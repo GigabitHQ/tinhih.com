@@ -8,9 +8,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { 
-  Activity, 
-  Search, 
-  Filter, 
+  Activity,
+  Filter,
   Calendar, 
   User, 
   Eye, 
@@ -32,6 +31,8 @@ import {
 import { api } from "@/lib/api";
 import { useToast } from "@/hooks/use-toast";
 import { usePageTitle } from "@/context/page-context";
+import { StatCard } from "@/components/ui/stat-card";
+import { SearchInput } from "@/components/ui/search-input";
 
 interface Activity {
   id: string;
@@ -51,30 +52,6 @@ interface Activity {
     role: string;
   };
 }
-
-const activityTypeColors = {
-  'user_login': 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200',
-  'user_logout': 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
-  'user_registered': 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200',
-  'appointment_created': 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200',
-  'appointment_updated': 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200',
-  'appointment_cancelled': 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200',
-  'appointment_completed': 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200',
-  'invoice_created': 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200',
-  'invoice_paid': 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200',
-  'payment_processed': 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200',
-  'donation_received': 'bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-200',
-  'message_sent': 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
-  'message_read': 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200',
-  'profile_updated': 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200',
-  'password_changed': 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200',
-  'admin_action': 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200',
-  'system_event': 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200',
-  'telehealth_session_started': 'bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-200',
-  'telehealth_session_ended': 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
-  'patient_onboarding_completed': 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200',
-  'member_onboarding_completed': 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200'
-};
 
 const activityTypeLabels = {
   'user_login': 'User Login',
@@ -263,51 +240,11 @@ export default function AdminActivity() {
 
         {/* Stats Cards */}
         <div className="p-6">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-            <Card>
-              <CardContent className="p-4">
-                <div className="flex items-center space-x-2">
-                  <Activity className="w-5 h-5 text-blue-600" />
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground">Total Activities</p>
-                    <p className="text-2xl font-bold">{activityStats.total}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4">
-                <div className="flex items-center space-x-2">
-                  <Clock className="w-5 h-5 text-green-600" />
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground">Today</p>
-                    <p className="text-2xl font-bold">{activityStats.today}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4">
-                <div className="flex items-center space-x-2">
-                  <Calendar className="w-5 h-5 text-orange-600" />
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground">This Week</p>
-                    <p className="text-2xl font-bold">{activityStats.thisWeek}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4">
-                <div className="flex items-center space-x-2">
-                  <Users className="w-5 h-5 text-purple-600" />
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground">Active Users</p>
-                    <p className="text-2xl font-bold">{activityStats.uniqueUsers}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <StatCard label="Total Activities" value={activityStats.total} icon={Activity} />
+            <StatCard label="Today" value={activityStats.today} icon={Clock} />
+            <StatCard label="This Week" value={activityStats.thisWeek} icon={Calendar} />
+            <StatCard label="Active Users" value={activityStats.uniqueUsers} icon={Users} />
           </div>
 
           {/* Filters */}
@@ -322,16 +259,12 @@ export default function AdminActivity() {
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div>
                   <Label htmlFor="search">Search</Label>
-                  <div className="relative">
-                    <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                    <Input
-                      id="search"
-                      placeholder="Search activities..."
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      className="pl-10"
-                    />
-                  </div>
+                  <SearchInput
+                    id="search"
+                    placeholder="Search activities..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
                 </div>
                 <div>
                   <Label htmlFor="type">Activity Type</Label>
@@ -408,10 +341,7 @@ export default function AdminActivity() {
                       <div className="flex items-center space-x-4">
                         <div className="flex items-center space-x-2">
                           {getActivityIcon(activity.type)}
-                          <Badge 
-                            variant="secondary" 
-                            className={activityTypeColors[activity.type as keyof typeof activityTypeColors] || 'bg-gray-100 text-gray-800'}
-                          >
+                          <Badge variant="secondary">
                             {activityTypeLabels[activity.type as keyof typeof activityTypeLabels] || activity.type}
                           </Badge>
                         </div>
@@ -464,15 +394,12 @@ export default function AdminActivity() {
             </DialogHeader>
             {selectedActivity && (
               <div className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <Label className="text-sm font-medium">Activity Type</Label>
                     <div className="flex items-center space-x-2 mt-1">
                       {getActivityIcon(selectedActivity.type)}
-                      <Badge 
-                        variant="secondary" 
-                        className={activityTypeColors[selectedActivity.type as keyof typeof activityTypeColors] || 'bg-gray-100 text-gray-800'}
-                      >
+                      <Badge variant="secondary">
                         {activityTypeLabels[selectedActivity.type as keyof typeof activityTypeLabels] || selectedActivity.type}
                       </Badge>
                     </div>

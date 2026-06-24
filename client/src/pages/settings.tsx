@@ -838,8 +838,8 @@ export default function SettingsPage() {
           {/* Header Section */}
           <div className="space-y-2">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                <SettingsIcon className="w-5 h-5 text-white" />
+              <div className="w-10 h-10 rounded-xl bg-muted border flex items-center justify-center">
+                <SettingsIcon className="w-5 h-5 text-muted-foreground" />
               </div>
               <div>
                 <h1 className="text-3xl font-bold tracking-tight">Settings</h1>
@@ -852,25 +852,25 @@ export default function SettingsPage() {
           <Tabs value={activeTab} onValueChange={handleTabChange} className="space-y-6">
             
             {/* Enhanced Tab Navigation */}
-            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20 rounded-xl p-2 border border-blue-100 dark:border-blue-800/30">
-              <TabsList className="grid w-full grid-cols-6 lg:w-auto lg:inline-flex h-14 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm p-1.5 rounded-lg shadow-sm">
+            <div className="bg-muted rounded-xl p-2 border border-border">
+              <TabsList className="grid w-full grid-cols-6 lg:w-auto lg:inline-flex h-14 bg-card backdrop-blur-sm p-1.5 rounded-lg shadow-sm">
                 <TabsTrigger 
                   value="profile" 
-                  className="flex items-center space-x-2 data-[state=active]:bg-[#ffdd00] data-[state=active]:text-black data-[state=active]:shadow-md data-[state=active]:font-semibold rounded-lg px-4 py-2 transition-all duration-200 hover:bg-[#ffdd00]/80"
+                  className="flex items-center space-x-2 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-md data-[state=active]:font-semibold rounded-lg px-4 py-2 transition-all duration-200 hover:bg-accent"
                 >
                   <User className="w-4 h-4" />
                   <span className="hidden sm:inline">Profile</span>
                 </TabsTrigger>
                 <TabsTrigger 
                   value="security" 
-                  className="flex items-center space-x-2 data-[state=active]:bg-[#ffdd00] data-[state=active]:text-black data-[state=active]:shadow-md data-[state=active]:font-semibold rounded-lg px-4 py-2 transition-all duration-200 hover:bg-[#ffdd00]/80"
+                  className="flex items-center space-x-2 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-md data-[state=active]:font-semibold rounded-lg px-4 py-2 transition-all duration-200 hover:bg-accent"
                 >
                   <Shield className="w-4 h-4" />
                   <span className="hidden sm:inline">Security</span>
                 </TabsTrigger>
                 <TabsTrigger 
                   value="notifications" 
-                  className="flex items-center space-x-2 data-[state=active]:bg-[#ffdd00] data-[state=active]:text-black data-[state=active]:shadow-md data-[state=active]:font-semibold rounded-lg px-4 py-2 transition-all duration-200 hover:bg-[#ffdd00]/80"
+                  className="flex items-center space-x-2 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-md data-[state=active]:font-semibold rounded-lg px-4 py-2 transition-all duration-200 hover:bg-accent"
                 >
                   <Bell className="w-4 h-4" />
                   <span className="hidden sm:inline">Notifications</span>
@@ -878,14 +878,14 @@ export default function SettingsPage() {
                 
                 <TabsTrigger 
                   value="appearance" 
-                  className="flex items-center space-x-2 data-[state=active]:bg-[#ffdd00] data-[state=active]:text-black data-[state=active]:shadow-md data-[state=active]:font-semibold rounded-lg px-4 py-2 transition-all duration-200 hover:bg-[#ffdd00]/80"
+                  className="flex items-center space-x-2 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-md data-[state=active]:font-semibold rounded-lg px-4 py-2 transition-all duration-200 hover:bg-accent"
                 >
                   <Palette className="w-4 h-4" />
                   <span className="hidden sm:inline">Appearance</span>
                 </TabsTrigger>
                 <TabsTrigger 
                   value="integrations" 
-                  className="flex items-center space-x-2 data-[state=active]:bg-[#ffdd00] data-[state=active]:text-black data-[state=active]:shadow-md data-[state=active]:font-semibold rounded-lg px-4 py-2 transition-all duration-200 hover:bg-[#ffdd00]/80"
+                  className="flex items-center space-x-2 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-md data-[state=active]:font-semibold rounded-lg px-4 py-2 transition-all duration-200 hover:bg-accent"
                 >
                   <Link className="w-4 h-4" />
                   <span className="hidden sm:inline">Integrations</span>
@@ -907,7 +907,7 @@ export default function SettingsPage() {
                     <div className="relative inline-block">
                       <Avatar className="w-24 h-24 border-4 border-background shadow-lg">
                         <AvatarImage src={profileData.profileImage} />
-                        <AvatarFallback className="text-xl font-semibold bg-gradient-to-br from-blue-500 to-purple-600 text-white">
+                        <AvatarFallback className="text-xl font-semibold bg-muted text-foreground">
                           {getInitials(profileData.firstName, profileData.lastName)}
                         </AvatarFallback>
                       </Avatar>
@@ -984,7 +984,7 @@ export default function SettingsPage() {
                       <div className="grid gap-4 sm:grid-cols-2">
                         <div className="space-y-2">
                           <Label htmlFor="firstName" className="text-sm font-medium">
-                            First Name {isEditingProfile && <span className="text-destructive"><span className="text-red-600">*</span></span>}
+                            First Name {isEditingProfile && <span className="text-destructive">*</span>}
                           </Label>
                           {isEditingProfile ? (
                             <Input
@@ -1001,7 +1001,7 @@ export default function SettingsPage() {
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="lastName" className="text-sm font-medium">
-                            Last Name {isEditingProfile && <span className="text-destructive"><span className="text-red-600">*</span></span>}
+                            Last Name {isEditingProfile && <span className="text-destructive">*</span>}
                           </Label>
                           {isEditingProfile ? (
                             <Input
@@ -1020,7 +1020,7 @@ export default function SettingsPage() {
                       
                       <div className="space-y-2">
                         <Label htmlFor="email" className="text-sm font-medium">
-                          Email Address {isEditingProfile && <span className="text-destructive"><span className="text-red-600">*</span></span>}
+                          Email Address {isEditingProfile && <span className="text-destructive">*</span>}
                         </Label>
                         <div className="relative">
                           <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
@@ -1029,7 +1029,7 @@ export default function SettingsPage() {
                           </div>
                         </div>
                         <p className="text-xs text-muted-foreground flex items-center">
-                          <Info className="w-3 h-3 mr-1 text-[#ffdd00]" />
+                          <Info className="w-3 h-3 mr-1 text-muted-foreground" />
                           Email cannot be changed. Contact support if needed.
                         </p>
                       </div>
@@ -1067,7 +1067,7 @@ export default function SettingsPage() {
                           <Button
                             type="submit"
                             disabled={updateProfile.isPending}
-                            className="min-w-[100px] bg-[#ffdd00] text-black"
+                            className="min-w-[100px]"
                           >
                             {updateProfile.isPending ? (
                               <>
@@ -1111,8 +1111,8 @@ export default function SettingsPage() {
                       <div className="space-y-1">
                         <Label className="text-sm text-muted-foreground">Account Status</Label>
                         <div className="flex items-center space-x-2">
-                          <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                          <span className="text-sm font-medium text-green-600">Active</span>
+                          <div className="w-2 h-2 bg-foreground rounded-full"></div>
+                          <span className="text-sm font-medium text-foreground">Active</span>
                 </div>
                   </div>
                 </div>
@@ -1270,12 +1270,12 @@ export default function SettingsPage() {
                       </div>
                 </div>
 
-                    <div className="p-4 border border-blue-200 bg-blue-50 dark:bg-blue-950 dark:border-blue-800 rounded-lg">
-                      <div className="flex items-center space-x-2 text-blue-800 dark:text-blue-200">
+                    <div className="p-4 border border-border bg-muted rounded-lg">
+                      <div className="flex items-center space-x-2 text-foreground">
                         <Clock className="w-4 h-4" />
                         <p className="text-sm font-medium">Two-factor authentication coming soon</p>
                       </div>
-                      <p className="text-sm text-blue-600 dark:text-blue-300 mt-1">
+                      <p className="text-sm text-muted-foreground mt-1">
                         We're working on implementing 2FA for enhanced account security
                       </p>
                     </div>
@@ -1294,7 +1294,7 @@ export default function SettingsPage() {
                   </CardTitle>
                   <CardDescription>Choose how you want to be notified</CardDescription>
                   {updatePreferences.isPending && (
-                    <div className="flex items-center space-x-2 text-sm text-yellow-600 absolute w-full z-50 bg-white/90 backdrop-blur-sm">
+                    <div className="flex items-center space-x-2 text-sm text-muted-foreground absolute w-full z-50 bg-background/90 backdrop-blur-sm">
                       <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin"></div>
                       <span>Saving preferences...</span>
                     </div>
@@ -1519,7 +1519,7 @@ export default function SettingsPage() {
                       <h3 className="text-lg font-semibold flex items-center">
                         <Smartphone className="w-5 h-5 mr-2 text-muted-foreground" />
                         SMS Notifications
-                        <Badge variant="secondary" className="ml-2  p-2 rounded-lg bg-yellow-50 border border-[#ffdd00] text-black">Coming Soon</Badge>
+                        <Badge variant="secondary" className="ml-2  p-2 rounded-lg">Coming Soon</Badge>
                       </h3>
                       
                       <div className="p-4 bg-muted/20 rounded-lg border border-dashed border-border/50">
@@ -1573,7 +1573,7 @@ export default function SettingsPage() {
                           {/* Light Theme */}
                           <div 
                               className={`relative cursor-pointer rounded-lg border-2 p-3 transition-all hover:scale-105 ${theme === 'light'
-                                ? 'border-[#ffdd00] bg-[#ffdd00]/5' 
+                                ? 'border-foreground bg-accent'
                                 : 'border-border hover:border-border/80'
                             }`}
                             onClick={() => setTheme('light')}
@@ -1590,8 +1590,8 @@ export default function SettingsPage() {
                               </div>
                             </div>
                             {theme === 'light' && (
-                              <div className="absolute -top-1 -right-1 w-5 h-5 bg-primary rounded-full flex items-center justify-center">
-                                <Check className="w-3 h-3 text-white" />
+                              <div className="absolute -top-1 -right-1 w-5 h-5 bg-foreground rounded-full flex items-center justify-center">
+                                <Check className="w-3 h-3 text-background" />
                               </div>
                             )}
                     </div>
@@ -1599,7 +1599,7 @@ export default function SettingsPage() {
                           {/* Dark Theme */}
                           <div 
                               className={`relative cursor-pointer rounded-lg border-2 p-3 transition-all hover:scale-105 ${theme === 'dark'
-                                ? 'border-primary bg-primary/5' 
+                                ? 'border-foreground bg-accent'
                                 : 'border-border hover:border-border/80'
                             }`}
                             onClick={() => setTheme('dark')}
@@ -1616,8 +1616,8 @@ export default function SettingsPage() {
                               </div>
                             </div>
                             {theme === 'dark' && (
-                              <div className="absolute -top-1 -right-1 w-5 h-5 bg-primary rounded-full flex items-center justify-center">
-                                <Check className="w-3 h-3 text-black" />
+                              <div className="absolute -top-1 -right-1 w-5 h-5 bg-foreground rounded-full flex items-center justify-center">
+                                <Check className="w-3 h-3 text-background" />
                               </div>
                             )}
                   </div>
@@ -1625,7 +1625,7 @@ export default function SettingsPage() {
                           {/* Auto Theme */}
                           <div 
                               className={`relative cursor-pointer rounded-lg border-2 p-3 transition-all hover:scale-105 ${theme === 'auto'
-                                ? 'border-primary bg-primary/5' 
+                                ? 'border-foreground bg-accent'
                                 : 'border-border hover:border-border/80'
                             }`}
                             onClick={() => setTheme('auto')}
@@ -1642,8 +1642,8 @@ export default function SettingsPage() {
                               </div>
                             </div>
                             {theme === 'auto' && (
-                              <div className="absolute -top-1 -right-1 w-5 h-5 bg-primary rounded-full flex items-center justify-center">
-                                <Check className="w-3 h-3 text-black" />
+                              <div className="absolute -top-1 -right-1 w-5 h-5 bg-foreground rounded-full flex items-center justify-center">
+                                <Check className="w-3 h-3 text-background" />
                               </div>
                             )}
                           </div>
@@ -1670,7 +1670,7 @@ export default function SettingsPage() {
                       <div className="flex items-center justify-between p-4 bg-muted/30 rounded-lg border border-border/50 hover:bg-muted/40 transition-colors">
                         <div className="space-y-1">
                           <div className="flex items-center space-x-2">
-                            <Eye className="w-4 h-4 text-primary" />
+                            <Eye className="w-4 h-4 text-muted-foreground" />
                             <p className="font-medium">High Contrast</p>
                     </div>
                           <p className="text-sm text-muted-foreground">
@@ -1678,7 +1678,7 @@ export default function SettingsPage() {
                           </p>
                         </div>
                         <div className="flex items-center space-x-3">
-                          <span className={`text-sm font-medium ${highContrast ? 'text-green-600' : 'text-muted-foreground'}`}>
+                          <span className={`text-sm font-medium ${highContrast ? 'text-foreground' : 'text-muted-foreground'}`}>
                             {highContrast ? 'On' : 'Off'}
                           </span>
                           <Switch
@@ -1691,7 +1691,7 @@ export default function SettingsPage() {
                       <div className="flex items-center justify-between p-4 bg-muted/30 rounded-lg border border-border/50 hover:bg-muted/40 transition-colors">
                         <div className="space-y-1">
                           <div className="flex items-center space-x-2">
-                            <Smartphone className="w-4 h-4 text-primary" />
+                            <Smartphone className="w-4 h-4 text-muted-foreground" />
                             <p className="font-medium">Reduce Motion</p>
                           </div>
                           <p className="text-sm text-muted-foreground">
@@ -1699,7 +1699,7 @@ export default function SettingsPage() {
                       </p>
                     </div>
                         <div className="flex items-center space-x-3">
-                          <span className={`text-sm font-medium ${reduceMotion ? 'text-green-600' : 'text-muted-foreground'}`}>
+                          <span className={`text-sm font-medium ${reduceMotion ? 'text-foreground' : 'text-muted-foreground'}`}>
                             {reduceMotion ? 'On' : 'Off'}
                           </span>
                     <Switch
@@ -1767,7 +1767,7 @@ export default function SettingsPage() {
                     <div className="flex items-center justify-between p-4 bg-muted/30 rounded-lg border border-border/50 hover:bg-muted/40 transition-colors">
                       <div className="space-y-1">
                         <div className="flex items-center space-x-2">
-                          <Grid3X3 className="w-4 h-4 text-primary" />
+                          <Grid3X3 className="w-4 h-4 text-muted-foreground" />
                           <p className="font-medium">Show Weekends</p>
                         </div>
                         <p className="text-sm text-muted-foreground">
@@ -1775,7 +1775,7 @@ export default function SettingsPage() {
                         </p>
                       </div>
                       <div className="flex items-center space-x-3">
-                        <span className={`text-sm font-medium ${showWeekends ? 'text-green-600' : 'text-muted-foreground'}`}>
+                        <span className={`text-sm font-medium ${showWeekends ? 'text-foreground' : 'text-muted-foreground'}`}>
                           {showWeekends ? 'On' : 'Off'}
                         </span>
                         <Switch
@@ -2061,12 +2061,12 @@ export default function SettingsPage() {
           <TabsContent value="integrations" className="space-y-8">
             
             {/* Enhanced Header */}
-            <div className="text-center space-y-3 pb-6 border-b border-gray-100">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl mb-4">
-                <Link className="w-8 h-8 text-blue-600" />
+            <div className="text-center space-y-3 pb-6 border-b border-border">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-muted border rounded-2xl mb-4">
+                <Link className="w-8 h-8 text-muted-foreground" />
               </div>
               <h2 className="text-3xl font-bold text-muted-foreground">Integrations</h2>
-              <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 When you integrate any service, you're enabling professional features for your clients and enhancing your practice's capabilities
               </p>
             </div>
@@ -2075,12 +2075,11 @@ export default function SettingsPage() {
             <div className="grid gap-8 lg:grid-cols-2">
               
               {/* Google Workspace */}
-              <Card className="group relative overflow-hidden border border-gray-200 hover:border-blue-200 hover:shadow-lg transition-all duration-300">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-indigo-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <Card className="group relative overflow-hidden border border-border hover:shadow-lg transition-all duration-300">
                <CardHeader className="relative">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-4">
-                      <div className="w-14 h-14 rounded-xl bg-white shadow-sm border border-gray-100 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                      <div className="w-14 h-14 rounded-xl bg-card shadow-sm border border-border flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-9 h-9">
                             <path fill="#fbbd00" d="M120 256c0-25.367 6.989-49.13 19.131-69.477v-86.308H52.823C18.568 144.703 0 198.922 0 256s18.568 111.297 52.823 155.785h86.308v-86.308C126.989 305.13 120 281.367 120 256z" />
                             <path fill="#0f9d58" d="m256 392-60 60 60 60c57.079 0 111.297-18.568 155.785-52.823v-86.216h-86.216C305.044 385.147 281.181 392 256 392z" />
@@ -2091,10 +2090,10 @@ export default function SettingsPage() {
                         </svg>
                       </div>
                       <div>
-                        <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white">Google</CardTitle>
-                        <CardDescription className="text-gray-600 dark:text-gray-300 text-accent-foreground">Calendar & Meeting</CardDescription>
+                        <CardTitle className="text-xl font-semibold text-foreground">Google</CardTitle>
+                        <CardDescription className="text-muted-foreground">Calendar & Meeting</CardDescription>
                         {updateIntegrationSettings.isPending && (
-                          <div className="flex items-center space-x-2 text-xs text-blue-600 mt-1">
+                          <div className="flex items-center space-x-2 text-xs text-muted-foreground mt-1">
                             <div className="w-3 h-3 border-2 border-current border-t-transparent rounded-full animate-spin"></div>
                             <span>Saving...</span>
                           </div>
@@ -2113,22 +2112,22 @@ export default function SettingsPage() {
                      
                       <div className="space-y-4">
                         {/* Connected Account Info */}
-                        <div className="p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border border-green-100">
+                        <div className="p-4 bg-muted rounded-xl border border-border">
                           <div className="flex items-center space-x-3">
-                            <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                              <Check className="w-4 h-4 text-green-600" />
+                            <div className="w-8 h-8 bg-background rounded-full flex items-center justify-center">
+                              <Check className="w-4 h-4 text-foreground" />
                             </div>
                             <div>
-                              <p className="font-semibold text-sm text-gray-900">Connected to Google</p>
-                              <p className="text-xs text-gray-600  text-accent-foreground">{integrationSettings.google.email}</p>
+                              <p className="font-semibold text-sm text-foreground">Connected to Google</p>
+                              <p className="text-xs text-muted-foreground">{integrationSettings.google.email}</p>
                             </div>
                           </div>
                         </div>
-                        
-                        <div className="flex items-center justify-between p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-100">
+
+                        <div className="flex items-center justify-between p-4 bg-muted rounded-xl border border-border">
                           <div>
-                            <p className="font-semibold text-sm text-gray-900">Calendar Sync</p>
-                            <p className="text-xs text-gray-600  text-accent-foreground mt-1">Sync appointments with Google Calendar</p>
+                            <p className="font-semibold text-sm text-foreground">Calendar Sync</p>
+                            <p className="text-xs text-muted-foreground mt-1">Sync appointments with Google Calendar</p>
                           </div>
                           <Switch
                             checked={integrationSettings.google.calendarSync}
@@ -2136,15 +2135,15 @@ export default function SettingsPage() {
                             disabled={updateIntegrationSettings.isPending}
                           />
                         </div>
-                        <div className="flex items-center justify-between p-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl border border-gray-200 opacity-60">
+                        <div className="flex items-center justify-between p-4 bg-muted rounded-xl border border-border opacity-60">
                           <div>
                             <div className="flex items-center space-x-2">
-                              <p className="font-semibold text-sm text-gray-900">Drive Sync</p>
-                              <Badge variant="secondary" className="text-xs bg-yellow-100 text-yellow-800 border-yellow-200">
+                              <p className="font-semibold text-sm text-foreground">Drive Sync</p>
+                              <Badge variant="secondary" className="text-xs">
                                 Coming Soon
                               </Badge>
                             </div>
-                            <p className="text-xs text-gray-600 text-accent-foreground mt-1">Store documents in Google Drive</p>
+                            <p className="text-xs text-muted-foreground mt-1">Store documents in Google Drive</p>
                           </div>
                           <Switch
                             checked={false}
@@ -2163,8 +2162,8 @@ export default function SettingsPage() {
                         </Button>
                         <Button 
                           onClick={() => handleDisconnectIntegration('google')}
-                          variant="ghost" 
-                          className="text-red-600 hover:text-red-700 hover:bg-red-50 h-11 font-medium"
+                          variant="ghost"
+                          className="text-foreground hover:bg-accent h-11 font-medium"
                           disabled={disconnectIntegration.isPending}
                         >
                           {disconnectIntegration.isPending ? (
@@ -2181,25 +2180,25 @@ export default function SettingsPage() {
                   ) : (
                     <>
                       {/* Professional Note */}
-                      <div className="p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-100 dark:from-blue-950/20 dark:to-indigo-950/20 dark:border-blue-800/30 mb-4">
+                      <div className="p-4 bg-muted rounded-xl border border-border mb-4">
                         <div className="flex items-start space-x-3">
-                          <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                            <Info className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                          <div className="w-8 h-8 bg-background rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <Info className="w-4 h-4 text-muted-foreground" />
                           </div>
                           <div>
-                            <p className="font-semibold text-sm text-gray-900 dark:text-white mb-1">
+                            <p className="font-semibold text-sm text-foreground mb-1">
                               Professional Meeting & Calendar Management
                             </p>
-                            <p className="text-sm text-gray-600 dark:text-gray-300">
+                            <p className="text-sm text-muted-foreground">
                               Automatically sync meetings and calendar with Google for professional client experience.
                             </p>
                           </div>
                         </div>
                       </div>
-                      
-                      <Button 
+
+                      <Button
                         onClick={handleGoogleConnect}
-                        className="w-full h-12 bg-[#ffdd00] hover:bg-[#ffdd00]/90 text-black font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                        className="w-full h-12 font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
                       >
                         <Link className="w-5 h-5 mr-3" />
                         Connect Google
@@ -2212,12 +2211,11 @@ export default function SettingsPage() {
 
 
               {/* Zoom Meetings */}
-              <Card className="group relative overflow-hidden border border-gray-200 hover:border-blue-200 hover:shadow-lg transition-all duration-300">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-cyan-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <Card className="group relative overflow-hidden border border-border hover:shadow-lg transition-all duration-300">
                 <CardHeader className="relative">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-4">
-                      <div className="w-14 h-14 rounded-xl bg-white shadow-sm border border-gray-100 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                      <div className="w-14 h-14 rounded-xl bg-card shadow-sm border border-border flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-9 h-9">
                             <path fill="#4a8cff" d="M0 131.07v187.51c.17 42.4 34.8 76.52 77.03 76.35h273.31c7.77 0 14.02-6.25 14.02-13.85v-187.5c-.17-42.4-34.79-76.53-77.03-76.36H14.02C6.25 117.22 0 123.47 0 131.07zm381.76 73.15 112.84-82.44c9.8-8.1 17.4-6.08 17.4 8.62v251.35c0 16.73-9.29 14.7-17.4 8.62L381.76 308.1z" />
                             <path fill="#3a76f0" d="m-4496 938.35 5.76 23.28a231.455 231.455 0 0 0-64.32 26.59l-12.32-20.56a255.163 255.163 0 0 1 70.88-29.31zm117.12 23.28a231.705 231.705 0 0 1 64.32 26.59l12.4-20.56a255.174 255.174 0 0 0-70.96-29.31zm-274.88 92.91a254.526 254.526 0 0 0-29.32 70.87l23.28 5.76a231.243 231.243 0 0 1 26.6-64.31zm-10.2 97.55-23.72-3.6a256.84 256.84 0 0 0 0 76.71l23.72-3.6a232.705 232.705 0 0 1 0-69.51zm349.4 233.38a231.543 231.543 0 0 1-64.24 26.6l5.76 23.28a255.126 255.126 0 0 0 70.8-29.32zm109.4-163.87 23.72 3.6a256.84 256.84 0 0 0 0-76.71l-23.72 3.6c3.47 22.98 3.47 46.53 0 69.51zm-4.16 20.92a231.908 231.908 0 0 1-26.6 64.32l20.56 12.4a255.376 255.376 0 0 0 29.32-70.96zm-190.48 173.75a233.502 233.502 0 0 1-69.53 0l-3.59 23.72c25.43 3.84 51.29 3.84 76.72 0zm151.99-91.79a232.576 232.576 0 0 1-49.15 49.11l14.24 19.32a256.562 256.562 0 0 0 54.24-54.08zm-49.15-324.38a233.046 233.046 0 0 1 49.15 49.16l19.33-14.4a256.745 256.745 0 0 0-54.08-54.08zm-324.36 49.16a232.859 232.859 0 0 1 49.16-49.16l-14.4-19.32a256.276 256.276 0 0 0-54.08 54.08zm385.4 17.6a231.357 231.357 0 0 1 26.6 64.23l23.28-5.76a255.242 255.242 0 0 0-29.32-70.79zm-233.41-109.39c23.05-3.47 46.48-3.47 69.53 0l3.6-23.72a256.907 256.907 0 0 0-76.72 0zm-139.67 441.8-49.56 11.56 11.56-49.56-23.36-5.48-11.56 49.56c-4.06 17.3 11.54 32.89 28.84 28.84l49.52-11.36zm-56.36-64.87 23.36 5.43 8-34.35a230.507 230.507 0 0 1-25.8-62.96l-23.28 5.76a254.073 254.073 0 0 0 23.6 60.84zm77.64 59.99 5.44 23.36 25.28-5.88a254.073 254.073 0 0 0 60.84 23.6l5.76-23.28a231.047 231.047 0 0 1-62.8-25.96zm-28.81-308.09c-36.59 66.25-34.31 147.14 5.97 211.22l-20 85.31 85.32-20c74.83 47.13 171.29 41.79 240.46-13.32s95.93-147.93 66.7-231.39c-59.28-169.3-292.25-187.9-378.45-31.82z" />
@@ -2236,14 +2234,14 @@ export default function SettingsPage() {
                         </svg>
                       </div>
                       <div>
-                        <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white flex items-center">
+                        <CardTitle className="text-xl font-semibold text-foreground flex items-center">
                           Zoom Meetings
                           <Badge variant="secondary" className="ml-2 flex items-center gap-1">
                             <Clock className="w-3 h-3" />
                             Coming soon
                           </Badge>
                         </CardTitle>
-                        <CardDescription className="text-gray-600 dark:text-gray-300 text-accent-foreground">Video conferencing</CardDescription>
+                        <CardDescription className="text-muted-foreground">Video conferencing</CardDescription>
                       </div>
                     </div>
                   </div>
@@ -2278,10 +2276,10 @@ export default function SettingsPage() {
                             className="mt-1"
                           />
                         </div>
-                        <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <div className="flex items-center justify-between p-3 bg-muted rounded-lg">
                           <div>
                             <p className="font-medium text-sm">Auto-create meetings</p>
-                            <p className="text-xs text-gray-600 dark:text-gray-300 text-accent-foreground">Create Zoom links for telehealth</p>
+                            <p className="text-xs text-muted-foreground">Create Zoom links for telehealth</p>
                           </div>
                           <Switch
                             checked={integrationSettings.zoom.autoCreateMeetings}
@@ -2295,7 +2293,7 @@ export default function SettingsPage() {
                           <ExternalLink className="w-4 h-4 mr-2" />
                           Manage Settings
                         </Button>
-                        <Button variant="ghost" className="text-red-600 hover:text-red-700">
+                        <Button variant="ghost" className="text-foreground hover:bg-accent">
                           Disconnect
                         </Button>
                       </div>
@@ -2315,12 +2313,11 @@ export default function SettingsPage() {
               </Card>
 
               {/* Microsoft Teams */}
-              <Card className="group relative overflow-hidden border border-gray-200 hover:border-purple-200 hover:shadow-lg transition-all duration-300">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-50/50 to-indigo-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <Card className="group relative overflow-hidden border border-border hover:shadow-lg transition-all duration-300">
                 <CardHeader className="relative">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-4">
-                      <div className="w-14 h-14 rounded-xl bg-white shadow-sm border border-gray-100 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                      <div className="w-14 h-14 rounded-xl bg-card shadow-sm border border-border flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" className="w-9 h-9">
                             <path fill="#464eb8" d="M84.025 35.881c5.797 0 10.513-4.729 10.513-10.54-.577-13.983-20.45-13.979-21.026 0 0 5.811 4.717 10.54 10.513 10.54z" />
                             <path fill="#464eb8" d="M90.958 38.71H51.61v-3.68c.784.139 1.605.232 2.467.268.093.001.186-.006.279-.007a15.5 15.5 0 0 0 1.063-.053c.12-.011.239-.021.357-.035.403-.045.801-.104 1.193-.181.024-.005.05-.008.074-.012a14.377 14.377 0 0 0 5.167-2.17 14.504 14.504 0 0 0 3.693-3.615c.26-.341.497-.697.718-1.061.021-.036.044-.07.065-.107.17-.287.32-.584.466-.884.064-.13.13-.26.19-.392.154-.345.296-.696.421-1.053l.032-.088c1.427-4.208.774-9.156-1.676-12.856a14.476 14.476 0 0 0-2.268-2.574c-.176-.153-.344-.314-.529-.457a14.41 14.41 0 0 0-3.567-2.159 12.49 12.49 0 0 0-1.347-.493c-.264-.081-.538-.141-.808-.207-.239-.058-.475-.121-.717-.166-.2-.038-.405-.062-.607-.092-.352-.05-.704-.096-1.06-.121-.122-.009-.245-.012-.368-.018a14.095 14.095 0 0 0-1.088-.007c-2.08.121-3.926.558-5.543 1.24-.33.149-.664.294-.975.47-3.242 1.766-5.722 4.772-6.867 8.293a15.274 15.274 0 0 0-.187 8.129l.02.076.097.345c.039.137.085.273.128.409.039.11.08.219.121.329H8.774a5.168 5.168 0 0 0-5.162 5.162v37.672a5.168 5.168 0 0 0 5.162 5.162h20.122c.026.118.059.232.087.349 2.77 10.899 12.463 18.607 23.917 18.885 9.503-.231 17.666-5.721 21.753-13.592.061.022.124.038.185.059 10.182 3.851 21.752-4.229 21.546-15.131V44.122c.001-2.984-2.434-5.412-5.426-5.412z" />
@@ -2330,14 +2327,14 @@ export default function SettingsPage() {
                         </svg>
                       </div>
                       <div>
-                        <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white flex items-center">
+                        <CardTitle className="text-xl font-semibold text-foreground flex items-center">
                           Microsoft Teams
                           <Badge variant="secondary" className="ml-2 flex items-center gap-1">
                             <Clock className="w-3 h-3" />
                             Coming soon
                           </Badge>
                         </CardTitle>
-                        <CardDescription className="text-gray-600 dark:text-gray-300 text-accent-foreground">Collaboration & meetings</CardDescription>
+                        <CardDescription className="text-muted-foreground">Collaboration & meetings</CardDescription>
                       </div>
                     </div>
                   </div>
@@ -2385,10 +2382,10 @@ export default function SettingsPage() {
                             className="mt-1"
                           />
                         </div>
-                        <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <div className="flex items-center justify-between p-3 bg-muted rounded-lg">
                           <div>
                             <p className="font-medium text-sm">Auto-create meetings</p>
-                            <p className="text-xs text-gray-600 dark:text-gray-300 text-accent-foreground">Create Teams links for telehealth</p>
+                            <p className="text-xs text-muted-foreground">Create Teams links for telehealth</p>
                           </div>
                           <Switch
                             checked={integrationSettings.teams.autoCreateMeetings}
@@ -2404,7 +2401,7 @@ export default function SettingsPage() {
                           <ExternalLink className="w-4 h-4 mr-2" />
                           Manage Settings
                         </Button>
-                        <Button variant="ghost" className="text-red-600 hover:text-red-700">
+                        <Button variant="ghost" className="text-foreground hover:bg-accent">
                           Disconnect
                         </Button>
                       </div>
@@ -2433,7 +2430,7 @@ export default function SettingsPage() {
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="flex items-center space-x-2">
-              <div className="w-8 h-8 rounded-lg bg-white shadow-sm border border-gray-100 flex items-center justify-center">
+              <div className="w-8 h-8 rounded-lg bg-card shadow-sm border border-border flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" className="w-6 h-6">
                   <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z" />
                   <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z" />
@@ -2450,16 +2447,16 @@ export default function SettingsPage() {
 
           <div className="space-y-6">
             {/* Account Information */}
-            <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+            <div className="bg-muted border border-border rounded-lg p-4">
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                  <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-10 h-10 bg-background rounded-full flex items-center justify-center">
+                  <svg className="w-5 h-5 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-medium text-green-900">Connected Account</h3>
-                  <p className="text-sm text-green-700">{integrationSettings.google.email || "nayem@gigabit.agency"}</p>
+                  <h3 className="font-medium text-foreground">Connected Account</h3>
+                  <p className="text-sm text-muted-foreground">{integrationSettings.google.email || "nayem@gigabit.agency"}</p>
                 </div>
               </div>
             </div>
@@ -2468,8 +2465,8 @@ export default function SettingsPage() {
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="font-medium text-gray-900 dark:text-gray-100">Calendar Sync</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-300 text-accent-foreground">Sync appointments with Google Calendar</p>
+                  <h3 className="font-medium text-foreground">Calendar Sync</h3>
+                  <p className="text-sm text-muted-foreground">Sync appointments with Google Calendar</p>
                 </div>
                 <Switch
                   checked={integrationSettings.google.calendarSync}
@@ -2573,12 +2570,12 @@ export default function SettingsPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <div className="flex items-center space-x-2">
-                    <h3 className="font-medium text-gray-900 dark:text-gray-100">Drive Sync</h3>
-                    <Badge variant="secondary" className="text-xs bg-yellow-100 text-yellow-800 border-yellow-200">
+                    <h3 className="font-medium text-foreground">Drive Sync</h3>
+                    <Badge variant="secondary" className="text-xs">
                       Coming Soon
                     </Badge>
                   </div>
-                  <p className="text-sm text-gray-600 dark:text-gray-300 text-accent-foreground">Store documents in Google Drive</p>
+                  <p className="text-sm text-muted-foreground">Store documents in Google Drive</p>
                 </div>
                 <Switch
                   checked={false}
@@ -2587,39 +2584,39 @@ export default function SettingsPage() {
               </div>
               
               {/* Drive Sync settings are disabled - Coming Soon */}
-              <div className="ml-6 p-4 bg-gray-50 border border-gray-200 rounded-lg">
+              <div className="ml-6 p-4 bg-muted border border-border rounded-lg">
                 <div className="flex items-center space-x-2 mb-2">
-                  <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
                   </svg>
-                  <span className="text-sm text-gray-600">Drive Sync will be available in a future update</span>
+                  <span className="text-sm text-muted-foreground">Drive Sync will be available in a future update</span>
                 </div>
-                <p className="text-xs text-gray-500">This feature will allow you to automatically sync documents, images, and other files with your Google Drive account.</p>
+                <p className="text-xs text-muted-foreground">This feature will allow you to automatically sync documents, images, and other files with your Google Drive account.</p>
               </div>
             </div>
 
             {/* Privacy & Permissions */}
             <div className="space-y-4">
-              <h3 className="font-medium text-gray-900 dark:text-gray-100">Privacy & Permissions</h3>
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <h3 className="font-medium text-foreground">Privacy & Permissions</h3>
+              <div className="bg-muted border border-border rounded-lg p-4">
                 <div className="space-y-2">
                   <div className="flex items-center space-x-2">
-                    <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <span className="text-sm text-blue-800">Calendar access</span>
+                    <span className="text-sm text-muted-foreground">Calendar access</span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <span className="text-sm text-blue-800">Drive access</span>
+                    <span className="text-sm text-muted-foreground">Drive access</span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <span className="text-sm text-blue-800">Profile information</span>
+                    <span className="text-sm text-muted-foreground">Profile information</span>
                   </div>
                 </div>
               </div>

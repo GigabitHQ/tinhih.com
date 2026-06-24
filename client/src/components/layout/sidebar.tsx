@@ -120,7 +120,7 @@ export function Sidebar({ isMobile = false }: SidebarProps) {
 
   return (
     <aside 
-      className={`w-64 h-screen fixed left-0 top-0 z-40 shadow-sm flex flex-col transition-all duration-300 ease-in-out border-r border-gray-200 dark:border-gray-800/50 ${!isMobile ? 'hidden lg:flex' : 'flex'}`}
+      className={`w-64 h-screen fixed left-0 top-0 z-40 shadow-sm flex flex-col transition-all duration-300 ease-in-out border-r border-border ${!isMobile ? 'hidden lg:flex' : 'flex'}`}
       style={{
         backgroundColor: `hsl(var(--sidebar-background))`,
         color: `hsl(var(--sidebar-foreground))`,
@@ -232,7 +232,7 @@ export function Sidebar({ isMobile = false }: SidebarProps) {
 
       {/* Elegant Footer - User Profile */}
       <div 
-        className="flex-shrink-0 p-5 transition-colors duration-300 border-t border-gray-200 dark:border-gray-800/80"
+        className="flex-shrink-0 p-5 transition-colors duration-300 border-t border-border"
         style={{
           backgroundColor: `hsl(var(--sidebar-background))`,
         }}

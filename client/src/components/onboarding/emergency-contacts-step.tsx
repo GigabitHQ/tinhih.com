@@ -102,7 +102,7 @@ export function EmergencyContactsStep({ data, existingData, onComplete, onBack, 
           {/* Primary Emergency Contact */}
           <div className="space-y-4">
             <h3 className="text-lg font-medium text-foreground border-b border-border pb-2 flex items-center gap-2">
-              <Phone className="w-5 h-5 text-red-600 dark:text-red-400" />
+              <Phone className="w-5 h-5 text-muted-foreground" />
               Primary Emergency Contact
             </h3>
             
@@ -112,11 +112,11 @@ export function EmergencyContactsStep({ data, existingData, onComplete, onBack, 
                 name="primaryContactName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Full Name <span className="text-red-600">*</span></FormLabel>
+                    <FormLabel>Full Name <span className="text-muted-foreground">*</span></FormLabel>
                     <FormControl>
                       <Input placeholder="Enter full name" {...field} />
                     </FormControl>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -126,11 +126,11 @@ export function EmergencyContactsStep({ data, existingData, onComplete, onBack, 
                 name="primaryContactPhone"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Phone Number <span className="text-red-600">*</span></FormLabel>
+                    <FormLabel>Phone Number <span className="text-muted-foreground">*</span></FormLabel>
                     <FormControl>
                       <Input placeholder="Enter phone number" {...field} />
                     </FormControl>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -142,7 +142,7 @@ export function EmergencyContactsStep({ data, existingData, onComplete, onBack, 
                 name="primaryContactRelationship"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Relationship to You <span className="text-red-600">*</span></FormLabel>
+                    <FormLabel>Relationship to You <span className="text-muted-foreground">*</span></FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
                         <SelectTrigger>
@@ -159,7 +159,7 @@ export function EmergencyContactsStep({ data, existingData, onComplete, onBack, 
                         <SelectItem value="other">Other</SelectItem>
                       </SelectContent>
                     </Select>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -173,7 +173,7 @@ export function EmergencyContactsStep({ data, existingData, onComplete, onBack, 
                     <FormControl>
                       <Input type="email" placeholder="Enter email address" {...field} />
                     </FormControl>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -194,7 +194,7 @@ export function EmergencyContactsStep({ data, existingData, onComplete, onBack, 
                     <FormControl>
                       <Input placeholder="Enter full name" {...field} />
                     </FormControl>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -208,7 +208,7 @@ export function EmergencyContactsStep({ data, existingData, onComplete, onBack, 
                     <FormControl>
                       <Input placeholder="Enter phone number" {...field} />
                     </FormControl>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -237,7 +237,7 @@ export function EmergencyContactsStep({ data, existingData, onComplete, onBack, 
                         <SelectItem value="other">Other</SelectItem>
                       </SelectContent>
                     </Select>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -251,7 +251,7 @@ export function EmergencyContactsStep({ data, existingData, onComplete, onBack, 
                     <FormControl>
                       <Input type="email" placeholder="Enter email address" {...field} />
                     </FormControl>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -261,7 +261,7 @@ export function EmergencyContactsStep({ data, existingData, onComplete, onBack, 
           {/* Emergency Preferences */}
           <div className="space-y-4">
             <h3 className="text-lg font-medium text-foreground border-b border-border pb-2 flex items-center gap-2">
-              <AlertTriangle className="w-5 h-5 text-orange-600 dark:text-orange-400" />
+              <AlertTriangle className="w-5 h-5 text-muted-foreground" />
               Emergency Preferences
             </h3>
             
@@ -333,7 +333,7 @@ export function EmergencyContactsStep({ data, existingData, onComplete, onBack, 
                       {...field} 
                     />
                   </FormControl>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -342,7 +342,7 @@ export function EmergencyContactsStep({ data, existingData, onComplete, onBack, 
           {/* Healthcare Proxy */}
           <div className="space-y-4">
             <h3 className="text-lg font-medium text-foreground border-b border-border pb-2 flex items-center gap-2">
-              <Shield className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+              <Shield className="w-5 h-5 text-muted-foreground" />
               Healthcare Proxy (Optional)
             </h3>
             
@@ -376,7 +376,7 @@ export function EmergencyContactsStep({ data, existingData, onComplete, onBack, 
                         <FormControl>
                           <Input placeholder="Enter proxy name" {...field} />
                         </FormControl>
-                        <FormMessage className="text-red-600"/>
+                        <FormMessage />
                       </FormItem>
                     )}
                   />
@@ -390,7 +390,7 @@ export function EmergencyContactsStep({ data, existingData, onComplete, onBack, 
                         <FormControl>
                           <Input placeholder="Enter proxy phone" {...field} />
                         </FormControl>
-                        <FormMessage className="text-red-600"/>
+                        <FormMessage />
                       </FormItem>
                     )}
                   />
@@ -408,7 +408,7 @@ export function EmergencyContactsStep({ data, existingData, onComplete, onBack, 
                           {...field} 
                         />
                       </FormControl>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />

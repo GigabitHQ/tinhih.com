@@ -213,24 +213,24 @@ export function WelcomeBanner({ className }: WelcomeBannerProps) {
           <div className="flex-1">
             <div className="flex items-center space-x-3 mb-2">
               <div className="flex items-center space-x-2">
-                <Coffee className="w-5 h-5 text-orange-500" />
+                <Coffee className="w-5 h-5 text-muted-foreground" />
                 <span className="text-sm font-medium opacity-70">
-                  {currentTime.toLocaleTimeString('en-US', { 
-                    hour: '2-digit', 
+                  {currentTime.toLocaleTimeString('en-US', {
+                    hour: '2-digit',
                     minute: '2-digit',
-                    hour12: true 
+                    hour12: true
                   })}
                 </span>
               </div>
               <div className="flex items-center space-x-2">
-                <WeatherIcon className="w-5 h-5 text-blue-500" />
+                <WeatherIcon className="w-5 h-5 text-muted-foreground" />
                 <span className="text-sm font-medium opacity-70">
                   {weather.temperature}°C
                 </span>
               </div>
             </div>
             
-            <h1 className="text-2xl lg:text-3xl font-bold mb-2 bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
+            <h1 className="text-2xl lg:text-3xl font-bold mb-2 text-foreground">
               {greeting}
             </h1>
             
@@ -240,20 +240,20 @@ export function WelcomeBanner({ className }: WelcomeBannerProps) {
             
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-1">
-                <Heart className="w-4 h-4 text-red-500 animate-pulse" />
+                <Heart className="w-4 h-4 text-muted-foreground animate-pulse" />
                 <span className="text-sm opacity-70">Ready to serve</span>
               </div>
               <div className="flex items-center space-x-1">
-                <Star className="w-4 h-4 text-yellow-500" />
+                <Star className="w-4 h-4 text-muted-foreground" />
                 <span className="text-sm opacity-70">Excellence</span>
               </div>
             </div>
           </div>
           
           <div className="hidden lg:block">
-            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary/20 to-purple-600/20 flex items-center justify-center">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-purple-600 flex items-center justify-center">
-                <span className="text-white font-bold text-lg">
+            <div className="w-20 h-20 rounded-full bg-muted flex items-center justify-center">
+              <div className="w-12 h-12 rounded-full bg-foreground flex items-center justify-center">
+                <span className="text-background font-bold text-lg">
                   {user?.firstName?.charAt(0) || 'U'}
                 </span>
               </div>

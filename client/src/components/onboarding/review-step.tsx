@@ -48,7 +48,7 @@ export function ReviewStep({ data, existingData, onBack, onSubmit, isSubmitting,
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Users className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+              <Users className="w-5 h-5 text-muted-foreground" />
               Personal Information
             </CardTitle>
           </CardHeader>
@@ -96,7 +96,7 @@ export function ReviewStep({ data, existingData, onBack, onSubmit, isSubmitting,
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Heart className="w-5 h-5 text-red-600 dark:text-red-400" />
+              <Heart className="w-5 h-5 text-muted-foreground" />
               Recovery History
             </CardTitle>
           </CardHeader>
@@ -134,7 +134,7 @@ export function ReviewStep({ data, existingData, onBack, onSubmit, isSubmitting,
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <FileText className="w-5 h-5 text-green-600 dark:text-green-400" />
+              <FileText className="w-5 h-5 text-muted-foreground" />
               Medical History
             </CardTitle>
           </CardHeader>
@@ -172,7 +172,7 @@ export function ReviewStep({ data, existingData, onBack, onSubmit, isSubmitting,
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Phone className="w-5 h-5 text-red-600 dark:text-red-400" />
+              <Phone className="w-5 h-5 text-muted-foreground" />
               Emergency Contacts
             </CardTitle>
           </CardHeader>
@@ -196,7 +196,7 @@ export function ReviewStep({ data, existingData, onBack, onSubmit, isSubmitting,
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <DollarSign className="w-5 h-5 text-green-600 dark:text-green-400" />
+              <DollarSign className="w-5 h-5 text-muted-foreground" />
               Insurance & Financial Information
             </CardTitle>
           </CardHeader>
@@ -226,7 +226,7 @@ export function ReviewStep({ data, existingData, onBack, onSubmit, isSubmitting,
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Shield className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+              <Shield className="w-5 h-5 text-muted-foreground" />
               Consents & Agreements
             </CardTitle>
           </CardHeader>
@@ -271,18 +271,18 @@ export function ReviewStep({ data, existingData, onBack, onSubmit, isSubmitting,
       </div>
 
       {/* Final Confirmation */}
-      <Card className="border-2 border-yellow-200 dark:border-yellow-800 bg-yellow-50 dark:bg-yellow-950/20">
+      <Card className="border bg-muted">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-yellow-800 dark:text-yellow-200">
+          <CardTitle className="flex items-center gap-2 text-foreground">
             <CheckCircle className="w-5 h-5" />
             Ready to Submit
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-yellow-800 dark:text-yellow-200 mb-4">
+          <p className="text-muted-foreground mb-4">
             By clicking "Submit Onboarding", you confirm that all the information provided is accurate and complete to the best of your knowledge.
           </p>
-          <div className="bg-card p-4 rounded-lg border border-yellow-300 dark:border-yellow-700">
+          <div className="bg-card p-4 rounded-lg border border-border">
             <p className="text-sm text-foreground">
               <strong>What happens next?</strong>
             </p>

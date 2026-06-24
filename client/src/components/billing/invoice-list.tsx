@@ -2,11 +2,11 @@ import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
+import { SearchInput } from "@/components/ui/search-input";
 import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogHeader } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Plus, DollarSign, Search, Edit, Eye, CheckCircle, XCircle, Clock, FileText, Filter, Users } from "lucide-react";
+import { StatusBadge } from "@/components/ui/status-badge";
+import { Plus, DollarSign, Edit, Eye, Clock, FileText, Filter, Users } from "lucide-react";
 import { format } from "date-fns";
 import { api } from "@/lib/api";
 import { useToast } from "@/hooks/use-toast";
@@ -104,36 +104,6 @@ export function InvoiceList({ onNewInvoice }: InvoiceListProps) {
     },
   });
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "paid":
-        return "bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400";
-      case "pending":
-        return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400";
-      case "overdue":
-        return "bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400";
-      case "cancelled":
-        return "bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400";
-      default:
-        return "bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400";
-    }
-  };
-
-  const getStatusIcon = (status: string) => {
-    switch (status) {
-      case "paid":
-        return <CheckCircle className="w-4 h-4" />;
-      case "pending":
-        return <Clock className="w-4 h-4" />;
-      case "overdue":
-        return <XCircle className="w-4 h-4" />;
-      case "cancelled":
-        return <XCircle className="w-4 h-4" />;
-      default:
-        return <Clock className="w-4 h-4" />;
-    }
-  };
-
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -141,7 +111,7 @@ export function InvoiceList({ onNewInvoice }: InvoiceListProps) {
         <CardHeader>
           <div className="flex items-center justify-between">
             <CardTitle className="flex items-center gap-2">
-              <DollarSign className="w-5 h-5 text-primary" />
+              <DollarSign className="w-5 h-5 text-muted-foreground" />
               {isPractitioner ? "Service Billing" : "Billing & Invoices"}
             </CardTitle>
             {(user?.role === 'admin' || user?.role === 'staff') && (
@@ -155,12 +125,10 @@ export function InvoiceList({ onNewInvoice }: InvoiceListProps) {
           {/* Search and Filters */}
           <div className="flex flex-col sm:flex-row gap-4">
             <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-              <Input
+              <SearchInput
                 placeholder={isPractitioner ? "Search service bills..." : "Search invoices..."}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10"
               />
             </div>
             
@@ -189,7 +157,7 @@ export function InvoiceList({ onNewInvoice }: InvoiceListProps) {
           {isLoading ? (
             <div className="flex items-center justify-center h-64">
               <div className="text-center">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-yellow-600 mx-auto mb-4"></div>
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-foreground mx-auto mb-4"></div>
                 <p className="text-muted-foreground">Loading {isPractitioner ? "service bills" : "invoices"}...</p>
               </div>
             </div>
@@ -224,12 +192,7 @@ export function InvoiceList({ onNewInvoice }: InvoiceListProps) {
                         <h3 className="font-medium text-foreground">
                           {invoice.description || `${isPractitioner ? "Recovery Service" : "Medical Service"}`}
                         </h3>
-                        <Badge className={getStatusColor(invoice.status)}>
-                          <div className="flex items-center gap-1">
-                            {getStatusIcon(invoice.status)}
-                            {invoice.status}
-                          </div>
-                        </Badge>
+                        <StatusBadge status={invoice.status} />
                       </div>
                       
                       <div className="text-sm text-muted-foreground mb-2">

@@ -36,12 +36,12 @@ export function CartDropdown() {
     <div className="relative">
       <Button
         onClick={() => setIsOpen(!isOpen)}
-        className="bg-yellow-400 hover:bg-yellow-500 text-black font-medium"
+        className="font-medium"
       >
         <ShoppingCart className="h-4 w-4 mr-2" />
         Cart
         {getItemCount() > 0 && (
-          <Badge className="ml-2 bg-red-500 text-white">
+          <Badge variant="secondary" className="ml-2">
             {getItemCount()}
           </Badge>
         )}
@@ -115,7 +115,7 @@ export function CartDropdown() {
                     <div className="flex space-x-2">
                       <Button
                         onClick={handleCheckout}
-                        className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black"
+                        className="flex-1"
                       >
                         Checkout
                       </Button>

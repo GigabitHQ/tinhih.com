@@ -56,7 +56,7 @@ export default function ClinicalNoteDetail() {
           <Card>
             <CardContent className="flex items-center justify-center h-64">
               <div className="text-center">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-yellow-600 mx-auto mb-4"></div>
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-foreground mx-auto mb-4"></div>
                 <p className="text-muted-foreground">Loading recovery note...</p>
               </div>
             </CardContent>
@@ -115,7 +115,7 @@ export default function ClinicalNoteDetail() {
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <CardTitle className="text-2xl font-bold text-foreground flex items-center gap-2">
-                    <FileText className="w-6 h-6 text-primary" />
+                    <FileText className="w-6 h-6 text-muted-foreground" />
                     {note.title}
                   </CardTitle>
                   <div className="flex items-center gap-4 mt-2 text-sm text-muted-foreground">
@@ -142,7 +142,7 @@ export default function ClinicalNoteDetail() {
           <Card>
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
-                <div className="w-2 h-2 bg-primary rounded-full"></div>
+                <div className="w-2 h-2 bg-muted-foreground rounded-full"></div>
                 Basic Information
               </CardTitle>
             </CardHeader>
@@ -189,7 +189,7 @@ export default function ClinicalNoteDetail() {
           <Card>
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
-                <div className="w-2 h-2 bg-primary rounded-full"></div>
+                <div className="w-2 h-2 bg-muted-foreground rounded-full"></div>
                 Recovery Session Documentation
               </CardTitle>
             </CardHeader>
@@ -200,7 +200,7 @@ export default function ClinicalNoteDetail() {
                   <label className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
                     Subjective (S)
                   </label>
-                  <div className="p-4 bg-muted/30 rounded-lg border-l-4 border-blue-500">
+                  <div className="p-4 bg-muted/30 rounded-lg border-l-4 border-border">
                     <p className="text-foreground whitespace-pre-wrap">{note.subjective}</p>
                   </div>
                 </div>
@@ -212,7 +212,7 @@ export default function ClinicalNoteDetail() {
                   <label className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
                     Objective (O)
                   </label>
-                  <div className="p-4 bg-muted/30 rounded-lg border-l-4 border-green-500">
+                  <div className="p-4 bg-muted/30 rounded-lg border-l-4 border-border">
                     <p className="text-foreground whitespace-pre-wrap">{note.objective}</p>
                   </div>
                 </div>
@@ -224,7 +224,7 @@ export default function ClinicalNoteDetail() {
                   <label className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
                     Assessment (A)
                   </label>
-                  <div className="p-4 bg-muted/30 rounded-lg border-l-4 border-yellow-500">
+                  <div className="p-4 bg-muted/30 rounded-lg border-l-4 border-border">
                     <p className="text-foreground whitespace-pre-wrap">{note.assessment}</p>
                   </div>
                 </div>
@@ -236,7 +236,7 @@ export default function ClinicalNoteDetail() {
                   <label className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
                     Plan (P)
                   </label>
-                  <div className="p-4 bg-muted/30 rounded-lg border-l-4 border-red-500">
+                  <div className="p-4 bg-muted/30 rounded-lg border-l-4 border-border">
                     <p className="text-foreground whitespace-pre-wrap">{note.plan}</p>
                   </div>
                 </div>
@@ -249,7 +249,7 @@ export default function ClinicalNoteDetail() {
             <Card>
               <CardHeader>
                 <CardTitle className="text-lg flex items-center gap-2">
-                  <div className="w-2 h-2 bg-primary rounded-full"></div>
+                  <div className="w-2 h-2 bg-muted-foreground rounded-full"></div>
                   Additional Information
                 </CardTitle>
               </CardHeader>
@@ -298,7 +298,7 @@ export default function ClinicalNoteDetail() {
             <Card>
               <CardHeader>
                 <CardTitle className="text-lg flex items-center gap-2">
-                  <div className="w-2 h-2 bg-primary rounded-full"></div>
+                  <div className="w-2 h-2 bg-muted-foreground rounded-full"></div>
                   Additional Notes
                 </CardTitle>
               </CardHeader>

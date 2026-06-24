@@ -22,11 +22,11 @@ export function MessageCard({ message, compact = false }: MessageCardProps) {
 
   if (compact) {
     return (
-      <div className={`flex items-center gap-3 p-3 border border-border rounded-lg hover:bg-accent/50 transition-colors ${isUnread ? 'bg-blue-50/50 dark:bg-blue-950/20' : ''}`}>
+      <div className={`flex items-center gap-3 p-3 border border-border rounded-lg hover:bg-accent/50 transition-colors ${isUnread ? 'bg-accent' : ''}`}>
         <div className="flex-shrink-0">
           <Avatar className="h-10 w-10">
             <AvatarImage src={message.sender?.user?.profileImage} />
-            <AvatarFallback className="text-sm bg-[#ffdd00] text-black">
+            <AvatarFallback className="text-sm bg-muted text-foreground">
               {message.sender?.user?.firstName?.[0]}{message.sender?.user?.lastName?.[0]}
             </AvatarFallback>
           </Avatar>
@@ -38,7 +38,7 @@ export function MessageCard({ message, compact = false }: MessageCardProps) {
               {message.sender?.user?.firstName} {message.sender?.user?.lastName}
             </h4>
             {isUnread && (
-              <Badge className="bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-900/20 dark:text-blue-400 dark:border-blue-800 text-xs">
+              <Badge className="text-xs">
                 New
               </Badge>
             )}
@@ -62,13 +62,13 @@ export function MessageCard({ message, compact = false }: MessageCardProps) {
   }
 
   return (
-    <Card className={`hover:shadow-md transition-shadow ${isUnread ? 'border-blue-200 dark:border-blue-800' : ''}`}>
+    <Card className={`hover:shadow-md transition-shadow ${isUnread ? 'border-foreground' : ''}`}>
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-3">
             <Avatar className="h-12 w-12">
               <AvatarImage src={message.sender?.user?.profileImage} />
-              <AvatarFallback className="text-sm bg-[#ffdd00] text-black">
+              <AvatarFallback className="text-sm bg-muted text-foreground">
                 {message.sender?.user?.firstName?.[0]}{message.sender?.user?.lastName?.[0]}
               </AvatarFallback>
             </Avatar>
@@ -76,7 +76,7 @@ export function MessageCard({ message, compact = false }: MessageCardProps) {
               <CardTitle className="text-lg flex items-center gap-2">
                 {message.sender?.user?.firstName} {message.sender?.user?.lastName}
                 {isUnread && (
-                  <Badge className="bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-900/20 dark:text-blue-400 dark:border-blue-800">
+                  <Badge>
                     New
                   </Badge>
                 )}

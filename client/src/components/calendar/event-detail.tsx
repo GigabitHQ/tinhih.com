@@ -65,7 +65,7 @@ export function EventDetail({ event, onClose }: EventDetailProps) {
       )}
 
       {/* Event Card */}
-      <Card className="border-l-4 border-l-[#3b82f6]">
+      <Card className="border-l-4 border-l-foreground">
         <CardHeader>
           <div className="flex items-start justify-between">
             <div className="flex-1">
@@ -83,7 +83,7 @@ export function EventDetail({ event, onClose }: EventDetailProps) {
                 </span>
               </div>
             </div>
-            <Badge variant="secondary" className="bg-[#3b82f6] text-white">
+            <Badge variant="secondary">
               Event
             </Badge>
           </div>

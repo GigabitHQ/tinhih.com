@@ -3,6 +3,7 @@ import { useRoute, useLocation } from "wouter";
 import { useAuth } from "@/context/auth-context";
 import { useToast } from "@/hooks/use-toast";
 import { VideoMeeting } from "@/components/telehealth/video-meeting";
+import { StatusBadge } from "@/components/ui/status-badge";
 import { usePageTitle } from "@/context/page-context";
 import type { TelehealthSessionWithDetails } from "@shared/schema";
 import { apiRequest } from "@/lib/queryClient";
@@ -195,11 +196,9 @@ export default function TelehealthSession() {
           <div className="bg-card p-6 rounded-lg border">
             <h3 className="text-lg font-semibold mb-4">Session Details</h3>
             <div className="space-y-3">
-              <div>
+              <div className="flex items-center">
                 <span className="text-sm text-muted-foreground">Status:</span>
-                <span className="ml-2 px-2 py-1 bg-blue-100 text-blue-800 rounded text-sm">
-                  {session.status}
-                </span>
+                <StatusBadge status={session.status} className="ml-2" />
               </div>
               <div>
                 <span className="text-sm text-muted-foreground">Platform:</span>
@@ -274,10 +273,10 @@ export default function TelehealthSession() {
         </div>
 
         {/* HIPAA Compliance Notice */}
-        <div className="mt-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-          <h4 className="font-semibold text-blue-900 mb-2">HIPAA Compliance</h4>
-          <p className="text-sm text-blue-700">
-            This meeting is conducted in compliance with HIPAA regulations. All communications are encrypted, 
+        <div className="mt-8 p-4 bg-muted border border-border rounded-lg">
+          <h4 className="font-semibold text-foreground mb-2">HIPAA Compliance</h4>
+          <p className="text-sm text-muted-foreground">
+            This meeting is conducted in compliance with HIPAA regulations. All communications are encrypted,
             and session data is securely logged for audit purposes. Your privacy and security are our top priorities.
           </p>
         </div>

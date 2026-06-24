@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Calendar, Clock, Video, Phone, MapPin, User, Plus } from 'lucide-react';
+import { StatusBadge } from '@/components/ui/status-badge';
 import { format } from 'date-fns';
 import { apiRequest } from '@/lib/queryClient';
 import { useToast } from '@/hooks/use-toast';
@@ -12,15 +12,6 @@ import BookAppointmentForm from './book-appointment-form';
 import { convertUTCToLocalDate, convertUTCToLocalTime, convertUTCToLocalShortDate, getUserTimezone } from '@/lib/timezone-utils';
 import { useAuth } from '@/context/auth-context';
 
-
-const statusColors = {
-  scheduled: 'bg-blue-100 text-blue-800',
-  confirmed: 'bg-green-100 text-green-800',
-  in_progress: 'bg-yellow-100 text-yellow-800',
-  completed: 'bg-gray-100 text-gray-800',
-  cancelled: 'bg-red-100 text-red-800',
-  no_show: 'bg-red-100 text-red-800'
-};
 
 const typeIcons = {
   consultation: Calendar,
@@ -112,8 +103,8 @@ export default function PatientAppointments() {
           <Card key={i}>
             <CardContent className="p-6">
               <div className="animate-pulse space-y-4">
-                <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-                <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                <div className="h-4 bg-muted rounded w-3/4"></div>
+                <div className="h-4 bg-muted rounded w-1/2"></div>
               </div>
             </CardContent>
           </Card>
@@ -189,15 +180,13 @@ export default function PatientAppointments() {
                 <CardContent className="p-6">
                   <div className="flex items-start justify-between">
                     <div className="flex items-start space-x-4">
-                      <div className="p-2 bg-primary/10 rounded-lg">
-                        <TypeIcon className="w-6 h-6 text-primary" />
+                      <div className="p-2 bg-muted rounded-lg">
+                        <TypeIcon className="w-6 h-6 text-muted-foreground" />
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-2">
                           <h4 className="font-semibold">{appointment.title}</h4>
-                          <Badge className={statusColors[appointment.status as keyof typeof statusColors]}>
-                            {appointment.status.replace('_', ' ')}
-                          </Badge>
+                          <StatusBadge status={appointment.status} />
                         </div>
                         <div className="space-y-2 text-sm text-muted-foreground">
                           <div className="flex items-center gap-2">
@@ -280,9 +269,7 @@ export default function PatientAppointments() {
                         </p>
                       </div>
                     </div>
-                    <Badge className={statusColors[appointment.status as keyof typeof statusColors]}>
-                      {appointment.status.replace('_', ' ')}
-                    </Badge>
+                    <StatusBadge status={appointment.status} />
                   </div>
                 </CardContent>
               </Card>

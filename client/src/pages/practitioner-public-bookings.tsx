@@ -44,10 +44,10 @@ export default function PractitionerPublicBookings() {
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="animate-pulse">
-          <div className="h-8 bg-gray-200 rounded w-1/4 mb-4"></div>
+          <div className="h-8 bg-muted rounded w-1/4 mb-4"></div>
           <div className="space-y-3">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="h-32 bg-gray-200 rounded"></div>
+              <div key={i} className="h-32 bg-muted rounded"></div>
             ))}
           </div>
         </div>
@@ -60,9 +60,9 @@ export default function PractitionerPublicBookings() {
       <div className="container mx-auto px-4 py-8">
         <Card>
           <CardContent className="text-center py-8">
-            <User className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">Practitioner Profile Not Found</h3>
-            <p className="text-gray-500">Please contact an administrator to set up your practitioner profile.</p>
+            <User className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+            <h3 className="text-lg font-medium text-foreground mb-2">Practitioner Profile Not Found</h3>
+            <p className="text-muted-foreground">Please contact an administrator to set up your practitioner profile.</p>
           </CardContent>
         </Card>
       </div>
@@ -73,7 +73,7 @@ export default function PractitionerPublicBookings() {
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Public Bookings Management</h1>
-        <p className="text-gray-600">
+        <p className="text-muted-foreground">
           Manage and respond to public booking requests from patients.
         </p>
       </div>

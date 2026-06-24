@@ -107,7 +107,7 @@ export function PaymentForm({ amount, email, fullName, phone, clientSecret, onSu
           </CardContent>
         </Card>
         {error && (
-          <p className="text-sm text-red-600">{error}</p>
+          <p className="text-sm text-foreground">{error}</p>
         )}
       </div>
 
@@ -143,12 +143,12 @@ export function PaymentForm({ amount, email, fullName, phone, clientSecret, onSu
       <Button
         type="submit"
         disabled={!stripe || isProcessing}
-        className="w-full bg-[#ffdd00] hover:bg-[#ffdd00]/90 text-black font-semibold"
+        className="w-full font-semibold"
         size="lg"
       >
         {isProcessing ? (
           <>
-            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-black mr-2"></div>
+            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary-foreground mr-2"></div>
             Processing Payment...
           </>
         ) : (

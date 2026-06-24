@@ -4,12 +4,12 @@ import { usePageTitle } from "@/context/page-context";
 import { QuoteList } from "@/components/quotes/quote-list";
 import { QuoteForm } from "@/components/quotes/quote-form";
 import { Button } from "@/components/ui/button";
-import { Plus, Filter, Search } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import { Plus, Filter } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { SearchInput } from "@/components/ui/search-input";
 import { useToast } from "@/hooks/use-toast";
 import { api } from "@/lib/api";
 import { Quote, QuoteWithCreator } from "@/shared/schema";
@@ -246,7 +246,7 @@ export default function AdminQuotes() {
               <CardTitle className="text-sm font-medium">Active</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-green-600">{stats.active}</div>
+              <div className="text-2xl font-bold text-foreground">{stats.active}</div>
             </CardContent>
           </Card>
           <Card>
@@ -254,7 +254,7 @@ export default function AdminQuotes() {
               <CardTitle className="text-sm font-medium">Featured</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-yellow-600">{stats.featured}</div>
+              <div className="text-2xl font-bold text-foreground">{stats.featured}</div>
             </CardContent>
           </Card>
           <Card>
@@ -262,7 +262,7 @@ export default function AdminQuotes() {
               <CardTitle className="text-sm font-medium">Categories</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-blue-600">{stats.categories}</div>
+              <div className="text-2xl font-bold text-foreground">{stats.categories}</div>
             </CardContent>
           </Card>
         </div>
@@ -277,15 +277,11 @@ export default function AdminQuotes() {
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="relative">
-                <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                <Input
-                  placeholder="Search quotes, authors, or tags..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10"
-                />
-              </div>
+              <SearchInput
+                placeholder="Search quotes, authors, or tags..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
               <Select value={categoryFilter} onValueChange={setCategoryFilter}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select category" />

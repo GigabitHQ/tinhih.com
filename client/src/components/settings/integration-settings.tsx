@@ -36,7 +36,7 @@ const INTEGRATION_CONFIGS = {
     name: "Zoom",
     description: "High-quality video conferencing with screen sharing",
     icon: Video,
-    color: "bg-blue-500",
+    color: "bg-muted",
     features: ["HD Video", "Screen Share", "Recording", "Waiting Room"],
     setupUrl: "https://marketplace.zoom.us/develop/create",
   },
@@ -44,7 +44,7 @@ const INTEGRATION_CONFIGS = {
     name: "Microsoft Teams",
     description: "Enterprise-grade meetings with collaboration tools",
     icon: Users,
-    color: "bg-purple-500",
+    color: "bg-muted",
     features: ["Video & Audio", "Chat", "File Sharing", "Transcription"],
     setupUrl: "https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/app-fundamentals-overview",
   },
@@ -52,7 +52,7 @@ const INTEGRATION_CONFIGS = {
     name: "Google Meet",
     description: "Simple and secure video meetings",
     icon: Monitor,
-    color: "bg-green-500",
+    color: "bg-muted",
     features: ["Easy Join", "Mobile Support", "Live Captions", "Recording"],
     setupUrl: "https://developers.google.com/meet/api/guides/overview",
   },
@@ -192,7 +192,7 @@ export function IntegrationSettings() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <CheckCircle className="h-5 w-5 text-green-500" />
+              <CheckCircle className="h-5 w-5 text-muted-foreground" />
               Connected Platforms
             </CardTitle>
             <CardDescription>
@@ -208,7 +208,7 @@ export function IntegrationSettings() {
                 <div key={integration.id} className="border rounded-lg p-4">
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
-                      <div className={`p-2 rounded-lg ${config?.color} text-white`}>
+                      <div className={`p-2 rounded-lg ${config?.color} text-muted-foreground`}>
                         <IconComponent className="h-5 w-5" />
                       </div>
                       <div>
@@ -217,7 +217,7 @@ export function IntegrationSettings() {
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Badge variant="secondary" className="text-green-600 bg-green-50">
+                      <Badge variant="secondary">
                         Connected
                       </Badge>
                       <Button
@@ -321,13 +321,13 @@ export function IntegrationSettings() {
                 <Card key={provider} className="relative">
                   <CardContent className="p-6">
                     <div className="flex items-center gap-3 mb-4">
-                      <div className={`p-2 rounded-lg ${config.color} text-white`}>
+                      <div className={`p-2 rounded-lg ${config.color} text-muted-foreground`}>
                         <IconComponent className="h-5 w-5" />
                       </div>
                       <div>
                         <h3 className="font-semibold">{config.name}</h3>
                         {isConnected && (
-                          <Badge variant="secondary" className="text-green-600 bg-green-50">
+                          <Badge variant="secondary">
                             Connected
                           </Badge>
                         )}
@@ -343,7 +343,7 @@ export function IntegrationSettings() {
                       <ul className="text-xs space-y-1">
                         {config.features.map((feature, index) => (
                           <li key={index} className="flex items-center gap-1">
-                            <CheckCircle className="h-3 w-3 text-green-500" />
+                            <CheckCircle className="h-3 w-3 text-muted-foreground" />
                             {feature}
                           </li>
                         ))}
@@ -383,13 +383,13 @@ export function IntegrationSettings() {
       </Card>
 
       {/* Information Card */}
-      <Card className="border-blue-200 bg-blue-50">
+      <Card className="border-border bg-muted">
         <CardContent className="p-4">
           <div className="flex items-start gap-3">
-            <Info className="h-5 w-5 text-blue-600 mt-0.5" />
+            <Info className="h-5 w-5 text-muted-foreground mt-0.5" />
             <div>
-              <h3 className="font-medium text-blue-900">About Integrations</h3>
-              <p className="text-sm text-blue-800 mt-1">
+              <h3 className="font-medium text-foreground">About Integrations</h3>
+              <p className="text-sm text-muted-foreground mt-1">
                 Connected platforms allow you to automatically create video meetings for telehealth appointments. 
                 You can also sync your calendar and manage meeting settings directly from the platform.
               </p>

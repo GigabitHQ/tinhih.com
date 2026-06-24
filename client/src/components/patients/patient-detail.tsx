@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { StatusBadge } from "@/components/ui/status-badge";
 import { Separator } from "@/components/ui/separator";
 import { 
   User, 
@@ -87,9 +88,7 @@ export function PatientDetail({ patient, onEdit, onBack, onMessage }: PatientDet
                   {patient.user?.firstName} {patient.user?.lastName}
                 </CardTitle>
                 {patient.user?.isActive && (
-                  <Badge variant="secondary" className="bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300">
-                    Active
-                  </Badge>
+                  <StatusBadge status="active" />
                 )}
               </div>
               <p className="text-muted-foreground mt-1">
@@ -248,7 +247,7 @@ export function PatientDetail({ patient, onEdit, onBack, onMessage }: PatientDet
             {patient.allergies && patient.allergies.length > 0 ? (
               <div className="flex flex-wrap gap-2">
                 {patient.allergies.map((allergy: string, index: number) => (
-                  <Badge key={index} variant="destructive" className="bg-red-100 text-red-800">
+                  <Badge key={index} variant="outline" className="border-foreground text-foreground">
                     {allergy}
                   </Badge>
                 ))}

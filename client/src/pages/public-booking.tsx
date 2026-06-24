@@ -238,8 +238,8 @@ export default function PublicBooking({ bookingLink }: PublicBookingProps) {
         </header>
         <main className="flex-1 flex items-center justify-center">
           <div className="text-center max-w-md mx-auto px-4">
-            <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <span className="text-red-600 text-2xl">⚠️</span>
+            <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mx-auto mb-4">
+              <span className="text-foreground text-2xl">⚠️</span>
             </div>
             <h2 className="text-xl font-semibold mb-2">Booking Unavailable</h2>
             <p className="text-muted-foreground mb-4">
@@ -393,8 +393,8 @@ export default function PublicBooking({ bookingLink }: PublicBookingProps) {
           <CardContent className="p-6">
             <RadioGroupItem value="returning" id="returning" className="sr-only" />
             <Label htmlFor="returning" className="flex items-center space-x-4 cursor-pointer">
-              <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                <User className="w-6 h-6 text-primary" />
+              <div className="w-12 h-12 bg-muted rounded-full flex items-center justify-center">
+                <User className="w-6 h-6 text-muted-foreground" />
               </div>
               <div className="flex-1">
                 <h3 className="text-[13px] font-medium">Returning Client</h3>
@@ -409,8 +409,8 @@ export default function PublicBooking({ bookingLink }: PublicBookingProps) {
           <CardContent className="p-6">
             <RadioGroupItem value="new" id="new" className="sr-only" />
             <Label htmlFor="new" className="flex items-center space-x-4 cursor-pointer">
-              <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                <User className="w-6 h-6 text-primary" />
+              <div className="w-12 h-12 bg-muted rounded-full flex items-center justify-center">
+                <User className="w-6 h-6 text-muted-foreground" />
               </div>
               <div className="flex-1">
                 <h3 className="text-[13px] font-medium">New Client</h3>
@@ -599,7 +599,7 @@ export default function PublicBooking({ bookingLink }: PublicBookingProps) {
           <p className="text-[13px] text-muted-foreground">Please review your booking details before confirming</p>
                         </div>
 
-        <Card className="border-2 border-primary/20">
+        <Card className="border-border">
           <CardContent className="p-6 space-y-4">
             <div className="space-y-3">
               <div className="flex justify-between items-center">
@@ -652,12 +652,12 @@ export default function PublicBooking({ bookingLink }: PublicBookingProps) {
   return (
       <div className="space-y-6 max-w-lg mx-auto">
         <div className="text-center space-y-4">
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
-            <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="w-16 h-16 bg-foreground rounded-full flex items-center justify-center mx-auto">
+            <svg className="w-8 h-8 text-background" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
                 </div>
-          <h2 className="text-2xl font-bold text-green-600">Booking Confirmed!</h2>
+          <h2 className="text-2xl font-bold text-foreground">Booking Confirmed!</h2>
           <p className="text-muted-foreground">
             Your appointment has been successfully booked. A confirmation email will be sent to your email address.
           </p>
@@ -694,7 +694,7 @@ export default function PublicBooking({ bookingLink }: PublicBookingProps) {
           </div>
           </div>
         <div className="text-center">
-          <Button onClick={handleReset} className="bg-[#ffdd00] text-black hover:bg-[#ffdd00]/90">
+          <Button onClick={handleReset}>
             Book Another Appointment
           </Button>
                   </div>
@@ -739,7 +739,7 @@ export default function PublicBooking({ bookingLink }: PublicBookingProps) {
         </header>
         <main className="flex-1 flex items-center justify-center">
         <div className="text-center">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-foreground mx-auto mb-4"></div>
             <p className="text-muted-foreground">Loading booking page...</p>
               </div>
         </main>
@@ -770,8 +770,8 @@ export default function PublicBooking({ bookingLink }: PublicBookingProps) {
         </header>
         <main className="flex-1 flex items-center justify-center">
           <div className="text-center max-w-md mx-auto px-4">
-            <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <span className="text-red-600 text-2xl">⚠️</span>
+            <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mx-auto mb-4">
+              <span className="text-foreground text-2xl">⚠️</span>
             </div>
             <h2 className="text-xl font-semibold mb-2">Booking Unavailable</h2>
             <p className="text-muted-foreground mb-4">{error instanceof Error ? error.message : 'An error occurred'}</p>
@@ -816,7 +816,7 @@ export default function PublicBooking({ bookingLink }: PublicBookingProps) {
         <div className="md:hidden block relative h-12">
           {/* Diagonal Ribbon in Top-Right Corner */}
           <div className="absolute top-0 right-0 z-10">
-            <div className="text-black transform rotate-45 origin-top-right px-3 py-1 shadow-md" style={{ backgroundColor: '#ffdd00' }}>
+            <div className="bg-muted text-foreground transform rotate-45 origin-top-right px-3 py-1 shadow-md">
               <div className="text-center">
                 <p className="text-xs font-medium">Powered by</p>
                 <p className="text-xs font-bold">TiNHiH Portal</p>
@@ -835,41 +835,33 @@ export default function PublicBooking({ bookingLink }: PublicBookingProps) {
               {steps.map((step, index) => (
                 <div key={step.id} className="flex items-center">
                   <div className="flex items-center gap-2">
-                    <div 
+                    <div
                       className={`w-8 h-8 rounded-full flex border items-center justify-center text-sm font-semibold ${
-                        currentStep > step.id 
-                          ? 'border-none bg-green-500' 
-                          : currentStep === step.id 
-                          ? 'border-none' 
-                          : 'bg-gray-300'
+                        currentStep > step.id
+                          ? 'border-none bg-foreground text-background'
+                          : currentStep === step.id
+                          ? 'border-none bg-primary text-primary-foreground'
+                          : 'bg-muted text-muted-foreground'
                       }`}
-                      style={{
-                        backgroundColor: currentStep === step.id ? '#ffdd00' : undefined
-                      }}
                     >
                       {currentStep > step.id ? (
-                        <span>
-                          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlnsXlink="http://www.w3.org/1999/xlink" width="30" height="30" x="0" y="0" viewBox="0 0 2.54 2.54" xmlSpace="preserve" fillRule="evenodd" className=""><g><circle cx="1.27" cy="1.27" r="1.27" fill="#48b02c" opacity="1" data-original="#48b02c"></circle><g fill="#fff"><path d="m.962 1.626.895-.895a.068.068 0 0 1 .096 0l.087.087a.068.068 0 0 1 0 .096l-.896.895a.068.068 0 0 1-.095 0l-.087-.087a.068.068 0 0 1 0-.096z" fill="#ffffff" opacity="1" data-original="#ffffff"></path><path d="m.683 1.08.545.546a.068.068 0 0 1 0 .096l-.086.086a.068.068 0 0 1-.096 0L.5 1.263a.068.068 0 0 1 0-.096l.087-.086a.068.068 0 0 1 .096 0z" fill="#ffffff" opacity="1" data-original="#ffffff"></path></g></g></svg>
-                        </span>
+                        <Check className="w-4 h-4" />
                       ) : (
                         step.id
                       )}
                     </div>
                     <div className="text-start">
-                      <p 
+                      <p
                         className={`text-xs font-medium text-nowrap ${
-                          currentStep === step.id ? 'font-bold' : ''
+                          currentStep === step.id ? 'font-bold text-foreground' : ''
                         }`}
-                        style={{
-                          color: currentStep === step.id ? '#000' : undefined
-                        }}
                       >
                         {step.title}
                       </p>
                     </div>
                   </div>
                   {index < steps.length - 1 && (
-                    <div className={`w-[100px] h-0.5 mx-4 ${currentStep > step.id ? 'bg-[#ffdd00]' : 'bg-gray-200'}`} />
+                    <div className={`w-[100px] h-0.5 mx-4 ${currentStep > step.id ? 'bg-foreground' : 'bg-muted'}`} />
                   )}
                 </div>
               ))}
@@ -936,24 +928,22 @@ export default function PublicBooking({ bookingLink }: PublicBookingProps) {
               {/* Right side - Next button */}
               <div className="flex-1 flex justify-end">
                 {currentStep < 3 && (
-                  <Button 
+                  <Button
                     onClick={handleNext}
                     disabled={
                       (currentStep === 2 && (!selectedDate || !selectedTime))
                     }
                     className="flex items-center gap-2"
-                    style={{ backgroundColor: '#ffdd00', color: 'black' }}
                   >
                     Next
                     <ChevronRight className="w-4 h-4" />
                   </Button>
                 )}
                 {currentStep === 3 && (
-                  <Button 
+                  <Button
                     onClick={() => step3Form.handleSubmit(handleSubmit)()}
                     disabled={!step3Form.formState.isValid || !selectedDate || !selectedTime}
                     className="flex items-center gap-2"
-                    style={{ backgroundColor: '#ffdd00', color: 'black' }}
                   >
                     Confirm
                     <ChevronRight className="w-4 h-4" />

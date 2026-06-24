@@ -96,12 +96,12 @@ export function ConsentStep({ data, existingData, onComplete, onBack, isEditing 
           {/* HIPAA and Privacy */}
           <div className="space-y-4">
             <h3 className="text-lg font-medium text-foreground border-b border-border pb-2 flex items-center gap-2">
-              <Shield className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+              <Shield className="w-5 h-5 text-muted-foreground" />
               Privacy & HIPAA Consent
             </h3>
             
-            <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
-              <p className="text-sm text-blue-800 dark:text-blue-200">
+            <div className="bg-muted border border-border rounded-lg p-4">
+              <p className="text-sm text-muted-foreground">
                 <strong>Notice of Privacy Practices:</strong> TiNHiH Foundation is committed to protecting your privacy. We follow all HIPAA regulations and maintain strict confidentiality of your health information.
               </p>
             </div>
@@ -120,9 +120,9 @@ export function ConsentStep({ data, existingData, onComplete, onBack, isEditing 
                   <div className="space-y-1 leading-none">
                     <FormLabel className="font-medium">
                       I have read and understand the Notice of Privacy Practices and consent to the use and disclosure of my health information as described 
-                      <span className="text-red-600"> *</span>
+                      <span className="text-muted-foreground"> *</span>
                     </FormLabel>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </div>
                 </FormItem>
               )}
@@ -142,9 +142,9 @@ export function ConsentStep({ data, existingData, onComplete, onBack, isEditing 
                   <div className="space-y-1 leading-none">
                     <FormLabel className="font-medium">
                       I accept the TiNHiH Foundation Privacy Policy and Terms of Service 
-                      <span className="text-red-600"> *</span>
+                      <span className="text-muted-foreground"> *</span>
                     </FormLabel>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </div>
                 </FormItem>
               )}
@@ -154,12 +154,12 @@ export function ConsentStep({ data, existingData, onComplete, onBack, isEditing 
           {/* Treatment Consent */}
           <div className="space-y-4">
             <h3 className="text-lg font-medium text-foreground border-b border-border pb-2 flex items-center gap-2">
-              <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400" />
+              <CheckCircle className="w-5 h-5 text-muted-foreground" />
               Treatment Consent
             </h3>
             
-            <div className="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
-              <p className="text-sm text-green-800 dark:text-green-200">
+            <div className="bg-muted border border-border rounded-lg p-4">
+              <p className="text-sm text-muted-foreground">
                 <strong>Treatment Consent:</strong> By consenting to treatment, you acknowledge that you understand the nature of your condition and the proposed treatment plan.
               </p>
             </div>
@@ -178,9 +178,9 @@ export function ConsentStep({ data, existingData, onComplete, onBack, isEditing 
                   <div className="space-y-1 leading-none">
                     <FormLabel className="font-medium">
                       I consent to receive treatment from TiNHiH Foundation and understand that I have the right to refuse any treatment 
-                      <span className="text-red-600"> *</span>
+                      <span className="text-muted-foreground"> *</span>
                     </FormLabel>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </div>
                 </FormItem>
               )}
@@ -295,12 +295,12 @@ export function ConsentStep({ data, existingData, onComplete, onBack, isEditing 
           {/* Financial Consent */}
           <div className="space-y-4">
             <h3 className="text-lg font-medium text-foreground border-b border-border pb-2 flex items-center gap-2">
-              <FileText className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+              <FileText className="w-5 h-5 text-muted-foreground" />
               Financial Policies
             </h3>
             
-            <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 rounded-lg p-4">
-              <p className="text-sm text-purple-800 dark:text-purple-200">
+            <div className="bg-muted border border-border rounded-lg p-4">
+              <p className="text-sm text-muted-foreground">
                 <strong>Financial Policies:</strong> TiNHiH Foundation offers sliding scale fees and financial assistance. We are committed to making recovery accessible regardless of financial circumstances.
               </p>
             </div>
@@ -319,9 +319,9 @@ export function ConsentStep({ data, existingData, onComplete, onBack, isEditing 
                   <div className="space-y-1 leading-none">
                     <FormLabel className="font-medium">
                       I understand and agree to the financial policies of TiNHiH Foundation, including payment terms and sliding scale options 
-                      <span className="text-red-600"> *</span>
+                      <span className="text-muted-foreground"> *</span>
                     </FormLabel>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </div>
                 </FormItem>
               )}
@@ -352,8 +352,8 @@ export function ConsentStep({ data, existingData, onComplete, onBack, isEditing 
           <div className="space-y-4">
             <h3 className="text-lg font-medium text-foreground border-b border-border pb-2">Research & Quality Improvement</h3>
             
-            <div className="bg-orange-50 dark:bg-orange-950/20 border border-orange-200 dark:border-orange-800 rounded-lg p-4">
-              <p className="text-sm text-orange-800 dark:text-orange-200">
+            <div className="bg-muted border border-border rounded-lg p-4">
+              <p className="text-sm text-muted-foreground">
                 <strong>Research & Quality Improvement:</strong> Your participation in research and quality improvement initiatives helps us provide better care to all patients. Participation is completely voluntary.
               </p>
             </div>
@@ -402,12 +402,12 @@ export function ConsentStep({ data, existingData, onComplete, onBack, isEditing 
           {/* Policies */}
           <div className="space-y-4">
             <h3 className="text-lg font-medium text-foreground border-b border-border pb-2 flex items-center gap-2">
-              <AlertTriangle className="w-5 h-5 text-red-600 dark:text-red-400" />
+              <AlertTriangle className="w-5 h-5 text-muted-foreground" />
               Important Policies
             </h3>
             
-            <div className="bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
-              <p className="text-sm text-red-800 dark:text-red-200">
+            <div className="bg-muted border border-border rounded-lg p-4">
+              <p className="text-sm text-muted-foreground">
                 <strong>No-Show & Cancellation Policy:</strong> We understand that emergencies happen. Please provide at least 24 hours notice for cancellations to allow other patients to use your appointment time.
               </p>
             </div>
@@ -426,9 +426,9 @@ export function ConsentStep({ data, existingData, onComplete, onBack, isEditing 
                   <div className="space-y-1 leading-none">
                     <FormLabel className="font-medium">
                       I understand and agree to the no-show policy, which may result in a fee for missed appointments without proper notice 
-                      <span className="text-red-600"> *</span>
+                      <span className="text-muted-foreground"> *</span>
                     </FormLabel>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </div>
                 </FormItem>
               )}
@@ -448,9 +448,9 @@ export function ConsentStep({ data, existingData, onComplete, onBack, isEditing 
                   <div className="space-y-1 leading-none">
                     <FormLabel className="font-medium">
                       I understand and agree to the cancellation policy requiring 24 hours notice for appointment changes 
-                      <span className="text-red-600"> *</span>
+                      <span className="text-muted-foreground"> *</span>
                     </FormLabel>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </div>
                 </FormItem>
               )}
@@ -473,7 +473,7 @@ export function ConsentStep({ data, existingData, onComplete, onBack, isEditing 
                       {...field} 
                     />
                   </FormControl>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />

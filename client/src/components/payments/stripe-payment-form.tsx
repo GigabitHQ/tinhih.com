@@ -276,7 +276,7 @@ export function StripePaymentForm({ amount, invoiceId, onSuccess, onCancel }: St
             </Button>
             <Button
               type="submit"
-              className="flex-1 bg-[#ffdd00] hover:bg-[#ffdd00]/90 text-black border-0"
+              className="flex-1"
               disabled={isProcessing || !clientSecret}
             >
               {isProcessing ? "Processing..." : `Pay $${amount.toFixed(2)}`}

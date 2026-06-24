@@ -104,15 +104,14 @@ export default function EmailTest() {
             <Button
               onClick={testEmail}
               disabled={isLoading}
-              className="bg-blue-600 hover:bg-blue-700"
+              variant="outline"
             >
               {isLoading ? "Testing..." : "Test Email Config"}
             </Button>
-            
+
             <Button
               onClick={testForgotPassword}
               disabled={isLoading}
-              className="bg-[#ffdd00] hover:bg-[#ffdd00]/90 text-black"
             >
               {isLoading ? "Testing..." : "Test Forgot Password"}
             </Button>
@@ -126,18 +125,18 @@ export default function EmailTest() {
           )}
 
           {result && !error && (
-            <Alert className="border-green-200 bg-green-50">
-              <CheckCircle className="h-4 w-4 text-green-600" />
-              <AlertDescription className="text-green-800">
+            <Alert className="border border-border bg-muted">
+              <CheckCircle className="h-4 w-4 text-foreground" />
+              <AlertDescription className="text-foreground">
                 {result.message}
               </AlertDescription>
             </Alert>
           )}
 
           {result && (
-            <div className="mt-4 p-4 bg-gray-50 rounded-lg">
+            <div className="mt-4 p-4 bg-muted rounded-lg">
               <h4 className="font-medium mb-2">Debug Information:</h4>
-              <pre className="text-xs bg-gray-100 p-3 rounded overflow-auto">
+              <pre className="text-xs bg-muted p-3 rounded overflow-auto">
                 {JSON.stringify(result, null, 2)}
               </pre>
             </div>

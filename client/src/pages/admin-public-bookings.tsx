@@ -13,7 +13,7 @@ export default function AdminPublicBookings() {
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">All Public Bookings</h1>
-        <p className="text-gray-600">
+        <p className="text-muted-foreground">
           View and manage all public booking requests across all practitioners.
         </p>
       </div>

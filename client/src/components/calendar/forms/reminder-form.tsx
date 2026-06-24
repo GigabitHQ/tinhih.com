@@ -85,7 +85,7 @@ export function ReminderForm({ selectedDate, selectedTime, onSubmit, onCancel }:
                 <FormControl>
                   <Input placeholder="Enter reminder title..." {...field} />
                 </FormControl>
-                <FormMessage className="text-red-600"/>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -111,7 +111,7 @@ export function ReminderForm({ selectedDate, selectedTime, onSubmit, onCancel }:
                     ))}
                   </SelectContent>
                 </Select>
-                <FormMessage className="text-red-600"/>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -152,7 +152,7 @@ export function ReminderForm({ selectedDate, selectedTime, onSubmit, onCancel }:
                       />
                     </PopoverContent>
                   </Popover>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -180,7 +180,7 @@ export function ReminderForm({ selectedDate, selectedTime, onSubmit, onCancel }:
                       ))}
                     </SelectContent>
                   </Select>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -202,25 +202,25 @@ export function ReminderForm({ selectedDate, selectedTime, onSubmit, onCancel }:
                   <SelectContent>
                     <SelectItem value="low">
                       <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 rounded-full bg-green-500" />
+                        <div className="w-3 h-3 rounded-full bg-muted border border-border" />
                         Low Priority
                       </div>
                     </SelectItem>
                     <SelectItem value="medium">
                       <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 rounded-full bg-yellow-500" />
+                        <div className="w-3 h-3 rounded-full bg-muted-foreground" />
                         Medium Priority
                       </div>
                     </SelectItem>
                     <SelectItem value="high">
                       <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 rounded-full bg-red-500" />
+                        <div className="w-3 h-3 rounded-full bg-foreground" />
                         High Priority
                       </div>
                     </SelectItem>
                   </SelectContent>
                 </Select>
-                <FormMessage className="text-red-600"/>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -240,7 +240,7 @@ export function ReminderForm({ selectedDate, selectedTime, onSubmit, onCancel }:
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className="text-red-600"/>
+                <FormMessage />
               </FormItem>
             )}
           />

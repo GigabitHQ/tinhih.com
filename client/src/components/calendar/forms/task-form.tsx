@@ -34,9 +34,9 @@ interface TaskFormProps {
 }
 
 const PRIORITY_OPTIONS = [
-  { value: "low", label: "Low", color: "bg-green-500" },
-  { value: "medium", label: "Medium", color: "bg-yellow-500" },
-  { value: "high", label: "High", color: "bg-red-500" },
+  { value: "low", label: "Low", color: "bg-muted border border-border" },
+  { value: "medium", label: "Medium", color: "bg-muted-foreground" },
+  { value: "high", label: "High", color: "bg-foreground" },
 ];
 
 export function TaskForm({ selectedDate, selectedTime, onSubmit, onCancel }: TaskFormProps) {
@@ -80,7 +80,7 @@ export function TaskForm({ selectedDate, selectedTime, onSubmit, onCancel }: Tas
                 <FormControl>
                   <Input placeholder="Enter task title..." {...field} />
                 </FormControl>
-                <FormMessage className="text-red-600"/>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -100,7 +100,7 @@ export function TaskForm({ selectedDate, selectedTime, onSubmit, onCancel }: Tas
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className="text-red-600"/>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -141,7 +141,7 @@ export function TaskForm({ selectedDate, selectedTime, onSubmit, onCancel }: Tas
                       />
                     </PopoverContent>
                   </Popover>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -169,7 +169,7 @@ export function TaskForm({ selectedDate, selectedTime, onSubmit, onCancel }: Tas
                       ))}
                     </SelectContent>
                   </Select>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -193,7 +193,7 @@ export function TaskForm({ selectedDate, selectedTime, onSubmit, onCancel }: Tas
                     <SelectItem value="unassigned">Unassigned</SelectItem>
                   </SelectContent>
                 </Select>
-                <FormMessage className="text-red-600"/>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -216,7 +216,7 @@ export function TaskForm({ selectedDate, selectedTime, onSubmit, onCancel }: Tas
                     {/* TODO: Load patients from API */}
                   </SelectContent>
                 </Select>
-                <FormMessage className="text-red-600"/>
+                <FormMessage />
               </FormItem>
             )}
           />

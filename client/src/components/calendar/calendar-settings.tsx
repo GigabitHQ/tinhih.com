@@ -340,9 +340,9 @@ export function CalendarSettings({ onClose }: CalendarSettingsProps) {
           <h2 className="text-lg font-semibold">Calendar Settings</h2>
         </div>
         <div className="animate-pulse space-y-4">
-          <div className="h-20 bg-gray-200 rounded"></div>
-          <div className="h-20 bg-gray-200 rounded"></div>
-          <div className="h-20 bg-gray-200 rounded"></div>
+          <div className="h-20 bg-muted rounded"></div>
+          <div className="h-20 bg-muted rounded"></div>
+          <div className="h-20 bg-muted rounded"></div>
         </div>
       </div>
     );
@@ -365,9 +365,9 @@ export function CalendarSettings({ onClose }: CalendarSettingsProps) {
             <Settings className="h-6 w-6 text-primary" />
           </div>
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Calendar Settings</h2>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-              Configure your working hours, time slots, and availability preferences for <span className="font-semibold text-primary-foreground">Public Booking Page</span>
+            <h2 className="text-2xl font-bold text-foreground">Calendar Settings</h2>
+            <p className="text-sm text-muted-foreground mt-1">
+              Configure your working hours, time slots, and availability preferences for <span className="font-semibold text-foreground">Public Booking Page</span>
             </p>
           </div>
         </div>
@@ -377,15 +377,15 @@ export function CalendarSettings({ onClose }: CalendarSettingsProps) {
         <form onSubmit={form.handleSubmit(handleSubmit)}>
           {/* Time Interval Settings */}
           <div className="space-y-8 max-h-[550px] overflow-y-auto"> 
-          <Card className="border-0 shadow-sm bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20">
+          <Card className="border shadow-sm bg-card">
             <CardHeader className="pb-4">
               <CardTitle className="flex items-center space-x-3 text-lg">
-                <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
-                  <Clock className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                <div className="p-2 bg-muted rounded-lg">
+                  <Clock className="h-5 w-5 text-muted-foreground" />
                 </div>
                 <div>
                   <span className="font-semibold">Time Interval</span>
-                  <p className="text-sm font-normal text-gray-600 dark:text-gray-400 mt-1">
+                  <p className="text-sm font-normal text-muted-foreground mt-1">
                     Configure appointment duration and buffer times
                   </p>
                 </div>
@@ -418,7 +418,7 @@ export function CalendarSettings({ onClose }: CalendarSettingsProps) {
                     <FormDescription>
                       This determines how time slots are generated in the calendar
                     </FormDescription>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -442,7 +442,7 @@ export function CalendarSettings({ onClose }: CalendarSettingsProps) {
                     <FormDescription>
                       Prevent appointments from being booked within this time before the slot
                     </FormDescription>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -450,15 +450,15 @@ export function CalendarSettings({ onClose }: CalendarSettingsProps) {
           </Card>
 
           {/* Working Hours */}
-          <Card className="border-0 shadow-sm bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20">
+          <Card className="border shadow-sm bg-card">
             <CardHeader className="pb-4">
               <CardTitle className="flex items-center space-x-3 text-lg">
-                <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg">
-                  <CalendarDays className="h-5 w-5 text-green-600 dark:text-green-400" />
+                <div className="p-2 bg-muted rounded-lg">
+                  <CalendarDays className="h-5 w-5 text-muted-foreground" />
                 </div>
                 <div>
                   <span className="font-semibold">Working Hours</span>
-                  <p className="text-sm font-normal text-gray-600 dark:text-gray-400 mt-1">
+                  <p className="text-sm font-normal text-muted-foreground mt-1">
                     Set your daily schedule and working days
                   </p>
                 </div>
@@ -498,15 +498,15 @@ export function CalendarSettings({ onClose }: CalendarSettingsProps) {
                     <FormDescription>
                       This timezone will be used for your working hours and time slot generation
                     </FormDescription>
-                    <div className="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                    <div className="mt-2 p-3 bg-muted border border-border rounded-lg">
                       <div className="flex items-start space-x-2">
-                        <AlertCircle className="h-4 w-4 text-blue-600 mt-0.5 flex-shrink-0" />
-                        <div className="text-sm text-blue-800">
+                        <AlertCircle className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
+                        <div className="text-sm text-muted-foreground">
                           <strong>Recommendation:</strong> We highly recommend keeping the same timezone in your user settings and calendar settings to avoid confusion. This ensures consistent time display across the platform.
                         </div>
                       </div>
                     </div>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -521,7 +521,7 @@ export function CalendarSettings({ onClose }: CalendarSettingsProps) {
                       <FormControl>
                         <Input type="time" {...field} />
                       </FormControl>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -535,14 +535,14 @@ export function CalendarSettings({ onClose }: CalendarSettingsProps) {
                       <FormControl>
                         <Input type="time" {...field} />
                       </FormControl>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
               </div>
 
               <div className="space-y-3">
-                <Label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Working Days</Label>
+                <Label className="text-sm font-semibold text-foreground">Working Days</Label>
                 <div className="grid grid-cols-2 gap-3">
                   {DAYS_OF_WEEK.map((day) => (
                     <FormField
@@ -552,7 +552,7 @@ export function CalendarSettings({ onClose }: CalendarSettingsProps) {
                       render={({ field }) => (
                         <FormItem>
                           <FormControl>
-                            <div className="flex items-center space-x-3 p-3 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                            <div className="flex items-center space-x-3 p-3 rounded-lg border border-border hover:bg-muted transition-colors">
                               <Switch
                                 checked={field.value?.includes(day.value)}
                                 onCheckedChange={(checked) => {
@@ -577,62 +577,62 @@ export function CalendarSettings({ onClose }: CalendarSettingsProps) {
           </Card>
 
           {/* Preview */}
-          <Card className="border-0 shadow-sm bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/20 dark:to-orange-950/20">
+          <Card className="border shadow-sm bg-card">
             <CardHeader className="pb-4">
               <CardTitle className="flex items-center space-x-3 text-lg">
-                <div className="p-2 bg-amber-100 dark:bg-amber-900/30 rounded-lg">
-                  <AlertCircle className="h-5 w-5 text-amber-600 dark:text-amber-400" />
+                <div className="p-2 bg-muted rounded-lg">
+                  <AlertCircle className="h-5 w-5 text-muted-foreground" />
                 </div>
                 <div>
                   <span className="font-semibold">Time Slots Preview</span>
-                  <p className="text-sm font-normal text-gray-600 dark:text-gray-400 mt-1">
+                  <p className="text-sm font-normal text-muted-foreground mt-1">
                     Preview of available time slots based on your settings
                   </p>
                 </div>
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700">
+              <div className="bg-background p-6 rounded-xl border border-border">
                 <div className="flex items-center space-x-2 mb-4">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  <div className="w-2 h-2 bg-foreground rounded-full"></div>
+                  <p className="text-sm font-medium text-foreground">
                     Available time slots ({previewSlots.length} total) in {getTimezoneLabel(currentValues.timezone || 'UTC')}:
                   </p>
                   {currentValues.bufferTime > 0 && (
-                    <span className="text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 px-2 py-1 rounded">
+                    <span className="text-xs bg-muted text-muted-foreground px-2 py-1 rounded">
                       +{currentValues.bufferTime}min buffer
                     </span>
                   )}
                 </div>
                                  <div className="grid grid-cols-3 gap-2 max-h-40 overflow-y-auto">
                   {previewSlots.slice(0, 24).map((slot, index) => (
-                    <span key={index} className="text-xs bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 px-3 py-2 rounded-lg font-medium text-center">
+                    <span key={index} className="text-xs bg-muted text-foreground px-3 py-2 rounded-lg font-medium text-center">
                       {slot}
                     </span>
                   ))}
                   {previewSlots.length > 24 && (
-                    <span className="text-xs text-gray-500 dark:text-gray-400 px-3 py-2 text-center">
+                    <span className="text-xs text-muted-foreground px-3 py-2 text-center">
                       +{previewSlots.length - 24} more
                     </span>
                   )}
                 </div>
                 {currentValues.bufferTime > 0 && (
-                  <p className="text-xs text-gray-600 dark:text-gray-400 mt-3 italic">
+                  <p className="text-xs text-muted-foreground mt-3 italic">
                     Buffer time of {currentValues.bufferTime} minutes is added between each appointment slot
                   </p>
                 )}
                 
                 {/* Timezone Preview */}
                 {currentValues.timezone && (
-                  <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-950/20 rounded-lg border border-blue-200 dark:border-blue-800">
-                    <p className="text-xs font-medium text-blue-800 dark:text-blue-300 mb-2">
+                  <div className="mt-4 p-3 bg-muted rounded-lg border border-border">
+                    <p className="text-xs font-medium text-foreground mb-2">
                       Timezone Preview (Your times in different regions):
                     </p>
-                    <div className="space-y-1 text-xs text-blue-700 dark:text-blue-400">
+                    <div className="space-y-1 text-xs text-muted-foreground">
                       <div><strong>Your Timezone:</strong> {getTimezoneLabel(currentValues.timezone)}</div>
                       <div><strong>Start Time:</strong> {currentValues.defaultStartTime} in your timezone</div>
                       <div><strong>End Time:</strong> {currentValues.defaultEndTime} in your timezone</div>
-                      <div className="text-xs text-blue-600 dark:text-blue-500 mt-2">
+                      <div className="text-xs text-muted-foreground mt-2">
                         <strong>Example conversions:</strong>
                       </div>
                       <div>• New York: {new Date(`2025-01-01T${currentValues.defaultStartTime}:00`).toLocaleString('en-US', { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit' })} - {new Date(`2025-01-01T${currentValues.defaultEndTime}:00`).toLocaleString('en-US', { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit' })}</div>
@@ -643,11 +643,11 @@ export function CalendarSettings({ onClose }: CalendarSettingsProps) {
                 )}
                 
                 {/* Debug Info */}
-                <div className="mt-4 p-3 bg-yellow-50 dark:bg-yellow-950/20 rounded-lg border border-yellow-200 dark:border-yellow-800">
-                  <p className="text-xs font-medium text-yellow-800 dark:text-yellow-300 mb-2">
+                <div className="mt-4 p-3 bg-muted rounded-lg border border-border">
+                  <p className="text-xs font-medium text-foreground mb-2">
                     Debug Info (Current Form Values):
                   </p>
-                  <div className="space-y-1 text-xs text-yellow-700 dark:text-yellow-400">
+                  <div className="space-y-1 text-xs text-muted-foreground">
                     <div><strong>Timezone:</strong> {currentValues.timezone || 'Not set'}</div>
                     <div><strong>Start Time:</strong> {currentValues.defaultStartTime || 'Not set'}</div>
                     <div><strong>End Time:</strong> {currentValues.defaultEndTime || 'Not set'}</div>
@@ -670,14 +670,14 @@ export function CalendarSettings({ onClose }: CalendarSettingsProps) {
             >
               Cancel
             </Button>
-            <Button 
-              type="submit" 
+            <Button
+              type="submit"
               disabled={saveSettingsMutation.isPending}
-              className="px-6 py-2 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary shadow-lg"
+              className="px-6 py-2 shadow-lg"
             >
               {saveSettingsMutation.isPending ? (
                 <div className="flex items-center space-x-2">
-                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  <div className="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin"></div>
                   <span>Saving...</span>
                 </div>
               ) : (

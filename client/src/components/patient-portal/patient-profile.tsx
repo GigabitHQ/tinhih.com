@@ -78,7 +78,7 @@ export function PatientProfile() {
     return (
       <div className="flex items-center justify-center h-64">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-yellow-600 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-foreground mx-auto mb-4"></div>
           <p className="text-muted-foreground">Loading profile...</p>
         </div>
       </div>
@@ -226,19 +226,19 @@ export function PatientProfile() {
             <CardContent>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-yellow-600">{patient.medications?.length || 0}</div>
+                  <div className="text-2xl font-bold text-foreground">{patient.medications?.length || 0}</div>
                   <div className="text-sm text-muted-foreground">Medications</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-red-600">{patient.allergies?.length || 0}</div>
+                  <div className="text-2xl font-bold text-foreground">{patient.allergies?.length || 0}</div>
                   <div className="text-sm text-muted-foreground">Allergies</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-blue-600">{patient.medicalHistory?.length || 0}</div>
+                  <div className="text-2xl font-bold text-foreground">{patient.medicalHistory?.length || 0}</div>
                   <div className="text-sm text-muted-foreground">Conditions</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-green-600">
+                  <div className="text-2xl font-bold text-foreground">
                     {onboardingData.consents?.hipaaConsent ? 'Yes' : 'No'}
                   </div>
                   <div className="text-sm text-muted-foreground">HIPAA Consent</div>
@@ -253,7 +253,7 @@ export function PatientProfile() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Heart className="w-5 h-5 text-red-600" />
+                <Heart className="w-5 h-5 text-muted-foreground" />
                 Recovery Journey
               </CardTitle>
             </CardHeader>
@@ -385,16 +385,16 @@ export function PatientProfile() {
                 {patient.allergies?.length > 0 ? (
                   <div className="space-y-2">
                     {patient.allergies.map((allergy: string, index: number) => (
-                      <div key={index} className="flex items-center gap-2 p-2 bg-red-50 border border-red-200 rounded">
-                        <AlertCircle className="w-4 h-4 text-red-600" />
-                        <span className="font-medium text-red-800">{allergy}</span>
+                      <div key={index} className="flex items-center gap-2 p-2 bg-muted border border-foreground rounded">
+                        <AlertCircle className="w-4 h-4 text-foreground" />
+                        <span className="font-medium text-foreground">{allergy}</span>
                       </div>
                     ))}
                   </div>
                 ) : (
-                  <div className="flex items-center gap-2 p-2 bg-green-50 border border-green-200 rounded">
-                    <CheckCircle className="w-4 h-4 text-green-600" />
-                    <span className="text-green-800">No known allergies</span>
+                  <div className="flex items-center gap-2 p-2 bg-muted border border-border rounded">
+                    <CheckCircle className="w-4 h-4 text-foreground" />
+                    <span className="text-foreground">No known allergies</span>
                   </div>
                 )}
               </CardContent>
@@ -501,25 +501,25 @@ export function PatientProfile() {
             <CardContent className="space-y-4">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="text-center">
-                  <div className={`text-2xl font-bold ${onboardingData.consents?.emailConsent ? 'text-green-600' : 'text-gray-400'}`}>
+                  <div className={`text-2xl font-bold ${onboardingData.consents?.emailConsent ? 'text-foreground' : 'text-muted-foreground'}`}>
                     {onboardingData.consents?.emailConsent ? '✓' : '✗'}
                   </div>
                   <div className="text-sm text-muted-foreground">Email</div>
                       </div>
                 <div className="text-center">
-                  <div className={`text-2xl font-bold ${onboardingData.consents?.smsConsent ? 'text-green-600' : 'text-gray-400'}`}>
+                  <div className={`text-2xl font-bold ${onboardingData.consents?.smsConsent ? 'text-foreground' : 'text-muted-foreground'}`}>
                     {onboardingData.consents?.smsConsent ? '✓' : '✗'}
                   </div>
                   <div className="text-sm text-muted-foreground">SMS</div>
               </div>
                 <div className="text-center">
-                  <div className={`text-2xl font-bold ${onboardingData.consents?.phoneConsent ? 'text-green-600' : 'text-gray-400'}`}>
+                  <div className={`text-2xl font-bold ${onboardingData.consents?.phoneConsent ? 'text-foreground' : 'text-muted-foreground'}`}>
                     {onboardingData.consents?.phoneConsent ? '✓' : '✗'}
                   </div>
                   <div className="text-sm text-muted-foreground">Phone</div>
                 </div>
                 <div className="text-center">
-                  <div className={`text-2xl font-bold ${onboardingData.consents?.mailConsent ? 'text-green-600' : 'text-gray-400'}`}>
+                  <div className={`text-2xl font-bold ${onboardingData.consents?.mailConsent ? 'text-foreground' : 'text-muted-foreground'}`}>
                     {onboardingData.consents?.mailConsent ? '✓' : '✗'}
                   </div>
                   <div className="text-sm text-muted-foreground">Mail</div>

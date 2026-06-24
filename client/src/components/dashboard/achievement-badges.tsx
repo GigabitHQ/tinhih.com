@@ -28,8 +28,8 @@ export function AchievementBadges({ className }: AchievementBadgesProps) {
         name: 'First Steps',
         description: 'Welcome to TiNHiH Portal!',
         icon: Star,
-        color: 'text-yellow-600',
-        bgColor: 'bg-yellow-100',
+        color: 'text-muted-foreground',
+        bgColor: 'bg-muted',
         unlocked: true
       },
       {
@@ -37,8 +37,8 @@ export function AchievementBadges({ className }: AchievementBadgesProps) {
         name: 'Profile Master',
         description: 'Complete your profile',
         icon: Heart,
-        color: 'text-red-600',
-        bgColor: 'bg-red-100',
+        color: 'text-muted-foreground',
+        bgColor: 'bg-muted',
         unlocked: true
       }
     ];
@@ -51,8 +51,8 @@ export function AchievementBadges({ className }: AchievementBadgesProps) {
           name: 'Team Leader',
           description: 'Manage a team of 5+ members',
           icon: Crown,
-          color: 'text-purple-600',
-          bgColor: 'bg-purple-100',
+          color: 'text-muted-foreground',
+          bgColor: 'bg-muted',
           unlocked: true
         },
         {
@@ -60,8 +60,8 @@ export function AchievementBadges({ className }: AchievementBadgesProps) {
           name: 'Excellence Award',
           description: 'Maintain 95%+ satisfaction',
           icon: Award,
-          color: 'text-green-600',
-          bgColor: 'bg-green-100',
+          color: 'text-muted-foreground',
+          bgColor: 'bg-muted',
           unlocked: false
         }
       );
@@ -72,8 +72,8 @@ export function AchievementBadges({ className }: AchievementBadgesProps) {
           name: 'Patient Care Expert',
           description: 'Treat 100+ patients',
           icon: Heart,
-          color: 'text-red-600',
-          bgColor: 'bg-red-100',
+          color: 'text-muted-foreground',
+          bgColor: 'bg-muted',
           unlocked: true
         },
         {
@@ -81,8 +81,8 @@ export function AchievementBadges({ className }: AchievementBadgesProps) {
           name: 'Clinical Excellence',
           description: 'Maintain 4.8+ rating',
           icon: Trophy,
-          color: 'text-yellow-600',
-          bgColor: 'bg-yellow-100',
+          color: 'text-muted-foreground',
+          bgColor: 'bg-muted',
           unlocked: false
         }
       );
@@ -93,8 +93,8 @@ export function AchievementBadges({ className }: AchievementBadgesProps) {
           name: 'Efficiency Expert',
           description: 'Process 200+ tasks',
           icon: Zap,
-          color: 'text-yellow-600',
-          bgColor: 'bg-yellow-100',
+          color: 'text-muted-foreground',
+          bgColor: 'bg-muted',
           unlocked: true
         },
         {
@@ -102,8 +102,8 @@ export function AchievementBadges({ className }: AchievementBadgesProps) {
           name: 'Support Hero',
           description: 'Help 50+ patients',
           icon: Shield,
-          color: 'text-green-600',
-          bgColor: 'bg-green-100',
+          color: 'text-muted-foreground',
+          bgColor: 'bg-muted',
           unlocked: false
         }
       );
@@ -114,8 +114,8 @@ export function AchievementBadges({ className }: AchievementBadgesProps) {
           name: 'Health Journey',
           description: 'Complete 10+ appointments',
           icon: Heart,
-          color: 'text-red-600',
-          bgColor: 'bg-red-100',
+          color: 'text-muted-foreground',
+          bgColor: 'bg-muted',
           unlocked: true
         },
         {
@@ -123,8 +123,8 @@ export function AchievementBadges({ className }: AchievementBadgesProps) {
           name: 'Wellness Champion',
           description: 'Complete health goals',
           icon: Target,
-          color: 'text-green-600',
-          bgColor: 'bg-green-100',
+          color: 'text-muted-foreground',
+          bgColor: 'bg-muted',
           unlocked: false
         }
       );
@@ -143,7 +143,7 @@ export function AchievementBadges({ className }: AchievementBadgesProps) {
             className="text-lg font-semibold flex items-center space-x-2"
             style={{ color: `hsl(var(--foreground))` }}
           >
-            <Trophy className="w-5 h-5 text-yellow-500" />
+            <Trophy className="w-5 h-5 text-muted-foreground" />
             <span>Achievements</span>
             <span className="text-sm opacity-70">({unlockedBadges.length}/{badges.length})</span>
           </h3>
@@ -155,14 +155,11 @@ export function AchievementBadges({ className }: AchievementBadgesProps) {
             return (
               <div
                 key={badge.id}
-                className={`relative p-3 rounded-lg cursor-pointer transition-all duration-300 ${
-                  badge.unlocked 
-                    ? 'hover:scale-105 hover:shadow-md' 
+                className={`relative p-3 rounded-lg cursor-pointer transition-all duration-300 bg-muted ${
+                  badge.unlocked
+                    ? 'hover:scale-105 hover:shadow-md'
                     : 'opacity-50 grayscale'
                 }`}
-                style={{
-                  backgroundColor: badge.unlocked ? badge.bgColor : 'hsl(var(--muted))'
-                }}
               >
                 <div className="flex flex-col items-center text-center space-y-2">
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center ${badge.color}`}>
@@ -180,7 +177,7 @@ export function AchievementBadges({ className }: AchievementBadgesProps) {
                 
                 {badge.unlocked && (
                   <div className="absolute -top-1 -right-1">
-                    <CheckCircle className="w-4 h-4 text-green-500" />
+                    <CheckCircle className="w-4 h-4 text-foreground" />
                   </div>
                 )}
               </div>

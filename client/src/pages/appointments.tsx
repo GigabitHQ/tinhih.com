@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
-import { Calendar, Clock, User, Search, Plus, Video, MapPin, CheckCircle, XCircle, AlertCircle, CalendarDays, History } from "lucide-react";
+import { Calendar, Clock, User, Plus, Video, MapPin } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { usePageTitle } from "@/context/page-context";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
+import { SearchInput } from "@/components/ui/search-input";
+import { StatusBadge } from "@/components/ui/status-badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { AppointmentDetail } from "@/components/appointments/appointment-detail";
@@ -126,65 +126,12 @@ export default function Appointments() {
     }
   });
 
-  const getStatusInfo = (status: string, appointmentDate: string) => {
+  // Returns the status to show; past appointments are surfaced as "Past".
+  const getDisplayStatus = (status: string, appointmentDate: string) => {
     const now = new Date();
     const appointmentDateTime = new Date(appointmentDate);
     const isPast = appointmentDateTime < now;
-
-    // If appointment is in the past, show "Past" status
-    if (isPast) {
-      return {
-        label: "Past",
-        icon: History,
-        className: "bg-gray-100 text-gray-800 border-gray-200"
-      };
-    }
-
-    // For current/future appointments, show actual status
-    switch (status) {
-      case "scheduled":
-        return {
-          label: "Scheduled",
-          icon: CalendarDays,
-          className: "bg-blue-100 text-blue-800 border-blue-200"
-        };
-      case "confirmed":
-        return {
-          label: "Confirmed",
-          icon: CheckCircle,
-          className: "bg-green-100 text-green-800 border-green-200"
-        };
-      case "cancelled":
-        return {
-          label: "Cancelled",
-          icon: XCircle,
-          className: "bg-red-100 text-red-800 border-red-200"
-        };
-      case "completed":
-        return {
-          label: "Completed",
-          icon: CheckCircle,
-          className: "bg-gray-100 text-gray-800 border-gray-200"
-        };
-      case "in_progress":
-        return {
-          label: "In Progress",
-          icon: AlertCircle,
-          className: "bg-yellow-100 text-yellow-800 border-yellow-200"
-        };
-      case "no_show":
-        return {
-          label: "No Show",
-          icon: XCircle,
-          className: "bg-orange-100 text-orange-800 border-orange-200"
-        };
-      default:
-        return {
-          label: status.charAt(0).toUpperCase() + status.slice(1),
-          icon: CalendarDays,
-          className: "bg-gray-100 text-gray-800 border-gray-200"
-        };
-    }
+    return isPast ? "Past" : status;
   };
 
   const handleCreateNew = () => {
@@ -207,7 +154,7 @@ export default function Appointments() {
           subtitle={isPatient ? "View and manage your appointments" : "View and manage appointments"} 
         />
         <div className="flex-1 flex items-center justify-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-foreground"></div>
         </div>
       </div>
     );
@@ -234,12 +181,10 @@ export default function Appointments() {
         {/* Search and Filters */}
         <div className="mb-6 flex items-center space-x-4">
           <div className="relative flex-1 max-w-md">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-            <Input
+            <SearchInput
               placeholder={isPatient ? "Search your appointments..." : "Search appointments..."}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10"
             />
           </div>
           
@@ -254,11 +199,11 @@ export default function Appointments() {
         {filteredAppointments.length === 0 ? (
           <Card>
             <CardContent className="flex flex-col items-center justify-center py-12">
-              <Calendar className="h-12 w-12 text-gray-400 mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">
+              <Calendar className="h-12 w-12 text-muted-foreground mb-4" />
+              <h3 className="text-lg font-medium text-foreground mb-2">
                 {searchTerm ? "No appointments found" : "No appointments scheduled"}
               </h3>
-              <p className="text-gray-500 text-center mb-4">
+              <p className="text-muted-foreground text-center mb-4">
                 {searchTerm 
                   ? "Try adjusting your search terms" 
                   : isPatient 
@@ -285,81 +230,72 @@ export default function Appointments() {
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between">
                     <CardTitle className="text-lg">{appointment.title}</CardTitle>
-                    {(() => {
-                      const statusInfo = getStatusInfo(appointment.status, appointment.appointmentDate);
-                      const StatusIcon = statusInfo.icon;
-                      return (
-                        <Badge className={`${statusInfo.className} flex items-center gap-1 px-2 py-1 text-xs font-medium border`}>
-                          <StatusIcon className="h-3 w-3" />
-                          {statusInfo.label}
-                        </Badge>
-                      );
-                    })()}
+                    <StatusBadge status={getDisplayStatus(appointment.status, appointment.appointmentDate)} />
                   </div>
                 </CardHeader>
                 <CardContent>
                   <div className={`grid gap-4 ${isPatient ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1 md:grid-cols-3'}`}>
                     <div className="flex items-center space-x-2">
-                      <Calendar className="h-4 w-4 text-gray-500" />
+                      <Calendar className="h-4 w-4 text-muted-foreground" />
                       <span className="text-sm">
                         {convertUTCToLocalShortDate(appointment.appointmentDate, userTimezone)}
                       </span>
                     </div>
-                    
+
                     <div className="flex items-center space-x-2">
-                      <Clock className="h-4 w-4 text-gray-500" />
+                      <Clock className="h-4 w-4 text-muted-foreground" />
                       <span className="text-sm">
-                        {convertUTCToLocalTime(appointment.appointmentDate, userTimezone)} 
+                        {convertUTCToLocalTime(appointment.appointmentDate, userTimezone)}
                         ({appointment.duration}min)
                       </span>
                     </div>
-                    
+
                     {!isPatient && appointment.patient?.user && (
                       <div className="flex items-center space-x-2">
-                        <User className="h-4 w-4 text-gray-500" />
+                        <User className="h-4 w-4 text-muted-foreground" />
                         <span className="text-sm">
                           {appointment.patient.user.firstName} {appointment.patient.user.lastName}
                         </span>
                       </div>
                     )}
-                    
+
                     {!isPatient && !appointment.patient?.user && (
                       <div className="flex items-center space-x-2">
-                        <User className="h-4 w-4 text-gray-500" />
-                        <span className="text-sm text-gray-400">
+                        <User className="h-4 w-4 text-muted-foreground" />
+                        <span className="text-sm text-muted-foreground">
                           Guest Patient
                         </span>
                       </div>
                     )}
                   </div>
-                  
-                  <div className="mt-3 pt-3 border-t border-gray-100">
+
+                  <div className="mt-3 pt-3 border-t border-border">
                     <div className="flex items-center justify-between mb-2">
-                      <div className="text-sm text-gray-600">
+                      <div className="text-sm text-muted-foreground">
                         Dr. {appointment.practitioner.user.firstName} {appointment.practitioner.user.lastName}
                       </div>
-                      <div className="text-sm text-gray-500 capitalize">
+                      <div className="text-sm text-muted-foreground capitalize">
                         {appointment.type}
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center space-x-2 mb-2">
                       {appointment.location === "telehealth" ? (
                         <>
-                          <Video className="h-3 w-3 text-blue-500" />
-                          <span className="text-xs text-blue-600">Telehealth</span>
+                          <Video className="h-3 w-3 text-muted-foreground" />
+                          <span className="text-xs text-muted-foreground">Telehealth</span>
                         </>
                       ) : (
                         <>
-                          <MapPin className="h-3 w-3 text-green-500" />
-                          <span className="text-xs text-green-600">Physical</span>
+                          <MapPin className="h-3 w-3 text-muted-foreground" />
+                          <span className="text-xs text-muted-foreground">Physical</span>
                         </>
                       )}
                     </div>
-                    
+
                     {appointment.notes && (
                       <div className="mt-2">
-                        <p className="text-sm text-gray-600">{appointment.notes}</p>
+                        <p className="text-sm text-muted-foreground">{appointment.notes}</p>
                       </div>
                     )}
                   </div>

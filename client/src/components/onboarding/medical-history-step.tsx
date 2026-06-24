@@ -113,7 +113,7 @@ export function MedicalHistoryStep({ data, onComplete, onBack }: MedicalHistoryS
           {/* Basic Health Information */}
           <div className="space-y-4">
             <h3 className="text-lg font-medium text-foreground border-b border-border pb-2 flex items-center gap-2">
-              <Activity className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+              <Activity className="w-5 h-5 text-muted-foreground" />
               Basic Health Information
             </h3>
             
@@ -127,7 +127,7 @@ export function MedicalHistoryStep({ data, onComplete, onBack }: MedicalHistoryS
                     <FormControl>
                       <Input placeholder={"e.g., 5'8\" or 172 cm"} {...field} />
                     </FormControl>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -141,7 +141,7 @@ export function MedicalHistoryStep({ data, onComplete, onBack }: MedicalHistoryS
                     <FormControl>
                       <Input placeholder="e.g., 150 lbs or 68 kg" {...field} />
                     </FormControl>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -170,7 +170,7 @@ export function MedicalHistoryStep({ data, onComplete, onBack }: MedicalHistoryS
                         <SelectItem value="unknown">Unknown</SelectItem>
                       </SelectContent>
                     </Select>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -236,7 +236,7 @@ export function MedicalHistoryStep({ data, onComplete, onBack }: MedicalHistoryS
                       />
                     ))}
                   </div>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -254,7 +254,7 @@ export function MedicalHistoryStep({ data, onComplete, onBack }: MedicalHistoryS
                         {...field} 
                       />
                     </FormControl>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -316,7 +316,7 @@ export function MedicalHistoryStep({ data, onComplete, onBack }: MedicalHistoryS
                       />
                     ))}
                   </div>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -334,7 +334,7 @@ export function MedicalHistoryStep({ data, onComplete, onBack }: MedicalHistoryS
                         {...field} 
                       />
                     </FormControl>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -397,7 +397,7 @@ export function MedicalHistoryStep({ data, onComplete, onBack }: MedicalHistoryS
                       />
                     ))}
                   </div>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -415,7 +415,7 @@ export function MedicalHistoryStep({ data, onComplete, onBack }: MedicalHistoryS
                         {...field} 
                       />
                     </FormControl>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -440,7 +440,7 @@ export function MedicalHistoryStep({ data, onComplete, onBack }: MedicalHistoryS
                       <SelectItem value="unknown">Unknown</SelectItem>
                     </SelectContent>
                   </Select>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -501,7 +501,7 @@ export function MedicalHistoryStep({ data, onComplete, onBack }: MedicalHistoryS
                       />
                     ))}
                   </div>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -519,7 +519,7 @@ export function MedicalHistoryStep({ data, onComplete, onBack }: MedicalHistoryS
                         {...field} 
                       />
                     </FormControl>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -537,7 +537,7 @@ export function MedicalHistoryStep({ data, onComplete, onBack }: MedicalHistoryS
                       {...field} 
                     />
                   </FormControl>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -597,7 +597,7 @@ export function MedicalHistoryStep({ data, onComplete, onBack }: MedicalHistoryS
                       />
                     ))}
                   </div>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -615,7 +615,7 @@ export function MedicalHistoryStep({ data, onComplete, onBack }: MedicalHistoryS
                         {...field} 
                       />
                     </FormControl>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -646,7 +646,7 @@ export function MedicalHistoryStep({ data, onComplete, onBack }: MedicalHistoryS
                         <SelectItem value="occasional">Occasional smoker</SelectItem>
                       </SelectContent>
                     </Select>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -671,7 +671,7 @@ export function MedicalHistoryStep({ data, onComplete, onBack }: MedicalHistoryS
                         <SelectItem value="in-recovery">In recovery</SelectItem>
                       </SelectContent>
                     </Select>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -698,7 +698,7 @@ export function MedicalHistoryStep({ data, onComplete, onBack }: MedicalHistoryS
                         <SelectItem value="frequently">Frequently (4+ times/week)</SelectItem>
                       </SelectContent>
                     </Select>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -712,7 +712,7 @@ export function MedicalHistoryStep({ data, onComplete, onBack }: MedicalHistoryS
                     <FormControl>
                       <Input placeholder="e.g., vegetarian, gluten-free, etc." {...field} />
                     </FormControl>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -754,7 +754,7 @@ export function MedicalHistoryStep({ data, onComplete, onBack }: MedicalHistoryS
                         {...field} 
                       />
                     </FormControl>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -797,7 +797,7 @@ export function MedicalHistoryStep({ data, onComplete, onBack }: MedicalHistoryS
                       />
                     </PopoverContent>
                   </Popover>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -819,7 +819,7 @@ export function MedicalHistoryStep({ data, onComplete, onBack }: MedicalHistoryS
                       {...field} 
                     />
                   </FormControl>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />

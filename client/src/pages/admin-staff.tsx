@@ -8,10 +8,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
-import { Users, Plus, Search, Edit, Trash2, UserCheck, UserX, Mail } from "lucide-react";
+import { Users, Plus, Edit, Trash2, UserCheck, UserX, Mail } from "lucide-react";
 import { api } from "@/lib/api";
 import { useToast } from "@/hooks/use-toast";
 import { usePageTitle } from "@/context/page-context";
+import { StatCard } from "@/components/ui/stat-card";
+import { SearchInput } from "@/components/ui/search-input";
 
 interface StaffMember {
   id: string;
@@ -276,9 +278,9 @@ export default function AdminStaff() {
                   <DialogTitle>Add New Staff Member</DialogTitle>
                 </DialogHeader>
                 <div className="space-y-6">
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="firstName">First Name <span className="text-red-600">*</span></Label>
+                      <Label htmlFor="firstName">First Name <span className="text-muted-foreground">*</span></Label>
                       <Input
                         id="firstName"
                         value={formData.firstName}
@@ -287,7 +289,7 @@ export default function AdminStaff() {
                       />
                     </div>
                     <div>
-                      <Label htmlFor="lastName">Last Name <span className="text-red-600">*</span></Label>
+                      <Label htmlFor="lastName">Last Name <span className="text-muted-foreground">*</span></Label>
                       <Input
                         id="lastName"
                         value={formData.lastName}
@@ -297,9 +299,9 @@ export default function AdminStaff() {
                     </div>
                   </div>
                   
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="email">Email <span className="text-red-600">*</span></Label>
+                      <Label htmlFor="email">Email <span className="text-muted-foreground">*</span></Label>
                       <Input
                         id="email"
                         type="email"
@@ -319,7 +321,7 @@ export default function AdminStaff() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <Label htmlFor="department">Department</Label>
                       <Select value={formData.department} onValueChange={(value) => setFormData(prev => ({ ...prev, department: value }))}>
@@ -392,53 +394,35 @@ export default function AdminStaff() {
         {/* Dashboard Content */}
         <div className="flex-1 overflow-auto p-6">
           {/* Summary Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Total Staff</CardTitle>
-                <Users className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{staff.length}</div>
-                <p className="text-xs text-muted-foreground">All staff members</p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Active Staff</CardTitle>
-                <UserCheck className="h-4 w-4 text-green-500" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{activeStaffCount}</div>
-                <p className="text-xs text-muted-foreground">Currently active</p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Inactive Staff</CardTitle>
-                <UserX className="h-4 w-4 text-red-500" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{inactiveStaffCount}</div>
-                <p className="text-xs text-muted-foreground">Deactivated accounts</p>
-              </CardContent>
-            </Card>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <StatCard
+              label="Total Staff"
+              value={staff.length}
+              icon={Users}
+              hint="All staff members"
+            />
+            <StatCard
+              label="Active Staff"
+              value={activeStaffCount}
+              icon={UserCheck}
+              hint="Currently active"
+            />
+            <StatCard
+              label="Inactive Staff"
+              value={inactiveStaffCount}
+              icon={UserX}
+              hint="Deactivated accounts"
+            />
           </div>
 
           {/* Search */}
           <Card className="mb-6">
             <CardContent className="pt-6">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-                <Input
-                  placeholder="Search staff members..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10"
-                />
-              </div>
+              <SearchInput
+                placeholder="Search staff members..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
             </CardContent>
           </Card>
 
@@ -451,7 +435,7 @@ export default function AdminStaff() {
               
               {isLoading ? (
                 <div className="text-center py-8">
-                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-foreground mx-auto"></div>
                   <p className="text-muted-foreground mt-2">Loading staff members...</p>
                 </div>
               ) : filteredStaff.length > 0 ? (
@@ -534,9 +518,9 @@ export default function AdminStaff() {
             <DialogTitle>Edit Staff Member</DialogTitle>
           </DialogHeader>
           <div className="space-y-6">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="editFirstName">First Name <span className="text-red-600">*</span></Label>
+                <Label htmlFor="editFirstName">First Name <span className="text-muted-foreground">*</span></Label>
                 <Input
                   id="editFirstName"
                   value={formData.firstName}
@@ -545,7 +529,7 @@ export default function AdminStaff() {
                 />
               </div>
               <div>
-                <Label htmlFor="editLastName">Last Name <span className="text-red-600">*</span></Label>
+                <Label htmlFor="editLastName">Last Name <span className="text-muted-foreground">*</span></Label>
                 <Input
                   id="editLastName"
                   value={formData.lastName}
@@ -555,9 +539,9 @@ export default function AdminStaff() {
               </div>
             </div>
             
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="editEmail">Email <span className="text-red-600">*</span></Label>
+                <Label htmlFor="editEmail">Email <span className="text-muted-foreground">*</span></Label>
                 <Input
                   id="editEmail"
                   type="email"
@@ -577,7 +561,7 @@ export default function AdminStaff() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <Label htmlFor="editDepartment">Department</Label>
                 <Select value={formData.department} onValueChange={(value) => setFormData(prev => ({ ...prev, department: value }))}>

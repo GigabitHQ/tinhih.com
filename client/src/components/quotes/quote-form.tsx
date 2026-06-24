@@ -132,7 +132,7 @@ export function QuoteForm({ quote, onSubmit, onCancel }: QuoteFormProps) {
             maxLength={500}
           />
           {errors.text && (
-            <p className="text-sm text-red-500">{errors.text}</p>
+            <p className="text-sm text-foreground">{errors.text}</p>
           )}
           <p className="text-xs text-muted-foreground">
             {formData.text.length}/500 characters
@@ -150,7 +150,7 @@ export function QuoteForm({ quote, onSubmit, onCancel }: QuoteFormProps) {
             maxLength={100}
           />
           {errors.author && (
-            <p className="text-sm text-red-500">{errors.author}</p>
+            <p className="text-sm text-foreground">{errors.author}</p>
           )}
         </div>
 
@@ -203,7 +203,7 @@ export function QuoteForm({ quote, onSubmit, onCancel }: QuoteFormProps) {
                   <button
                     type="button"
                     onClick={() => removeTag(tag)}
-                    className="ml-1 hover:text-red-500"
+                    className="ml-1 hover:text-foreground"
                   >
                     <X className="h-3 w-3" />
                   </button>

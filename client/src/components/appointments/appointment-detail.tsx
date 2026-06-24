@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { format } from "date-fns";
-import { CalendarIcon, Clock, User, X, Edit2, Save, XCircle, Trash2, Video, MapPin, Building, Monitor, History, CheckCircle, AlertCircle, CalendarDays } from "lucide-react";
+import { CalendarIcon, Clock, User, X, Edit2, Save, XCircle, Trash2, Video, MapPin, Building, Monitor } from "lucide-react";
 import { useAuth } from "@/context/auth-context";
 
 import { Button } from "@/components/ui/button";
@@ -15,7 +15,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Badge } from "@/components/ui/badge";
+import { StatusBadge } from "@/components/ui/status-badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
@@ -233,65 +233,12 @@ export function AppointmentDetail({ appointmentId, onClose }: AppointmentDetailP
     }
   };
 
-  const getStatusInfo = (status: string, appointmentDate: string) => {
+  // Returns the status to show; past appointments are surfaced as "Past".
+  const getDisplayStatus = (status: string, appointmentDate: string) => {
     const now = new Date();
     const appointmentDateTime = new Date(appointmentDate);
     const isPast = appointmentDateTime < now;
-
-    // If appointment is in the past, show "Past" status
-    if (isPast) {
-      return {
-        label: "Past",
-        icon: "History",
-        className: "bg-gray-100 text-gray-800 border-gray-200"
-      };
-    }
-
-    // For current/future appointments, show actual status
-    switch (status) {
-      case "scheduled":
-        return {
-          label: "Scheduled",
-          icon: "CalendarDays",
-          className: "bg-blue-100 text-blue-800 border-blue-200"
-        };
-      case "confirmed":
-        return {
-          label: "Confirmed",
-          icon: "CheckCircle",
-          className: "bg-green-100 text-green-800 border-green-200"
-        };
-      case "cancelled":
-        return {
-          label: "Cancelled",
-          icon: "XCircle",
-          className: "bg-red-100 text-red-800 border-red-200"
-        };
-      case "completed":
-        return {
-          label: "Completed",
-          icon: "CheckCircle",
-          className: "bg-gray-100 text-gray-800 border-gray-200"
-        };
-      case "in_progress":
-        return {
-          label: "In Progress",
-          icon: "AlertCircle",
-          className: "bg-yellow-100 text-yellow-800 border-yellow-200"
-        };
-      case "no_show":
-        return {
-          label: "No Show",
-          icon: "XCircle",
-          className: "bg-orange-100 text-orange-800 border-orange-200"
-        };
-      default:
-        return {
-          label: status.charAt(0).toUpperCase() + status.slice(1),
-          icon: "CalendarDays",
-          className: "bg-gray-100 text-gray-800 border-gray-200"
-        };
-    }
+    return isPast ? "Past" : status;
   };
 
   if (isLoading) {
@@ -301,9 +248,9 @@ export function AppointmentDetail({ appointmentId, onClose }: AppointmentDetailP
           <h2 className="text-lg font-semibold">Loading...</h2>
         </div>
         <div className="animate-pulse space-y-4">
-          <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-          <div className="h-20 bg-gray-200 rounded"></div>
-          <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+          <div className="h-4 bg-muted rounded w-3/4"></div>
+          <div className="h-20 bg-muted rounded"></div>
+          <div className="h-4 bg-muted rounded w-1/2"></div>
         </div>
       </div>
     );
@@ -314,9 +261,9 @@ export function AppointmentDetail({ appointmentId, onClose }: AppointmentDetailP
     return (
       <div className="space-y-6">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-red-600">Error Loading Appointment</h2>
+          <h2 className="text-lg font-semibold text-foreground">Error Loading Appointment</h2>
         </div>
-        <div className="text-red-500">
+        <div className="text-muted-foreground">
           Failed to load appointment details. Please try again.
         </div>
       </div>
@@ -329,7 +276,7 @@ export function AppointmentDetail({ appointmentId, onClose }: AppointmentDetailP
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-semibold">Appointment not found</h2>
         </div>
-        <div className="text-gray-500">
+        <div className="text-muted-foreground">
           The appointment you're looking for could not be found.
         </div>
       </div>
@@ -342,9 +289,9 @@ export function AppointmentDetail({ appointmentId, onClose }: AppointmentDetailP
     return (
       <div className="space-y-6">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-red-600">Invalid Appointment Data</h2>
+          <h2 className="text-lg font-semibold text-foreground">Invalid Appointment Data</h2>
         </div>
-        <div className="text-red-500">
+        <div className="text-muted-foreground">
           The appointment data is incomplete or invalid.
         </div>
       </div>
@@ -392,7 +339,7 @@ export function AppointmentDetail({ appointmentId, onClose }: AppointmentDetailP
                   <FormControl>
                     <Input placeholder="Appointment title" {...field} />
                   </FormControl>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -427,7 +374,7 @@ export function AppointmentDetail({ appointmentId, onClose }: AppointmentDetailP
                         />
                       </PopoverContent>
                     </Popover>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -452,7 +399,7 @@ export function AppointmentDetail({ appointmentId, onClose }: AppointmentDetailP
                         ))}
                       </SelectContent>
                     </Select>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -475,7 +422,7 @@ export function AppointmentDetail({ appointmentId, onClose }: AppointmentDetailP
                         onChange={(e) => field.onChange(parseInt(e.target.value))}
                       />
                     </FormControl>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -500,7 +447,7 @@ export function AppointmentDetail({ appointmentId, onClose }: AppointmentDetailP
                         ))}
                       </SelectContent>
                     </Select>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -532,7 +479,7 @@ export function AppointmentDetail({ appointmentId, onClose }: AppointmentDetailP
                         </SelectItem>
                       </SelectContent>
                     </Select>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -559,7 +506,7 @@ export function AppointmentDetail({ appointmentId, onClose }: AppointmentDetailP
                       ))}
                     </SelectContent>
                   </Select>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -579,7 +526,7 @@ export function AppointmentDetail({ appointmentId, onClose }: AppointmentDetailP
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -612,29 +559,22 @@ export function AppointmentDetail({ appointmentId, onClose }: AppointmentDetailP
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle>{appointment.title}</CardTitle>
-                {(() => {
-                  const statusInfo = getStatusInfo(appointment.status, appointment.appointmentDate);
-                  return (
-                    <Badge className={`${statusInfo.className} flex items-center gap-1 px-2 py-1 text-xs font-medium border`}>
-                      {statusInfo.label}
-                    </Badge>
-                  );
-                })()}
+                <StatusBadge status={getDisplayStatus(appointment.status, appointment.appointmentDate)} />
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="flex items-center space-x-2">
-                  <CalendarIcon className="h-4 w-4 text-gray-500" />
+                  <CalendarIcon className="h-4 w-4 text-muted-foreground" />
                   <span className="text-sm">
                     {convertUTCToLocalDate(appointment.appointmentDate, userTimezone)}
                   </span>
                 </div>
-                
+
                 <div className="flex items-center space-x-2">
-                  <Clock className="h-4 w-4 text-gray-500" />
+                  <Clock className="h-4 w-4 text-muted-foreground" />
                   <span className="text-sm">
-                    {convertUTCToLocalTime(appointment.appointmentDate, userTimezone)} 
+                    {convertUTCToLocalTime(appointment.appointmentDate, userTimezone)}
                     ({appointment.duration} minutes)
                   </span>
                 </div>
@@ -648,23 +588,23 @@ export function AppointmentDetail({ appointmentId, onClose }: AppointmentDetailP
                 </span>
               </div>
               
-              <div className="pt-3 border-t border-gray-100">
-                <div className="text-sm text-gray-600 mb-2">
+              <div className="pt-3 border-t border-border">
+                <div className="text-sm text-muted-foreground mb-2">
                   <strong>Type:</strong> <span className="capitalize">{appointment.type}</span>
                 </div>
-                
-                <div className="text-sm text-gray-600 mb-2">
-                  <strong>Location:</strong> 
+
+                <div className="text-sm text-muted-foreground mb-2">
+                  <strong>Location:</strong>
                   <div className="flex items-center space-x-2 mt-1">
                     {appointment.location === "telehealth" ? (
                       <>
-                        <Video className="h-4 w-4 text-blue-500" />
-                        <span className="capitalize text-blue-600">Telehealth (Video Consultation)</span>
+                        <Video className="h-4 w-4 text-muted-foreground" />
+                        <span className="capitalize text-foreground">Telehealth (Video Consultation)</span>
                       </>
                     ) : (
                       <>
-                        <MapPin className="h-4 w-4 text-green-500" />
-                        <span className="capitalize text-green-600">Physical Location (In-person)</span>
+                        <MapPin className="h-4 w-4 text-muted-foreground" />
+                        <span className="capitalize text-foreground">Physical Location (In-person)</span>
                       </>
                     )}
                   </div>
@@ -672,7 +612,7 @@ export function AppointmentDetail({ appointmentId, onClose }: AppointmentDetailP
 
                 {/* Address for Physical Location */}
                 {appointment.location === "physical" && appointment.address && (
-                  <div className="text-sm text-gray-600 mb-2">
+                  <div className="text-sm text-muted-foreground mb-2">
                     <strong>Address:</strong>
                     <p className="mt-1">{appointment.address}</p>
                   </div>
@@ -680,26 +620,26 @@ export function AppointmentDetail({ appointmentId, onClose }: AppointmentDetailP
 
                 {/* Telehealth Type */}
                 {appointment.location === "telehealth" && appointment.telehealthType && (
-                  <div className="text-sm text-gray-600 mb-2">
+                  <div className="text-sm text-muted-foreground mb-2">
                     <strong>Platform:</strong>
                     <div className="flex items-center space-x-2 mt-1">
                       {appointment.telehealthType === "integrated" ? (
                         <>
-                          <Building className="h-4 w-4 text-purple-500" />
-                          <span className="capitalize text-purple-600">Integrated System (External Platform)</span>
+                          <Building className="h-4 w-4 text-muted-foreground" />
+                          <span className="capitalize text-foreground">Integrated System (External Platform)</span>
                         </>
                       ) : (
                         <>
-                          <Monitor className="h-4 w-4 text-orange-500" />
-                          <span className="capitalize text-orange-600">In-App Session</span>
+                          <Monitor className="h-4 w-4 text-muted-foreground" />
+                          <span className="capitalize text-foreground">In-App Session</span>
                         </>
                       )}
                     </div>
                   </div>
                 )}
-                
+
                 {appointment.notes && (
-                  <div className="text-sm text-gray-600">
+                  <div className="text-sm text-muted-foreground">
                     <strong>Notes:</strong>
                     <p className="mt-1">{appointment.notes}</p>
                   </div>
@@ -715,7 +655,7 @@ export function AppointmentDetail({ appointmentId, onClose }: AppointmentDetailP
             </CardHeader>
             <CardContent>
               <div className="flex items-center space-x-2">
-                <User className="h-4 w-4 text-gray-500" />
+                <User className="h-4 w-4 text-muted-foreground" />
                 <span className="text-sm font-medium">
                   {appointment.patient.user.firstName} {appointment.patient.user.lastName}
                 </span>
@@ -730,7 +670,7 @@ export function AppointmentDetail({ appointmentId, onClose }: AppointmentDetailP
             </CardHeader>
             <CardContent>
               <div className="flex items-center space-x-2">
-                <User className="h-4 w-4 text-gray-500" />
+                <User className="h-4 w-4 text-muted-foreground" />
                 <span className="text-sm font-medium">
                   Dr. {appointment.practitioner.user.firstName} {appointment.practitioner.user.lastName}
                 </span>

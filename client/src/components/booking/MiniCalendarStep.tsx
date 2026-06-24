@@ -925,9 +925,9 @@ export function MiniCalendarStep({
                       className={`
                         p-2 text-xs transition-all duration-200
                         ${isCurrentMonth ? 'text-foreground' : 'text-muted-foreground/50'}
-                        ${isTodayDate && isAvailable && !isSelected ? 'bg-primary/10 font-semibold' : ''}
-                        ${isSelected ? 'bg-[#ffdd00] font-semibold rounded-full' : ''}
-                        ${isAvailable && !isSelected ? 'bg-[#ffdd00]/40 hover:bg-[#ffdd00]/60 cursor-pointer rounded-full' : ''}
+                        ${isTodayDate && isAvailable && !isSelected ? 'bg-muted font-semibold' : ''}
+                        ${isSelected ? 'bg-foreground text-background font-semibold rounded-full' : ''}
+                        ${isAvailable && !isSelected ? 'bg-muted hover:bg-accent cursor-pointer rounded-full' : ''}
                         ${!isAvailable ? 'text-muted-foreground/50 cursor-not-allowed' : ''}
                       `}
                     >
@@ -1007,11 +1007,11 @@ export function MiniCalendarStep({
 
                   return (
                     <div key={day.toISOString()} className={`p-3 text-center ${index >= 3 ? 'hidden lg:block' : ''}`}>
-                      <div className={`flex flex-col items-center justify-center ${isSelected ? 'bg-[#ffdd00] rounded-full w-16 h-16' : ''}`}>
-                        <span className="text-[18px] leading-[18px] text-muted-foreground">
+                      <div className={`flex flex-col items-center justify-center ${isSelected ? 'bg-foreground text-background rounded-full w-16 h-16' : ''}`}>
+                        <span className={`text-[18px] leading-[18px] ${isSelected ? 'text-background' : 'text-muted-foreground'}`}>
                           {format(day, 'EEE')}
                         </span>
-                        <span className={`text-[18px] leading-[18px] font-medium ${isTodayDate ? 'font-bold text-primary' : ''}`}>
+                        <span className={`text-[18px] leading-[18px] font-medium ${isTodayDate && !isSelected ? 'font-bold text-foreground' : ''}`}>
                           {format(day, 'd')}
                         </span>
                       </div>
@@ -1025,7 +1025,7 @@ export function MiniCalendarStep({
             <div className="px-12">
               {isLoadingSlots ? (
                 <div className="flex items-center justify-center py-8">
-                  <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
+                  <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-foreground"></div>
                   <span className="ml-2 text-sm text-muted-foreground">Loading available times...</span>
                 </div>
               ) : !allUniqueTimeStrings || allUniqueTimeStrings.length === 0 ? (
@@ -1040,7 +1040,7 @@ export function MiniCalendarStep({
                 </div>
               ) : selectedDate && isLoadingSlots ? (
                 <div className="flex items-center justify-center py-8">
-                  <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
+                  <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-foreground"></div>
                   <span className="ml-2 text-sm text-muted-foreground">
                     Loading availability for {format(selectedDate, 'EEEE, MMMM d')}...
                   </span>
@@ -1104,8 +1104,8 @@ export function MiniCalendarStep({
                               <button
                                 onClick={() => handleTimeSelect(day, timeString)}
                                 className={`w-full py-2 px-3 text-[13px] rounded-md transition-colors border ${isSelected
-                                    ? 'bg-[#ffdd00] text-black border-[#ffdd00]/50'
-                                    : 'bg-gray-300/30 hover:bg-gray-300/50 border-[#ffdd00]/50'
+                                    ? 'bg-foreground text-background border-transparent'
+                                    : 'bg-muted hover:bg-accent border-border'
                                   }`}
                               >
                                 <div className="flex flex-col items-center justify-center">
@@ -1136,7 +1136,7 @@ export function MiniCalendarStep({
                               </button>
                             ) : (
                               <div
-                                className="w-full h-8 flex items-center justify-center text-[13px] text-muted-foreground bg-gray-100 rounded-md border border-gray-200 cursor-not-allowed"
+                                className="w-full h-8 flex items-center justify-center text-[13px] text-muted-foreground bg-muted rounded-md border border-border cursor-not-allowed"
                                 title="This time slot is already booked"
                               >
                                 —
@@ -1160,7 +1160,7 @@ export function MiniCalendarStep({
 
       {/* Selected Appointment Summary */}
       {selectedDate && selectedTime && (
-        <Card className="bg-primary/5 border-primary/20">
+        <Card className="bg-muted border-border">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>

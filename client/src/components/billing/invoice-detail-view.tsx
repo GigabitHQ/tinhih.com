@@ -10,13 +10,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { 
-  Download, 
-  Printer, 
-  Mail, 
-  CheckCircle, 
-  XCircle, 
-  Clock, 
+import { StatusBadge } from "@/components/ui/status-badge";
+import {
+  Download,
+  Printer,
+  Mail,
+  CheckCircle,
+  XCircle,
   FileText,
   CreditCard,
   DollarSign,
@@ -109,20 +109,7 @@ export function InvoiceDetailView({ invoice, onEdit, onClose, onStatusUpdate }: 
     },
   });
 
-  const getStatusBadge = (status: string) => {
-    switch (status) {
-      case "paid":
-        return <Badge className="bg-green-100 text-green-800 border-green-200 dark:bg-green-900/20 dark:text-green-400 dark:border-green-800"><CheckCircle className="w-3 h-3 mr-1" />Paid</Badge>;
-      case "overdue":
-        return <Badge className="bg-red-100 text-red-800 border-red-200 dark:bg-red-900/20 dark:text-red-400 dark:border-green-800"><XCircle className="w-3 h-3 mr-1" />Overdue</Badge>;
-      case "pending":
-        return <Badge className="bg-yellow-100 text-yellow-800 border-yellow-200 dark:bg-yellow-900/20 dark:text-yellow-400 dark:border-yellow-800"><Clock className="w-3 h-3 mr-1" />Pending</Badge>;
-      case "cancelled":
-        return <Badge className="bg-gray-100 text-gray-800 border-gray-200 dark:bg-gray-900/20 dark:text-gray-400 dark:border-gray-800"><XCircle className="w-3 h-3 mr-1" />Cancelled</Badge>;
-      default:
-        return <Badge className="bg-slate-100 text-slate-800 border-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700"><Clock className="w-3 h-3 mr-1" />Draft</Badge>;
-    }
-  };
+  const getStatusBadge = (status: string) => <StatusBadge status={status} />;
 
   const handleManualPayment = () => {
     updateStatusMutation.mutate({
@@ -384,7 +371,7 @@ export function InvoiceDetailView({ invoice, onEdit, onClose, onStatusUpdate }: 
                   <Button 
                     onClick={() => updateStatusMutation.mutate({ status: "cancelled" })}
                     variant="outline"
-                    className="w-full text-red-600 hover:text-red-700"
+                    className="w-full text-foreground hover:text-foreground"
                   >
                     <XCircle className="w-4 h-4 mr-2" />
                     Cancel Bill
@@ -419,7 +406,7 @@ export function InvoiceDetailView({ invoice, onEdit, onClose, onStatusUpdate }: 
                       }
                     }}
                     variant="outline"
-                    className="w-full text-blue-600 hover:text-blue-700"
+                    className="w-full text-foreground hover:text-foreground"
                   >
                     <CheckCircle className="w-4 h-4 mr-2" />
                     Test Payment Success
@@ -444,7 +431,7 @@ export function InvoiceDetailView({ invoice, onEdit, onClose, onStatusUpdate }: 
                         }
                       }}
                       variant="outline"
-                      className="w-full text-green-600 hover:text-green-700"
+                      className="w-full text-foreground hover:text-foreground"
                     >
                       <CheckCircle className="w-4 h-4 mr-2" />
                       Debug Payment Intent

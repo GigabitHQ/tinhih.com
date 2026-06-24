@@ -122,7 +122,7 @@ export function RecoveryHistoryStep({ data, existingData, onComplete, onBack, is
           {/* Substance Use History */}
           <div className="space-y-4">
             <h3 className="text-lg font-medium text-foreground border-b border-border pb-2 flex items-center gap-2">
-              <Heart className="w-5 h-5 text-red-600 dark:text-red-400" />
+              <Heart className="w-5 h-5 text-muted-foreground" />
               Substance Use History
             </h3>
             
@@ -131,7 +131,7 @@ export function RecoveryHistoryStep({ data, existingData, onComplete, onBack, is
               name="primarySubstance"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Primary Substance of Concern <span className="text-red-600">*</span></FormLabel>
+                  <FormLabel>Primary Substance of Concern <span className="text-muted-foreground">*</span></FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
                       <SelectTrigger>
@@ -151,7 +151,7 @@ export function RecoveryHistoryStep({ data, existingData, onComplete, onBack, is
                       <SelectItem value="other">Other</SelectItem>
                     </SelectContent>
                   </Select>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -166,7 +166,7 @@ export function RecoveryHistoryStep({ data, existingData, onComplete, onBack, is
                     <FormControl>
                       <Input placeholder="e.g., 5 years" {...field} />
                     </FormControl>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -225,7 +225,7 @@ export function RecoveryHistoryStep({ data, existingData, onComplete, onBack, is
                           {...field} 
                         />
                       </FormControl>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -262,7 +262,7 @@ export function RecoveryHistoryStep({ data, existingData, onComplete, onBack, is
                           {...field} 
                         />
                       </FormControl>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -299,7 +299,7 @@ export function RecoveryHistoryStep({ data, existingData, onComplete, onBack, is
                           {...field} 
                         />
                       </FormControl>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -363,7 +363,7 @@ export function RecoveryHistoryStep({ data, existingData, onComplete, onBack, is
                       />
                     ))}
                   </div>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -381,7 +381,7 @@ export function RecoveryHistoryStep({ data, existingData, onComplete, onBack, is
                         {...field} 
                       />
                     </FormControl>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -437,7 +437,7 @@ export function RecoveryHistoryStep({ data, existingData, onComplete, onBack, is
                       />
                     ))}
                   </div>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -455,7 +455,7 @@ export function RecoveryHistoryStep({ data, existingData, onComplete, onBack, is
                         {...field} 
                       />
                     </FormControl>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -471,14 +471,14 @@ export function RecoveryHistoryStep({ data, existingData, onComplete, onBack, is
               name="supportSystem"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Describe your current support system <span className="text-red-600">*</span></FormLabel>
+                  <FormLabel>Describe your current support system <span className="text-muted-foreground">*</span></FormLabel>
                   <FormControl>
                     <Textarea 
                       placeholder="Who supports you in your recovery? (family, friends, support groups, etc.)"
                       {...field} 
                     />
                   </FormControl>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -514,7 +514,7 @@ export function RecoveryHistoryStep({ data, existingData, onComplete, onBack, is
                         {...field} 
                       />
                     </FormControl>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -530,14 +530,14 @@ export function RecoveryHistoryStep({ data, existingData, onComplete, onBack, is
               name="recoveryGoals"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>What are your primary recovery goals? <span className="text-red-600">*</span></FormLabel>
+                  <FormLabel>What are your primary recovery goals? <span className="text-muted-foreground">*</span></FormLabel>
                   <FormControl>
                     <Textarea 
                       placeholder="What do you hope to achieve in your recovery journey?"
                       {...field} 
                     />
                   </FormControl>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -547,7 +547,7 @@ export function RecoveryHistoryStep({ data, existingData, onComplete, onBack, is
               name="motivationLevel"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>How would you rate your motivation for recovery? <span className="text-red-600">*</span></FormLabel>
+                  <FormLabel>How would you rate your motivation for recovery? <span className="text-muted-foreground">*</span></FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
                       <SelectTrigger>
@@ -562,7 +562,7 @@ export function RecoveryHistoryStep({ data, existingData, onComplete, onBack, is
                       <SelectItem value="very-low">Very Low - I'm here because someone else wants me to be</SelectItem>
                     </SelectContent>
                   </Select>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -579,7 +579,7 @@ export function RecoveryHistoryStep({ data, existingData, onComplete, onBack, is
                       {...field} 
                     />
                   </FormControl>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -620,7 +620,7 @@ export function RecoveryHistoryStep({ data, existingData, onComplete, onBack, is
                         {...field} 
                       />
                     </FormControl>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -648,7 +648,7 @@ export function RecoveryHistoryStep({ data, existingData, onComplete, onBack, is
                       <SelectItem value="other">Other</SelectItem>
                     </SelectContent>
                   </Select>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -665,7 +665,7 @@ export function RecoveryHistoryStep({ data, existingData, onComplete, onBack, is
                       {...field} 
                     />
                   </FormControl>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -697,7 +697,7 @@ export function RecoveryHistoryStep({ data, existingData, onComplete, onBack, is
                       <SelectItem value="other">Other</SelectItem>
                     </SelectContent>
                   </Select>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -714,7 +714,7 @@ export function RecoveryHistoryStep({ data, existingData, onComplete, onBack, is
                       {...field} 
                     />
                   </FormControl>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -740,7 +740,7 @@ export function RecoveryHistoryStep({ data, existingData, onComplete, onBack, is
                       <SelectItem value="other">Other</SelectItem>
                     </SelectContent>
                   </Select>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -762,7 +762,7 @@ export function RecoveryHistoryStep({ data, existingData, onComplete, onBack, is
                       {...field} 
                     />
                   </FormControl>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />

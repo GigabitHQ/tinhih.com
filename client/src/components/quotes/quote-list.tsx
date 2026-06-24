@@ -35,17 +35,6 @@ export function QuoteList({
     setDeletingId(null);
   };
 
-  const getCategoryColor = (category: string) => {
-    const colors = {
-      general: "bg-gray-100 text-gray-800",
-      health: "bg-green-100 text-green-800",
-      wellness: "bg-blue-100 text-blue-800",
-      motivation: "bg-yellow-100 text-yellow-800",
-      recovery: "bg-purple-100 text-purple-800",
-    };
-    return colors[category as keyof typeof colors] || colors.general;
-  };
-
   if (loading) {
     return (
       <Card>
@@ -121,7 +110,7 @@ export function QuoteList({
                   <span className="font-medium">{quote.author}</span>
                 </TableCell>
                 <TableCell>
-                  <Badge className={getCategoryColor(quote.category)}>
+                  <Badge variant="secondary" className="capitalize">
                     {quote.category}
                   </Badge>
                 </TableCell>
@@ -158,9 +147,9 @@ export function QuoteList({
                     className="p-1"
                   >
                     {quote.isFeatured ? (
-                      <StarFilled className="h-4 w-4 text-yellow-500 fill-current" />
+                      <StarFilled className="h-4 w-4 text-foreground fill-current" />
                     ) : (
-                      <Star className="h-4 w-4 text-gray-400" />
+                      <Star className="h-4 w-4 text-muted-foreground" />
                     )}
                   </Button>
                 </TableCell>
@@ -185,7 +174,7 @@ export function QuoteList({
                           size="sm"
                           disabled={deletingId === quote.id}
                         >
-                          <Trash2 className="h-4 w-4 text-red-500" />
+                          <Trash2 className="h-4 w-4 text-muted-foreground" />
                         </Button>
                       </AlertDialogTrigger>
                       <AlertDialogContent>
@@ -199,7 +188,7 @@ export function QuoteList({
                           <AlertDialogCancel>Cancel</AlertDialogCancel>
                           <AlertDialogAction
                             onClick={() => handleDelete(quote.id)}
-                            className="bg-red-500 hover:bg-red-600"
+                            className="bg-foreground text-background hover:bg-foreground/90"
                           >
                             Delete
                           </AlertDialogAction>

@@ -94,7 +94,7 @@ export function CreateTelehealthSessionForm({
           pros: ["Seamless experience", "No external apps", "Direct integration", "Cost-effective"],
           cons: ["Basic features", "Internet dependent", "Limited recording"],
           recommended: true,
-          color: "bg-yellow-500",
+          color: "bg-foreground",
           disabled: false,
         };
       case "zoom":
@@ -106,7 +106,7 @@ export function CreateTelehealthSessionForm({
           pros: ["Reliable", "Advanced features", "Mobile app", "Recording"],
           cons: ["Requires download", "Meeting limits", "Cost for premium"],
           recommended: false,
-          color: "dark:bg-gray-800 bg-gray-400",
+          color: "bg-muted-foreground",
           disabled: true,
         };
       case "teams":
@@ -118,7 +118,7 @@ export function CreateTelehealthSessionForm({
           pros: ["Enterprise features", "Integration", "Security", "Recording"],
           cons: ["Complex setup", "Requires account", "Heavy app"],
           recommended: false,
-          color: "dark:bg-gray-800 bg-gray-400",
+          color: "bg-muted-foreground",
           disabled: true,
         };
       case "google_meet":
@@ -130,7 +130,7 @@ export function CreateTelehealthSessionForm({
           pros: ["Easy to use", "Browser-based", "Free tier", "Captions"],
           cons: ["Google account required", "Limited features", "Internet dependent"],
           recommended: false,
-          color: "dark:bg-gray-800 bg-gray-400",
+          color: "bg-muted-foreground",
           disabled: true,
         };
       default:
@@ -289,14 +289,14 @@ export function CreateTelehealthSessionForm({
                               <div className="flex items-center space-x-3 w-full">
                                 <div className="flex-shrink-0">
                                   <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                                    new Date(appointment.appointmentDate) < new Date() 
-                                      ? 'bg-gray-100 dark:bg-gray-800' 
-                                      : 'bg-primary/10'
+                                    new Date(appointment.appointmentDate) < new Date()
+                                      ? 'bg-muted'
+                                      : 'bg-muted'
                                   }`}>
                                     <User className={`h-4 w-4 ${
-                                      new Date(appointment.appointmentDate) < new Date() 
-                                        ? 'text-gray-400' 
-                                        : 'text-primary'
+                                      new Date(appointment.appointmentDate) < new Date()
+                                        ? 'text-muted-foreground'
+                                        : 'text-foreground'
                                     }`} />
                                   </div>
                                 </div>
@@ -317,7 +317,7 @@ export function CreateTelehealthSessionForm({
                                       {appointment.status || 'scheduled'}
                                     </Badge>
                                     {new Date(appointment.appointmentDate) < new Date() && (
-                                      <Badge variant="secondary" className="text-xs bg-gray-100 text-gray-600">
+                                      <Badge variant="secondary" className="text-xs">
                                         Past
                                       </Badge>
                                     )}
@@ -355,7 +355,7 @@ export function CreateTelehealthSessionForm({
                   </Command>
                 </PopoverContent>
               </Popover>
-              <FormMessage className="text-red-600"/>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -377,13 +377,13 @@ export function CreateTelehealthSessionForm({
             )}
             
             <Card className={`border-l-4 ${
-              isPastAppointment || isCompletedOrCancelled 
-                ? 'border-l-red-500/20 opacity-60' 
-                : 'border-l-primary/20'
+              isPastAppointment || isCompletedOrCancelled
+                ? 'border-l-border opacity-60'
+                : 'border-l-foreground/20'
             }`}>
               <CardHeader className="pb-3">
                 <CardTitle className="text-lg flex items-center space-x-2">
-                  <Calendar className="h-5 w-5 text-primary" />
+                  <Calendar className="h-5 w-5 text-muted-foreground" />
                   <span>Appointment Details</span>
                   <Badge 
                     variant={selectedAppointment.status === 'completed' ? 'secondary' : 
@@ -394,7 +394,7 @@ export function CreateTelehealthSessionForm({
                     {selectedAppointment.status || 'scheduled'}
                   </Badge>
                   {isPastAppointment && (
-                    <Badge variant="secondary" className="ml-2 bg-red-100 text-red-700">
+                    <Badge variant="secondary" className="ml-2">
                       Past Appointment
                     </Badge>
                   )}
@@ -404,8 +404,8 @@ export function CreateTelehealthSessionForm({
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-3">
                   <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/20 flex items-center justify-center">
-                      <User className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                    <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
+                      <User className="h-4 w-4 text-muted-foreground" />
                     </div>
                     <div>
                       <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Patient</p>
@@ -416,8 +416,8 @@ export function CreateTelehealthSessionForm({
                   </div>
                   
                   <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 rounded-full bg-green-100 dark:bg-green-900/20 flex items-center justify-center">
-                      <Stethoscope className="h-4 w-4 text-green-600 dark:text-green-400" />
+                    <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
+                      <Stethoscope className="h-4 w-4 text-muted-foreground" />
                     </div>
                     <div>
                       <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Practitioner</p>
@@ -430,8 +430,8 @@ export function CreateTelehealthSessionForm({
                 
                 <div className="space-y-3">
                   <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 rounded-full bg-purple-100 dark:bg-purple-900/20 flex items-center justify-center">
-                      <Calendar className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+                    <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
+                      <Calendar className="h-4 w-4 text-muted-foreground" />
                     </div>
                     <div>
                       <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Date & Time</p>
@@ -446,8 +446,8 @@ export function CreateTelehealthSessionForm({
                   </div>
                   
                   <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 rounded-full bg-orange-100 dark:bg-orange-900/20 flex items-center justify-center">
-                      <Clock className="h-4 w-4 text-orange-600 dark:text-orange-400" />
+                    <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
+                      <Clock className="h-4 w-4 text-muted-foreground" />
                     </div>
                     <div>
                       <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Duration</p>
@@ -456,7 +456,7 @@ export function CreateTelehealthSessionForm({
                   </div>
                   
                   <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/20 flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
                       <Badge variant="outline" className="capitalize text-xs border-0 bg-transparent">
                         {selectedAppointment.type || 'consultation'}
                       </Badge>
@@ -507,7 +507,7 @@ export function CreateTelehealthSessionForm({
                       <Card 
                         key={platform} 
                         className={`cursor-pointer transition-all  ${
-                          selectedPlatform === platform ? 'ring-2 ring-yellow-500' : ''
+                          selectedPlatform === platform ? 'ring-2 ring-ring' : ''
                         }`}
                         onClick={() => form.setValue("platform", platform as any)}
                       >
@@ -528,27 +528,27 @@ export function CreateTelehealthSessionForm({
                           </div>
                         </CardHeader>
                         <CardContent className="pt-0">
-                          <p className="text-xs text-gray-600 mb-3">{info.description}</p>
-                          
+                          <p className="text-xs text-muted-foreground mb-3">{info.description}</p>
+
                           <div className="space-y-2">
                             <div>
-                              <p className="text-xs font-medium text-green-600 mb-1">Pros:</p>
-                              <ul className="text-xs text-gray-600 space-y-1">
+                              <p className="text-xs font-medium text-foreground mb-1">Pros:</p>
+                              <ul className="text-xs text-muted-foreground space-y-1">
                                 {info.pros.slice(0, 2).map((pro, idx) => (
                                   <li key={idx} className="flex items-center">
-                                    <CheckCircle className="w-3 h-3 mr-1 text-green-500" />
+                                    <CheckCircle className="w-3 h-3 mr-1 text-muted-foreground" />
                                     {pro}
                                   </li>
                                 ))}
                               </ul>
                             </div>
-                            
+
                             <div>
-                              <p className="text-xs font-medium text-red-600 mb-1">Cons:</p>
-                              <ul className="text-xs text-gray-600 space-y-1">
+                              <p className="text-xs font-medium text-foreground mb-1">Cons:</p>
+                              <ul className="text-xs text-muted-foreground space-y-1">
                                 {info.cons.slice(0, 2).map((con, idx) => (
                                   <li key={idx} className="flex items-center">
-                                    <span className="w-3 h-3 mr-1 text-red-500">•</span>
+                                    <span className="w-3 h-3 mr-1 text-muted-foreground">•</span>
                                     {con}
                                   </li>
                                 ))}
@@ -588,8 +588,8 @@ export function CreateTelehealthSessionForm({
                         />
                         <Label
                           htmlFor={platform}
-                          className={`flex flex-col items-start p-4 border rounded-lg cursor-pointer transition-all hover:bg-gray-50 dark:hover:bg-gray-900 peer-checked:border-yellow-500 peer-checked:bg-yellow-50 ${
-                            info.recommended ? 'ring-2 ring-yellow-200' : ''
+                          className={`flex flex-col items-start p-4 border rounded-lg cursor-pointer transition-all hover:bg-accent peer-checked:border-foreground peer-checked:bg-muted ${
+                            info.recommended ? 'ring-2 ring-ring' : ''
                           }`}
                         >
                           <div className="flex items-center space-x-3 mb-2">
@@ -606,7 +606,7 @@ export function CreateTelehealthSessionForm({
                               )}
                             </div>
                           </div>
-                          <p className="text-sm text-gray-600">{info.description}</p>
+                          <p className="text-sm text-muted-foreground">{info.description}</p>
                           <div className="flex flex-wrap gap-1 mt-2">
                             {info.features.slice(0, 3).map((feature) => (
                               <Badge key={feature} variant="outline" className="text-xs">
@@ -619,7 +619,7 @@ export function CreateTelehealthSessionForm({
                     );
                   })}
                 </RadioGroup>
-                <FormMessage className="text-red-600"/>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -712,7 +712,7 @@ export function CreateTelehealthSessionForm({
                   className="min-h-[100px]"
                 />
               </FormControl>
-              <FormMessage className="text-red-600"/>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -730,11 +730,7 @@ export function CreateTelehealthSessionForm({
           </Button>
           <Button
             type="submit"
-            className={`w-full sm:w-auto ${
-              canCreateSession 
-                ? 'bg-yellow-500 hover:bg-yellow-600 text-white' 
-                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-            }`}
+            className="w-full sm:w-auto"
             disabled={isLoading || !canCreateSession}
           >
             {isLoading ? "Creating..." : 

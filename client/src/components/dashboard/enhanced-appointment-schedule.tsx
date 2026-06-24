@@ -4,7 +4,7 @@ import { ThemedCard, ThemedCardContent, ThemedCardHeader, ThemedCardTitle } from
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@/lib/api";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { StatusBadge } from "@/components/ui/status-badge";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { format, isToday, isTomorrow, parseISO } from "date-fns";
@@ -52,19 +52,6 @@ export function EnhancedAppointmentSchedule({ className }: EnhancedAppointmentSc
     },
     refetchInterval: 30000, // Refresh every 30 seconds
   });
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "completed":
-        return "bg-green-100 text-green-800";
-      case "cancelled":
-        return "bg-red-100 text-red-800";
-      case "no-show":
-        return "bg-orange-100 text-orange-800";
-      default:
-        return "bg-blue-100 text-blue-800";
-    }
-  };
 
   const getStatusIcon = (status: string) => {
     switch (status) {
@@ -171,9 +158,7 @@ export function EnhancedAppointmentSchedule({ className }: EnhancedAppointmentSc
                       <h4 className="font-medium truncate">
                         {appointment.patient.firstName} {appointment.patient.lastName}
                       </h4>
-                      <Badge variant="secondary" className={getStatusColor(appointment.status)}>
-                        {appointment.status}
-                      </Badge>
+                      <StatusBadge status={appointment.status} />
                     </div>
                     
                     <div className="flex items-center gap-4 text-sm text-muted-foreground">

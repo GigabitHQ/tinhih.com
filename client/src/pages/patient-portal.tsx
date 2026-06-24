@@ -120,7 +120,7 @@ export default function PatientPortal() {
     return (
       <div className="flex items-center justify-center h-full">
         <div className="text-center">
-          <Activity className="w-8 h-8 animate-spin mx-auto mb-4 text-primary" />
+          <Activity className="w-8 h-8 animate-spin mx-auto mb-4 text-foreground" />
           <p className="text-muted-foreground">Loading your health portal...</p>
         </div>
       </div>
@@ -200,7 +200,7 @@ export default function PatientPortal() {
             <Card>
               <CardContent className="p-6">
                 <div className="flex items-center space-x-2">
-                  <Calendar className="h-8 w-8 text-blue-600" />
+                  <Calendar className="h-8 w-8 text-muted-foreground" />
                   <div>
                     <p className="text-2xl font-bold">{upcomingAppointments?.length || 0}</p>
                     <p className="text-sm text-muted-foreground">Upcoming</p>
@@ -212,7 +212,7 @@ export default function PatientPortal() {
             <Card>
               <CardContent className="p-6">
                 <div className="flex items-center space-x-2">
-                  <MessageSquare className="h-8 w-8 text-green-600" />
+                  <MessageSquare className="h-8 w-8 text-muted-foreground" />
                   <div>
                     <p className="text-2xl font-bold">{unreadMessages?.length || 0}</p>
                     <p className="text-sm text-muted-foreground">New Messages</p>
@@ -224,7 +224,7 @@ export default function PatientPortal() {
             <Card>
               <CardContent className="p-6">
                 <div className="flex items-center space-x-2">
-                  <FileText className="h-8 w-8 text-purple-600" />
+                  <FileText className="h-8 w-8 text-muted-foreground" />
                   <div>
                     <p className="text-2xl font-bold">0</p>
                     <p className="text-sm text-muted-foreground">New Results</p>
@@ -236,7 +236,7 @@ export default function PatientPortal() {
             <Card>
               <CardContent className="p-6">
                 <div className="flex items-center space-x-2">
-                  <CreditCard className="h-8 w-8 text-orange-600" />
+                  <CreditCard className="h-8 w-8 text-muted-foreground" />
                   <div>
                     <p className="text-2xl font-bold">{unpaidInvoices?.length || 0}</p>
                     <p className="text-sm text-muted-foreground">Pending Bills</p>
@@ -251,7 +251,7 @@ export default function PatientPortal() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <AlertCircle className="w-5 h-5 text-amber-600" />
+                  <AlertCircle className="w-5 h-5 text-muted-foreground" />
                   Action Items
                 </CardTitle>
                 <CardDescription>
@@ -262,7 +262,7 @@ export default function PatientPortal() {
                 {upcomingAppointments?.slice(0, 2).map((appointment: any) => (
                   <div key={appointment.id} className="flex items-center justify-between p-3 border rounded-lg">
                     <div className="flex items-center gap-3">
-                      <Calendar className="w-5 h-5 text-blue-600" />
+                      <Calendar className="w-5 h-5 text-muted-foreground" />
                       <div>
                         <p className="font-medium">{appointment.title}</p>
                         <p className="text-sm text-muted-foreground">
@@ -279,7 +279,7 @@ export default function PatientPortal() {
                 {unreadMessages?.slice(0, 2).map((message: any) => (
                   <div key={message.id} className="flex items-center justify-between p-3 border rounded-lg">
                     <div className="flex items-center gap-3">
-                      <MessageSquare className="w-5 h-5 text-green-600" />
+                      <MessageSquare className="w-5 h-5 text-muted-foreground" />
                       <div>
                         <p className="font-medium">{message.subject}</p>
                         <p className="text-sm text-muted-foreground">
@@ -296,7 +296,7 @@ export default function PatientPortal() {
                 {unpaidInvoices?.slice(0, 2).map((invoice: any) => (
                   <div key={invoice.id} className="flex items-center justify-between p-3 border rounded-lg">
                     <div className="flex items-center gap-3">
-                      <CreditCard className="w-5 h-5 text-orange-600" />
+                      <CreditCard className="w-5 h-5 text-muted-foreground" />
                       <div>
                         <p className="font-medium">Invoice #{invoice.invoiceNumber}</p>
                         <p className="text-sm text-muted-foreground">
@@ -356,9 +356,9 @@ export default function PatientPortal() {
                 {patient?.allergies?.length > 0 ? (
                   <div className="space-y-2">
                     {patient.allergies.slice(0, 3).map((allergy: string, index: number) => (
-                      <div key={index} className="flex items-center gap-2 p-2 bg-red-50 border border-red-200 rounded">
-                        <AlertCircle className="w-4 h-4 text-red-600" />
-                        <span className="font-medium text-red-800">{allergy}</span>
+                      <div key={index} className="flex items-center gap-2 p-2 bg-muted border border-foreground rounded">
+                        <AlertCircle className="w-4 h-4 text-foreground" />
+                        <span className="font-medium text-foreground">{allergy}</span>
                       </div>
                     ))}
                     {patient.allergies.length > 3 && (
@@ -368,9 +368,9 @@ export default function PatientPortal() {
                     )}
                   </div>
                 ) : (
-                  <div className="flex items-center gap-2 p-2 bg-green-50 border border-green-200 rounded">
-                    <CheckCircle className="w-4 h-4 text-green-600" />
-                    <span className="text-green-800">No known allergies</span>
+                  <div className="flex items-center gap-2 p-2 bg-muted border border-border rounded">
+                    <CheckCircle className="w-4 h-4 text-foreground" />
+                    <span className="text-foreground">No known allergies</span>
                   </div>
                 )}
               </CardContent>
@@ -415,7 +415,7 @@ export default function PatientPortal() {
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <User className="w-5 h-5 text-yellow-600" />
+              <User className="w-5 h-5 text-muted-foreground" />
               Complete Your Onboarding
             </DialogTitle>
             <DialogDescription>
@@ -423,11 +423,11 @@ export default function PatientPortal() {
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4">
-            <div className="bg-yellow-50 dark:bg-yellow-950/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4">
-              <p className="text-sm text-yellow-800 dark:text-yellow-200">
+            <div className="bg-muted border border-border rounded-lg p-4">
+              <p className="text-sm text-foreground">
                 <strong>Why onboarding is important:</strong>
               </p>
-              <ul className="text-sm text-yellow-700 dark:text-yellow-300 mt-2 space-y-1">
+              <ul className="text-sm text-muted-foreground mt-2 space-y-1">
                 <li>• Helps us understand your recovery journey</li>
                 <li>• Ensures we have your complete medical history</li>
                 <li>• Allows us to provide personalized care</li>

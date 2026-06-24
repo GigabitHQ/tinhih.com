@@ -2,19 +2,11 @@ import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { CreditCard, Download, Eye, Calendar, DollarSign, Receipt } from 'lucide-react';
+import { StatusBadge } from '@/components/ui/status-badge';
 import { format } from 'date-fns';
 import { StripePaymentWrapper } from '@/components/payments/payment-form';
-
-const statusColors = {
-  draft: 'bg-gray-100 text-gray-800',
-  sent: 'bg-blue-100 text-blue-800',
-  paid: 'bg-green-100 text-green-800',
-  overdue: 'bg-red-100 text-red-800',
-  cancelled: 'bg-gray-100 text-gray-800'
-};
 
 export default function PatientBilling() {
   const [selectedInvoice, setSelectedInvoice] = useState<any>(null);
@@ -35,8 +27,8 @@ export default function PatientBilling() {
           <Card key={i}>
             <CardContent className="p-6">
               <div className="animate-pulse space-y-4">
-                <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-                <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                <div className="h-4 bg-muted rounded w-3/4"></div>
+                <div className="h-4 bg-muted rounded w-1/2"></div>
               </div>
             </CardContent>
           </Card>
@@ -62,7 +54,7 @@ export default function PatientBilling() {
         <Card>
           <CardContent className="p-6">
             <div className="flex items-center space-x-2">
-              <DollarSign className="h-8 w-8 text-red-600" />
+              <DollarSign className="h-8 w-8 text-muted-foreground" />
               <div>
                 <p className="text-2xl font-bold">${totalOwed.toFixed(2)}</p>
                 <p className="text-sm text-muted-foreground">Outstanding Balance</p>
@@ -74,7 +66,7 @@ export default function PatientBilling() {
         <Card>
           <CardContent className="p-6">
             <div className="flex items-center space-x-2">
-              <Receipt className="h-8 w-8 text-orange-600" />
+              <Receipt className="h-8 w-8 text-muted-foreground" />
               <div>
                 <p className="text-2xl font-bold">{unpaidInvoices.length}</p>
                 <p className="text-sm text-muted-foreground">Unpaid Bills</p>
@@ -86,7 +78,7 @@ export default function PatientBilling() {
         <Card>
           <CardContent className="p-6">
             <div className="flex items-center space-x-2">
-              <CreditCard className="h-8 w-8 text-green-600" />
+              <CreditCard className="h-8 w-8 text-muted-foreground" />
               <div>
                 <p className="text-2xl font-bold">{paymentHistory?.length || 0}</p>
                 <p className="text-sm text-muted-foreground">Total Payments</p>
@@ -101,15 +93,13 @@ export default function PatientBilling() {
         <div className="space-y-4">
           <h3 className="text-lg font-semibold">Outstanding Bills</h3>
           {unpaidInvoices.map((invoice: any) => (
-            <Card key={invoice.id} className="border-l-4 border-l-red-500">
+            <Card key={invoice.id} className="border-l-4 border-l-foreground">
               <CardContent className="p-6">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
                       <h4 className="font-semibold">Invoice #{invoice.invoiceNumber}</h4>
-                      <Badge className={statusColors[invoice.status as keyof typeof statusColors]}>
-                        {invoice.status}
-                      </Badge>
+                      <StatusBadge status={invoice.status} />
                     </div>
                     <div className="space-y-2 text-sm text-muted-foreground">
                       <div className="flex items-center gap-2">
@@ -254,8 +244,8 @@ export default function PatientBilling() {
       {unpaidInvoices.length === 0 && (
         <Card>
           <CardContent className="p-6 text-center">
-            <CreditCard className="w-12 h-12 mx-auto mb-4 text-green-600" />
-            <h3 className="text-lg font-semibold text-green-800 mb-2">All Caught Up!</h3>
+            <CreditCard className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
+            <h3 className="text-lg font-semibold text-foreground mb-2">All Caught Up!</h3>
             <p className="text-muted-foreground">You have no outstanding bills at this time.</p>
           </CardContent>
         </Card>

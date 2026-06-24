@@ -1,17 +1,12 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { 
-  DollarSign, 
-  Calendar, 
-  User, 
-  FileText,
+import { StatusBadge } from "@/components/ui/status-badge";
+import {
+  DollarSign,
+  Calendar,
+  User,
   CreditCard,
-  CheckCircle,
-  XCircle,
-  AlertCircle,
-  Clock,
   Eye
 } from "lucide-react";
 import { format } from "date-fns";
@@ -22,18 +17,7 @@ interface InvoiceCardProps {
 }
 
 export function InvoiceCard({ invoice, compact = false }: InvoiceCardProps) {
-  const getStatusBadge = (status: string) => {
-    switch (status) {
-      case "paid":
-        return <Badge className="bg-green-100 text-green-800 border-green-200 dark:bg-green-900/20 dark:text-green-400 dark:border-green-800"><CheckCircle className="w-3 h-3 mr-1" />Paid</Badge>;
-      case "overdue":
-        return <Badge className="bg-red-100 text-red-800 border-red-200 dark:bg-red-900/20 dark:text-red-400 dark:border-red-800"><XCircle className="w-3 h-3 mr-1" />Overdue</Badge>;
-      case "sent":
-        return <Badge className="bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-900/20 dark:text-blue-400 dark:border-blue-800"><FileText className="w-3 h-3 mr-1" />Sent</Badge>;
-      default:
-        return <Badge className="bg-slate-100 text-slate-800 border-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700"><Clock className="w-3 h-3 mr-1" />Draft</Badge>;
-    }
-  };
+  const getStatusBadge = (status: string) => <StatusBadge status={status} />;
 
   if (compact) {
     return (
@@ -41,7 +25,7 @@ export function InvoiceCard({ invoice, compact = false }: InvoiceCardProps) {
         <div className="flex-shrink-0">
           <Avatar className="h-10 w-10">
             <AvatarImage src={invoice.practitioner?.user?.profileImage} />
-            <AvatarFallback className="text-sm bg-[#ffdd00] text-black">
+            <AvatarFallback className="text-sm bg-muted text-foreground">
               {invoice.practitioner?.user?.firstName?.[0]}{invoice.practitioner?.user?.lastName?.[0]}
             </AvatarFallback>
           </Avatar>
@@ -81,7 +65,7 @@ export function InvoiceCard({ invoice, compact = false }: InvoiceCardProps) {
           <div className="flex items-center gap-3">
             <Avatar className="h-12 w-12">
               <AvatarImage src={invoice.practitioner?.user?.profileImage} />
-              <AvatarFallback className="text-sm bg-[#ffdd00] text-black">
+              <AvatarFallback className="text-sm bg-muted text-foreground">
                 {invoice.practitioner?.user?.firstName?.[0]}{invoice.practitioner?.user?.lastName?.[0]}
               </AvatarFallback>
             </Avatar>
@@ -133,7 +117,7 @@ export function InvoiceCard({ invoice, compact = false }: InvoiceCardProps) {
             View Details
           </Button>
           {invoice.status !== "paid" && (
-            <Button size="sm" className="flex-1 bg-[#ffdd00] hover:bg-[#ffdd00]/90 text-black">
+            <Button size="sm" className="flex-1">
               <CreditCard className="h-4 w-4 mr-2" />
               Pay Now
             </Button>

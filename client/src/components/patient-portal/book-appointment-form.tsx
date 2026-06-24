@@ -118,7 +118,7 @@ export default function BookAppointmentForm({ onSuccess, onCancel }: BookAppoint
                   ))}
                 </SelectContent>
               </Select>
-              <FormMessage className="text-red-600"/>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -144,7 +144,7 @@ export default function BookAppointmentForm({ onSuccess, onCancel }: BookAppoint
                   <SelectItem value="telehealth">Video Consultation</SelectItem>
                 </SelectContent>
               </Select>
-              <FormMessage className="text-red-600"/>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -159,7 +159,7 @@ export default function BookAppointmentForm({ onSuccess, onCancel }: BookAppoint
               <FormControl>
                 <Input placeholder="e.g., Annual checkup, Follow-up consultation..." {...field} />
               </FormControl>
-              <FormMessage className="text-red-600"/>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -178,7 +178,7 @@ export default function BookAppointmentForm({ onSuccess, onCancel }: BookAppoint
                   {...field} 
                 />
               </FormControl>
-              <FormMessage className="text-red-600"/>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -221,7 +221,7 @@ export default function BookAppointmentForm({ onSuccess, onCancel }: BookAppoint
                   />
                 </PopoverContent>
               </Popover>
-              <FormMessage className="text-red-600"/>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -250,7 +250,7 @@ export default function BookAppointmentForm({ onSuccess, onCancel }: BookAppoint
                   ))}
                 </SelectContent>
               </Select>
-              <FormMessage className="text-red-600"/>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -277,7 +277,7 @@ export default function BookAppointmentForm({ onSuccess, onCancel }: BookAppoint
                   <SelectItem value="120">2 hours</SelectItem>
                 </SelectContent>
               </Select>
-              <FormMessage className="text-red-600"/>
+              <FormMessage />
             </FormItem>
           )}
         />

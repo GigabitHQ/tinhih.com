@@ -242,7 +242,7 @@ export function InvoiceForm({ invoice, onSuccess, onCancel }: InvoiceFormProps) 
                           </Command>
                         </PopoverContent>
                       </Popover>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -318,7 +318,7 @@ export function InvoiceForm({ invoice, onSuccess, onCancel }: InvoiceFormProps) 
                           </PopoverContent>
                         </Popover>
                       )}
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -346,7 +346,7 @@ export function InvoiceForm({ invoice, onSuccess, onCancel }: InvoiceFormProps) 
                         ))}
                       </SelectContent>
                     </Select>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -364,7 +364,7 @@ export function InvoiceForm({ invoice, onSuccess, onCancel }: InvoiceFormProps) 
                 name="description"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-sm font-medium">Service Description <span className="text-red-600">*</span></FormLabel>
+                    <FormLabel className="text-sm font-medium">Service Description <span className="text-destructive">*</span></FormLabel>
                     <FormControl>
                       <Textarea
                         placeholder="Describe the recovery service provided..."
@@ -372,7 +372,7 @@ export function InvoiceForm({ invoice, onSuccess, onCancel }: InvoiceFormProps) 
                         {...field}
                       />
                     </FormControl>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -383,7 +383,7 @@ export function InvoiceForm({ invoice, onSuccess, onCancel }: InvoiceFormProps) 
                   name="amount"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-sm font-medium">Service Amount <span className="text-red-600">*</span></FormLabel>
+                      <FormLabel className="text-sm font-medium">Service Amount <span className="text-destructive">*</span></FormLabel>
                       <FormControl>
                         <div className="relative">
                           <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">$</span>
@@ -397,7 +397,7 @@ export function InvoiceForm({ invoice, onSuccess, onCancel }: InvoiceFormProps) 
                           />
                         </div>
                       </FormControl>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -421,7 +421,7 @@ export function InvoiceForm({ invoice, onSuccess, onCancel }: InvoiceFormProps) 
                           />
                         </div>
                       </FormControl>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -461,7 +461,7 @@ export function InvoiceForm({ invoice, onSuccess, onCancel }: InvoiceFormProps) 
                           />
                         </PopoverContent>
                       </Popover>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />

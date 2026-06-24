@@ -150,7 +150,7 @@ export function DonationDialog({ children }: DonationDialogProps) {
       <DialogContent className="max-w-md max-h-[80vh] overflow-y-auto">
         {isSuccess ? (
           <div className="text-center py-4">
-            <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-3" />
+            <CheckCircle className="w-12 h-12 text-foreground mx-auto mb-3" />
             <h3 className="text-lg font-semibold mb-2">Thank You!</h3>
             <p className="text-sm text-muted-foreground mb-2">
               Your donation of ${amount} has been successfully processed.
@@ -163,7 +163,7 @@ export function DonationDialog({ children }: DonationDialogProps) {
           <>
             <DialogHeader>
               <DialogTitle className="flex items-center gap-2 text-xl">
-                <Heart className="w-6 h-6 text-[#ffdd00]" />
+                <Heart className="w-6 h-6 text-muted-foreground" />
                 Support TiNHiH Portal
               </DialogTitle>
               <DialogDescription className="text-sm text-muted-foreground">
@@ -252,7 +252,7 @@ export function DonationDialog({ children }: DonationDialogProps) {
             <Button
               onClick={handleDonation}
               disabled={isProcessing || !amount}
-              className="w-full bg-[#ffdd00] hover:bg-[#ffdd00]/90 text-black font-semibold"
+              className="w-full font-semibold"
             >
               {isProcessing ? "Processing..." : "Continue to Payment"}
             </Button>

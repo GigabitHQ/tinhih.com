@@ -11,6 +11,7 @@ import { useAuth } from "@/context/auth-context";
 import { usePageTitle } from "@/context/page-context";
 import { format } from "date-fns";
 import { User, Mail, Phone, Calendar, Edit, Save, X } from "lucide-react";
+import { StatusBadge } from "@/components/ui/status-badge";
 
 interface UserProfile {
   id: string;
@@ -115,7 +116,7 @@ export default function MemberProfile() {
     return (
       <MemberLayout>
         <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-foreground"></div>
           <span className="ml-2">Loading profile...</span>
         </div>
       </MemberLayout>
@@ -173,7 +174,7 @@ export default function MemberProfile() {
                       placeholder="Enter your first name"
                     />
                   ) : (
-                    <p className="text-sm text-gray-600 mt-1">
+                    <p className="text-sm text-muted-foreground mt-1">
                       {profile?.firstName || "Not provided"}
                     </p>
                   )}
@@ -189,7 +190,7 @@ export default function MemberProfile() {
                       placeholder="Enter your last name"
                     />
                   ) : (
-                    <p className="text-sm text-gray-600 mt-1">
+                    <p className="text-sm text-muted-foreground mt-1">
                       {profile?.lastName || "Not provided"}
                     </p>
                   )}
@@ -205,7 +206,7 @@ export default function MemberProfile() {
                       placeholder="Enter your phone number"
                     />
                   ) : (
-                    <p className="text-sm text-gray-600 mt-1">
+                    <p className="text-sm text-muted-foreground mt-1">
                       {profile?.phone || "Not provided"}
                     </p>
                   )}
@@ -217,28 +218,26 @@ export default function MemberProfile() {
                   <Label>Email Address</Label>
                   <div className="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-2 mt-1">
                     <div className="flex items-center space-x-2">
-                      <Mail className="h-4 w-4 text-gray-400" />
-                      <p className="text-sm text-gray-600">{profile?.email}</p>
+                      <Mail className="h-4 w-4 text-muted-foreground" />
+                      <p className="text-sm text-muted-foreground">{profile?.email}</p>
                     </div>
-                    <Badge className="bg-gray-100 text-gray-600 text-xs w-fit">Read Only</Badge>
+                    <Badge variant="secondary" className="text-xs w-fit">Read Only</Badge>
                   </div>
-                  <p className="text-xs text-gray-500 mt-1">Email address cannot be changed for security reasons</p>
+                  <p className="text-xs text-muted-foreground mt-1">Email address cannot be changed for security reasons</p>
                 </div>
 
                 <div>
                   <Label>Account Status</Label>
                   <div className="flex items-center space-x-2 mt-1">
-                    <Badge className={profile?.isActive ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}>
-                      {profile?.isActive ? "Active" : "Inactive"}
-                    </Badge>
+                    <StatusBadge status={profile?.isActive ? "active" : "inactive"} />
                   </div>
                 </div>
 
                 <div>
                   <Label>Member Since</Label>
                   <div className="flex items-center space-x-2 mt-1">
-                    <Calendar className="h-4 w-4 text-gray-400" />
-                    <p className="text-sm text-gray-600">
+                    <Calendar className="h-4 w-4 text-muted-foreground" />
+                    <p className="text-sm text-muted-foreground">
                       {profile?.createdAt ? format(new Date(profile.createdAt), "MMM dd, yyyy") : "N/A"}
                     </p>
                   </div>
@@ -247,8 +246,8 @@ export default function MemberProfile() {
                 <div>
                   <Label>Last Login</Label>
                   <div className="flex items-center space-x-2 mt-1">
-                    <Calendar className="h-4 w-4 text-gray-400" />
-                    <p className="text-sm text-gray-600">
+                    <Calendar className="h-4 w-4 text-muted-foreground" />
+                    <p className="text-sm text-muted-foreground">
                       {profile?.lastLoginAt ? format(new Date(profile.lastLoginAt), "MMM dd, yyyy 'at' h:mm a") : "Never"}
                     </p>
                   </div>
@@ -271,7 +270,7 @@ export default function MemberProfile() {
               <div>
                 <Label>Role</Label>
                 <div className="flex items-center space-x-2 mt-1">
-                  <Badge className="bg-blue-100 text-blue-800">
+                  <Badge variant="secondary">
                     Community Member
                   </Badge>
                 </div>
@@ -279,7 +278,7 @@ export default function MemberProfile() {
 
               <div>
                 <Label>Account Type</Label>
-                <p className="text-sm text-gray-600 mt-1">
+                <p className="text-sm text-muted-foreground mt-1">
                   Community Member Portal
                 </p>
               </div>
@@ -288,31 +287,31 @@ export default function MemberProfile() {
         </Card>
 
         {/* Community Information */}
-        <Card className="bg-blue-50 border-blue-200">
+        <Card className="bg-muted border-border">
           <CardHeader>
-            <CardTitle className="text-blue-900 text-lg sm:text-xl">TiNHiH Community Member Benefits</CardTitle>
+            <CardTitle className="text-foreground text-lg sm:text-xl">TiNHiH Community Member Benefits</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
               <div className="flex items-start space-x-3">
-                <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                <span className="text-blue-800 text-sm sm:text-base">Access to recovery-focused inspirational content</span>
+                <div className="w-2 h-2 bg-muted-foreground rounded-full mt-2 flex-shrink-0"></div>
+                <span className="text-foreground text-sm sm:text-base">Access to recovery-focused inspirational content</span>
               </div>
               <div className="flex items-start space-x-3">
-                <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                <span className="text-blue-800 text-sm sm:text-base">Stay connected with TiNHiH events and activities</span>
+                <div className="w-2 h-2 bg-muted-foreground rounded-full mt-2 flex-shrink-0"></div>
+                <span className="text-foreground text-sm sm:text-base">Stay connected with TiNHiH events and activities</span>
               </div>
               <div className="flex items-start space-x-3">
-                <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                <span className="text-blue-800 text-sm sm:text-base">Support TiNHiH's mission to end addiction devastation</span>
+                <div className="w-2 h-2 bg-muted-foreground rounded-full mt-2 flex-shrink-0"></div>
+                <span className="text-foreground text-sm sm:text-base">Support TiNHiH's mission to end addiction devastation</span>
               </div>
               <div className="flex items-start space-x-3">
-                <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                <span className="text-blue-800 text-sm sm:text-base">Connect with others in the recovery community</span>
+                <div className="w-2 h-2 bg-muted-foreground rounded-full mt-2 flex-shrink-0"></div>
+                <span className="text-foreground text-sm sm:text-base">Connect with others in the recovery community</span>
               </div>
               <div className="flex items-start space-x-3">
-                <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                <span className="text-blue-800 text-sm sm:text-base">Share your story to inspire hope in others</span>
+                <div className="w-2 h-2 bg-muted-foreground rounded-full mt-2 flex-shrink-0"></div>
+                <span className="text-foreground text-sm sm:text-base">Share your story to inspire hope in others</span>
               </div>
             </div>
           </CardContent>

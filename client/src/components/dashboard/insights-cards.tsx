@@ -111,7 +111,7 @@ export function InsightsCards({ className }: InsightsCardsProps) {
       {insightsData.map((insight, index) => {
         const Icon = insight.icon;
         const TrendIcon = insight.positive ? TrendingUp : TrendingDown;
-        const trendColor = insight.positive ? "text-green-600" : "text-red-600";
+        const trendColor = "text-foreground";
         const sign = insight.positive ? "+" : "";
         
         return (
@@ -119,16 +119,11 @@ export function InsightsCards({ className }: InsightsCardsProps) {
             <ThemedCardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
-                  <div 
-                    className="p-2 rounded-lg transition-colors duration-300"
-                    style={{ 
-                      backgroundColor: insight.positive 
-                        ? 'hsl(var(--primary) / 0.1)' 
-                        : 'hsl(var(--destructive) / 0.1)' 
-                    }}
+                  <div
+                    className="p-2 rounded-lg bg-muted transition-colors duration-300"
                   >
-                    <Icon 
-                      className={`w-5 h-5 ${trendColor} transition-colors duration-300`}
+                    <Icon
+                      className={`w-5 h-5 text-muted-foreground transition-colors duration-300`}
                     />
                   </div>
                   <div>

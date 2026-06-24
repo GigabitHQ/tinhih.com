@@ -9,10 +9,12 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
-import { Stethoscope, Plus, Search, Edit, Trash2, UserCheck, UserX, Mail, Calendar, DollarSign } from "lucide-react";
+import { Stethoscope, Plus, Edit, Trash2, UserCheck, UserX, Mail, Calendar, DollarSign } from "lucide-react";
 import { api } from "@/lib/api";
 import { useToast } from "@/hooks/use-toast";
 import { usePageTitle } from "@/context/page-context";
+import { StatCard } from "@/components/ui/stat-card";
+import { SearchInput } from "@/components/ui/search-input";
 
 interface Practitioner {
   id: string;
@@ -296,9 +298,9 @@ export default function AdminPractitioners() {
                   <DialogTitle>Add New Practitioner</DialogTitle>
                 </DialogHeader>
                 <div className="space-y-6">
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="firstName">First Name <span className="text-red-600">*</span></Label>
+                      <Label htmlFor="firstName">First Name <span className="text-muted-foreground">*</span></Label>
                       <Input
                         id="firstName"
                         value={formData.firstName}
@@ -307,7 +309,7 @@ export default function AdminPractitioners() {
                       />
                     </div>
                     <div>
-                      <Label htmlFor="lastName">Last Name <span className="text-red-600">*</span></Label>
+                      <Label htmlFor="lastName">Last Name <span className="text-muted-foreground">*</span></Label>
                       <Input
                         id="lastName"
                         value={formData.lastName}
@@ -317,9 +319,9 @@ export default function AdminPractitioners() {
                     </div>
                   </div>
                   
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="email">Email <span className="text-red-600">*</span></Label>
+                      <Label htmlFor="email">Email <span className="text-muted-foreground">*</span></Label>
                       <Input
                         id="email"
                         type="email"
@@ -339,7 +341,7 @@ export default function AdminPractitioners() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <Label htmlFor="licenseNumber">License Number</Label>
                       <Input
@@ -428,7 +430,7 @@ export default function AdminPractitioners() {
               >
                 {isCreating ? (
                   <>
-                    <div className="w-4 h-4 mr-2 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    <div className="w-4 h-4 mr-2 border-2 border-current border-t-transparent rounded-full animate-spin"></div>
                     Creating...
                   </>
                 ) : (
@@ -445,64 +447,41 @@ export default function AdminPractitioners() {
         {/* Dashboard Content */}
         <div className="flex-1 overflow-auto p-6">
           {/* Summary Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Total Practitioners</CardTitle>
-                <Stethoscope className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{practitioners.length}</div>
-                <p className="text-xs text-muted-foreground">All recovery specialists</p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Active Practitioners</CardTitle>
-                <UserCheck className="h-4 w-4 text-green-500" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{activePractitionersCount}</div>
-                <p className="text-xs text-muted-foreground">Currently active</p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Inactive Practitioners</CardTitle>
-                <UserX className="h-4 w-4 text-red-500" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{inactivePractitionersCount}</div>
-                <p className="text-xs text-muted-foreground">Deactivated accounts</p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Specialties</CardTitle>
-                <Calendar className="h-4 w-4 text-blue-500" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{new Set(practitioners.map(p => p.specialty).filter(Boolean)).size}</div>
-                <p className="text-xs text-muted-foreground">Active specialties</p>
-              </CardContent>
-            </Card>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <StatCard
+              label="Total Practitioners"
+              value={practitioners.length}
+              icon={Stethoscope}
+              hint="All recovery specialists"
+            />
+            <StatCard
+              label="Active Practitioners"
+              value={activePractitionersCount}
+              icon={UserCheck}
+              hint="Currently active"
+            />
+            <StatCard
+              label="Inactive Practitioners"
+              value={inactivePractitionersCount}
+              icon={UserX}
+              hint="Deactivated accounts"
+            />
+            <StatCard
+              label="Specialties"
+              value={new Set(practitioners.map(p => p.specialty).filter(Boolean)).size}
+              icon={Calendar}
+              hint="Active specialties"
+            />
           </div>
 
           {/* Search */}
           <Card className="mb-6">
             <CardContent className="pt-6">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-                <Input
-                  placeholder="Search practitioners..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10"
-                />
-              </div>
+              <SearchInput
+                placeholder="Search practitioners..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
             </CardContent>
           </Card>
 
@@ -514,7 +493,7 @@ export default function AdminPractitioners() {
             <CardContent>
               {isLoading ? (
                 <div className="text-center py-8">
-                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-foreground mx-auto"></div>
                   <p className="text-muted-foreground mt-2">Loading practitioners...</p>
                 </div>
               ) : filteredPractitioners.length > 0 ? (
@@ -617,9 +596,9 @@ export default function AdminPractitioners() {
             <DialogTitle>Edit Practitioner</DialogTitle>
           </DialogHeader>
           <div className="space-y-6">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="editFirstName">First Name <span className="text-red-600">*</span></Label>
+                <Label htmlFor="editFirstName">First Name <span className="text-muted-foreground">*</span></Label>
                 <Input
                   id="editFirstName"
                   value={formData.firstName}
@@ -628,7 +607,7 @@ export default function AdminPractitioners() {
                 />
               </div>
               <div>
-                <Label htmlFor="editLastName">Last Name <span className="text-red-600">*</span></Label>
+                <Label htmlFor="editLastName">Last Name <span className="text-muted-foreground">*</span></Label>
                 <Input
                   id="editLastName"
                   value={formData.lastName}
@@ -638,9 +617,9 @@ export default function AdminPractitioners() {
               </div>
             </div>
             
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="editEmail">Email <span className="text-red-600">*</span></Label>
+                <Label htmlFor="editEmail">Email <span className="text-muted-foreground">*</span></Label>
                 <Input
                   id="editEmail"
                   type="email"
@@ -660,7 +639,7 @@ export default function AdminPractitioners() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <Label htmlFor="editLicenseNumber">License Number</Label>
                 <Input
@@ -749,7 +728,7 @@ export default function AdminPractitioners() {
               >
                 {isUpdating ? (
                   <>
-                    <div className="w-4 h-4 mr-2 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    <div className="w-4 h-4 mr-2 border-2 border-current border-t-transparent rounded-full animate-spin"></div>
                     Updating...
                   </>
                 ) : (
@@ -790,7 +769,7 @@ export default function AdminPractitioners() {
               >
                 {isDeleting ? (
                   <>
-                    <div className="w-4 h-4 mr-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    <div className="w-4 h-4 mr-2 border-2 border-current border-t-transparent rounded-full animate-spin"></div>
                     Deactivating...
                   </>
                 ) : (
@@ -830,7 +809,7 @@ export default function AdminPractitioners() {
               >
                 {isSendingEmail ? (
                   <>
-                    <div className="w-4 h-4 mr-2 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    <div className="w-4 h-4 mr-2 border-2 border-current border-t-transparent rounded-full animate-spin"></div>
                     Sending...
                   </>
                 ) : (

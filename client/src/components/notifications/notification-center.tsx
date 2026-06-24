@@ -355,15 +355,15 @@ export function NotificationCenter() {
   const getPriorityIcon = (priority: string) => {
     switch (priority) {
       case 'urgent':
-        return <Zap className="w-4 h-4 text-red-500" />;
+        return <Zap className="w-4 h-4 text-foreground" />;
       case 'high':
-        return <AlertCircle className="w-4 h-4 text-orange-500" />;
+        return <AlertCircle className="w-4 h-4 text-foreground" />;
       case 'medium':
-        return <Info className="w-4 h-4 text-blue-500" />;
+        return <Info className="w-4 h-4 text-muted-foreground" />;
       case 'low':
-        return <CheckCircle className="w-4 h-4 text-green-500" />;
+        return <CheckCircle className="w-4 h-4 text-muted-foreground" />;
       default:
-        return <Info className="w-4 h-4 text-gray-500" />;
+        return <Info className="w-4 h-4 text-muted-foreground" />;
     }
   };
 
@@ -373,43 +373,43 @@ export function NotificationCenter() {
       case 'appointment_updated':
       case 'appointment_cancelled':
       case 'appointment_reminder':
-        return <Calendar className="w-4 h-4 text-blue-500" />;
+        return <Calendar className="w-4 h-4 text-muted-foreground" />;
       case 'patient_registered':
       case 'patient_updated':
-        return <User className="w-4 h-4 text-green-500" />;
+        return <User className="w-4 h-4 text-muted-foreground" />;
       case 'clinical_note_created':
       case 'clinical_note_updated':
-        return <FileText className="w-4 h-4 text-purple-500" />;
+        return <FileText className="w-4 h-4 text-muted-foreground" />;
       case 'invoice_created':
       case 'invoice_paid':
       case 'invoice_overdue':
-        return <CreditCard className="w-4 h-4 text-orange-500" />;
+        return <CreditCard className="w-4 h-4 text-muted-foreground" />;
       case 'message_received':
-        return <MessageSquare className="w-4 h-4 text-indigo-500" />;
+        return <MessageSquare className="w-4 h-4 text-muted-foreground" />;
       case 'telehealth_session_started':
       case 'telehealth_session_ended':
-        return <Sparkles className="w-4 h-4 text-cyan-500" />;
+        return <Sparkles className="w-4 h-4 text-muted-foreground" />;
       case 'system_update':
-        return <Settings className="w-4 h-4 text-gray-500" />;
+        return <Settings className="w-4 h-4 text-muted-foreground" />;
       case 'security_alert':
-        return <Shield className="w-4 h-4 text-red-500" />;
+        return <Shield className="w-4 h-4 text-foreground" />;
       default:
-        return <Bell className="w-4 h-4 text-gray-500" />;
+        return <Bell className="w-4 h-4 text-muted-foreground" />;
     }
   };
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
       case 'urgent':
-        return 'border-l-red-500 bg-red-50/50 dark:bg-red-950/20 hover:bg-red-50/70 dark:hover:bg-red-950/30';
+        return 'border-l-foreground bg-muted/50 hover:bg-muted/70';
       case 'high':
-        return 'border-l-orange-500 bg-orange-50/50 dark:bg-orange-950/20 hover:bg-orange-50/70 dark:hover:bg-orange-950/30';
+        return 'border-l-foreground bg-muted/40 hover:bg-muted/60';
       case 'medium':
-        return 'border-l-blue-500 bg-blue-50/50 dark:bg-blue-950/20 hover:bg-blue-50/70 dark:hover:bg-blue-950/30';
+        return 'border-l-border bg-muted/30 hover:bg-muted/50';
       case 'low':
-        return 'border-l-green-500 bg-green-50/50 dark:bg-green-950/20 hover:bg-green-50/70 dark:hover:bg-green-950/30';
+        return 'border-l-border bg-muted/20 hover:bg-muted/40';
       default:
-        return 'border-l-gray-300 bg-gray-50/50 dark:bg-gray-950/20 hover:bg-gray-50/70 dark:hover:bg-gray-950/30';
+        return 'border-l-border bg-muted/20 hover:bg-muted/40';
     }
   };
 
@@ -450,9 +450,9 @@ export function NotificationCenter() {
               {unreadCount > 99 ? '99+' : unreadCount}
             </Badge>
           )}
-          {/* New notification indicator - Red dot */}
+          {/* New notification indicator - dot */}
           {hasNewNotifications && unreadCount > 0 && (
-            <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse" />
+            <div className="absolute -top-1 -right-1 w-3 h-3 bg-foreground rounded-full animate-pulse" />
           )}
 
 
@@ -471,7 +471,7 @@ export function NotificationCenter() {
               </SheetTitle>
               {unreadCount > 0 && (
                 <div className="flex items-center gap-2 flex-wrap">
-                  <Badge variant="secondary" className="font-medium text-green-900 animate-pulse">
+                  <Badge variant="secondary" className="font-medium animate-pulse">
                     {unreadCount} unread
                   </Badge>
                   <span
@@ -609,12 +609,12 @@ export function NotificationCenter() {
             )} */}
             <div className="flex items-center gap-2 text-xs">
               <span className={`w-2 h-2 rounded-full ${
-                isConnecting ? 'bg-yellow-500' : 
-                isConnected ? 'bg-green-500' : 'bg-red-500'
+                isConnecting ? 'bg-muted-foreground' :
+                isConnected ? 'bg-foreground' : 'bg-border'
               }`}></span>
               <span className={
-                isConnecting ? 'text-yellow-600' : 
-                isConnected ? 'text-green-600' : 'text-red-600'
+                isConnecting ? 'text-muted-foreground' :
+                isConnected ? 'text-foreground' : 'text-muted-foreground'
               }>
                 {/* WebSocket: {
                   isConnecting ? 'Connecting...' : 
@@ -735,7 +735,7 @@ export function NotificationCenter() {
                               </h4>
                               <Badge
                                 variant="outline"
-                                className="text-[10px] capitalize px-2 py-0.5 border-primary/20 bg-primary/5 flex-shrink-0"
+                                className="text-[10px] capitalize px-2 py-0.5 flex-shrink-0"
                               >
                                 {notification.priority}
                               </Badge>
@@ -758,7 +758,7 @@ export function NotificationCenter() {
 
                               <div className="flex items-center gap-2 flex-shrink-0">
                                 {notification.type === 'message_received' && (
-                                  <span className="text-[10px] text-blue-600 dark:text-blue-400 font-medium flex items-center gap-1">
+                                  <span className="text-[10px] text-muted-foreground font-medium flex items-center gap-1">
                                     <MessageSquare className="w-3 h-3" />
                                     Click to view
                                   </span>

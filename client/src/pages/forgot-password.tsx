@@ -102,9 +102,9 @@ export default function ForgotPassword() {
           <CardContent className="pt-0 space-y-6">
             {/* Forgot Password Success Alert */}
             {forgotPasswordSuccess && (
-              <Alert className="border-green-200 bg-green-50">
-                <CheckCircle className="h-4 w-4 text-green-600" />
-                <AlertDescription className="text-green-800">
+              <Alert className="border-border bg-muted">
+                <CheckCircle className="h-4 w-4 text-foreground" />
+                <AlertDescription className="text-foreground">
                   <div>
                     <p className="font-medium mb-1">Reset email sent!</p>
                     <p className="text-sm">
@@ -128,14 +128,14 @@ export default function ForgotPassword() {
 
             {/* User Not Found - Helpful Actions */}
             {userNotFound && (
-              <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                <h4 className="font-medium text-blue-900 mb-2">Account not found?</h4>
-                <p className="text-sm text-blue-700 mb-3">
+              <div className="p-4 bg-muted border border-border rounded-lg">
+                <h4 className="font-medium text-foreground mb-2">Account not found?</h4>
+                <p className="text-sm text-muted-foreground mb-3">
                   If you don't have an account yet, you can create one to start your mental health journey.
                 </p>
-                <Link 
+                <Link
                   href="/register"
-                  className="inline-flex items-center px-4 py-2 bg-[#ffdd00] hover:bg-[#ffdd00]/90 text-black text-sm font-medium rounded-md transition-colors"
+                  className="inline-flex items-center px-4 py-2 bg-primary text-primary-foreground hover:bg-primary/90 text-sm font-medium rounded-md transition-colors"
                 >
                   Create New Account
                 </Link>
@@ -159,19 +159,19 @@ export default function ForgotPassword() {
                           className="h-11 bg-background border-input"
                         />
                       </FormControl>
-                      <FormMessage className="text-red-500"/>
+                      <FormMessage/>
                     </FormItem>
                   )}
                 />
                 
-                <Button 
-                  type="submit" 
-                  className="w-full h-11 bg-[#ffdd00] hover:bg-[#ffdd00]/90 text-black font-medium" 
+                <Button
+                  type="submit"
+                  className="w-full h-11 font-medium"
                   disabled={isLoading}
                 >
                   {isLoading ? (
                     <div className="flex items-center space-x-2">
-                      <div className="w-4 h-4 border-2 border-black/30 border-t-black rounded-full animate-spin"></div>
+                      <div className="w-4 h-4 border-2 border-current/30 border-t-current rounded-full animate-spin"></div>
                       <span>Sending reset email...</span>
                     </div>
                   ) : (

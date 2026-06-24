@@ -9,20 +9,20 @@ export function PerformanceDashboard() {
   const { metrics, score, grade, totalLoadTime, isLoading } = usePerformance();
 
   const getScoreColor = (score: number) => {
-    if (score >= 90) return 'text-green-600';
-    if (score >= 80) return 'text-yellow-600';
-    if (score >= 70) return 'text-orange-600';
-    return 'text-red-600';
+    return 'text-foreground';
   };
 
   const getGradeColor = (grade: string) => {
     switch (grade) {
-      case 'A': return 'bg-green-100 text-green-800 border-green-200';
-      case 'B': return 'bg-blue-100 text-blue-800 border-blue-200';
-      case 'C': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-      case 'D': return 'bg-orange-100 text-orange-800 border-orange-200';
-      case 'F': return 'bg-red-100 text-red-800 border-red-200';
-      default: return 'bg-gray-100 text-gray-800 border-gray-200';
+      case 'A':
+      case 'B':
+        return 'bg-foreground text-background border-transparent';
+      case 'C':
+        return 'bg-muted text-muted-foreground border-border';
+      case 'D':
+      case 'F':
+        return 'bg-transparent text-foreground border-foreground';
+      default: return 'bg-muted text-muted-foreground border-border';
     }
   };
 
@@ -45,26 +45,26 @@ export function PerformanceDashboard() {
 
   const getMetricIcon = (status: string) => {
     switch (status) {
-      case 'good': return <TrendingUp className="h-4 w-4 text-green-600" />;
-      case 'needs-improvement': return <AlertTriangle className="h-4 w-4 text-yellow-600" />;
-      case 'poor': return <TrendingDown className="h-4 w-4 text-red-600" />;
-      default: return <Clock className="h-4 w-4 text-gray-600" />;
+      case 'good': return <TrendingUp className="h-4 w-4 text-foreground" />;
+      case 'needs-improvement': return <AlertTriangle className="h-4 w-4 text-muted-foreground" />;
+      case 'poor': return <TrendingDown className="h-4 w-4 text-foreground" />;
+      default: return <Clock className="h-4 w-4 text-muted-foreground" />;
     }
   };
 
   const getMetricColor = (status: string) => {
     switch (status) {
-      case 'good': return 'text-green-600';
-      case 'needs-improvement': return 'text-yellow-600';
-      case 'poor': return 'text-red-600';
-      default: return 'text-gray-600';
+      case 'good': return 'text-foreground';
+      case 'needs-improvement': return 'text-muted-foreground';
+      case 'poor': return 'text-foreground';
+      default: return 'text-muted-foreground';
     }
   };
 
   if (isLoading) {
     return (
       <div className="flex items-center justify-center p-8">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-foreground"></div>
       </div>
     );
   }
@@ -199,10 +199,10 @@ export function PerformanceDashboard() {
           </CardHeader>
           <CardContent>
             <div className="flex items-center justify-between">
-              <span className="text-2xl font-bold text-gray-600">
+              <span className="text-2xl font-bold text-foreground">
                 {metrics.domLoad.toFixed(0)}ms
               </span>
-              <Clock className="h-4 w-4 text-gray-600" />
+              <Clock className="h-4 w-4 text-muted-foreground" />
             </div>
             <div className="text-xs text-muted-foreground mt-1">
               DOM Ready
@@ -224,11 +224,11 @@ export function PerformanceDashboard() {
             {score < 90 && (
               <>
                 {metrics.fcp > 1000 && (
-                  <div className="flex items-start gap-3 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
-                    <AlertTriangle className="h-5 w-5 text-yellow-600 mt-0.5" />
+                  <div className="flex items-start gap-3 p-3 bg-muted rounded-lg border border-border">
+                    <AlertTriangle className="h-5 w-5 text-foreground mt-0.5" />
                     <div>
-                      <div className="font-medium text-yellow-800">Optimize First Contentful Paint</div>
-                      <div className="text-sm text-yellow-700">
+                      <div className="font-medium text-foreground">Optimize First Contentful Paint</div>
+                      <div className="text-sm text-muted-foreground">
                         Consider code splitting, lazy loading, and optimizing critical rendering path
                       </div>
                     </div>
@@ -236,11 +236,11 @@ export function PerformanceDashboard() {
                 )}
                 
                 {metrics.lcp > 2500 && (
-                  <div className="flex items-start gap-3 p-3 bg-orange-50 rounded-lg border border-orange-200">
-                    <AlertTriangle className="h-5 w-5 text-orange-600 mt-0.5" />
+                  <div className="flex items-start gap-3 p-3 bg-muted rounded-lg border border-border">
+                    <AlertTriangle className="h-5 w-5 text-foreground mt-0.5" />
                     <div>
-                      <div className="font-medium text-orange-800">Improve Largest Contentful Paint</div>
-                      <div className="text-sm text-orange-700">
+                      <div className="font-medium text-foreground">Improve Largest Contentful Paint</div>
+                      <div className="text-sm text-muted-foreground">
                         Optimize images, implement lazy loading, and reduce render-blocking resources
                       </div>
                     </div>
@@ -248,11 +248,11 @@ export function PerformanceDashboard() {
                 )}
                 
                 {metrics.fid > 100 && (
-                  <div className="flex items-start gap-3 p-3 bg-red-50 rounded-lg border border-red-200">
-                    <AlertTriangle className="h-5 w-5 text-red-600 mt-0.5" />
+                  <div className="flex items-start gap-3 p-3 bg-muted rounded-lg border border-foreground">
+                    <AlertTriangle className="h-5 w-5 text-foreground mt-0.5" />
                     <div>
-                      <div className="font-medium text-red-800">Reduce First Input Delay</div>
-                      <div className="text-sm text-red-700">
+                      <div className="font-medium text-foreground">Reduce First Input Delay</div>
+                      <div className="text-sm text-muted-foreground">
                         Break up long tasks, optimize JavaScript execution, and reduce main thread blocking
                       </div>
                     </div>
@@ -262,11 +262,11 @@ export function PerformanceDashboard() {
             )}
             
             {score >= 90 && (
-              <div className="flex items-start gap-3 p-3 bg-green-50 rounded-lg border border-green-200">
-                <TrendingUp className="h-5 w-5 text-green-600 mt-0.5" />
+              <div className="flex items-start gap-3 p-3 bg-muted rounded-lg border border-border">
+                <TrendingUp className="h-5 w-5 text-foreground mt-0.5" />
                 <div>
-                  <div className="font-medium text-green-800">Excellent Performance!</div>
-                  <div className="text-sm text-green-700">
+                  <div className="font-medium text-foreground">Excellent Performance!</div>
+                  <div className="text-sm text-muted-foreground">
                     Your application is performing well. Keep monitoring for any regressions.
                   </div>
                 </div>

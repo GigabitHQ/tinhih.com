@@ -213,7 +213,7 @@ export function SoapNotesForm({ note, onSuccess, onCancel }: SoapNotesFormProps)
                   name="patientId"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-sm font-medium">Client <span className="text-red-600">*</span></FormLabel>
+                      <FormLabel className="text-sm font-medium">Client <span className="text-destructive">*</span></FormLabel>
                       <Popover>
                         <PopoverTrigger asChild>
                           <FormControl>
@@ -270,7 +270,7 @@ export function SoapNotesForm({ note, onSuccess, onCancel }: SoapNotesFormProps)
                           </Command>
                         </PopoverContent>
                       </Popover>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -280,7 +280,7 @@ export function SoapNotesForm({ note, onSuccess, onCancel }: SoapNotesFormProps)
                   name="practitionerId"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-sm font-medium">Recovery Specialist <span className="text-red-600">*</span></FormLabel>
+                      <FormLabel className="text-sm font-medium">Recovery Specialist <span className="text-destructive">*</span></FormLabel>
                       {isPractitioner ? (
                         // For practitioners, show their name as read-only
                         <div className="flex items-center space-x-2 p-3 border rounded-md bg-muted/50">
@@ -348,7 +348,7 @@ export function SoapNotesForm({ note, onSuccess, onCancel }: SoapNotesFormProps)
                           </PopoverContent>
                         </Popover>
                       )}
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -360,11 +360,11 @@ export function SoapNotesForm({ note, onSuccess, onCancel }: SoapNotesFormProps)
                   name="title"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-sm font-medium">Note Title <span className="text-red-600">*</span></FormLabel>
+                      <FormLabel className="text-sm font-medium">Note Title <span className="text-destructive">*</span></FormLabel>
                       <FormControl>
                         <Input placeholder="Enter note title" className="h-10 border-border/20 focus:border-border" {...field} />
                       </FormControl>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -389,7 +389,7 @@ export function SoapNotesForm({ note, onSuccess, onCancel }: SoapNotesFormProps)
                           ))}
                         </SelectContent>
                       </Select>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -401,11 +401,11 @@ export function SoapNotesForm({ note, onSuccess, onCancel }: SoapNotesFormProps)
           <Card>
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
-                <div className="w-2 h-2 bg-primary rounded-full"></div>
+                <div className="w-2 h-2 bg-muted-foreground rounded-full"></div>
                 SOAP Documentation
               </CardTitle>
               <p className="text-sm text-muted-foreground">
-                Complete the SOAP note sections below. All fields marked with <span className="text-red-600">*</span> are required.
+                Complete the SOAP note sections below. All fields marked with <span className="text-destructive">*</span> are required.
               </p>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -416,8 +416,8 @@ export function SoapNotesForm({ note, onSuccess, onCancel }: SoapNotesFormProps)
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-sm font-medium flex items-center gap-2">
-                        <span className="w-6 h-6 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full flex items-center justify-center text-xs font-bold">S</span>
-                        Subjective <span className="text-red-600">*</span>
+                        <span className="w-6 h-6 bg-muted text-foreground rounded-full flex items-center justify-center text-xs font-bold">S</span>
+                        Subjective <span className="text-destructive">*</span>
                       </FormLabel>
                       <FormControl>
                         <Textarea
@@ -426,7 +426,7 @@ export function SoapNotesForm({ note, onSuccess, onCancel }: SoapNotesFormProps)
                           {...field}
                         />
                       </FormControl>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -437,8 +437,8 @@ export function SoapNotesForm({ note, onSuccess, onCancel }: SoapNotesFormProps)
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-sm font-medium flex items-center gap-2">
-                        <span className="w-6 h-6 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-full flex items-center justify-center text-xs font-bold">O</span>
-                        Objective <span className="text-red-600">*</span>
+                        <span className="w-6 h-6 bg-muted text-foreground rounded-full flex items-center justify-center text-xs font-bold">O</span>
+                        Objective <span className="text-destructive">*</span>
                       </FormLabel>
                       <FormControl>
                         <Textarea
@@ -447,7 +447,7 @@ export function SoapNotesForm({ note, onSuccess, onCancel }: SoapNotesFormProps)
                           {...field}
                         />
                       </FormControl>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -458,8 +458,8 @@ export function SoapNotesForm({ note, onSuccess, onCancel }: SoapNotesFormProps)
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-sm font-medium flex items-center gap-2">
-                        <span className="w-6 h-6 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400 rounded-full flex items-center justify-center text-xs font-bold">A</span>
-                        Assessment <span className="text-red-600">*</span>
+                        <span className="w-6 h-6 bg-muted text-foreground rounded-full flex items-center justify-center text-xs font-bold">A</span>
+                        Assessment <span className="text-destructive">*</span>
                       </FormLabel>
                       <FormControl>
                         <Textarea
@@ -468,7 +468,7 @@ export function SoapNotesForm({ note, onSuccess, onCancel }: SoapNotesFormProps)
                           {...field}
                         />
                       </FormControl>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -479,8 +479,8 @@ export function SoapNotesForm({ note, onSuccess, onCancel }: SoapNotesFormProps)
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-sm font-medium flex items-center gap-2">
-                        <span className="w-6 h-6 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-full flex items-center justify-center text-xs font-bold">P</span>
-                        Plan <span className="text-red-600">*</span>
+                        <span className="w-6 h-6 bg-muted text-foreground rounded-full flex items-center justify-center text-xs font-bold">P</span>
+                        Plan <span className="text-destructive">*</span>
                       </FormLabel>
                       <FormControl>
                         <Textarea
@@ -489,7 +489,7 @@ export function SoapNotesForm({ note, onSuccess, onCancel }: SoapNotesFormProps)
                           {...field}
                         />
                       </FormControl>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -500,7 +500,7 @@ export function SoapNotesForm({ note, onSuccess, onCancel }: SoapNotesFormProps)
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-sm font-medium flex items-center gap-2">
-                        <span className="w-6 h-6 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded-full flex items-center justify-center text-xs font-bold">+</span>
+                        <span className="w-6 h-6 bg-muted text-foreground rounded-full flex items-center justify-center text-xs font-bold">+</span>
                         Additional Notes
                       </FormLabel>
                       <FormControl>
@@ -510,7 +510,7 @@ export function SoapNotesForm({ note, onSuccess, onCancel }: SoapNotesFormProps)
                           {...field}
                         />
                       </FormControl>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />

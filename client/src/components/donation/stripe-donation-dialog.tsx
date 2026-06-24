@@ -81,17 +81,17 @@ export function StripeDonationDialog({ children, className }: StripeDonationDial
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle className="flex items-center space-x-2">
-              <CheckCircle className="h-6 w-6 text-green-500" />
+              <CheckCircle className="h-6 w-6 text-foreground" />
               <span>Donation Successful!</span>
             </DialogTitle>
           </DialogHeader>
           <div className="text-center py-6">
-            <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">Thank You for Your Support!</h3>
-            <p className="text-gray-600">
+            <CheckCircle className="h-16 w-16 text-foreground mx-auto mb-4" />
+            <h3 className="text-xl font-semibold text-foreground mb-2">Thank You for Your Support!</h3>
+            <p className="text-muted-foreground">
               Your donation of ${amount === "custom" ? customAmount : amount} helps provide better healthcare services.
             </p>
-            <Button onClick={() => setOpen(false)} className="bg-gradient-to-r from-[#ffdd00] to-yellow-400 text-black font-semibold mt-4">
+            <Button onClick={() => setOpen(false)} className="font-semibold mt-4">
               Close
             </Button>
           </div>
@@ -108,7 +108,7 @@ export function StripeDonationDialog({ children, className }: StripeDonationDial
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="flex items-center space-x-2">
-            <Heart className="h-6 w-6 text-red-500" />
+            <Heart className="h-6 w-6 text-muted-foreground" />
             <span>Support TiNHiH Community</span>
           </DialogTitle>
         </DialogHeader>
@@ -122,13 +122,13 @@ export function StripeDonationDialog({ children, className }: StripeDonationDial
                 <Card
                   key={option.value}
                   className={`cursor-pointer transition-all duration-200 hover:shadow-md ${
-                    amount === option.value ? "border-[#ffdd00] bg-[#ffdd00]/10" : "border-gray-200 hover:border-[#ffdd00]/50"
+                    amount === option.value ? "border-foreground bg-muted" : "border-border hover:border-foreground/40"
                   }`}
                   onClick={() => setAmount(option.value)}
                 >
                   <CardContent className="p-4 text-center">
-                    <div className="text-lg font-bold text-gray-900 mb-1">{option.label}</div>
-                    <div className="text-xs text-gray-600">{option.description}</div>
+                    <div className="text-lg font-bold text-foreground mb-1">{option.label}</div>
+                    <div className="text-xs text-muted-foreground">{option.description}</div>
                   </CardContent>
                 </Card>
               ))}
@@ -147,21 +147,20 @@ export function StripeDonationDialog({ children, className }: StripeDonationDial
                 placeholder="Enter amount"
                 value={customAmount}
                 onChange={(e) => setCustomAmount(e.target.value)}
-                className="border-gray-300 focus:border-[#ffdd00] focus:ring-[#ffdd00]"
               />
             </div>
           )}
 
           {/* Payment Info */}
-          <div className="bg-gray-50 rounded-lg p-4 flex items-center space-x-2 mb-2">
-            <CreditCard className="h-4 w-4 text-gray-600" />
-            <span className="text-sm font-medium text-gray-700">Secure Payment via Stripe</span>
+          <div className="bg-muted rounded-lg p-4 flex items-center space-x-2 mb-2">
+            <CreditCard className="h-4 w-4 text-muted-foreground" />
+            <span className="text-sm font-medium text-foreground">Secure Payment via Stripe</span>
           </div>
 
           {/* Donation Summary */}
-          <div className="bg-[#ffdd00]/10 rounded-lg p-4 border border-[#ffdd00]/20 flex justify-between">
-            <span className="font-medium text-gray-900">Total Donation:</span>
-            <span className="text-xl font-bold text-gray-900">${amount === "custom" ? customAmount || "0" : amount}</span>
+          <div className="bg-muted rounded-lg p-4 border border-border flex justify-between">
+            <span className="font-medium text-foreground">Total Donation:</span>
+            <span className="text-xl font-bold text-foreground">${amount === "custom" ? customAmount || "0" : amount}</span>
           </div>
 
           {/* Action Buttons */}
@@ -172,11 +171,11 @@ export function StripeDonationDialog({ children, className }: StripeDonationDial
             <Button
               onClick={handleDonation}
               disabled={loading || (amount === "custom" && !customAmount)}
-              className="flex-1 bg-gradient-to-r from-[#ffdd00] to-yellow-400 text-black font-semibold hover:shadow-lg"
+              className="flex-1 font-semibold hover:shadow-lg"
             >
               {loading ? (
                 <div className="flex items-center space-x-2">
-                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-black"></div>
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary-foreground"></div>
                   <span>Processing...</span>
                 </div>
               ) : (

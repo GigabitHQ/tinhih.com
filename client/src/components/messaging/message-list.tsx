@@ -49,10 +49,10 @@ export function MessageList() {
             {Array.from({ length: 5 }).map((_, i) => (
               <div key={i} className="animate-pulse">
                 <div className="flex items-center space-x-4 p-4 border rounded-lg">
-                  <div className="w-12 h-12 bg-slate-300 rounded-full"></div>
+                  <div className="w-12 h-12 bg-muted rounded-full"></div>
                   <div className="flex-1 space-y-2">
-                    <div className="h-4 bg-slate-300 rounded w-1/3"></div>
-                    <div className="h-3 bg-slate-300 rounded w-2/3"></div>
+                    <div className="h-4 bg-muted rounded w-1/3"></div>
+                    <div className="h-3 bg-muted rounded w-2/3"></div>
                   </div>
                 </div>
               </div>
@@ -83,31 +83,31 @@ export function MessageList() {
         {messages && messages.length > 0 ? (
           <div className="space-y-4">
             {messages.map((message: any) => (
-              <div key={message.id} className={`flex items-start space-x-4 p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors ${
-                message.status === "unread" ? "bg-blue-50 border-blue-200" : ""
+              <div key={message.id} className={`flex items-start space-x-4 p-4 border border-border rounded-lg hover:bg-accent transition-colors ${
+                message.status === "unread" ? "bg-accent border-foreground" : ""
               }`}>
-                <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-                  <span className="text-primary-foreground font-medium text-sm">
+                <div className="w-10 h-10 bg-muted rounded-full flex items-center justify-center">
+                  <span className="text-foreground font-medium text-sm">
                     {message.sender?.firstName?.charAt(0)}{message.sender?.lastName?.charAt(0)}
                   </span>
                 </div>
                 
                 <div className="flex-1">
                   <div className="flex items-center space-x-2 mb-1">
-                    <h3 className="font-medium text-slate-900">
+                    <h3 className="font-medium text-foreground">
                       {message.sender?.firstName} {message.sender?.lastName}
                     </h3>
                     {message.status === "unread" && (
-                      <Badge variant="secondary" className="bg-blue-100 text-blue-800">
+                      <Badge variant="secondary">
                         Unread
                       </Badge>
                     )}
                   </div>
-                  
-                  <h4 className="text-sm font-medium text-slate-700 mb-1">{message.subject}</h4>
-                  <p className="text-sm text-slate-600 line-clamp-2">{message.content}</p>
-                  
-                  <p className="text-xs text-slate-400 mt-2">
+
+                  <h4 className="text-sm font-medium text-foreground mb-1">{message.subject}</h4>
+                  <p className="text-sm text-muted-foreground line-clamp-2">{message.content}</p>
+
+                  <p className="text-xs text-muted-foreground mt-2">
                     {format(new Date(message.createdAt), "MMM dd, yyyy 'at' h:mm a")}
                   </p>
                 </div>
@@ -133,7 +133,7 @@ export function MessageList() {
               >
                 Previous
               </Button>
-              <span className="text-sm text-slate-600">
+              <span className="text-sm text-muted-foreground">
                 Page {page + 1}
               </span>
               <Button 
@@ -147,9 +147,9 @@ export function MessageList() {
           </div>
         ) : (
           <div className="text-center py-8">
-            <MessageSquare className="w-12 h-12 text-slate-400 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-slate-900 mb-2">No messages yet</h3>
-            <p className="text-slate-600 mb-4">Start communicating with patients and colleagues</p>
+            <MessageSquare className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+            <h3 className="text-lg font-medium text-foreground mb-2">No messages yet</h3>
+            <p className="text-muted-foreground mb-4">Start communicating with patients and colleagues</p>
             <Button onClick={handleNewMessage}>
               <Plus className="w-4 h-4 mr-2" />
               Send First Message

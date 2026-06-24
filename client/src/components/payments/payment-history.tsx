@@ -2,20 +2,18 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { 
-  CreditCard, 
-  Calendar, 
+import { StatusBadge } from "@/components/ui/status-badge";
+import { SearchInput } from "@/components/ui/search-input";
+import {
+  CreditCard,
+  Calendar,
   DollarSign,
   Receipt,
   Download,
-  Search,
   Filter,
   CheckCircle,
   XCircle,
-  Clock,
   RefreshCw
 } from "lucide-react";
 import { format } from "date-fns";
@@ -591,15 +589,15 @@ export function PaymentHistory({ patientId, invoiceId }: PaymentHistoryProps) {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "succeeded":
-        return <Badge className="bg-green-100 text-green-800"><CheckCircle className="w-3 h-3 mr-1" />Completed</Badge>;
+        return <StatusBadge status="completed" label="Completed" />;
       case "failed":
-        return <Badge className="bg-red-100 text-red-800"><XCircle className="w-3 h-3 mr-1" />Failed</Badge>;
+        return <StatusBadge status="failed" label="Failed" />;
       case "processing":
-        return <Badge className="bg-blue-100 text-blue-800"><Clock className="w-3 h-3 mr-1" />Processing</Badge>;
+        return <StatusBadge status="processing" label="Processing" />;
       case "refunded":
-        return <Badge className="bg-orange-100 text-orange-800"><RefreshCw className="w-3 h-3 mr-1" />Refunded</Badge>;
+        return <StatusBadge status="refunded" label="Refunded" />;
       default:
-        return <Badge className="bg-gray-100 text-gray-800"><Clock className="w-3 h-3 mr-1" />Pending</Badge>;
+        return <StatusBadge status="pending" label="Pending" />;
     }
   };
 
@@ -676,8 +674,8 @@ export function PaymentHistory({ patientId, invoiceId }: PaymentHistoryProps) {
           {[...Array(3)].map((_, i) => (
             <Card key={i}>
               <CardContent className="p-6">
-                <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
-                <div className="h-3 bg-gray-200 rounded w-1/2"></div>
+                <div className="h-4 bg-muted rounded w-3/4 mb-2"></div>
+                <div className="h-3 bg-muted rounded w-1/2"></div>
               </CardContent>
             </Card>
           ))}
@@ -693,7 +691,7 @@ export function PaymentHistory({ patientId, invoiceId }: PaymentHistoryProps) {
         <Card>
           <CardContent className="p-3">
             <div className="flex items-center space-x-2">
-              <Receipt className="w-4 h-4 text-blue-600" />
+              <Receipt className="w-4 h-4 text-muted-foreground" />
               <div>
                 <p className="text-xs font-medium">Total Payments</p>
                 <p className="text-lg font-bold">{totals.totalPayments}</p>
@@ -705,7 +703,7 @@ export function PaymentHistory({ patientId, invoiceId }: PaymentHistoryProps) {
         <Card>
           <CardContent className="p-3">
             <div className="flex items-center space-x-2">
-              <DollarSign className="w-4 h-4 text-green-600" />
+              <DollarSign className="w-4 h-4 text-muted-foreground" />
               <div>
                 <p className="text-xs font-medium">Total Amount</p>
                 <p className="text-lg font-bold">${totals.totalAmount.toFixed(2)}</p>
@@ -717,7 +715,7 @@ export function PaymentHistory({ patientId, invoiceId }: PaymentHistoryProps) {
         <Card>
           <CardContent className="p-3">
             <div className="flex items-center space-x-2">
-              <RefreshCw className="w-4 h-4 text-orange-600" />
+              <RefreshCw className="w-4 h-4 text-muted-foreground" />
               <div>
                 <p className="text-xs font-medium">Refunded</p>
                 <p className="text-lg font-bold">${totals.totalRefunded.toFixed(2)}</p>
@@ -729,7 +727,7 @@ export function PaymentHistory({ patientId, invoiceId }: PaymentHistoryProps) {
         <Card>
           <CardContent className="p-3">
             <div className="flex items-center space-x-2">
-              <CheckCircle className="w-4 h-4 text-purple-600" />
+              <CheckCircle className="w-4 h-4 text-muted-foreground" />
               <div>
                 <p className="text-xs font-medium">Net Amount</p>
                 <p className="text-lg font-bold">${totals.netAmount.toFixed(2)}</p>
@@ -755,15 +753,11 @@ export function PaymentHistory({ patientId, invoiceId }: PaymentHistoryProps) {
         <CardContent className="pt-0">
           <div className="flex flex-col sm:flex-row gap-3 mb-4">
             <div className="flex-1">
-              <div className="relative">
-                <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                <Input
-                  placeholder={invoiceId ? "Search payment details..." : "Search by invoice number, patient name..."}
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10"
-                />
-              </div>
+              <SearchInput
+                placeholder={invoiceId ? "Search payment details..." : "Search by invoice number, patient name..."}
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
             </div>
             
             <Select value={statusFilter} onValueChange={setStatusFilter}>
@@ -789,8 +783,8 @@ export function PaymentHistory({ patientId, invoiceId }: PaymentHistoryProps) {
           <div className="space-y-3">
             {payments.length === 0 ? (
               <div className="text-center py-8">
-                <Receipt className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-500">No payment history found</p>
+                <Receipt className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+                <p className="text-muted-foreground">No payment history found</p>
               </div>
             ) : (
               payments.map((payment: any) => {
@@ -802,18 +796,18 @@ export function PaymentHistory({ patientId, invoiceId }: PaymentHistoryProps) {
                     <CardContent className="p-4">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-3">
-                          <div className="flex items-center justify-center w-8 h-8 bg-primary/10 rounded-full">
-                            <PaymentIcon className="w-4 h-4 text-primary" />
+                          <div className="flex items-center justify-center w-8 h-8 bg-muted rounded-full">
+                            <PaymentIcon className="w-4 h-4 text-muted-foreground" />
                           </div>
                           
                           <div>
                             <p className="font-medium text-sm">
                               Payment for Invoice #{payment.invoice?.invoiceNumber || 'N/A'}
                             </p>
-                            <p className="text-xs text-gray-500">
+                            <p className="text-xs text-muted-foreground">
                               {paymentMethodInfo.text}
                             </p>
-                            <p className="text-xs text-gray-400">
+                            <p className="text-xs text-muted-foreground">
                               {format(new Date(payment.created_at), "MMM dd, yyyy 'at' h:mm a")}
                             </p>
                           </div>
@@ -842,8 +836,8 @@ export function PaymentHistory({ patientId, invoiceId }: PaymentHistoryProps) {
                       </div>
                       
                       {payment.failure_message && (
-                        <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-md">
-                          <p className="text-sm text-red-700">
+                        <div className="mt-4 p-3 bg-muted border border-foreground rounded-md">
+                          <p className="text-sm text-foreground">
                             <XCircle className="w-4 h-4 inline mr-1" />
                             {payment.failure_message}
                           </p>

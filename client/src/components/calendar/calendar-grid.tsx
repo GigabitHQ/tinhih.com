@@ -634,10 +634,10 @@ export function CalendarGrid({
                     {dayEvents.slice(0, 2).map((event) => (
                       <EventClickHandler key={event.id} event={event}>
                         <div className={`p-1 rounded text-xs cursor-pointer hover:opacity-80 mb-1 ${event.type === 'appointment'
-                            ? 'bg-[#ffdd00] text-black'
+                            ? 'bg-foreground text-background'
                             : event.type === 'event'
-                              ? 'bg-[#3b82f6] text-white'
-                              : `${event.color} text-white`
+                              ? 'bg-muted text-foreground border border-border'
+                              : 'bg-muted text-muted-foreground'
                           }`}>
                           <div className="truncate font-medium">{event.title}</div>
                           {event.patientName && event.type !== 'event' && (
@@ -746,10 +746,10 @@ export function CalendarGrid({
                   {dayEvents.slice(0, 3).map((event) => (
                     <EventClickHandler key={event.id} event={event}>
                       <div className={`p-1 rounded text-xs cursor-pointer hover:opacity-80 ${event.type === 'appointment'
-                          ? 'bg-[#ffdd00] text-black'
+                          ? 'bg-foreground text-background'
                           : event.type === 'event'
-                            ? 'bg-[#3b82f6] text-white'
-                            : `${event.color} text-white`
+                            ? 'bg-muted text-foreground border border-border'
+                            : 'bg-muted text-muted-foreground'
                         }`}>
                         <div className="truncate">{event.title}</div>
                         {event.patientName && event.type !== 'event' && (
@@ -886,10 +886,10 @@ export function CalendarGrid({
                     {slotEvents.map((event) => (
                       <EventClickHandler key={event.id} event={event}>
                         <div className={`p-2 rounded mb-2 cursor-pointer hover:opacity-80 ${event.type === 'appointment'
-                            ? 'bg-[#ffdd00] text-black'
+                            ? 'bg-foreground text-background'
                             : event.type === 'event'
-                              ? 'bg-[#3b82f6] text-white'
-                              : `${event.color} text-white`
+                              ? 'bg-muted text-foreground border border-border'
+                              : 'bg-muted text-muted-foreground'
                           }`}>
                           <div className="font-medium">{event.title}</div>
                           {event.patientName && event.type !== 'event' && (

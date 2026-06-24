@@ -120,8 +120,8 @@ export default function Store() {
       >
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-center h-64">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#ffdd00]"></div>
-            <span 
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-foreground"></div>
+            <span
               className="ml-2 transition-colors duration-300"
               style={{ color: `hsl(var(--foreground))` }}
             >
@@ -147,8 +147,8 @@ export default function Store() {
             >
               Store Error
             </h1>
-            <p className="text-red-600 mb-4">{error}</p>
-            <Button onClick={fetchProducts} className="bg-[#ffdd00] text-black hover:bg-yellow-400">Try Again</Button>
+            <p className="text-destructive mb-4">{error}</p>
+            <Button onClick={fetchProducts}>Try Again</Button>
           </div>
         </div>
       </div>
@@ -242,7 +242,7 @@ export default function Store() {
                 <select
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#ffdd00] transition-colors duration-300"
+                  className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-ring transition-colors duration-300"
                   style={{ 
                     backgroundColor: `hsl(var(--background))`,
                     color: `hsl(var(--foreground))`,
@@ -345,15 +345,15 @@ function ProductCard({ product, onAddToCart, onBuyNow, addingToCart, buyingNow, 
         
         {/* TiNHiH Logo Badge */}
         <div className="absolute top-3 left-3">
-          <div className="bg-[#ffdd00] text-black font-bold px-2 py-1 rounded-full text-xs shadow-lg">
+          <div className="bg-foreground text-background font-bold px-2 py-1 rounded-full text-xs shadow-lg">
             TINHIH
           </div>
         </div>
-        
+
         {/* Sale Badge */}
         {product.isOnSale && (
           <div className="absolute top-3 right-3">
-            <div className="bg-red-500 text-white font-semibold px-2 py-1 rounded-full text-xs shadow-lg">
+            <div className="bg-foreground text-background font-semibold px-2 py-1 rounded-full text-xs shadow-lg">
               SALE
             </div>
           </div>
@@ -375,15 +375,15 @@ function ProductCard({ product, onAddToCart, onBuyNow, addingToCart, buyingNow, 
           <div className="flex items-center mb-3">
             <div className="flex items-center">
               {[...Array(5)].map((_, i) => (
-                <Star 
-                  key={i} 
+                <Star
+                  key={i}
                   className={`h-4 w-4 ${
-                    i < Math.floor(product.rating) 
-                      ? 'text-yellow-400 fill-current' 
-                      : i < product.rating 
-                        ? 'text-yellow-400 fill-current opacity-50' 
-                        : 'text-gray-300'
-                  }`} 
+                    i < Math.floor(product.rating)
+                      ? 'text-foreground fill-current'
+                      : i < product.rating
+                        ? 'text-foreground fill-current opacity-50'
+                        : 'text-muted-foreground/40'
+                  }`}
                 />
               ))}
             </div>
@@ -419,7 +419,7 @@ function ProductCard({ product, onAddToCart, onBuyNow, addingToCart, buyingNow, 
           {hasVariants ? (
             <Button
               onClick={() => setLocation(`/product/${product.id}`)}
-              className="w-full bg-[#ffdd00] hover:bg-yellow-400 text-black font-semibold py-3 rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg"
+              className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-semibold py-3 rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg"
             >
               SELECT OPTIONS
             </Button>
@@ -427,11 +427,11 @@ function ProductCard({ product, onAddToCart, onBuyNow, addingToCart, buyingNow, 
             <Button
               onClick={() => onAddToCart(product)}
               disabled={!product.is_enabled || isAddingToCart}
-              className="w-full bg-[#ffdd00] hover:bg-yellow-400 text-black font-semibold py-3 rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg flex items-center justify-center"
+              className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-semibold py-3 rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg flex items-center justify-center"
             >
               {isAddingToCart ? (
                 <div className="flex items-center">
-                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-black mr-2"></div>
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary-foreground mr-2"></div>
                   Adding...
                 </div>
               ) : (

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Calendar, Clock, ExternalLink, Play, Phone, PhoneOff, MoreVertical, Copy, Check, Video } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { StatusBadge } from "@/components/ui/status-badge";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/hooks/use-toast";
 import { useLocation } from "wouter";
@@ -84,23 +84,21 @@ export function TelehealthSessionCard({
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <div className="flex items-center space-x-3">
-            <div className="p-2 bg-yellow-100 rounded-lg">
+            <div className="p-2 bg-muted rounded-lg">
               {getPlatformIcon(session.platform)}
             </div>
             <div>
               <CardTitle className="text-lg">
                 {session.patient.user.firstName} {session.patient.user.lastName}
               </CardTitle>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-muted-foreground">
                 with Dr. {session.practitioner.user.firstName} {session.practitioner.user.lastName}
               </p>
             </div>
           </div>
           
           <div className="flex items-center space-x-2">
-            <Badge className={getStatusColor(session.status)}>
-              {session.status.replace('_', ' ').toUpperCase()}
-            </Badge>
+            <StatusBadge status={session.status} />
             
             {!isReadOnly && (
               <DropdownMenu>
@@ -137,15 +135,15 @@ export function TelehealthSessionCard({
       
       <CardContent className="pt-0">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-          <div className="flex items-center space-x-2 text-sm text-gray-600">
+          <div className="flex items-center space-x-2 text-sm text-muted-foreground">
             <Calendar className="w-4 h-4" />
             <span>{appointmentDateTime.date}</span>
           </div>
-          <div className="flex items-center space-x-2 text-sm text-gray-600">
+          <div className="flex items-center space-x-2 text-sm text-muted-foreground">
             <Clock className="w-4 h-4" />
             <span>{appointmentDateTime.time}</span>
           </div>
-          <div className="flex items-center space-x-2 text-sm text-gray-600">
+          <div className="flex items-center space-x-2 text-sm text-muted-foreground">
             {getPlatformIcon(session.platform)}
             <span className="capitalize">{session.platform.replace('_', ' ')}</span>
           </div>
@@ -153,9 +151,9 @@ export function TelehealthSessionCard({
 
         {/* Meeting Details */}
         {session.meetingId && (
-          <div className="bg-gray-50 p-3 rounded-lg mb-4">
+          <div className="bg-muted p-3 rounded-lg mb-4">
             <h4 className="font-medium text-sm mb-2">Meeting Details</h4>
-            <div className="space-y-1 text-sm text-gray-600">
+            <div className="space-y-1 text-sm text-muted-foreground">
               {session.meetingUrl && (
                 <div className="flex justify-between items-center">
                   <span>Session URL:</span>
@@ -168,8 +166,8 @@ export function TelehealthSessionCard({
                       className="h-6 w-6 p-0"
                     >
                       {copyStatus === 'idle' && <Copy className="w-3 h-3" />}
-                      {copyStatus === 'copying' && <svg className="animate-spin w-3 h-3 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>}
-                      {copyStatus === 'copied' && <Check className="w-3 h-3 text-green-500" />}
+                      {copyStatus === 'copying' && <svg className="animate-spin w-3 h-3 text-muted-foreground" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>}
+                      {copyStatus === 'copied' && <Check className="w-3 h-3 text-foreground" />}
                     </Button>
                   </div>
                 </div>
@@ -192,15 +190,15 @@ export function TelehealthSessionCard({
         {session.sessionNotes && (
           <div className="mb-4">
             <h4 className="font-medium text-sm mb-1">Session Notes</h4>
-            <p className="text-sm text-gray-600">{session.sessionNotes}</p>
+            <p className="text-sm text-muted-foreground">{session.sessionNotes}</p>
           </div>
         )}
 
         {/* Session Timing */}
         {(session.sessionStartedAt || session.sessionEndedAt) && (
-          <div className="bg-blue-50 p-3 rounded-lg mb-4">
+          <div className="bg-muted p-3 rounded-lg mb-4">
             <h4 className="font-medium text-sm mb-2">Session Timing</h4>
-            <div className="space-y-1 text-sm text-gray-600">
+            <div className="space-y-1 text-sm text-muted-foreground">
               {session.sessionStartedAt && (
                 <div className="flex justify-between">
                   <span>Started:</span>
@@ -230,9 +228,9 @@ export function TelehealthSessionCard({
 
         {/* Technical Issues */}
         {session.technicalIssues && (
-          <div className="bg-orange-50 p-3 rounded-lg mb-4">
-            <h4 className="font-medium text-sm mb-1 text-orange-800">Technical Issues</h4>
-            <p className="text-sm text-orange-700">{session.technicalIssues}</p>
+          <div className="bg-muted border border-border p-3 rounded-lg mb-4">
+            <h4 className="font-medium text-sm mb-1 text-foreground">Technical Issues</h4>
+            <p className="text-sm text-muted-foreground">{session.technicalIssues}</p>
           </div>
         )}
 
@@ -242,19 +240,18 @@ export function TelehealthSessionCard({
             {canStart && (
               <Button
                 onClick={onStart}
-                className="bg-green-600 hover:bg-green-700 text-white"
                 size="sm"
               >
                 <Play className="w-4 h-4 mr-2" />
                 Start Meeting
               </Button>
             )}
-            
+
             {/* Start Meeting Button - Navigate to session page */}
             {session.meetingUrl && (
               <Button
                 onClick={startCall}
-                className="bg-blue-600 hover:bg-blue-700 text-white"
+                variant="outline"
                 size="sm"
               >
                 <Video className="w-4 h-4 mr-2" />
@@ -299,8 +296,8 @@ export function TelehealthSessionCard({
                 className="flex items-center"
               >
                 {copyStatus === 'idle' && <Copy className="w-4 h-4 mr-2" />}
-                {copyStatus === 'copying' && <svg className="animate-spin w-4 h-4 mr-2 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>}
-                {copyStatus === 'copied' && <Check className="w-4 h-4 mr-2 text-green-500" />}
+                {copyStatus === 'copying' && <svg className="animate-spin w-4 h-4 mr-2 text-muted-foreground" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>}
+                {copyStatus === 'copied' && <Check className="w-4 h-4 mr-2 text-foreground" />}
                 {copyStatus === 'copied' ? 'Copied!' : 'Copy Session Link'}
               </Button>
             )}

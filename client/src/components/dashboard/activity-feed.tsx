@@ -56,24 +56,7 @@ const getActivityIcon = (type: string) => {
 };
 
 const getActivityColor = (type: string) => {
-  switch (type) {
-    case 'appointment':
-      return { color: 'text-blue-600', bgColor: 'bg-blue-100' };
-    case 'message':
-      return { color: 'text-green-600', bgColor: 'bg-green-100' };
-    case 'achievement':
-      return { color: 'text-yellow-600', bgColor: 'bg-yellow-100' };
-    case 'milestone':
-      return { color: 'text-purple-600', bgColor: 'bg-purple-100' };
-    case 'reminder':
-      return { color: 'text-orange-600', bgColor: 'bg-orange-100' };
-    case 'clinical_note':
-      return { color: 'text-indigo-600', bgColor: 'bg-indigo-100' };
-    case 'invoice':
-      return { color: 'text-emerald-600', bgColor: 'bg-emerald-100' };
-    default:
-      return { color: 'text-gray-600', bgColor: 'bg-gray-100' };
-  }
+  return { color: 'text-muted-foreground', bgColor: 'bg-muted' };
 };
 
 export function ActivityFeed({ className }: ActivityFeedProps) {
@@ -238,10 +221,10 @@ export function ActivityFeed({ className }: ActivityFeedProps) {
             className="text-lg font-semibold flex items-center space-x-2"
             style={{ color: `hsl(var(--foreground))` }}
           >
-            <Zap className="w-5 h-5 text-yellow-500" />
+            <Zap className="w-5 h-5 text-muted-foreground" />
             <span>Activity Feed</span>
             {activities.filter(a => a.isNew).length > 0 && (
-              <span className="bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+              <span className="bg-foreground text-background text-xs px-2 py-1 rounded-full">
                 {activities.filter(a => a.isNew).length}
               </span>
             )}
@@ -281,7 +264,7 @@ export function ActivityFeed({ className }: ActivityFeedProps) {
 
                 {activity.isNew && (
                   <div className="flex-shrink-0">
-                    <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+                    <div className="w-2 h-2 bg-foreground rounded-full animate-pulse"></div>
                   </div>
                 )}
               </div>

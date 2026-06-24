@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import { MemberLayout } from "@/components/layout/member-layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
+import { SearchInput } from "@/components/ui/search-input";
+import { StatusBadge } from "@/components/ui/status-badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { api } from "@/lib/api";
 import { usePageTitle } from "@/context/page-context";
 import { format } from "date-fns";
-import { Quote, Search, Filter, Heart, Share2, Bookmark } from "lucide-react";
+import { Quote, Heart, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface Quote {
@@ -100,17 +101,6 @@ export default function MemberQuotes() {
     setFilteredQuotes(filtered);
   };
 
-  const getCategoryColor = (category: string) => {
-    const colors = {
-      health: "bg-blue-100 text-blue-800",
-      wellness: "bg-green-100 text-green-800",
-      motivation: "bg-yellow-100 text-yellow-800",
-      recovery: "bg-purple-100 text-purple-800",
-      general: "bg-gray-100 text-gray-800",
-    };
-    return colors[category as keyof typeof colors] || colors.general;
-  };
-
   const toggleFavorite = (quoteId: string) => {
     setFavorites(prev => 
       prev.includes(quoteId) 
@@ -141,8 +131,8 @@ export default function MemberQuotes() {
     return (
       <MemberLayout>
         <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#ffdd00]"></div>
-          <span className="ml-2 text-gray-600">Loading inspirational quotes...</span>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-foreground"></div>
+          <span className="ml-2 text-muted-foreground">Loading inspirational quotes...</span>
         </div>
       </MemberLayout>
     );
@@ -154,31 +144,27 @@ export default function MemberQuotes() {
         {/* Header */}
         <div className="text-center py-4 sm:py-6 lg:py-8">
           <div className="flex items-center justify-center space-x-2 sm:space-x-3 mb-3 sm:mb-4">
-            <div className="p-2 sm:p-3 rounded-full bg-gradient-to-r from-[#ffdd00] to-yellow-400 shadow-lg">
-              <Quote className="h-6 w-6 sm:h-8 sm:w-8 text-black" />
+            <div className="p-2 sm:p-3 rounded-full bg-muted shadow-sm">
+              <Quote className="h-6 w-6 sm:h-8 sm:w-8 text-foreground" />
             </div>
-            <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+            <h1 className="text-2xl sm:text-3xl font-bold text-foreground">
               Inspirational Quotes
             </h1>
           </div>
-          <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
             Discover motivational quotes to inspire your wellness journey and support your mental health
           </p>
         </div>
 
         {/* Search and Filter */}
-        <Card className="border-0 shadow-lg">
+        <Card className="shadow-sm">
           <CardContent className="p-4 sm:p-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-                <Input
-                  placeholder="Search quotes, authors, or tags..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10"
-                />
-              </div>
+              <SearchInput
+                placeholder="Search quotes, authors, or tags..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
               <Select value={categoryFilter} onValueChange={setCategoryFilter}>
                 <SelectTrigger>
                   <SelectValue placeholder="Filter by category" />
@@ -198,40 +184,38 @@ export default function MemberQuotes() {
         {/* Quotes Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {filteredQuotes.map((quote) => (
-            <Card 
-              key={quote.id} 
-              className={`border-0 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 ${
-                quote.isFeatured ? 'ring-2 ring-[#ffdd00]' : ''
+            <Card
+              key={quote.id}
+              className={`shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 ${
+                quote.isFeatured ? 'ring-2 ring-foreground' : ''
               }`}
             >
               <CardContent className="p-4 sm:p-6">
                 {quote.isFeatured && (
-                  <Badge className="mb-4 bg-gradient-to-r from-[#ffdd00] to-yellow-400 text-black font-semibold">
+                  <Badge variant="secondary" className="mb-4 font-semibold">
                     <Heart className="h-3 w-3 mr-1" />
                     Featured
                   </Badge>
                 )}
-                
-                <blockquote className="text-base sm:text-lg italic text-gray-700 mb-4 leading-relaxed">
+
+                <blockquote className="text-base sm:text-lg italic text-foreground mb-4 leading-relaxed">
                   "{quote.text}"
                 </blockquote>
-                
+
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 space-y-2 sm:space-y-0">
-                  <p className="font-semibold text-gray-900">
+                  <p className="font-semibold text-foreground">
                     — {quote.author}
                   </p>
-                  <Badge className={getCategoryColor(quote.category)}>
-                    {quote.category}
-                  </Badge>
+                  <StatusBadge status={quote.category} showIcon={false} />
                 </div>
 
                 {/* Tags */}
                 {quote.tags.length > 0 && (
                   <div className="flex flex-wrap gap-1 mb-4">
                     {quote.tags.slice(0, 3).map((tag, index) => (
-                      <span 
-                        key={index} 
-                        className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full"
+                      <span
+                        key={index}
+                        className="text-xs bg-muted text-muted-foreground px-2 py-1 rounded-full"
                       >
                         #{tag}
                       </span>
@@ -240,14 +224,14 @@ export default function MemberQuotes() {
                 )}
 
                 {/* Actions */}
-                <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                <div className="flex items-center justify-between pt-4 border-t border-border">
                   <div className="flex space-x-2">
                     <Button
                       variant="ghost"
                       size="sm"
                       onClick={() => toggleFavorite(quote.id)}
-                      className={`hover:bg-red-50 ${
-                        favorites.includes(quote.id) ? 'text-red-500' : 'text-gray-400'
+                      className={`hover:bg-accent ${
+                        favorites.includes(quote.id) ? 'text-foreground' : 'text-muted-foreground'
                       }`}
                     >
                       <Heart className={`h-4 w-4 ${favorites.includes(quote.id) ? 'fill-current' : ''}`} />
@@ -256,12 +240,12 @@ export default function MemberQuotes() {
                       variant="ghost"
                       size="sm"
                       onClick={() => shareQuote(quote)}
-                      className="text-gray-400 hover:text-gray-600"
+                      className="text-muted-foreground hover:text-foreground"
                     >
                       <Share2 className="h-4 w-4" />
                     </Button>
                   </div>
-                  <span className="text-xs text-gray-400">
+                  <span className="text-xs text-muted-foreground">
                     {format(new Date(quote.createdAt), "MMM dd, yyyy")}
                   </span>
                 </div>
@@ -272,24 +256,23 @@ export default function MemberQuotes() {
 
         {/* Empty State */}
         {filteredQuotes.length === 0 && (
-          <Card className="border-0 shadow-lg">
+          <Card className="shadow-sm">
             <CardContent className="p-8 sm:p-12 text-center">
-              <Quote className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">No quotes found</h3>
-              <p className="text-gray-600 mb-4">
-                {searchTerm || categoryFilter !== "all" 
+              <Quote className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-foreground mb-2">No quotes found</h3>
+              <p className="text-muted-foreground mb-4">
+                {searchTerm || categoryFilter !== "all"
                   ? "Try adjusting your search or filter criteria"
                   : "Check back soon for new inspirational quotes"
                 }
               </p>
               {(searchTerm || categoryFilter !== "all") && (
-                <Button 
+                <Button
                   variant="outline"
                   onClick={() => {
                     setSearchTerm("");
                     setCategoryFilter("all");
                   }}
-                  className="border-[#ffdd00] text-[#ffdd00] hover:bg-[#ffdd00] hover:text-black"
                 >
                   Clear Filters
                 </Button>

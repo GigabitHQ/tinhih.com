@@ -93,7 +93,7 @@ export function MeetingForm({ selectedDate, selectedTime, onSubmit, onCancel }: 
                 <FormControl>
                   <Input placeholder="Enter meeting title..." {...field} />
                 </FormControl>
-                <FormMessage className="text-red-600"/>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -122,7 +122,7 @@ export function MeetingForm({ selectedDate, selectedTime, onSubmit, onCancel }: 
                     ))}
                   </SelectContent>
                 </Select>
-                <FormMessage className="text-red-600"/>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -163,7 +163,7 @@ export function MeetingForm({ selectedDate, selectedTime, onSubmit, onCancel }: 
                       />
                     </PopoverContent>
                   </Popover>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -191,7 +191,7 @@ export function MeetingForm({ selectedDate, selectedTime, onSubmit, onCancel }: 
                       ))}
                     </SelectContent>
                   </Select>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -223,7 +223,7 @@ export function MeetingForm({ selectedDate, selectedTime, onSubmit, onCancel }: 
                       <SelectItem value="120">2 hours</SelectItem>
                     </SelectContent>
                   </Select>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -237,7 +237,7 @@ export function MeetingForm({ selectedDate, selectedTime, onSubmit, onCancel }: 
                   <FormControl>
                     <Input placeholder="Meeting location..." {...field} />
                   </FormControl>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -258,7 +258,7 @@ export function MeetingForm({ selectedDate, selectedTime, onSubmit, onCancel }: 
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className="text-red-600"/>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -278,7 +278,7 @@ export function MeetingForm({ selectedDate, selectedTime, onSubmit, onCancel }: 
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className="text-red-600"/>
+                <FormMessage />
               </FormItem>
             )}
           />

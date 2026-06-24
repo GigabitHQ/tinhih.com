@@ -397,7 +397,7 @@ export function NotificationSettings() {
 
             {/* Quiet Hours Time Selection */}
             {form.watch('quietHoursEnabled') && (
-              <div className="grid grid-cols-2 gap-4 p-4 bg-muted/50 rounded-lg">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 bg-muted/50 rounded-lg">
                 <FormField
                   control={form.control}
                   name="quietHoursStart"
@@ -407,7 +407,7 @@ export function NotificationSettings() {
                       <FormControl>
                         <Input type="time" {...field} />
                       </FormControl>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage className="text-foreground"/>
                     </FormItem>
                   )}
                 />
@@ -421,7 +421,7 @@ export function NotificationSettings() {
                       <FormControl>
                         <Input type="time" {...field} />
                       </FormControl>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage className="text-foreground"/>
                     </FormItem>
                   )}
                 />
@@ -439,7 +439,7 @@ export function NotificationSettings() {
           >
             {updatePreferencesMutation.isPending ? (
               <div className="flex items-center gap-2">
-                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                <div className="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin"></div>
                 Saving...
               </div>
             ) : (

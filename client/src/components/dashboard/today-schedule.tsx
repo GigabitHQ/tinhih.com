@@ -1,6 +1,6 @@
 import { ThemedCard, ThemedCardContent, ThemedCardHeader, ThemedCardTitle } from "@/components/ui/themed-card";
 import { ThemedButton } from "@/components/ui/themed-button";
-import { Badge } from "@/components/ui/badge";
+import { StatusBadge } from "@/components/ui/status-badge";
 import { Video, Edit, Clock, Calendar } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
@@ -52,21 +52,6 @@ export function TodaySchedule({ className }: TodayScheduleProps) {
       </ThemedCard>
     );
   }
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "confirmed":
-        return "bg-green-100 text-green-800";
-      case "in_progress":
-        return "bg-blue-100 text-blue-800";
-      case "scheduled":
-        return "bg-yellow-100 text-yellow-800";
-      case "completed":
-        return "bg-gray-100 text-gray-800";
-      default:
-        return "bg-gray-100 text-gray-800";
-    }
-  };
 
   const getPatientInitials = (patient: any) => {
     const firstName = patient?.user?.firstName || "";
@@ -132,9 +117,7 @@ export function TodaySchedule({ className }: TodayScheduleProps) {
                     <Clock className="w-3 h-3 mr-1" />
                     {format(new Date(appointment.appointmentDate), "h:mm a")}
                   </div>
-                  <Badge className={getStatusColor(appointment.status)}>
-                    {appointment.status.replace("_", " ")}
-                  </Badge>
+                  <StatusBadge status={appointment.status} />
                 </div>
                 <div className="flex space-x-2">
                   <ThemedButton variant="ghost" size="sm">

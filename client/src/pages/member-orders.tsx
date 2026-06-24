@@ -7,19 +7,17 @@ import { useToast } from "@/hooks/use-toast";
 import { usePageTitle } from "@/context/page-context";
 import { useAuth } from "@/context/auth-context";
 import { api } from "@/lib/api";
-import { 
-  Package, 
-  Calendar, 
-  DollarSign, 
-  Truck, 
-  CheckCircle, 
-  Clock, 
-  AlertCircle,
+import {
+  Package,
+  Calendar,
+  DollarSign,
+  Truck,
   ArrowLeft,
   Eye,
   Download
 } from "lucide-react";
 import { format } from "date-fns";
+import { StatusBadge } from "@/components/ui/status-badge";
 
 interface OrderItem {
   productId: string;
@@ -110,40 +108,6 @@ export default function MemberOrders() {
     fetchOrders();
   }, [setPageInfo, fetchOrders]);
 
-  const getStatusColor = (status: string) => {
-    switch (status.toLowerCase()) {
-      case "pending":
-        return "bg-yellow-100 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-200 border-yellow-200 dark:border-yellow-800/30";
-      case "processing":
-        return "bg-blue-100 dark:bg-blue-900/20 text-blue-800 dark:text-blue-200 border-blue-200 dark:border-blue-800/30";
-      case "shipped":
-        return "bg-purple-100 dark:bg-purple-900/20 text-purple-800 dark:text-purple-200 border-purple-200 dark:border-purple-800/30";
-      case "delivered":
-        return "bg-green-100 dark:bg-green-900/20 text-green-800 dark:text-green-200 border-green-200 dark:border-green-800/30";
-      case "cancelled":
-        return "bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-200 border-red-200 dark:border-red-800/30";
-      default:
-        return "bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 border-gray-200 dark:border-gray-700";
-    }
-  };
-
-  const getStatusIcon = (status: string) => {
-    switch (status.toLowerCase()) {
-      case "pending":
-        return <Clock className="h-4 w-4" />;
-      case "processing":
-        return <Package className="h-4 w-4" />;
-      case "shipped":
-        return <Truck className="h-4 w-4" />;
-      case "delivered":
-        return <CheckCircle className="h-4 w-4" />;
-      case "cancelled":
-        return <AlertCircle className="h-4 w-4" />;
-      default:
-        return <Package className="h-4 w-4" />;
-    }
-  };
-
   const formatDate = (dateString: string) => {
     try {
       return format(new Date(dateString), "MMM dd, yyyy 'at' h:mm a");
@@ -166,7 +130,7 @@ export default function MemberOrders() {
       <div className="min-h-screen bg-background py-8">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-center h-64">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-foreground"></div>
           </div>
         </div>
       </div>
@@ -266,11 +230,11 @@ export default function MemberOrders() {
           <div className="space-y-6">
             {orders.map((order) => (
               <Card key={order.id} className="overflow-hidden">
-                <CardHeader className="bg-gradient-to-r from-muted/50 to-muted/30 border-b">
+                <CardHeader className="bg-muted border-b">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
                     <div className="flex items-center space-x-3 mb-3 sm:mb-0">
-                      <div className="p-2 rounded-lg bg-gradient-to-r from-[#ffdd00] to-yellow-400">
-                        <Package className="h-5 w-5 text-black" />
+                      <div className="p-2 rounded-lg bg-muted">
+                        <Package className="h-5 w-5 text-muted-foreground" />
                       </div>
                       <div>
                         <CardTitle className="text-lg font-semibold text-foreground">
@@ -282,10 +246,7 @@ export default function MemberOrders() {
                       </div>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <Badge className={`${getStatusColor(order.status)} border`}>
-                        {getStatusIcon(order.status)}
-                        <span className="ml-1 capitalize">{order.status}</span>
-                      </Badge>
+                      <StatusBadge status={order.status} />
                       <Badge variant="outline" className="font-mono">
                         ${Number(order.total).toFixed(2)}
                       </Badge>

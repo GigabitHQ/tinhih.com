@@ -227,7 +227,7 @@ export function QuickActions({ context, data }: QuickActionsProps) {
             <div className="space-y-2">
               <div className="flex items-center justify-between p-2 rounded border">
                 <div className="flex items-center gap-2">
-                  <Clock className="w-4 h-4 text-primary" />
+                  <Clock className="w-4 h-4 text-muted-foreground" />
                   <span className="text-sm">Pending Notes</span>
                 </div>
                 <Badge variant="secondary">3</Badge>
@@ -235,7 +235,7 @@ export function QuickActions({ context, data }: QuickActionsProps) {
               
               <div className="flex items-center justify-between p-2 rounded border">
                 <div className="flex items-center gap-2">
-                  <CreditCard className="w-4 h-4 text-primary" />
+                  <CreditCard className="w-4 h-4 text-muted-foreground" />
                   <span className="text-sm">Unpaid Invoices</span>
                 </div>
                 <Badge variant="destructive">2</Badge>

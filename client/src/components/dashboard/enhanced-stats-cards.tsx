@@ -101,8 +101,8 @@ export function EnhancedStatsCards({ className }: EnhancedStatsCardsProps) {
         change: insights?.patientsGrowth ? `${insights.patientsGrowth >= 0 ? '+' : ''}${insights.patientsGrowth.toFixed(1)}% from last month` : "+12% from last month",
         changeType: (insights?.patientsGrowth || 0) >= 0 ? "increase" as const : "decrease" as const,
         icon: Users,
-        iconBg: "bg-blue-100 dark:bg-blue-900/20",
-        iconColor: "text-blue-600 dark:text-blue-400",
+        iconBg: "bg-muted",
+        iconColor: "text-muted-foreground",
         onClick: () => isPatient ? setLocation("/profile") : setLocation("/patients"),
         description: isPatient ? "Your patient profile" : "Registered patients",
       },
@@ -111,13 +111,13 @@ export function EnhancedStatsCards({ className }: EnhancedStatsCardsProps) {
         value: appointmentStats?.today || 0,
         subtitle: `${appointmentStats?.completed || 0} completed`,
         icon: Calendar,
-        iconBg: "bg-green-100 dark:bg-green-900/20",
-        iconColor: "text-green-600 dark:text-green-400",
+        iconBg: "bg-muted",
+        iconColor: "text-muted-foreground",
         onClick: () => setLocation("/calendar"),
         description: isPatient ? "Your appointments today" : "Scheduled for today",
         badges: [
-          { label: "Pending", count: appointmentStats?.pending || 0, color: "bg-yellow-100 text-yellow-800" },
-          { label: "Completed", count: appointmentStats?.completed || 0, color: "bg-green-100 text-green-800" },
+          { label: "Pending", count: appointmentStats?.pending || 0, color: "bg-muted text-muted-foreground" },
+          { label: "Completed", count: appointmentStats?.completed || 0, color: "bg-muted text-muted-foreground" },
         ]
       },
       {
@@ -125,8 +125,8 @@ export function EnhancedStatsCards({ className }: EnhancedStatsCardsProps) {
         value: appointmentStats?.thisWeek || 0,
         subtitle: "appointments scheduled",
         icon: Clock,
-        iconBg: "bg-purple-100 dark:bg-purple-900/20",
-        iconColor: "text-purple-600 dark:text-purple-400",
+        iconBg: "bg-muted",
+        iconColor: "text-muted-foreground",
         onClick: () => setLocation("/calendar"),
         description: isPatient ? "Your weekly schedule" : "Weekly schedule",
       },
@@ -136,8 +136,8 @@ export function EnhancedStatsCards({ className }: EnhancedStatsCardsProps) {
         change: isPatient ? undefined : (insights?.revenueGrowth ? `${insights.revenueGrowth >= 0 ? '+' : ''}${insights.revenueGrowth.toFixed(1)}% from last month` : "+8% from last month"),
         changeType: isPatient ? undefined : ((insights?.revenueGrowth || 0) >= 0 ? "increase" as const : "decrease" as const),
         icon: isPatient ? Users : DollarSign,
-        iconBg: isPatient ? "bg-blue-100 dark:bg-blue-900/20" : "bg-emerald-100 dark:bg-emerald-900/20",
-        iconColor: isPatient ? "text-blue-600 dark:text-blue-400" : "text-emerald-600 dark:text-emerald-400",
+        iconBg: "bg-muted",
+        iconColor: "text-muted-foreground",
         onClick: () => isPatient ? setLocation("/medical-records") : setLocation("/billing"),
         description: isPatient ? "Your medical records" : "Total earnings",
       },
@@ -151,22 +151,22 @@ export function EnhancedStatsCards({ className }: EnhancedStatsCardsProps) {
       title: "Completed",
       value: appointmentStats?.completed || 0,
       icon: CheckCircle,
-      color: "text-green-600",
-      bgColor: "bg-green-50 dark:bg-green-900/20",
+      color: "text-muted-foreground",
+      bgColor: "bg-muted",
     },
     {
       title: "Pending",
       value: appointmentStats?.pending || 0,
       icon: Clock,
-      color: "text-yellow-600",
-      bgColor: "bg-yellow-50 dark:bg-yellow-900/20",
+      color: "text-muted-foreground",
+      bgColor: "bg-muted",
     },
     {
       title: "Cancelled",
       value: appointmentStats?.cancelled || 0,
       icon: XCircle,
-      color: "text-red-600",
-      bgColor: "bg-red-50 dark:bg-red-900/20",
+      color: "text-muted-foreground",
+      bgColor: "bg-muted",
     },
   ];
 
@@ -206,11 +206,11 @@ export function EnhancedStatsCards({ className }: EnhancedStatsCardsProps) {
                 {stat.change && (
                   <div className="flex items-center text-xs">
                     {stat.changeType === "increase" ? (
-                      <TrendingUp className="h-3 w-3 text-green-600 mr-1" />
+                      <TrendingUp className="h-3 w-3 text-muted-foreground mr-1" />
                     ) : (
-                      <TrendingDown className="h-3 w-3 text-red-600 mr-1" />
+                      <TrendingDown className="h-3 w-3 text-muted-foreground mr-1" />
                     )}
-                    <span className={stat.changeType === "increase" ? "text-green-600" : "text-red-600"}>
+                    <span className="text-muted-foreground">
                       {stat.change}
                     </span>
                   </div>
@@ -258,19 +258,19 @@ export function EnhancedStatsCards({ className }: EnhancedStatsCardsProps) {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               <div className="text-center">
                 <p className="text-sm text-muted-foreground">Total Revenue</p>
-                <p className="text-2xl font-bold text-emerald-600">
+                <p className="text-2xl font-bold text-foreground">
                   ${Number(stats.totalRevenue).toLocaleString()}
                 </p>
               </div>
               <div className="text-center">
                 <p className="text-sm text-muted-foreground">Paid</p>
-                <p className="text-2xl font-bold text-green-600">
+                <p className="text-2xl font-bold text-foreground">
                   ${Number(stats.paidRevenue).toLocaleString()}
                 </p>
               </div>
               <div className="text-center">
                 <p className="text-sm text-muted-foreground">Outstanding</p>
-                <p className="text-2xl font-bold text-red-600">
+                <p className="text-2xl font-bold text-foreground">
                   ${Number(stats.outstandingRevenue).toLocaleString()}
                 </p>
               </div>

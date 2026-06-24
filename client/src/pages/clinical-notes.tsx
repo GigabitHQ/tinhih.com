@@ -6,10 +6,10 @@ import { usePageTitle } from "@/context/page-context";
 import { useAuth } from "@/context/auth-context";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { SearchInput } from "@/components/ui/search-input";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogHeader } from "@/components/ui/dialog";
-import { Plus, FileText, Search, Edit, Eye } from "lucide-react";
+import { Plus, FileText, Edit, Eye } from "lucide-react";
 import { api } from "@/lib/api";
 import { format } from "date-fns";
 
@@ -173,19 +173,17 @@ export default function RecoveryNotes() {
             
             {/* Search */}
             <div className="relative max-w-md">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-              <Input
+              <SearchInput
                 placeholder="Search recovery notes..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10"
               />
             </div>
           </CardHeader>
           <CardContent>
             {isLoading ? (
               <div className="text-center py-8">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-yellow-600 mx-auto"></div>
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-foreground mx-auto"></div>
                 <p className="text-muted-foreground mt-2">Loading Recovery Notes...</p>
               </div>
             ) : !clinicalNotes || clinicalNotes.length === 0 ? (
@@ -278,7 +276,7 @@ export default function RecoveryNotes() {
           <DialogContent className="max-w-4xl max-h-[85vh] overflow-y-auto">
             <DialogHeader className="border-b border-border pb-4">
               <DialogTitle className="text-2xl font-bold text-foreground flex items-center gap-2">
-                <FileText className="w-6 h-6 text-primary" />
+                <FileText className="w-6 h-6 text-muted-foreground" />
                 {viewingNote?.title}
               </DialogTitle>
               <DialogDescription className="text-base text-muted-foreground">
@@ -292,7 +290,7 @@ export default function RecoveryNotes() {
                 <Card className="border-border/50">
                   <CardHeader className="pb-3">
                     <CardTitle className="text-lg flex items-center gap-2">
-                      <div className="w-2 h-2 bg-primary rounded-full"></div>
+                      <div className="w-2 h-2 bg-muted-foreground rounded-full"></div>
                       Basic Information
                     </CardTitle>
                   </CardHeader>
@@ -327,7 +325,7 @@ export default function RecoveryNotes() {
                 <Card className="border-border/50">
                   <CardHeader className="pb-3">
                     <CardTitle className="text-lg flex items-center gap-2">
-                      <div className="w-2 h-2 bg-primary rounded-full"></div>
+                      <div className="w-2 h-2 bg-muted-foreground rounded-full"></div>
                       SOAP Documentation
                     </CardTitle>
                   </CardHeader>
@@ -335,7 +333,7 @@ export default function RecoveryNotes() {
                     {/* Subjective */}
                     <div className="space-y-3">
                       <div className="flex items-center gap-2">
-                        <span className="w-6 h-6 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full flex items-center justify-center text-xs font-bold">S</span>
+                        <span className="w-6 h-6 bg-muted text-foreground rounded-full flex items-center justify-center text-xs font-bold">S</span>
                         <h4 className="font-semibold text-foreground">Subjective</h4>
                       </div>
                       <div className="pl-8">
@@ -348,7 +346,7 @@ export default function RecoveryNotes() {
                     {/* Objective */}
                     <div className="space-y-3">
                       <div className="flex items-center gap-2">
-                        <span className="w-6 h-6 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-full flex items-center justify-center text-xs font-bold">O</span>
+                        <span className="w-6 h-6 bg-muted text-foreground rounded-full flex items-center justify-center text-xs font-bold">O</span>
                         <h4 className="font-semibold text-foreground">Objective</h4>
                       </div>
                       <div className="pl-8">
@@ -361,7 +359,7 @@ export default function RecoveryNotes() {
                     {/* Assessment */}
                     <div className="space-y-3">
                       <div className="flex items-center gap-2">
-                        <span className="w-6 h-6 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400 rounded-full flex items-center justify-center text-xs font-bold">A</span>
+                        <span className="w-6 h-6 bg-muted text-foreground rounded-full flex items-center justify-center text-xs font-bold">A</span>
                         <h4 className="font-semibold text-foreground">Assessment</h4>
                       </div>
                       <div className="pl-8">
@@ -374,7 +372,7 @@ export default function RecoveryNotes() {
                     {/* Plan */}
                     <div className="space-y-3">
                       <div className="flex items-center gap-2">
-                        <span className="w-6 h-6 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-full flex items-center justify-center text-xs font-bold">P</span>
+                        <span className="w-6 h-6 bg-muted text-foreground rounded-full flex items-center justify-center text-xs font-bold">P</span>
                         <h4 className="font-semibold text-foreground">Plan</h4>
                       </div>
                       <div className="pl-8">
@@ -388,7 +386,7 @@ export default function RecoveryNotes() {
                     {viewingNote.additionalNotes && (
                       <div className="space-y-3">
                         <div className="flex items-center gap-2">
-                          <span className="w-6 h-6 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded-full flex items-center justify-center text-xs font-bold">+</span>
+                          <span className="w-6 h-6 bg-muted text-foreground rounded-full flex items-center justify-center text-xs font-bold">+</span>
                           <h4 className="font-semibold text-foreground">Additional Notes</h4>
                         </div>
                         <div className="pl-8">

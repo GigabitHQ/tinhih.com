@@ -74,7 +74,7 @@ export function OutOfOfficeForm({ selectedDate, selectedTime, onSubmit, onCancel
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Coffee className="h-5 w-5 text-orange-500" />
+          <Coffee className="h-5 w-5 text-muted-foreground" />
           <h2 className="text-lg font-semibold">Out of Office</h2>
         </div>
         <Button variant="ghost" size="sm" onClick={onCancel}>
@@ -94,7 +94,7 @@ export function OutOfOfficeForm({ selectedDate, selectedTime, onSubmit, onCancel
                 <FormControl>
                   <Input placeholder="e.g., Summer Vacation" {...field} />
                 </FormControl>
-                <FormMessage className="text-red-600"/>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -123,7 +123,7 @@ export function OutOfOfficeForm({ selectedDate, selectedTime, onSubmit, onCancel
                     ))}
                   </SelectContent>
                 </Select>
-                <FormMessage className="text-red-600"/>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -164,7 +164,7 @@ export function OutOfOfficeForm({ selectedDate, selectedTime, onSubmit, onCancel
                       />
                     </PopoverContent>
                   </Popover>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -203,7 +203,7 @@ export function OutOfOfficeForm({ selectedDate, selectedTime, onSubmit, onCancel
                       />
                     </PopoverContent>
                   </Popover>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -224,7 +224,7 @@ export function OutOfOfficeForm({ selectedDate, selectedTime, onSubmit, onCancel
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className="text-red-600"/>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -294,7 +294,7 @@ export function OutOfOfficeForm({ selectedDate, selectedTime, onSubmit, onCancel
                         {...field}
                       />
                     </FormControl>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -320,7 +320,7 @@ export function OutOfOfficeForm({ selectedDate, selectedTime, onSubmit, onCancel
                     <SelectItem value="colleague2">Dr. Johnson</SelectItem>
                   </SelectContent>
                 </Select>
-                <FormMessage className="text-red-600"/>
+                <FormMessage />
               </FormItem>
             )}
           />

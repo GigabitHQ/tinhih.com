@@ -10,9 +10,8 @@ import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { 
-  UserCheck, 
-  Search, 
-  Filter, 
+  UserCheck,
+  Filter,
   Eye, 
   Edit, 
   Trash2, 
@@ -31,6 +30,8 @@ import {
 import { api } from "@/lib/api";
 import { useToast } from "@/hooks/use-toast";
 import { usePageTitle } from "@/context/page-context";
+import { StatCard } from "@/components/ui/stat-card";
+import { SearchInput } from "@/components/ui/search-input";
 
 interface Patient {
   id: string;
@@ -354,51 +355,11 @@ export default function AdminPatients() {
 
         {/* Stats Cards */}
         <div className="p-6">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-            <Card>
-              <CardContent className="p-4">
-                <div className="flex items-center space-x-2">
-                  <UserCheck className="w-5 h-5 text-blue-600" />
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground">Total Patients</p>
-                    <p className="text-2xl font-bold">{patientStats.total}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4">
-                <div className="flex items-center space-x-2">
-                  <CheckCircle className="w-5 h-5 text-green-600" />
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground">Active Patients</p>
-                    <p className="text-2xl font-bold">{patientStats.active}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4">
-                <div className="flex items-center space-x-2">
-                  <AlertCircle className="w-5 h-5 text-red-600" />
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground">Inactive Patients</p>
-                    <p className="text-2xl font-bold">{patientStats.inactive}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4">
-                <div className="flex items-center space-x-2">
-                  <Clock className="w-5 h-5 text-orange-600" />
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground">New This Week</p>
-                    <p className="text-2xl font-bold">{patientStats.recent}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <StatCard label="Total Patients" value={patientStats.total} icon={UserCheck} />
+            <StatCard label="Active Patients" value={patientStats.active} icon={CheckCircle} />
+            <StatCard label="Inactive Patients" value={patientStats.inactive} icon={AlertCircle} />
+            <StatCard label="New This Week" value={patientStats.recent} icon={Clock} />
           </div>
 
           {/* Filters */}
@@ -413,16 +374,12 @@ export default function AdminPatients() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="search">Search Patients</Label>
-                  <div className="relative">
-                    <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                    <Input
-                      id="search"
-                      placeholder="Search by name, email, or phone..."
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      className="pl-10"
-                    />
-                  </div>
+                  <SearchInput
+                    id="search"
+                    placeholder="Search by name, email, or phone..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
                 </div>
                 <div>
                   <Label htmlFor="status">Status</Label>
@@ -466,7 +423,7 @@ export default function AdminPatients() {
                     >
                       <div className="flex items-center space-x-4">
                         <div className="flex items-center space-x-2">
-                          <UserCheck className="w-5 h-5 text-blue-600" />
+                          <UserCheck className="w-5 h-5 text-muted-foreground" />
                           <Badge variant={patient.user.isActive ? "default" : "secondary"}>
                             {patient.user.isActive ? "Active" : "Inactive"}
                           </Badge>
@@ -543,7 +500,7 @@ export default function AdminPatients() {
             </DialogHeader>
             {selectedPatient && (
               <div className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <Label className="text-sm font-medium">Name</Label>
                     <p className="text-sm mt-1">
@@ -556,7 +513,7 @@ export default function AdminPatients() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <Label className="text-sm font-medium">Phone</Label>
                     <p className="text-sm mt-1">{selectedPatient.user.phone || "Not provided"}</p>
@@ -598,7 +555,7 @@ export default function AdminPatients() {
                 )}
 
                 {(selectedPatient.emergencyContact || selectedPatient.emergencyPhone) && (
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <Label className="text-sm font-medium">Emergency Contact</Label>
                       <p className="text-sm mt-1">{selectedPatient.emergencyContact || "Not provided"}</p>
@@ -611,7 +568,7 @@ export default function AdminPatients() {
                 )}
 
                 {(selectedPatient.insuranceProvider || selectedPatient.insuranceNumber) && (
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <Label className="text-sm font-medium">Insurance Provider</Label>
                       <p className="text-sm mt-1">{selectedPatient.insuranceProvider || "Not provided"}</p>
@@ -662,7 +619,7 @@ export default function AdminPatients() {
                   </div>
                 )}
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <Label className="text-sm font-medium">Account Created</Label>
                     <p className="text-sm mt-1">
@@ -694,7 +651,7 @@ export default function AdminPatients() {
               </DialogDescription>
             </DialogHeader>
             <div className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="firstName">First Name</Label>
                   <Input
@@ -713,7 +670,7 @@ export default function AdminPatients() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="email">Email</Label>
                   <Input
@@ -733,7 +690,7 @@ export default function AdminPatients() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="dateOfBirth">Date of Birth</Label>
                   <Input
@@ -768,7 +725,7 @@ export default function AdminPatients() {
                 />
               </div>
 
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
                   <Label htmlFor="city">City</Label>
                   <Input
@@ -795,7 +752,7 @@ export default function AdminPatients() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="emergencyContact">Emergency Contact</Label>
                   <Input
@@ -814,7 +771,7 @@ export default function AdminPatients() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="insuranceProvider">Insurance Provider</Label>
                   <Input
@@ -908,7 +865,7 @@ export default function AdminPatients() {
               </DialogDescription>
             </DialogHeader>
             <div className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="createFirstName">First Name *</Label>
                   <Input
@@ -929,7 +886,7 @@ export default function AdminPatients() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="createEmail">Email *</Label>
                   <Input
@@ -984,7 +941,7 @@ export default function AdminPatients() {
                 />
               </div>
 
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
                   <Label htmlFor="createCity">City</Label>
                   <Input
@@ -1011,7 +968,7 @@ export default function AdminPatients() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="createEmergencyContact">Emergency Contact</Label>
                   <Input
@@ -1030,7 +987,7 @@ export default function AdminPatients() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="createInsuranceProvider">Insurance Provider</Label>
                   <Input

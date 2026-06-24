@@ -145,7 +145,7 @@ export function UserSettingsForm({ user, onClose }: UserSettingsFormProps) {
                         <FormControl>
                           <Input {...field} />
                         </FormControl>
-                        <FormMessage className="text-red-600"/>
+                        <FormMessage />
                       </FormItem>
                     )}
                   />
@@ -158,7 +158,7 @@ export function UserSettingsForm({ user, onClose }: UserSettingsFormProps) {
                         <FormControl>
                           <Input {...field} />
                         </FormControl>
-                        <FormMessage className="text-red-600"/>
+                        <FormMessage />
                       </FormItem>
                     )}
                   />
@@ -173,7 +173,7 @@ export function UserSettingsForm({ user, onClose }: UserSettingsFormProps) {
                       <FormControl>
                         <Input type="email" {...field} />
                       </FormControl>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -187,7 +187,7 @@ export function UserSettingsForm({ user, onClose }: UserSettingsFormProps) {
                       <FormControl>
                         <Input type="tel" {...field} />
                       </FormControl>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -253,7 +253,7 @@ export function UserSettingsForm({ user, onClose }: UserSettingsFormProps) {
                           </Button>
                         </div>
                       </FormControl>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -288,7 +288,7 @@ export function UserSettingsForm({ user, onClose }: UserSettingsFormProps) {
                       <FormDescription>
                         Password must be at least 8 characters long.
                       </FormDescription>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -302,7 +302,7 @@ export function UserSettingsForm({ user, onClose }: UserSettingsFormProps) {
                       <FormControl>
                         <Input type="password" {...field} />
                       </FormControl>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />

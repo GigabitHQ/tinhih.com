@@ -84,10 +84,10 @@ export function Header({ title, subtitle, onNewEvent }: HeaderProps) {
           {!isMessagesPage && (
             <Sheet>
               <SheetTrigger asChild>
-                <ThemedButton 
-                  variant="ghost" 
-                  size="sm" 
-                  className="lg:hidden border border-gray-300 dark:border-gray-600"
+                <ThemedButton
+                  variant="ghost"
+                  size="sm"
+                  className="lg:hidden border border-border"
                   style={{ minWidth: '40px', minHeight: '40px' }}
                 >
                   <Menu className="h-5 w-5" />
@@ -148,25 +148,25 @@ export function Header({ title, subtitle, onNewEvent }: HeaderProps) {
           {/* Theme Toggle */}
           
           {/* Store Button */}
-          <ThemedButton 
-            variant="outline" 
-            size="sm" 
+          <ThemedButton
+            variant="outline"
+            size="sm"
             onClick={() => setLocation('/store')}
-            className="hidden sm:flex items-center gap-2 border border-[#000] hover:border-[#ffdd00]/80 hover:bg-[#ffdd00]/10 dark:border-white dark:hover:border-[#ffdd00]/80 dark:hover:bg-[#ffdd00]/10"
+            className="hidden sm:flex items-center gap-2 border border-border hover:bg-accent"
           >
-            <ShoppingCart className="w-4 h-4 text-[#ffdd00]" />
-            <span className="hidden md:inline text-[#000000] dark:text-[#ffdd00] font-medium">Store</span>
+            <ShoppingCart className="w-4 h-4 text-muted-foreground" />
+            <span className="hidden md:inline text-foreground font-medium">Store</span>
           </ThemedButton>
           
           {/* Donate Button */}
           <DonationDialog>
-            <ThemedButton 
-              variant="outline" 
-              size="sm" 
-              className="hidden sm:flex items-center gap-2 border border-[#000] hover:border-[#ffdd00]/80 hover:bg-[#ffdd00]/10 dark:border-white dark:hover:border-[#ffdd00]/80 dark:hover:bg-[#ffdd00]/10"
+            <ThemedButton
+              variant="outline"
+              size="sm"
+              className="hidden sm:flex items-center gap-2 border border-border hover:bg-accent"
             >
-              <Heart className="w-4 h-4 text-[#ffdd00]" />
-              <span className="hidden md:inline text-[#000000] dark:text-[#ffdd00] font-medium">Donate</span>
+              <Heart className="w-4 h-4 text-muted-foreground" />
+              <span className="hidden md:inline text-foreground font-medium">Donate</span>
             </ThemedButton>
           </DonationDialog>
 

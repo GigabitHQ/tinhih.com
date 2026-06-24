@@ -57,9 +57,9 @@ export function UserMenu({ user, logout, isLoggingOut = false }: UserMenuProps) 
             className="w-full  p-0 h-auto hover:bg-muted/50 dark:hover:bg-muted/30 rounded-lg transition-all duration-200 border border-transparent hover:border-border/50"
           >
             <div className="flex items-center space-x-3 w-full p-3">
-              <Avatar className="w-11 h-11 border-2 border-primary/30 ring-2 ring-black/50 shadow-md">
+              <Avatar className="w-11 h-11 border-2 border-border ring-2 ring-border shadow-md">
                 <AvatarImage src={user?.profileImage} />
-                <AvatarFallback className="bg-gradient-to-br from-[#ffdd00] to-yellow/80 text-black font-bold text-sm">
+                <AvatarFallback className="bg-muted text-foreground font-bold text-sm">
                   {user ? getUserInitials(user.firstName, user.lastName) : "U"}
                 </AvatarFallback>
               </Avatar>
@@ -68,9 +68,9 @@ export function UserMenu({ user, logout, isLoggingOut = false }: UserMenuProps) 
                   {user ? `${user.firstName || ''} ${user.lastName || ''}`.trim() || user.email?.split('@')[0] || "User" : "User"}
                 </p>
                 <div className="flex items-center gap-2 mt-1">
-                  <Badge 
-                    variant="secondary" 
-                    className="text-xs px-2 py-0.5 bg-primary/10 text-primary border-primary/20 capitalize font-medium"
+                  <Badge
+                    variant="secondary"
+                    className="text-xs px-2 py-0.5 capitalize font-medium"
                   >
                     {user?.role || "Role"}
                   </Badge>
@@ -88,9 +88,9 @@ export function UserMenu({ user, logout, isLoggingOut = false }: UserMenuProps) 
         >
           <DropdownMenuLabel className="font-normal p-3">
             <div className="flex items-center space-x-3">
-              <Avatar className="w-10 h-10 border-2 border-primary/30 shadow-md">
+              <Avatar className="w-10 h-10 border-2 border-border shadow-md">
                 <AvatarImage src={user?.profileImage} />
-                <AvatarFallback className="bg-gradient-to-br from-primary to-primary/80 text-black dark:text-white font-bold text-sm">
+                <AvatarFallback className="bg-muted text-foreground font-bold text-sm">
                   {user ? getUserInitials(user.firstName, user.lastName) : "U"}
                 </AvatarFallback>
               </Avatar>
@@ -101,9 +101,9 @@ export function UserMenu({ user, logout, isLoggingOut = false }: UserMenuProps) 
                 <p className="text-xs text-muted-foreground truncate mt-0.5">
                   {user?.email}
                 </p>
-                <Badge 
-                  variant="secondary" 
-                  className="text-xs px-2 py-0.5 bg-primary/10 text-primary border-primary/20 capitalize font-medium mt-1 w-fit"
+                <Badge
+                  variant="secondary"
+                  className="text-xs px-2 py-0.5 capitalize font-medium mt-1 w-fit"
                 >
                   {user?.role || "Role"}
                 </Badge>
@@ -152,10 +152,10 @@ export function UserMenu({ user, logout, isLoggingOut = false }: UserMenuProps) 
           
           <DropdownMenuSeparator />
           
-          <DropdownMenuItem 
+          <DropdownMenuItem
             onClick={handleLogout}
             disabled={isLoggingOut}
-            className="text-red-600 focus:text-red-600 focus:bg-red-50"
+            className="text-foreground focus:text-foreground focus:bg-accent"
           >
             {isLoggingOut ? (
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />

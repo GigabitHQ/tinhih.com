@@ -22,9 +22,9 @@ export function EventsModal({ isOpen, onClose, events, date }: EventsModalProps)
 
   const getEventColor = (event: any) => {
     if (event.id?.startsWith('google-')) {
-      return 'bg-green-500 text-white';
+      return 'bg-muted text-muted-foreground';
     }
-    return 'bg-[#ffdd00] text-black';
+    return 'bg-foreground text-background';
   };
 
   const sortedEvents = events.sort((a, b) => a.start.getTime() - b.start.getTime());

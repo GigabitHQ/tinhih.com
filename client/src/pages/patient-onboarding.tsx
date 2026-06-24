@@ -117,15 +117,15 @@ export default function PatientOnboarding() {
   // Component to display existing onboarding data
   const ExistingOnboardingData = () => (
     <div className="max-w-4xl mx-auto px-6 py-8">
-      <Card className="mb-8 border-2 border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-950/20">
+      <Card className="mb-8 border bg-muted">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-green-800 dark:text-green-200">
+          <CardTitle className="flex items-center gap-2 text-foreground">
             <CheckCircle className="w-8 h-8" />
             Onboarding Already Completed
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-green-700 dark:text-green-300 mb-6">
+          <p className="text-muted-foreground mb-6">
             Welcome back! We found your existing onboarding information. You can review your data below or edit it if needed.
           </p>
 
@@ -176,7 +176,7 @@ export default function PatientOnboarding() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Heart className="w-5 h-5 text-red-600" />
+                  <Heart className="w-5 h-5 text-muted-foreground" />
                   Recovery History
                 </CardTitle>
               </CardHeader>
@@ -293,8 +293,8 @@ export default function PatientOnboarding() {
             </Card>
           </div>
 
-          <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg">
-            <p className="text-sm text-blue-800 dark:text-blue-200">
+          <div className="mt-6 p-4 bg-muted border border-border rounded-lg">
+            <p className="text-sm text-muted-foreground">
               <strong>Onboarding Data Available:</strong> Your information has been successfully stored and is ready for use.
             </p>
           </div>
@@ -323,9 +323,9 @@ export default function PatientOnboarding() {
   // Show loading state
   if (patientLoading || !patientData) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-yellow-950/20 dark:to-orange-950/20 flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-600 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-foreground mx-auto mb-4"></div>
           <p className="text-muted-foreground">Loading your information...</p>
         </div>
       </div>
@@ -335,7 +335,7 @@ export default function PatientOnboarding() {
   // Show existing onboarding data if completed and not editing
   if (hasCompletedOnboarding && !isEditing) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-yellow-950/20 dark:to-orange-950/20">
+      <div className="min-h-screen bg-background">
         {/* Header */}
         <div className="bg-background shadow-sm border-b border-border">
           <div className="max-w-4xl mx-auto px-6 py-4">
@@ -365,7 +365,7 @@ export default function PatientOnboarding() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-yellow-950/20 dark:to-orange-950/20">
+    <div className="min-h-screen bg-background">
       {/* Header */}
       <div className="bg-background shadow-sm border-b border-border">
         <div className="max-w-4xl mx-auto px-6 py-4">
@@ -402,10 +402,10 @@ export default function PatientOnboarding() {
       <div className="max-w-4xl mx-auto px-6 py-8">
         {/* Welcome Message */}
         {currentStep === 0 && (
-          <Card className="mb-8 border-2 border-yellow-200 dark:border-yellow-800 bg-yellow-50 dark:bg-yellow-950/20">
+          <Card className="mb-8 border bg-muted">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-2xl text-foreground">
-                <Heart className="w-8 h-8 text-yellow-600 dark:text-yellow-400" />
+                <Heart className="w-8 h-8 text-muted-foreground" />
                 Welcome to TiNHiH Foundation
               </CardTitle>
             </CardHeader>
@@ -415,15 +415,15 @@ export default function PatientOnboarding() {
               </p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="flex items-center gap-2 p-3 bg-card rounded-lg border border-border">
-                  <Shield className="w-5 h-5 text-green-600 dark:text-green-400" />
+                  <Shield className="w-5 h-5 text-muted-foreground" />
                   <span className="text-sm font-medium text-foreground">Confidential & Secure</span>
                 </div>
                 <div className="flex items-center gap-2 p-3 bg-card rounded-lg border border-border">
-                  <Users className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                  <Users className="w-5 h-5 text-muted-foreground" />
                   <span className="text-sm font-medium text-foreground">Community Support</span>
                 </div>
                 <div className="flex items-center gap-2 p-3 bg-card rounded-lg border border-border">
-                  <FileText className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+                  <FileText className="w-5 h-5 text-muted-foreground" />
                   <span className="text-sm font-medium text-foreground">Comprehensive Care</span>
                 </div>
               </div>

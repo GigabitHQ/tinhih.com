@@ -34,6 +34,7 @@ import { InvoiceCard } from "@/components/billing/invoice-card";
 import { NotificationCard } from "@/components/notifications/notification-card";
 import { PatientProfile } from "@/components/patient-portal/patient-profile";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { StatCard } from "@/components/ui/stat-card";
 import { useLocation } from "wouter";
 
 export default function PatientDashboard() {
@@ -121,7 +122,7 @@ export default function PatientDashboard() {
     return (
       <div className="flex items-center justify-center h-full">
         <div className="text-center">
-          <Activity className="w-8 h-8 animate-spin mx-auto mb-4 text-primary" />
+          <Activity className="w-8 h-8 animate-spin mx-auto mb-4 text-foreground" />
           <p className="text-muted-foreground">Loading your health portal...</p>
         </div>
       </div>
@@ -131,11 +132,11 @@ export default function PatientDashboard() {
   return (
     <div className="space-y-6">
       {/* Welcome Section */}
-      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20 rounded-lg p-4 sm:p-6 lg:p-8">
+      <div className="bg-card border rounded-lg p-4 sm:p-6 lg:p-8">
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
           <Avatar className="h-16 w-16 sm:h-20 sm:w-20 flex-shrink-0">
             <AvatarImage src={patient?.profileImage} />
-            <AvatarFallback className="text-lg sm:text-xl bg-[#ffdd00] text-black">
+            <AvatarFallback className="text-lg sm:text-xl bg-muted text-foreground">
               {patient?.user?.firstName?.[0]}{patient?.user?.lastName?.[0]}
             </AvatarFallback>
           </Avatar>
@@ -150,7 +151,7 @@ export default function PatientDashboard() {
             <div className="flex flex-col sm:flex-row gap-3">
               <Button
                 onClick={() => setLocation('/patient-onboarding')}
-                className="bg-[#ffdd00] text-black hover:bg-[#ffdd00]/90 w-full sm:w-auto"
+                className="w-full sm:w-auto"
               >
                 <UserPlus className="w-4 h-4 mr-2" />
                 Complete Onboarding
@@ -174,61 +175,10 @@ export default function PatientDashboard() {
 
       {/* Quick Stats */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card className=" shadow-sm bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950/20 dark:to-blue-900/20">
-          <CardContent className="p-6">
-            <div className="flex items-center gap-4">
-              <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-xl">
-                <Calendar className="h-6 w-6 text-blue-600 dark:text-blue-400" />
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-blue-900 dark:text-blue-100">{upcomingAppointments.length}</div>
-                <div className="text-sm text-blue-700 dark:text-blue-300 font-medium">Upcoming</div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className=" shadow-sm bg-gradient-to-br from-green-50 to-green-100 dark:from-green-950/20 dark:to-green-900/20">
-          <CardContent className="p-6">
-            <div className="flex items-center gap-4">
-              <div className="p-3 bg-green-100 dark:bg-green-900/30 rounded-xl">
-                <MessageSquare className="h-6 w-6 text-green-600 dark:text-green-400" />
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-green-900 dark:text-green-100">{unreadMessages.length}</div>
-                <div className="text-sm text-green-700 dark:text-green-300 font-medium">New Conversations</div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className=" shadow-sm bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-950/20 dark:to-orange-900/20">
-          <CardContent className="p-6">
-            <div className="flex items-center gap-4">
-              <div className="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-xl">
-                <DollarSign className="h-6 w-6 text-orange-600 dark:text-orange-400" />
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-orange-900 dark:text-orange-100">{pendingInvoices.length}</div>
-                <div className="text-sm text-orange-700 dark:text-orange-300 font-medium">Pending Bills</div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className=" shadow-sm bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-950/20 dark:to-purple-900/20">
-          <CardContent className="p-6">
-            <div className="flex items-center gap-4">
-              <div className="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-xl">
-                <Bell className="h-6 w-6 text-purple-600 dark:text-purple-400" />
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-purple-900 dark:text-purple-100">{unreadNotifications.length}</div>
-                <div className="text-sm text-purple-700 dark:text-purple-300 font-medium">Notifications</div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+        <StatCard label="Upcoming" value={upcomingAppointments.length} icon={Calendar} />
+        <StatCard label="New Conversations" value={unreadMessages.length} icon={MessageSquare} />
+        <StatCard label="Pending Bills" value={pendingInvoices.length} icon={DollarSign} />
+        <StatCard label="Notifications" value={unreadNotifications.length} icon={Bell} />
       </div>
 
       {/* Main Dashboard Content */}
@@ -247,7 +197,7 @@ export default function PatientDashboard() {
             <Card className=" shadow-sm">
             <CardHeader className="pb-4">
               <CardTitle className="flex items-center gap-3 text-xl">
-                <Calendar className="h-6 w-6 text-blue-600" />
+                <Calendar className="h-6 w-6 text-muted-foreground" />
                 Upcoming Appointments
               </CardTitle>
             </CardHeader>
@@ -255,10 +205,10 @@ export default function PatientDashboard() {
               {upcomingAppointments.length > 0 ? (
                 <div className="space-y-3">
                   {upcomingAppointments.slice(0, 3).map((appointment: any) => (
-                    <div key={appointment.id} className="flex items-center gap-3 p-3 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                    <div key={appointment.id} className="flex items-center gap-3 p-3 rounded-lg border border-border hover:bg-accent transition-colors">
                       <div className="flex-shrink-0">
-                        <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
-                          <Calendar className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                        <div className="p-2 bg-muted rounded-lg">
+                          <Calendar className="h-4 w-4 text-muted-foreground" />
                         </div>
                       </div>
                       <div className="flex-1 min-w-0">
@@ -295,7 +245,7 @@ export default function PatientDashboard() {
                 <div className="text-center py-12 text-muted-foreground">
                   <Calendar className="h-16 w-16 mx-auto mb-4 opacity-50" />
                   <p className="text-lg mb-4">No upcoming appointments</p>
-                  <Button className="bg-[#ffdd00] text-black hover:bg-[#ffdd00]/90">
+                  <Button>
                     <Plus className="h-4 w-4 mr-2" />
                     Book Appointment
                   </Button>
@@ -385,7 +335,7 @@ export default function PatientDashboard() {
           <Card className=" shadow-sm">
             <CardHeader className="pb-4">
               <CardTitle className="flex items-center gap-3 text-xl">
-                <DollarSign className="h-6 w-6 text-orange-600" />
+                <DollarSign className="h-6 w-6 text-muted-foreground" />
                 Pending Bills
               </CardTitle>
             </CardHeader>
@@ -393,10 +343,10 @@ export default function PatientDashboard() {
               {pendingInvoices.length > 0 ? (
                 <div className="space-y-3">
                   {pendingInvoices.slice(0, 3).map((invoice: any) => (
-                    <div key={invoice.id} className="flex items-center gap-3 p-3 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                    <div key={invoice.id} className="flex items-center gap-3 p-3 rounded-lg border border-border hover:bg-accent transition-colors">
                       <div className="flex-shrink-0">
-                        <div className="p-2 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
-                          <DollarSign className="h-4 w-4 text-orange-600 dark:text-orange-400" />
+                        <div className="p-2 bg-muted rounded-lg">
+                          <DollarSign className="h-4 w-4 text-muted-foreground" />
                         </div>
                       </div>
                       <div className="flex-1 min-w-0">
@@ -442,7 +392,7 @@ export default function PatientDashboard() {
           <Card className=" shadow-sm">
             <CardHeader className="pb-4">
               <CardTitle className="flex items-center gap-3 text-xl">
-                <Bell className="h-6 w-6 text-purple-600" />
+                <Bell className="h-6 w-6 text-muted-foreground" />
                 Unread Notifications
               </CardTitle>
             </CardHeader>
@@ -450,10 +400,10 @@ export default function PatientDashboard() {
               {unreadNotifications.length > 0 ? (
                 <div className="space-y-3">
                   {unreadNotifications.slice(0, 3).map((notification: any) => (
-                    <div key={notification.id} className="flex items-center gap-3 p-3 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                    <div key={notification.id} className="flex items-center gap-3 p-3 rounded-lg border border-border hover:bg-accent transition-colors">
                       <div className="flex-shrink-0">
-                        <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
-                          <Bell className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+                        <div className="p-2 bg-muted rounded-lg">
+                          <Bell className="h-4 w-4 text-muted-foreground" />
                         </div>
                       </div>
                       <div className="flex-1 min-w-0">
@@ -468,7 +418,7 @@ export default function PatientDashboard() {
                         <p className="text-sm text-muted-foreground truncate mt-1">
                           {notification.message?.substring(0, 60) || 'No message'}
                         </p>
-                        <div className="w-2 h-2 bg-purple-500 rounded-full mt-2"></div>
+                        <div className="w-2 h-2 bg-foreground rounded-full mt-2"></div>
                       </div>
                     </div>
                   ))}
@@ -501,7 +451,7 @@ export default function PatientDashboard() {
           <Card className="shadow-sm">
             <CardHeader>
               <CardTitle className="flex items-center gap-3 text-xl">
-                <Calendar className="h-6 w-6 text-blue-600" />
+                <Calendar className="h-6 w-6 text-muted-foreground" />
                 All Appointments
               </CardTitle>
             </CardHeader>
@@ -526,7 +476,7 @@ export default function PatientDashboard() {
           <Card className="shadow-sm">
             <CardHeader>
               <CardTitle className="flex items-center gap-3 text-xl">
-                <MessageSquare className="h-6 w-6 text-green-600" />
+                <MessageSquare className="h-6 w-6 text-muted-foreground" />
                 All Messages
               </CardTitle>
             </CardHeader>
@@ -551,7 +501,7 @@ export default function PatientDashboard() {
           <Card className="shadow-sm">
             <CardHeader>
               <CardTitle className="flex items-center gap-3 text-xl">
-                <DollarSign className="h-6 w-6 text-orange-600" />
+                <DollarSign className="h-6 w-6 text-muted-foreground" />
                 All Invoices
               </CardTitle>
             </CardHeader>
@@ -578,7 +528,7 @@ export default function PatientDashboard() {
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <User className="w-5 h-5 text-yellow-600" />
+              <User className="w-5 h-5 text-muted-foreground" />
               Complete Your Onboarding
             </DialogTitle>
             <DialogDescription>
@@ -586,11 +536,11 @@ export default function PatientDashboard() {
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4">
-            <div className="bg-yellow-50 dark:bg-yellow-950/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4">
-              <p className="text-sm text-yellow-800 dark:text-yellow-200">
+            <div className="bg-muted border border-border rounded-lg p-4">
+              <p className="text-sm text-foreground">
                 <strong>Why onboarding is important:</strong>
               </p>
-              <ul className="text-sm text-yellow-700 dark:text-yellow-300 mt-2 space-y-1">
+              <ul className="text-sm text-muted-foreground mt-2 space-y-1">
                 <li>• Helps us understand your recovery journey</li>
                 <li>• Ensures we have your complete medical history</li>
                 <li>• Allows us to provide personalized care</li>

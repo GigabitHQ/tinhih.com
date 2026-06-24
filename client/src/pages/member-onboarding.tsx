@@ -238,14 +238,14 @@ export default function MemberOnboarding() {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center space-x-2">
-          <Heart className="h-5 w-5 text-red-500" />
+          <Heart className="h-5 w-5 text-muted-foreground" />
           <span>Personal Information</span>
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <Label htmlFor="firstName">First Name <span className="text-red-500"> *</span></Label>
+            <Label htmlFor="firstName">First Name <span className="text-muted-foreground"> *</span></Label>
             <Input
               id="firstName"
               value={formData.firstName}
@@ -254,7 +254,7 @@ export default function MemberOnboarding() {
             />
           </div>
           <div>
-            <Label htmlFor="lastName">Last Name <span className="text-red-500"> *</span></Label>
+            <Label htmlFor="lastName">Last Name <span className="text-muted-foreground"> *</span></Label>
             <Input
               id="lastName"
               value={formData.lastName}
@@ -266,13 +266,13 @@ export default function MemberOnboarding() {
         
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="email">Email Address <span className="text-red-500"> *</span></Label>
+                    <Label htmlFor="email">Email Address <span className="text-muted-foreground"> *</span></Label>
                     <Input
                       id="email"
                       type="email"
                       value={formData.email}
                       disabled={true}
-                      className="bg-gray-50 text-gray-600"
+                      className="bg-muted text-muted-foreground"
                       placeholder="Email address from registration"
                     />
                   </div>
@@ -294,13 +294,13 @@ export default function MemberOnboarding() {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center space-x-2">
-          <MessageSquare className="h-5 w-5 text-blue-500" />
+          <MessageSquare className="h-5 w-5 text-muted-foreground" />
           <span>Patient History</span>
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
         <div>
-          <Label className="text-base font-medium">Were you previously a TiNHiH client? <span className="text-red-500"> *</span></Label>
+          <Label className="text-base font-medium">Were you previously a TiNHiH client? <span className="text-muted-foreground"> *</span></Label>
           <RadioGroup
             value={formData.wasPatient.toString()}
             onValueChange={(value) => handleInputChange("wasPatient", value === "true")}
@@ -370,7 +370,7 @@ export default function MemberOnboarding() {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center space-x-2">
-          <Star className="h-5 w-5 text-yellow-500" />
+          <Star className="h-5 w-5 text-muted-foreground" />
           <span>Recovery Journey</span>
         </CardTitle>
       </CardHeader>
@@ -378,7 +378,7 @@ export default function MemberOnboarding() {
         {formData.wasPatient ? (
           <>
             <div>
-              <Label className="text-base font-medium">How would you rate your overall recovery experience? <span className="text-red-500"> *</span></Label>
+              <Label className="text-base font-medium">How would you rate your overall recovery experience? <span className="text-muted-foreground"> *</span></Label>
               <div className="flex items-center space-x-2 mt-3">
                 {[1, 2, 3, 4, 5].map((rating) => (
                   <Button
@@ -462,7 +462,7 @@ export default function MemberOnboarding() {
 
             <div>
               <Label htmlFor="recoveryJourney" className="text-base font-medium">
-                Please share your TiNHiH recovery journey story <span className="text-red-500"> *</span>
+                Please share your TiNHiH recovery journey story <span className="text-muted-foreground"> *</span>
               </Label>
               <Textarea
                 id="recoveryJourney"
@@ -476,7 +476,7 @@ export default function MemberOnboarding() {
           </>
         ) : (
           <div className="text-center py-8">
-            <Heart className="h-12 w-12 text-red-500 mx-auto mb-4" />
+            <Heart className="h-12 w-12 text-foreground mx-auto mb-4" />
             <h3 className="text-lg font-medium mb-2">Welcome to Our Community!</h3>
             <p className="text-muted-foreground">
               We're glad you're interested in joining our community. Your support and engagement help us continue our mission.
@@ -491,7 +491,7 @@ export default function MemberOnboarding() {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center space-x-2">
-          <CheckCircle className="h-5 w-5 text-green-500" />
+          <CheckCircle className="h-5 w-5 text-muted-foreground" />
           <span>Service Feedback</span>
         </CardTitle>
       </CardHeader>
@@ -500,7 +500,7 @@ export default function MemberOnboarding() {
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <Label className="text-base font-medium">Overall Service Quality <span className="text-red-500"> *</span></Label>
+                <Label className="text-base font-medium">Overall Service Quality <span className="text-muted-foreground"> *</span></Label>
                 <div className="flex items-center space-x-2 mt-3">
                   {[1, 2, 3, 4, 5].map((rating) => (
                     <Button
@@ -570,7 +570,7 @@ export default function MemberOnboarding() {
 
               <div>
                 <Label htmlFor="whatWorkedWell" className="text-base font-medium">
-                  What TiNHiH services worked well for you? <span className="text-red-500"> *</span>
+                  What TiNHiH services worked well for you? <span className="text-muted-foreground"> *</span>
                 </Label>
                 <Textarea
                   id="whatWorkedWell"
@@ -612,7 +612,7 @@ export default function MemberOnboarding() {
           </>
         ) : (
           <div className="text-center py-8">
-            <MessageSquare className="h-12 w-12 text-blue-500 mx-auto mb-4" />
+            <MessageSquare className="h-12 w-12 text-foreground mx-auto mb-4" />
             <h3 className="text-lg font-medium mb-2">Community Engagement</h3>
             <p className="text-muted-foreground">
               We value your interest in our community and look forward to your participation.
@@ -627,7 +627,7 @@ export default function MemberOnboarding() {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center space-x-2">
-          <Heart className="h-5 w-5 text-red-500" />
+          <Heart className="h-5 w-5 text-muted-foreground" />
           <span>Community Engagement</span>
         </CardTitle>
       </CardHeader>
@@ -701,12 +701,12 @@ export default function MemberOnboarding() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-muted py-8">
       <div className="max-w-4xl mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center space-x-2 mb-4">
-            <Heart className="h-8 w-8 text-red-500" />
+            <Heart className="h-8 w-8 text-muted-foreground" />
             <h1 className="text-3xl font-bold">Welcome to TiNHiH Community</h1>
           </div>
           <p className="text-lg text-muted-foreground">
@@ -725,9 +725,9 @@ export default function MemberOnboarding() {
               {Math.round((currentStep / steps.length) * 100)}% Complete
             </span>
           </div>
-          <div className="w-full bg-gray-200 rounded-full h-2">
+          <div className="w-full bg-muted rounded-full h-2">
             <div
-              className="bg-[#ffdd00] h-2 rounded-full transition-all duration-300"
+              className="bg-foreground h-2 rounded-full transition-all duration-300"
               style={{ width: `${(currentStep / steps.length) * 100}%` }}
             ></div>
           </div>

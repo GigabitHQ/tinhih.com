@@ -8,7 +8,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { MessageSquare, Plus, Reply, User, Calendar, Search } from 'lucide-react';
+import { MessageSquare, Plus, Reply, User, Calendar } from 'lucide-react';
+import { SearchInput } from '@/components/ui/search-input';
 import { format } from 'date-fns';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -94,8 +95,8 @@ export default function PatientMessages() {
           <Card key={i}>
             <CardContent className="p-6">
               <div className="animate-pulse space-y-4">
-                <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-                <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                <div className="h-4 bg-muted rounded w-3/4"></div>
+                <div className="h-4 bg-muted rounded w-1/2"></div>
               </div>
             </CardContent>
           </Card>
@@ -149,11 +150,11 @@ export default function PatientMessages() {
                           ))}
                         </SelectContent>
                       </Select>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
-                
+
                 <FormField
                   control={form.control}
                   name="subject"
@@ -163,7 +164,7 @@ export default function PatientMessages() {
                       <FormControl>
                         <Input placeholder="Enter message subject..." {...field} />
                       </FormControl>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -181,7 +182,7 @@ export default function PatientMessages() {
                           {...field} 
                         />
                       </FormControl>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -210,15 +211,11 @@ export default function PatientMessages() {
       </div>
 
       {/* Search */}
-      <div className="relative">
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-        <Input
-          placeholder="Search messages..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="pl-10"
-        />
-      </div>
+      <SearchInput
+        placeholder="Search messages..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
 
       {/* Messages List */}
       <div className="space-y-4">
@@ -243,7 +240,7 @@ export default function PatientMessages() {
             <Card 
               key={message.id} 
               className={`hover:shadow-md transition-shadow cursor-pointer ${
-                message.status === 'unread' ? 'border-primary bg-primary/5' : ''
+                message.status === 'unread' ? 'border-foreground bg-accent' : ''
               }`}
               onClick={() => {
                 setSelectedMessage(message);
@@ -256,7 +253,7 @@ export default function PatientMessages() {
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
-                      <h4 className={`font-semibold ${message.status === 'unread' ? 'text-primary' : ''}`}>
+                      <h4 className={`font-semibold ${message.status === 'unread' ? 'text-foreground' : ''}`}>
                         {message.subject}
                       </h4>
                       {message.status === 'unread' && (

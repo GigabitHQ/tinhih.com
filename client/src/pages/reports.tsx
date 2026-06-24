@@ -17,7 +17,7 @@ export default function Reports() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center">
-                <Users className="w-5 h-5 mr-2 text-primary" />
+                <Users className="w-5 h-5 mr-2 text-muted-foreground" />
                 Patient Reports
               </CardTitle>
             </CardHeader>
@@ -29,7 +29,7 @@ export default function Reports() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center">
-                <Calendar className="w-5 h-5 mr-2 text-secondary" />
+                <Calendar className="w-5 h-5 mr-2 text-muted-foreground" />
                 Appointment Analytics
               </CardTitle>
             </CardHeader>
@@ -41,7 +41,7 @@ export default function Reports() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center">
-                <TrendingUp className="w-5 h-5 mr-2 text-green-600" />
+                <TrendingUp className="w-5 h-5 mr-2 text-muted-foreground" />
                 Revenue Reports
               </CardTitle>
             </CardHeader>
@@ -57,7 +57,7 @@ export default function Reports() {
           </CardHeader>
           <CardContent>
             <div className="text-center py-8">
-              <BarChart className="w-16 h-16 text-muted-foreground mx-auto mb-4 dark:text-[#ffdd00]" />
+              <BarChart className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
               <h3 className="text-lg font-medium text-foreground mb-2">Advanced Reports & Analytics</h3>
               <p className="text-muted-foreground">
                 Detailed reporting features will be available in the next update.

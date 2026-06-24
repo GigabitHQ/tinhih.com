@@ -1,18 +1,15 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { StatusBadge } from "@/components/ui/status-badge";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { 
-  Calendar, 
-  Clock, 
-  User, 
-  MapPin, 
-  Phone, 
-  Video, 
-  MessageSquare,
-  CheckCircle,
-  XCircle,
-  AlertCircle
+import {
+  Calendar,
+  Clock,
+  User,
+  MapPin,
+  Phone,
+  Video,
+  MessageSquare
 } from "lucide-react";
 import { format } from "date-fns";
 
@@ -23,16 +20,8 @@ interface AppointmentCardProps {
 
 export function AppointmentCard({ appointment, compact = false }: AppointmentCardProps) {
   const getStatusBadge = (status: string) => {
-    switch (status) {
-      case "confirmed":
-        return <Badge className="bg-green-100 text-green-800 border-green-200 dark:bg-green-900/20 dark:text-green-400 dark:border-green-800"><CheckCircle className="w-3 h-3 mr-1" />Confirmed</Badge>;
-      case "pending":
-        return <Badge className="bg-yellow-100 text-yellow-800 border-yellow-200 dark:bg-yellow-900/20 dark:text-yellow-400 dark:border-yellow-800"><AlertCircle className="w-3 h-3 mr-1" />Pending</Badge>;
-      case "cancelled":
-        return <Badge className="bg-red-100 text-red-800 border-red-200 dark:bg-red-900/20 dark:text-red-400 dark:border-red-800"><XCircle className="w-3 h-3 mr-1" />Cancelled</Badge>;
-      default:
-        return <Badge className="bg-slate-100 text-slate-800 border-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700"><AlertCircle className="w-3 h-3 mr-1" />Scheduled</Badge>;
-    }
+    const known = ["confirmed", "pending", "cancelled"];
+    return <StatusBadge status={known.includes(status) ? status : "scheduled"} />;
   };
 
   const getAppointmentTypeIcon = (type: string) => {
@@ -53,7 +42,7 @@ export function AppointmentCard({ appointment, compact = false }: AppointmentCar
         <div className="flex-shrink-0">
           <Avatar className="h-10 w-10">
             <AvatarImage src={appointment.practitioner?.user?.profileImage} />
-            <AvatarFallback className="text-sm bg-[#ffdd00] text-black">
+            <AvatarFallback className="text-sm bg-muted text-foreground">
               {appointment.practitioner?.user?.firstName?.[0]}{appointment.practitioner?.user?.lastName?.[0]}
             </AvatarFallback>
           </Avatar>
@@ -90,7 +79,7 @@ export function AppointmentCard({ appointment, compact = false }: AppointmentCar
           <div className="flex items-center gap-3">
             <Avatar className="h-12 w-12">
               <AvatarImage src={appointment.practitioner?.user?.profileImage} />
-              <AvatarFallback className="text-sm bg-[#ffdd00] text-black">
+              <AvatarFallback className="text-sm bg-muted text-foreground">
                 {appointment.practitioner?.user?.firstName?.[0]}{appointment.practitioner?.user?.lastName?.[0]}
               </AvatarFallback>
             </Avatar>
@@ -140,7 +129,7 @@ export function AppointmentCard({ appointment, compact = false }: AppointmentCar
             Message
           </Button>
           {appointment.status === "confirmed" && (
-            <Button size="sm" className="flex-1 bg-[#ffdd00] hover:bg-[#ffdd00]/90 text-black">
+            <Button size="sm" className="flex-1">
               Join Meeting
             </Button>
           )}

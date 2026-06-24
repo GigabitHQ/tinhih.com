@@ -29,8 +29,8 @@ export default function PatientMedicalRecords() {
           <Card key={i}>
             <CardContent className="p-6">
               <div className="animate-pulse space-y-4">
-                <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-                <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                <div className="h-4 bg-muted rounded w-3/4"></div>
+                <div className="h-4 bg-muted rounded w-1/2"></div>
               </div>
             </CardContent>
           </Card>
@@ -199,7 +199,7 @@ export default function PatientMedicalRecords() {
               <Card key={doc.id} className="hover:shadow-md transition-shadow">
                 <CardContent className="p-4">
                   <div className="flex items-center gap-3">
-                    <FileText className="w-8 h-8 text-primary" />
+                    <FileText className="w-8 h-8 text-muted-foreground" />
                     <div className="flex-1 min-w-0">
                       <h4 className="font-medium truncate">{doc.title}</h4>
                       <p className="text-sm text-muted-foreground">

@@ -163,7 +163,7 @@ export function BookingLink({ className }: BookingLinkProps) {
           <div className="p-4">
             {practitionerError ? (
               <div className="text-center py-4">
-                <p className="text-sm text-red-600 mb-2">Failed to load practitioner data</p>
+                <p className="text-sm text-foreground mb-2">Failed to load practitioner data</p>
                 <Button 
                   variant="outline" 
                   size="sm" 
@@ -261,7 +261,7 @@ export function BookingLink({ className }: BookingLinkProps) {
                 {/* <Button variant="ghost" size="sm" disabled className="opacity-50 cursor-not-allowed">
                   <Settings className="h-4 w-4" />
                 </Button> */}
-                <Badge className="absolute -top-2 -right-2 text-nowrap text-xs bg-yellow-100 text-yellow-800 border-yellow-200">
+                <Badge variant="secondary" className="absolute -top-2 -right-2 text-nowrap text-xs">
                   Coming Soon
                 </Badge>
               </div>
@@ -368,11 +368,11 @@ export function BookingLink({ className }: BookingLinkProps) {
                       <div className="text-sm text-muted-foreground">Total Views</div>
                     </div>
                     <div>
-                      <div className="text-2xl font-bold text-green-600">0</div>
+                      <div className="text-2xl font-bold text-foreground">0</div>
                       <div className="text-sm text-muted-foreground">Appointments Booked</div>
                     </div>
                     <div>
-                      <div className="text-2xl font-bold text-blue-600">0%</div>
+                      <div className="text-2xl font-bold text-foreground">0%</div>
                       <div className="text-sm text-muted-foreground">Conversion Rate</div>
                     </div>
                   </div>

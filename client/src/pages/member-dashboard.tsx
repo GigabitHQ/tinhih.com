@@ -22,6 +22,7 @@ import {
 import { DonationDialog } from "@/components/donation/donation-dialog";
 import { MemberLayout } from "@/components/layout/member-layout";
 import { PremiumStatCard } from "@/components/premium-stat-card";
+import { StatusBadge } from "@/components/ui/status-badge";
 import { useMemberStore, useEventStore, useQuoteStore } from "@/store";
 import { Link } from "wouter";
 
@@ -95,25 +96,14 @@ export default function MemberDashboard() {
     }
   }, [quotesError, toast]);
 
-  const getCategoryColor = (category: string) => {
-    const colors = {
-      health: "bg-blue-100 text-blue-800",
-      wellness: "bg-green-100 text-green-800",
-      motivation: "bg-yellow-100 text-yellow-800",
-      recovery: "bg-purple-100 text-purple-800",
-      general: "bg-gray-100 text-gray-800",
-    };
-    return colors[category as keyof typeof colors] || colors.general;
-  };
-
   const isLoading = memberLoading || eventsLoading || quotesLoading;
 
   if (isLoading) {
     return (
       <MemberLayout>
         <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#ffdd00]"></div>
-          <span className="ml-2 text-gray-600">Loading your premium dashboard...</span>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-foreground"></div>
+          <span className="ml-2 text-muted-foreground">Loading your premium dashboard...</span>
         </div>
       </MemberLayout>
     );
@@ -133,21 +123,21 @@ export default function MemberDashboard() {
     <MemberLayout>
       <div className="space-y-8">
         {/* Hero Section */}
-        <div className="text-center py-8 sm:py-12 bg-gradient-to-r from-[#ffdd00]/10 via-white to-[#ffdd00]/10 rounded-2xl border border-[#ffdd00]/20">
+        <div className="text-center py-8 sm:py-12 bg-card rounded-2xl border border-border">
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-3 sm:space-y-0 sm:space-x-3 mb-4 sm:mb-6">
-            <div className="p-2 sm:p-3 rounded-full bg-gradient-to-r from-[#ffdd00] to-yellow-400 shadow-lg">
-              <Crown className="h-6 w-6 sm:h-8 sm:w-8 text-black" />
+            <div className="p-2 sm:p-3 rounded-full bg-muted shadow-sm">
+              <Crown className="h-6 w-6 sm:h-8 sm:w-8 text-foreground" />
             </div>
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground">
               Welcome to TiNHiH Community
             </h1>
           </div>
-          <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-6 max-w-2xl mx-auto px-4">
+          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground mb-6 max-w-2xl mx-auto px-4">
             Your support makes healthcare better for everyone. Thank you for being part of our community.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-3 sm:space-y-0 sm:space-x-4 px-4">
             <Button
-              className="bg-gradient-to-r from-[#ffdd00] to-yellow-400 text-black font-semibold px-6 sm:px-8 py-2 sm:py-3 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200 w-full sm:w-auto"
+              className="font-semibold px-6 sm:px-8 py-2 sm:py-3 w-full sm:w-auto"
               onClick={() => window.location.href = '/store'}
             >
               <ShoppingBag className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
@@ -156,7 +146,7 @@ export default function MemberDashboard() {
             <DonationDialog>
               <Button
                 variant="outline"
-                className="border-[#ffdd00] text-[#ffdd00] hover:bg-[#ffdd00] hover:text-black font-semibold px-6 sm:px-8 py-2 sm:py-3 transition-all duration-200 w-full sm:w-auto"
+                className="font-semibold px-6 sm:px-8 py-2 sm:py-3 w-full sm:w-auto"
               >
                 <Heart className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
                 Make a Donation
@@ -172,7 +162,7 @@ export default function MemberDashboard() {
             number={eventsAttended}
             label="Events Attended"
             subtext="This Month"
-            gradient="bg-gradient-to-br from-blue-500 to-blue-600"
+            gradient="bg-muted"
             delay={0}
           />
 
@@ -182,7 +172,7 @@ export default function MemberDashboard() {
             label="Total Donations"
             prefix="$"
             subtext="This Year"
-            gradient="bg-gradient-to-br from-pink-500 to-red-500"
+            gradient="bg-muted"
             delay={200}
           />
 
@@ -191,7 +181,7 @@ export default function MemberDashboard() {
             number={productsPurchased}
             label="Products Purchased"
             subtext="Member Discount"
-            gradient="bg-gradient-to-br from-green-500 to-emerald-600"
+            gradient="bg-muted"
             delay={400}
           />
 
@@ -201,7 +191,7 @@ export default function MemberDashboard() {
             label="Days as Member"
             suffix="days"
             subtext="Premium Status"
-            gradient="bg-gradient-to-br from-[#ffdd00] to-yellow-500"
+            gradient="bg-muted"
             delay={600}
           />
         </div>
@@ -210,15 +200,15 @@ export default function MemberDashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Inspirational Quote */}
           {currentQuote && (
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+            <Card className="shadow-sm hover:shadow-md transition-all duration-300">
               <CardHeader className="pb-4">
                 <CardTitle className="flex items-center space-x-2">
-                  <div className="p-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500">
-                    <Quote className="h-5 w-5 text-white" />
+                  <div className="p-2 rounded-lg bg-muted">
+                    <Quote className="h-5 w-5 text-muted-foreground" />
                   </div>
                   <span>Today's Inspiration</span>
                   {currentQuote.isFeatured && (
-                    <Badge className="bg-gradient-to-r from-[#ffdd00] to-yellow-400 text-black font-semibold">
+                    <Badge variant="secondary" className="font-semibold">
                       <Star className="h-3 w-3 mr-1" />
                       Featured
                     </Badge>
@@ -226,27 +216,25 @@ export default function MemberDashboard() {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <blockquote className="text-xl italic text-gray-700 mb-6 leading-relaxed">
+                <blockquote className="text-xl italic text-foreground mb-6 leading-relaxed">
                   "{currentQuote.text}"
                 </blockquote>
                 <div className="flex items-center justify-between">
-                  <p className="text-lg font-semibold text-gray-800">
+                  <p className="text-lg font-semibold text-foreground">
                     — {currentQuote.author}
                   </p>
-                  <Badge className={getCategoryColor(currentQuote.category)}>
-                    {currentQuote.category}
-                  </Badge>
+                  <StatusBadge status={currentQuote.category} showIcon={false} />
                 </div>
               </CardContent>
             </Card>
           )}
 
           {/* Upcoming Events */}
-          <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+          <Card className="shadow-sm hover:shadow-md transition-all duration-300">
             <CardHeader className="pb-4">
               <CardTitle className="flex items-center space-x-2">
-                <div className="p-2 rounded-lg bg-gradient-to-r from-blue-500 to-cyan-500">
-                  <Calendar className="h-5 w-5 text-white" />
+                <div className="p-2 rounded-lg bg-muted">
+                  <Calendar className="h-5 w-5 text-muted-foreground" />
                 </div>
                 <span>Upcoming Events</span>
               </CardTitle>
@@ -258,11 +246,11 @@ export default function MemberDashboard() {
                     .sort((a: any, b: any) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime())
                     .slice(0, 3)
                     .map((event: any) => (
-                      <div key={event.id} className="flex items-center justify-between p-4 border border-gray-100 rounded-xl hover:border-[#ffdd00]/30 transition-all duration-200">
+                      <div key={event.id} className="flex items-center justify-between p-4 border border-border rounded-xl hover:border-foreground/30 transition-all duration-200">
                         <div className="flex-1">
-                          <h3 className="font-semibold text-lg text-gray-900">{event.title}</h3>
-                          <p className="text-sm text-gray-600 mb-2 line-clamp-2">{event.description}</p>
-                          <div className="flex items-center space-x-4 text-sm text-gray-500">
+                          <h3 className="font-semibold text-lg text-foreground">{event.title}</h3>
+                          <p className="text-sm text-muted-foreground mb-2 line-clamp-2">{event.description}</p>
+                          <div className="flex items-center space-x-4 text-sm text-muted-foreground">
                             <div className="flex items-center space-x-1">
                               <Clock className="h-4 w-4" />
                               <span>{format(new Date(event.startDate), "MMM dd, yyyy 'at' h:mm a")}</span>
@@ -275,7 +263,7 @@ export default function MemberDashboard() {
                             )}
                           </div>
                         </div>
-                        <Button variant="outline" size="sm" className="border-[#ffdd00] text-[#ffdd00] hover:bg-[#ffdd00] hover:text-black">
+                        <Button variant="outline" size="sm">
                           <ExternalLink className="h-4 w-4 mr-2" />
                           Details
                         </Button>
@@ -283,7 +271,7 @@ export default function MemberDashboard() {
                     ))}
                   <Button
                     variant="outline"
-                    className="w-full border-[#ffdd00] text-[#ffdd00] hover:bg-[#ffdd00] hover:text-black font-semibold"
+                    className="w-full font-semibold"
                     onClick={() => window.location.href = '/member/events'}
                   >
                     View All Events
@@ -291,9 +279,9 @@ export default function MemberDashboard() {
                 </div>
               ) : (
                 <div className="text-center py-8">
-                  <Calendar className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                  <p className="text-gray-600 font-medium">No upcoming events at the moment</p>
-                  <p className="text-sm text-gray-500 mt-2">Check back soon for new community events!</p>
+                  <Calendar className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                  <p className="text-muted-foreground font-medium">No upcoming events at the moment</p>
+                  <p className="text-sm text-muted-foreground mt-2">Check back soon for new community events!</p>
                 </div>
               )}
             </CardContent>
@@ -301,50 +289,50 @@ export default function MemberDashboard() {
         </div>
 
         {/* Quick Actions */}
-        <Card className="border-0 shadow-lg bg-gradient-to-r from-gray-50 to-white">
+        <Card className="shadow-sm bg-muted">
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
-              <div className="p-2 rounded-lg bg-gradient-to-r from-[#ffdd00] to-yellow-400">
-                <Award className="h-5 w-5 text-black" />
+              <div className="p-2 rounded-lg bg-muted">
+                <Award className="h-5 w-5 text-muted-foreground" />
               </div>
               <span>Quick Actions</span>
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <Button
                 variant="outline"
-                className="h-auto p-6 flex flex-col items-center gap-3 border-gray-200 hover:border-[#ffdd00] hover:bg-[#ffdd00]/10 transition-all duration-200"
+                className="h-auto p-6 flex flex-col items-center gap-3 border-border hover:bg-accent transition-all duration-200"
                 onClick={() => window.location.href = '/store'}
               >
-                <ShoppingBag className="h-6 w-6 text-[#ffdd00]" />
+                <ShoppingBag className="h-6 w-6 text-muted-foreground" />
                 <span className="font-semibold">Visit Store</span>
               </Button>
 
               <Button
                 variant="outline"
-                className="h-auto p-6 flex flex-col items-center gap-3 border-gray-200 hover:border-[#ffdd00] hover:bg-[#ffdd00]/10 transition-all duration-200"
+                className="h-auto p-6 flex flex-col items-center gap-3 border-border hover:bg-accent transition-all duration-200"
                 onClick={() => window.location.href = '/member/events'}
               >
-                <Calendar className="h-6 w-6 text-[#ffdd00]" />
+                <Calendar className="h-6 w-6 text-muted-foreground" />
                 <span className="font-semibold">View Events</span>
               </Button>
 
               <Button
                 variant="outline"
-                className="h-auto p-6 flex flex-col items-center gap-3 border-gray-200 hover:border-[#ffdd00] hover:bg-[#ffdd00]/10 transition-all duration-200"
+                className="h-auto p-6 flex flex-col items-center gap-3 border-border hover:bg-accent transition-all duration-200"
                 onClick={() => window.location.href = '/member/quotes'}
               >
-                <Quote className="h-6 w-6 text-[#ffdd00]" />
+                <Quote className="h-6 w-6 text-muted-foreground" />
                 <span className="font-semibold">Read Quotes</span>
               </Button>
 
               <Button
                 variant="outline"
-                className="h-auto p-6 flex flex-col items-center gap-3 border-gray-200 hover:border-[#ffdd00] hover:bg-[#ffdd00]/10 transition-all duration-200"
+                className="h-auto p-6 flex flex-col items-center gap-3 border-border hover:bg-accent transition-all duration-200"
                 onClick={() => window.location.href = '/member/profile'}
               >
-                <Users className="h-6 w-6 text-[#ffdd00]" />
+                <Users className="h-6 w-6 text-muted-foreground" />
                 <span className="font-semibold">My Profile</span>
               </Button>
             </div>
@@ -352,28 +340,28 @@ export default function MemberDashboard() {
         </Card>
 
         {/* Support Community Section */}
-        <Card className="border-0 shadow-lg bg-gradient-to-r from-[#ffdd00]/10 to-yellow-100/50">
+        <Card className="shadow-sm bg-muted">
           <CardContent className="p-6 sm:p-8">
             <div className="text-center">
               <div className="flex flex-col sm:flex-row items-center justify-center space-y-3 sm:space-y-0 sm:space-x-3 mb-4 sm:mb-6">
-                <div className="p-2 sm:p-3 rounded-full bg-gradient-to-r from-[#ffdd00] to-yellow-400 shadow-lg">
-                  <Heart className="h-6 w-6 sm:h-8 sm:w-8 text-black" />
+                <div className="p-2 sm:p-3 rounded-full bg-card shadow-sm">
+                  <Heart className="h-6 w-6 sm:h-8 sm:w-8 text-foreground" />
                 </div>
-                <h3 className="text-xl sm:text-2xl font-bold text-gray-900">Support Our Community</h3>
+                <h3 className="text-xl sm:text-2xl font-bold text-foreground">Support Our Community</h3>
               </div>
-              <p className="text-base sm:text-lg text-gray-700 mb-6 sm:mb-8 max-w-2xl mx-auto px-4">
+              <p className="text-base sm:text-lg text-muted-foreground mb-6 sm:mb-8 max-w-2xl mx-auto px-4">
                 Your donation helps us provide better healthcare services and support our community initiatives.
                 Every contribution makes a difference.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center space-y-3 sm:space-y-0 sm:space-x-6 px-4">
                 <DonationDialog>
-                  <Button className="bg-gradient-to-r from-[#ffdd00] to-yellow-400 text-black font-semibold px-6 sm:px-8 py-2 sm:py-3 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200 w-full sm:w-auto">
+                  <Button className="font-semibold px-6 sm:px-8 py-2 sm:py-3 w-full sm:w-auto">
                     <Heart className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
                     Make a Donation
                   </Button>
                 </DonationDialog>
                 <Link href="/store"
-                  className="flex items-center justify-center rounded border border-[#ffdd00] text-[#ffdd00] hover:bg-[#ffdd00] hover:text-black font-semibold px-6 sm:px-8 py-2 transition-all duration-200 w-full sm:w-auto"
+                  className="flex items-center justify-center rounded border border-input bg-background text-foreground hover:bg-accent hover:text-accent-foreground font-semibold px-6 sm:px-8 py-2 transition-all duration-200 w-full sm:w-auto"
                 >
                   <Gift className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
                   Visit Store

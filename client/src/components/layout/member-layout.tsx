@@ -70,9 +70,9 @@ export function MemberLayout({ children }: MemberLayoutProps) {
   }, [isMobileMenuOpen]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
+    <div className="min-h-screen bg-background">
       {/* Premium Header */}
-      <header className="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50">
+      <header className="bg-card shadow-sm border-b border-border sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             {/* Logo and Brand */}
@@ -85,16 +85,16 @@ export function MemberLayout({ children }: MemberLayoutProps) {
                 />
               </div>
               <div className="hidden sm:block">
-                <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+                <h1 className="text-xl sm:text-2xl font-bold text-foreground">
                   TiNHiH Community
                 </h1>
-                <p className="text-sm text-gray-600 font-medium">Premium Member Portal</p>
+                <p className="text-sm text-muted-foreground font-medium">Premium Member Portal</p>
               </div>
               <div className="sm:hidden">
-                <h1 className="text-lg font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+                <h1 className="text-lg font-bold text-foreground">
                   TiNHiH
                 </h1>
-                <p className="text-xs text-gray-600 font-medium">Community</p>
+                <p className="text-xs text-muted-foreground font-medium">Community</p>
               </div>
             </div>
 
@@ -102,11 +102,11 @@ export function MemberLayout({ children }: MemberLayoutProps) {
             <div className="flex items-center space-x-4 lg:space-x-6">
               {/* Desktop User Info */}
               <div className="hidden md:block text-right">
-                <p className="text-lg font-semibold text-gray-900">
+                <p className="text-lg font-semibold text-foreground">
                   {user?.firstName} {user?.lastName}
                 </p>
                 <div className="">
-                  <Badge className="bg-gradient-to-r from-[#ffdd00] to-yellow-400 text-black font-semibold px-3 py-1">
+                  <Badge variant="secondary" className="font-semibold px-3 py-1">
                     <Crown className="h-3 w-3 mr-1" />
                      Member
                   </Badge>
@@ -118,7 +118,7 @@ export function MemberLayout({ children }: MemberLayoutProps) {
                 {/* <p className="text-sm font-semibold text-gray-900 hidden">
                   {user?.firstName} {user?.lastName}
                 </p> */}
-                <Badge className="bg-gradient-to-r from-[#ffdd00] to-yellow-400 text-black font-semibold px-2 py-0.5 text-xs">
+                <Badge variant="secondary" className="font-semibold px-2 py-0.5 text-xs">
                   <Crown className="h-2 w-2 mr-1" />
                   Member
                 </Badge>
@@ -129,7 +129,7 @@ export function MemberLayout({ children }: MemberLayoutProps) {
                 variant="outline"
                 size="sm"
                 onClick={handleLogout}
-                className="hidden md:flex items-center space-x-2 border-gray-200 hover:border-[#ffdd00] hover:bg-[#ffdd00]/10 transition-all duration-200"
+                className="hidden md:flex items-center space-x-2 border-border hover:bg-accent transition-all duration-200"
               >
                 <LogOut className="h-4 w-4" />
                 <span>Logout</span>
@@ -140,7 +140,7 @@ export function MemberLayout({ children }: MemberLayoutProps) {
                 variant="outline"
                 size="sm"
                 onClick={toggleMobileMenu}
-                className="md:hidden flex items-center space-x-2 border-gray-200 hover:border-[#ffdd00] hover:bg-[#ffdd00]/10 transition-all duration-200 mobile-menu-container"
+                className="md:hidden flex items-center space-x-2 border-border hover:bg-accent transition-all duration-200 mobile-menu-container"
               >
                 {isMobileMenuOpen ? (
                   <X className="h-4 w-4" />
@@ -154,7 +154,7 @@ export function MemberLayout({ children }: MemberLayoutProps) {
       </header>
 
       {/* Premium Navigation */}
-      <nav className="bg-white border-b border-gray-100 shadow-sm mobile-menu-container sticky top-20 z-40">
+      <nav className="bg-card border-b border-border shadow-sm mobile-menu-container sticky top-20 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-1">
@@ -169,8 +169,8 @@ export function MemberLayout({ children }: MemberLayoutProps) {
                   className={cn(
                     "flex items-center space-x-2 py-4 px-6 font-medium text-sm transition-all duration-200 rounded-lg mx-1",
                     isActive
-                      ? "bg-gradient-to-r from-[#ffdd00] to-yellow-400 text-black shadow-md"
-                      : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                      ? "bg-accent text-foreground shadow-sm"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted"
                   )}
                 >
                   <Icon className="h-4 w-4" />
@@ -182,7 +182,7 @@ export function MemberLayout({ children }: MemberLayoutProps) {
 
           {/* Mobile Navigation */}
           <div className={cn(
-            "md:hidden transition-all duration-300 ease-in-out overflow-hidden border-t border-gray-100",
+            "md:hidden transition-all duration-300 ease-in-out overflow-hidden border-t border-border",
             isMobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
           )}>
             <div className="py-4 space-y-2">
@@ -198,8 +198,8 @@ export function MemberLayout({ children }: MemberLayoutProps) {
                     className={cn(
                       "flex items-center space-x-3 py-3 px-4 font-medium text-sm transition-all duration-200 rounded-lg cursor-pointer",
                       isActive
-                        ? "bg-gradient-to-r from-[#ffdd00] to-yellow-400 text-black shadow-md"
-                        : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                        ? "bg-accent text-foreground shadow-sm"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted"
                     )}
                   >
                     <Icon className="h-5 w-5" />
@@ -209,7 +209,7 @@ export function MemberLayout({ children }: MemberLayoutProps) {
               })}
               
               {/* Mobile Logout Button */}
-              <div className="pt-4 border-t border-gray-100">
+              <div className="pt-4 border-t border-border">
                 <Button
                   variant="outline"
                   size="sm"
@@ -217,7 +217,7 @@ export function MemberLayout({ children }: MemberLayoutProps) {
                     setIsMobileMenuOpen(false);
                     handleLogout();
                   }}
-                  className="w-full flex items-center justify-center space-x-2 border-gray-200 hover:border-[#ffdd00] hover:bg-[#ffdd00]/10 transition-all duration-200"
+                  className="w-full flex items-center justify-center space-x-2 border-border hover:bg-accent transition-all duration-200"
                 >
                   <LogOut className="h-4 w-4" />
                   <span>Logout</span>
@@ -234,7 +234,7 @@ export function MemberLayout({ children }: MemberLayoutProps) {
       </main>
 
       {/* Premium Footer */}
-      <footer className="bg-white border-t border-gray-100 mt-auto">
+      <footer className="bg-card border-t border-border mt-auto">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">
             <div className="flex items-center justify-center space-x-2 mb-4">
@@ -245,12 +245,12 @@ export function MemberLayout({ children }: MemberLayoutProps) {
                   className="w-full h-full object-contain"
                 />
               </div>
-              <p className="text-lg font-semibold text-gray-900">TiNHiH Portal</p>
+              <p className="text-lg font-semibold text-foreground">TiNHiH Portal</p>
             </div>
-            <p className="text-sm text-gray-600 mb-2">
+            <p className="text-sm text-muted-foreground mb-2">
               Empowering healthcare communities through connection and support.
             </p>
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-muted-foreground">
               © {new Date().getFullYear()} TiNHiH Portal. All rights reserved.
             </p>
           </div>

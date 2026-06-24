@@ -275,7 +275,7 @@ export default function AdminEvents() {
         <Card>
           <CardContent className="p-6">
             <div className="text-center">
-              <h2 className="text-2xl font-bold text-red-600 mb-2">Access Denied</h2>
+              <h2 className="text-2xl font-bold text-foreground mb-2">Access Denied</h2>
               <p className="text-muted-foreground">
                 You don't have permission to access this page.
               </p>
@@ -360,7 +360,7 @@ export default function AdminEvents() {
         <CardContent>
           {isLoading ? (
             <div className="text-center py-8">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-foreground mx-auto"></div>
               <p className="mt-2 text-muted-foreground">Loading events...</p>
             </div>
           ) : filteredEvents.length === 0 ? (
@@ -405,7 +405,7 @@ export default function AdminEvents() {
                               href={event.link}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-xs text-blue-600 hover:underline flex items-center gap-1"
+                              className="text-xs text-muted-foreground hover:underline flex items-center gap-1"
                             >
                               <ExternalLink className="h-3 w-3" />
                               View Link
@@ -501,7 +501,7 @@ export default function AdminEvents() {
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction
               onClick={confirmDelete}
-              className="bg-[#ffdd00] hover:bg-[#ffdd00]/90 text-black"
+              className="bg-primary text-primary-foreground hover:bg-primary/90"
               disabled={deleteEventMutation.isPending}
             >
               {deleteEventMutation.isPending ? "Deleting..." : "Delete Event"}
@@ -609,7 +609,7 @@ function EventForm({ formData, setFormData, onSubmit, onCancel, isLoading }: Eve
 
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <Label htmlFor="title">Event Title *</Label>
           <Input
@@ -617,10 +617,10 @@ function EventForm({ formData, setFormData, onSubmit, onCancel, isLoading }: Eve
             value={formData.title}
             onChange={(e) => setFormData({ ...formData, title: e.target.value })}
             placeholder="Enter event title"
-            className={errors.title ? "border-red-500" : ""}
+            className={errors.title ? "border-foreground" : ""}
           />
           {errors.title && (
-            <p className="text-sm text-red-500 mt-1">{errors.title}</p>
+            <p className="text-sm text-foreground mt-1">{errors.title}</p>
           )}
         </div>
         <div>
@@ -652,14 +652,14 @@ function EventForm({ formData, setFormData, onSubmit, onCancel, isLoading }: Eve
           onChange={(e) => setFormData({ ...formData, description: e.target.value })}
           placeholder="Enter event description"
           rows={3}
-          className={errors.description ? "border-red-500" : ""}
+          className={errors.description ? "border-foreground" : ""}
         />
         {errors.description && (
-          <p className="text-sm text-red-500 mt-1">{errors.description}</p>
+          <p className="text-sm text-foreground mt-1">{errors.description}</p>
         )}
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <Label htmlFor="startDate">Start Date *</Label>
           <Input
@@ -667,10 +667,10 @@ function EventForm({ formData, setFormData, onSubmit, onCancel, isLoading }: Eve
             type="date"
             value={formData.startDate}
             onChange={(e) => setFormData({ ...formData, startDate: e.target.value })}
-            className={errors.startDate ? "border-red-500" : ""}
+            className={errors.startDate ? "border-foreground" : ""}
           />
           {errors.startDate && (
-            <p className="text-sm text-red-500 mt-1">{errors.startDate}</p>
+            <p className="text-sm text-foreground mt-1">{errors.startDate}</p>
           )}
         </div>
         <div>
@@ -680,15 +680,15 @@ function EventForm({ formData, setFormData, onSubmit, onCancel, isLoading }: Eve
             type="time"
             value={formData.startTime}
             onChange={(e) => setFormData({ ...formData, startTime: e.target.value })}
-            className={errors.startTime ? "border-red-500" : ""}
+            className={errors.startTime ? "border-foreground" : ""}
           />
           {errors.startTime && (
-            <p className="text-sm text-red-500 mt-1">{errors.startTime}</p>
+            <p className="text-sm text-foreground mt-1">{errors.startTime}</p>
           )}
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <Label htmlFor="endDate">End Date *</Label>
           <Input
@@ -696,10 +696,10 @@ function EventForm({ formData, setFormData, onSubmit, onCancel, isLoading }: Eve
             type="date"
             value={formData.endDate}
             onChange={(e) => setFormData({ ...formData, endDate: e.target.value })}
-            className={errors.endDate ? "border-red-500" : ""}
+            className={errors.endDate ? "border-foreground" : ""}
           />
           {errors.endDate && (
-            <p className="text-sm text-red-500 mt-1">{errors.endDate}</p>
+            <p className="text-sm text-foreground mt-1">{errors.endDate}</p>
           )}
         </div>
         <div>
@@ -709,10 +709,10 @@ function EventForm({ formData, setFormData, onSubmit, onCancel, isLoading }: Eve
             type="time"
             value={formData.endTime}
             onChange={(e) => setFormData({ ...formData, endTime: e.target.value })}
-            className={errors.endTime ? "border-red-500" : ""}
+            className={errors.endTime ? "border-foreground" : ""}
           />
           {errors.endTime && (
-            <p className="text-sm text-red-500 mt-1">{errors.endTime}</p>
+            <p className="text-sm text-foreground mt-1">{errors.endTime}</p>
           )}
         </div>
       </div>

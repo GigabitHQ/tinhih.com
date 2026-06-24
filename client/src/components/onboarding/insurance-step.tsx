@@ -107,7 +107,7 @@ export function InsuranceStep({ data, existingData, onComplete, onBack, isEditin
           {/* Primary Insurance */}
           <div className="space-y-4">
             <h3 className="text-lg font-medium text-foreground border-b border-border pb-2 flex items-center gap-2">
-              <Shield className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+              <Shield className="w-5 h-5 text-muted-foreground" />
               Primary Insurance
             </h3>
             
@@ -141,7 +141,7 @@ export function InsuranceStep({ data, existingData, onComplete, onBack, isEditin
                         <FormControl>
                           <Input placeholder="e.g., Blue Cross Blue Shield" {...field} />
                         </FormControl>
-                        <FormMessage className="text-red-600"/>
+                        <FormMessage />
                       </FormItem>
                     )}
                   />
@@ -155,7 +155,7 @@ export function InsuranceStep({ data, existingData, onComplete, onBack, isEditin
                         <FormControl>
                           <Input placeholder="Enter member ID" {...field} />
                         </FormControl>
-                        <FormMessage className="text-red-600"/>
+                        <FormMessage />
                       </FormItem>
                     )}
                   />
@@ -171,7 +171,7 @@ export function InsuranceStep({ data, existingData, onComplete, onBack, isEditin
                         <FormControl>
                           <Input placeholder="Enter group number" {...field} />
                         </FormControl>
-                        <FormMessage className="text-red-600"/>
+                        <FormMessage />
                       </FormItem>
                     )}
                   />
@@ -185,7 +185,7 @@ export function InsuranceStep({ data, existingData, onComplete, onBack, isEditin
                         <FormControl>
                           <Input placeholder="Enter policy holder name" {...field} />
                         </FormControl>
-                        <FormMessage className="text-red-600"/>
+                        <FormMessage />
                       </FormItem>
                     )}
                   />
@@ -201,7 +201,7 @@ export function InsuranceStep({ data, existingData, onComplete, onBack, isEditin
                         <FormControl>
                           <Input placeholder="MM/DD/YYYY" {...field} />
                         </FormControl>
-                        <FormMessage className="text-red-600"/>
+                        <FormMessage />
                       </FormItem>
                     )}
                   />
@@ -226,7 +226,7 @@ export function InsuranceStep({ data, existingData, onComplete, onBack, isEditin
                             <SelectItem value="other">Other</SelectItem>
                           </SelectContent>
                         </Select>
-                        <FormMessage className="text-red-600"/>
+                        <FormMessage />
                       </FormItem>
                     )}
                   />
@@ -269,7 +269,7 @@ export function InsuranceStep({ data, existingData, onComplete, onBack, isEditin
                         <FormControl>
                           <Input placeholder="Enter provider name" {...field} />
                         </FormControl>
-                        <FormMessage className="text-red-600"/>
+                        <FormMessage />
                       </FormItem>
                     )}
                   />
@@ -283,7 +283,7 @@ export function InsuranceStep({ data, existingData, onComplete, onBack, isEditin
                         <FormControl>
                           <Input placeholder="Enter member ID" {...field} />
                         </FormControl>
-                        <FormMessage className="text-red-600"/>
+                        <FormMessage />
                       </FormItem>
                     )}
                   />
@@ -298,7 +298,7 @@ export function InsuranceStep({ data, existingData, onComplete, onBack, isEditin
                       <FormControl>
                         <Input placeholder="Enter group number" {...field} />
                       </FormControl>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -309,7 +309,7 @@ export function InsuranceStep({ data, existingData, onComplete, onBack, isEditin
           {/* Financial Information */}
           <div className="space-y-4">
             <h3 className="text-lg font-medium text-foreground border-b border-border pb-2 flex items-center gap-2">
-              <DollarSign className="w-5 h-5 text-green-600 dark:text-green-400" />
+              <DollarSign className="w-5 h-5 text-muted-foreground" />
               Financial Information
             </h3>
             
@@ -334,7 +334,7 @@ export function InsuranceStep({ data, existingData, onComplete, onBack, isEditin
                         <SelectItem value="other">Other</SelectItem>
                       </SelectContent>
                     </Select>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -361,7 +361,7 @@ export function InsuranceStep({ data, existingData, onComplete, onBack, isEditin
                         <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
                       </SelectContent>
                     </Select>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -390,7 +390,7 @@ export function InsuranceStep({ data, existingData, onComplete, onBack, isEditin
                         <SelectItem value="other">Other</SelectItem>
                       </SelectContent>
                     </Select>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -404,7 +404,7 @@ export function InsuranceStep({ data, existingData, onComplete, onBack, isEditin
                     <FormControl>
                       <Input placeholder="Enter employer name" {...field} />
                     </FormControl>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -414,12 +414,12 @@ export function InsuranceStep({ data, existingData, onComplete, onBack, isEditin
           {/* Financial Assistance */}
           <div className="space-y-4">
             <h3 className="text-lg font-medium text-foreground border-b border-border pb-2 flex items-center gap-2">
-              <FileText className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+              <FileText className="w-5 h-5 text-muted-foreground" />
               Financial Assistance
             </h3>
             
-            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-              <p className="text-sm text-yellow-800">
+            <div className="bg-muted border border-border rounded-lg p-4">
+              <p className="text-sm text-muted-foreground">
                 <strong>TiNHiH Foundation offers sliding scale fees and financial assistance</strong> to ensure that cost is never a barrier to receiving the care you need. We are committed to making recovery accessible to everyone.
               </p>
             </div>
@@ -466,7 +466,7 @@ export function InsuranceStep({ data, existingData, onComplete, onBack, isEditin
                             <SelectItem value="6+">6+ people</SelectItem>
                           </SelectContent>
                         </Select>
-                        <FormMessage className="text-red-600"/>
+                        <FormMessage />
                       </FormItem>
                     )}
                   />
@@ -480,7 +480,7 @@ export function InsuranceStep({ data, existingData, onComplete, onBack, isEditin
                         <FormControl>
                           <Input placeholder="Enter monthly income" {...field} />
                         </FormControl>
-                        <FormMessage className="text-red-600"/>
+                        <FormMessage />
                       </FormItem>
                     )}
                   />
@@ -498,7 +498,7 @@ export function InsuranceStep({ data, existingData, onComplete, onBack, isEditin
                           {...field} 
                         />
                       </FormControl>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -532,7 +532,7 @@ export function InsuranceStep({ data, existingData, onComplete, onBack, isEditin
                         <SelectItem value="other">Other</SelectItem>
                       </SelectContent>
                     </Select>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -558,7 +558,7 @@ export function InsuranceStep({ data, existingData, onComplete, onBack, isEditin
                         <SelectItem value="no-preference">No preference</SelectItem>
                       </SelectContent>
                     </Select>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -599,7 +599,7 @@ export function InsuranceStep({ data, existingData, onComplete, onBack, isEditin
                       {...field} 
                     />
                   </FormControl>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />

@@ -4,7 +4,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
@@ -12,6 +11,8 @@ import { api } from "@/lib/api";
 import { usePageTitle } from "@/context/page-context";
 import { format } from "date-fns";
 import { DollarSign, Users, TrendingUp, Heart } from "lucide-react";
+import { StatCard } from "@/components/ui/stat-card";
+import { StatusBadge } from "@/components/ui/status-badge";
 
 interface Donation {
   id: string;
@@ -115,17 +116,7 @@ export default function AdminDonations() {
     setPagination(prev => ({ ...prev, page }));
   };
 
-  const getStatusBadge = (status: string) => {
-    const statusConfig = {
-      pending: { color: "bg-yellow-100 text-yellow-800", label: "Pending" },
-      succeeded: { color: "bg-green-100 text-green-800", label: "Succeeded" },
-      failed: { color: "bg-red-100 text-red-800", label: "Failed" },
-      cancelled: { color: "bg-gray-100 text-gray-800", label: "Cancelled" },
-    };
-
-    const config = statusConfig[status as keyof typeof statusConfig] || statusConfig.pending;
-    return <Badge className={config.color}>{config.label}</Badge>;
-  };
+  const getStatusBadge = (status: string) => <StatusBadge status={status} />;
 
   const stats = {
     total: donations.length,
@@ -138,54 +129,11 @@ export default function AdminDonations() {
     <AdminLayout>
       <div className="space-y-6 text-xs">
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center space-x-2">
-              <Heart className="h-4 w-4 text-red-500" />
-              <div>
-                <p className="text-xs font-medium text-muted-foreground">Total Donations</p>
-                <p className="text-xl font-bold">{stats.total}</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center space-x-2">
-              <DollarSign className="h-4 w-4 text-green-500" />
-              <div>
-                <p className="text-xs font-medium text-muted-foreground">Total Amount</p>
-                <p className="text-xl font-bold">${stats.totalAmount.toFixed(2)}</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center space-x-2">
-              <TrendingUp className="h-4 w-4 text-blue-500" />
-              <div>
-                <p className="text-xs font-medium text-muted-foreground">Successful</p>
-                <p className="text-xl font-bold">{stats.succeeded}</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center space-x-2">
-              <Users className="h-4 w-4 text-yellow-500" />
-              <div>
-                <p className="text-xs font-medium text-muted-foreground">Pending</p>
-                <p className="text-xl font-bold">{stats.pending}</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <StatCard label="Total Donations" value={stats.total} icon={Heart} />
+          <StatCard label="Total Amount" value={`$${stats.totalAmount.toFixed(2)}`} icon={DollarSign} />
+          <StatCard label="Successful" value={stats.succeeded} icon={TrendingUp} />
+          <StatCard label="Pending" value={stats.pending} icon={Users} />
       </div>
 
       {/* Filters */}
@@ -232,7 +180,7 @@ export default function AdminDonations() {
         <CardContent>
           {loading ? (
             <div className="text-center py-8">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 mx-auto"></div>
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-foreground mx-auto"></div>
               <p className="mt-2 text-muted-foreground">Loading donations...</p>
             </div>
           ) : donations.length === 0 ? (

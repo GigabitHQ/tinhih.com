@@ -14,8 +14,8 @@ export function RecentActivity({ className }: RecentActivityProps) {
       message: "Completed appointment with Sarah Wilson",
       timestamp: "2 hours ago",
       icon: CheckCircle,
-      iconBg: "bg-green-100",
-      iconColor: "text-green-600",
+      iconBg: "bg-muted",
+      iconColor: "text-muted-foreground",
     },
     {
       id: 2,
@@ -23,8 +23,8 @@ export function RecentActivity({ className }: RecentActivityProps) {
       message: "Updated SOAP notes for Michael Chen", 
       timestamp: "3 hours ago",
       icon: FileText,
-      iconBg: "bg-blue-100",
-      iconColor: "text-blue-600",
+      iconBg: "bg-muted",
+      iconColor: "text-muted-foreground",
     },
     {
       id: 3,
@@ -32,8 +32,8 @@ export function RecentActivity({ className }: RecentActivityProps) {
       message: "New patient registered: Emma Davis",
       timestamp: "4 hours ago",
       icon: UserPlus,
-      iconBg: "bg-purple-100",
-      iconColor: "text-purple-600",
+      iconBg: "bg-muted",
+      iconColor: "text-muted-foreground",
     },
     {
       id: 4,
@@ -41,8 +41,8 @@ export function RecentActivity({ className }: RecentActivityProps) {
       message: "Payment received from David Rodriguez",
       timestamp: "6 hours ago",
       icon: DollarSign,
-      iconBg: "bg-yellow-100",
-      iconColor: "text-yellow-600",
+      iconBg: "bg-muted",
+      iconColor: "text-muted-foreground",
     },
   ];
 

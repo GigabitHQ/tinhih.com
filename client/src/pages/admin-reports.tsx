@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { StatCard } from "@/components/ui/stat-card";
 import { useToast } from "@/hooks/use-toast";
 import { api } from "@/lib/api";
 import { usePageTitle } from "@/context/page-context";
@@ -43,16 +44,16 @@ import {
   Area
 } from 'recharts';
 
-// Chart colors
+// Chart colors — monochrome greyscale ramp (state conveyed by value, not hue)
 const CHART_COLORS = {
-  primary: '#ffdd00',
-  secondary: '#3b82f6',
-  success: '#10b981',
-  warning: '#f59e0b',
-  danger: '#ef4444',
-  purple: '#8b5cf6',
-  pink: '#ec4899',
-  indigo: '#6366f1'
+  primary: '#171717',
+  secondary: '#404040',
+  success: '#525252',
+  warning: '#737373',
+  danger: '#a3a3a3',
+  purple: '#262626',
+  pink: '#8a8a8a',
+  indigo: '#bdbdbd'
 };
 
 interface ReportData {
@@ -183,7 +184,7 @@ export default function AdminReports() {
     return (
       <AdminLayout>
         <div className="flex flex-col items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#ffdd00] mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-foreground mb-4"></div>
           <h3 className="text-lg font-semibold mb-2">Loading Analytics Dashboard</h3>
           <p className="text-muted-foreground">Gathering your data...</p>
         </div>
@@ -195,7 +196,7 @@ export default function AdminReports() {
     return (
       <AdminLayout>
         <div className="flex flex-col items-center justify-center h-64">
-          <div className="text-red-500 mb-4">
+          <div className="text-muted-foreground mb-4">
             <BarChart3 className="h-12 w-12" />
           </div>
           <h3 className="text-lg font-semibold mb-2">Error Loading Reports</h3>
@@ -293,41 +294,41 @@ export default function AdminReports() {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-2">
-              <div className="text-center p-2 bg-blue-50 rounded-lg">
-                <p className="text-sm font-bold text-blue-600">
+              <div className="text-center p-2 bg-muted rounded-lg">
+                <p className="text-sm font-bold text-foreground">
                   {reportData?.totalPatients || 0}
                 </p>
-                <p className="text-xs text-blue-600">Clients (Patients)</p>
+                <p className="text-xs text-muted-foreground">Clients (Patients)</p>
               </div>
-              <div className="text-center p-2 bg-green-50 rounded-lg">
-                <p className="text-sm font-bold text-green-600">
+              <div className="text-center p-2 bg-muted rounded-lg">
+                <p className="text-sm font-bold text-foreground">
                   {reportData?.totalAppointments || 0}
                 </p>
-                <p className="text-xs text-green-600">Appointments</p>
+                <p className="text-xs text-muted-foreground">Appointments</p>
               </div>
-              <div className="text-center p-2 bg-yellow-50 rounded-lg">
-                <p className="text-sm font-bold text-yellow-600">
+              <div className="text-center p-2 bg-muted rounded-lg">
+                <p className="text-sm font-bold text-foreground">
                   ${Number(reportData?.totalRevenue || 0).toFixed(0)}
                 </p>
-                <p className="text-xs text-yellow-600">Revenue</p>
+                <p className="text-xs text-muted-foreground">Revenue</p>
               </div>
-              <div className="text-center p-2 bg-purple-50 rounded-lg">
-                <p className="text-sm font-bold text-purple-600">
+              <div className="text-center p-2 bg-muted rounded-lg">
+                <p className="text-sm font-bold text-foreground">
                   {reportData?.totalInvoices || 0}
                 </p>
-                <p className="text-xs text-purple-600">Service Bills</p>
+                <p className="text-xs text-muted-foreground">Service Bills</p>
               </div>
-              <div className="text-center p-2 bg-indigo-50 rounded-lg">
-                <p className="text-sm font-bold text-indigo-600">
+              <div className="text-center p-2 bg-muted rounded-lg">
+                <p className="text-sm font-bold text-foreground">
                   {reportData?.totalPractitioners || 0}
                 </p>
-                <p className="text-xs text-indigo-600">Practitioners</p>
+                <p className="text-xs text-muted-foreground">Practitioners</p>
               </div>
-              <div className="text-center p-2 bg-pink-50 rounded-lg">
-                <p className="text-sm font-bold text-pink-600">
+              <div className="text-center p-2 bg-muted rounded-lg">
+                <p className="text-sm font-bold text-foreground">
                   {reportData?.totalMembers || 0}
                 </p>
-                <p className="text-xs text-pink-600">Community Members</p>
+                <p className="text-xs text-muted-foreground">Community Members</p>
               </div>
             </CardContent>
           </Card>
@@ -335,128 +336,58 @@ export default function AdminReports() {
 
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <Card className="border-l-4 border-l-blue-500 hover:shadow-lg transition-shadow">
-            <CardContent className="p-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-xs font-medium text-muted-foreground">Total Patients</p>
-                  <p className="text-xl font-bold text-blue-600">{reportData?.totalPatients || 0}</p>
-                  <p className="text-xs text-green-600 mt-1">Active patients</p>
-                </div>
-                <div className="p-2 bg-blue-100 rounded-full">
-                  <Users className="h-4 w-4 text-blue-600" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          
-          <Card className="border-l-4 border-l-green-500 hover:shadow-lg transition-shadow">
-            <CardContent className="p-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-xs font-medium text-muted-foreground">Total Appointments</p>
-                  <p className="text-xl font-bold text-green-600">{reportData?.totalAppointments || 0}</p>
-                  <p className="text-xs text-green-600 mt-1">All appointments</p>
-                </div>
-                <div className="p-2 bg-green-100 rounded-full">
-                  <Calendar className="h-4 w-4 text-green-600" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          
-          <Card className="border-l-4 border-l-yellow-500 hover:shadow-lg transition-shadow">
-            <CardContent className="p-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-xs font-medium text-muted-foreground">Total Donations</p>
-                  <p className="text-xl font-bold text-yellow-600">{reportData?.totalDonations || 0}</p>
-                  <p className="text-xs text-green-600 mt-1">All donations</p>
-                </div>
-                <div className="p-2 bg-yellow-100 rounded-full">
-                  <DollarSign className="h-4 w-4 text-yellow-600" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-l-4 border-l-purple-500 hover:shadow-lg transition-shadow">
-            <CardContent className="p-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-xs font-medium text-muted-foreground">Total Revenue</p>
-                  <p className="text-xl font-bold text-purple-600">${Number(reportData?.totalRevenue || 0).toFixed(2)}</p>
-                  <p className="text-xs text-green-600 mt-1">Total earnings</p>
-                </div>
-                <div className="p-2 bg-purple-100 rounded-full">
-                  <TrendingUp className="h-4 w-4 text-purple-600" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          <StatCard
+            label="Total Patients"
+            value={reportData?.totalPatients || 0}
+            icon={Users}
+            hint="Active patients"
+          />
+          <StatCard
+            label="Total Appointments"
+            value={reportData?.totalAppointments || 0}
+            icon={Calendar}
+            hint="All appointments"
+          />
+          <StatCard
+            label="Total Donations"
+            value={reportData?.totalDonations || 0}
+            icon={DollarSign}
+            hint="All donations"
+          />
+          <StatCard
+            label="Total Revenue"
+            value={`$${Number(reportData?.totalRevenue || 0).toFixed(2)}`}
+            icon={TrendingUp}
+            hint="Total earnings"
+          />
         </div>
 
         {/* Additional Stats Row */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <Card className="border-l-4 border-l-indigo-500 hover:shadow-lg transition-shadow">
-            <CardContent className="p-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-xs font-medium text-muted-foreground">Practitioners</p>
-                  <p className="text-xl font-bold text-indigo-600">{reportData?.totalPractitioners || 0}</p>
-                  <p className="text-xs text-green-600 mt-1">Healthcare providers</p>
-                </div>
-                <div className="p-2 bg-indigo-100 rounded-full">
-                  <Users className="h-4 w-4 text-indigo-600" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-l-4 border-l-pink-500 hover:shadow-lg transition-shadow">
-            <CardContent className="p-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-xs font-medium text-muted-foreground">Community Members</p>
-                  <p className="text-xl font-bold text-pink-600">{reportData?.totalMembers || 0}</p>
-                  <p className="text-xs text-green-600 mt-1">Former patients</p>
-                </div>
-                <div className="p-2 bg-pink-100 rounded-full">
-                  <Users className="h-4 w-4 text-pink-600" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-l-4 border-l-orange-500 hover:shadow-lg transition-shadow">
-            <CardContent className="p-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-xs font-medium text-muted-foreground">Service Bills</p>
-                  <p className="text-xl font-bold text-orange-600">{reportData?.totalInvoices || 0}</p>
-                  <p className="text-xs text-green-600 mt-1">{reportData?.paidInvoices || 0} paid</p>
-                </div>
-                <div className="p-2 bg-orange-100 rounded-full">
-                  <DollarSign className="h-4 w-4 text-orange-600" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-l-4 border-l-teal-500 hover:shadow-lg transition-shadow">
-            <CardContent className="p-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-xs font-medium text-muted-foreground">Messages</p>
-                  <p className="text-xl font-bold text-teal-600">{reportData?.totalMessages || 0}</p>
-                  <p className="text-xs text-green-600 mt-1">Total messages</p>
-                </div>
-                <div className="p-2 bg-teal-100 rounded-full">
-                  <Activity className="h-4 w-4 text-teal-600" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          <StatCard
+            label="Practitioners"
+            value={reportData?.totalPractitioners || 0}
+            icon={Users}
+            hint="Healthcare providers"
+          />
+          <StatCard
+            label="Community Members"
+            value={reportData?.totalMembers || 0}
+            icon={Users}
+            hint="Former patients"
+          />
+          <StatCard
+            label="Service Bills"
+            value={reportData?.totalInvoices || 0}
+            icon={DollarSign}
+            hint={`${reportData?.paidInvoices || 0} paid`}
+          />
+          <StatCard
+            label="Messages"
+            value={reportData?.totalMessages || 0}
+            icon={Activity}
+            hint="Total messages"
+          />
         </div>
 
         {/* Charts Section */}
@@ -562,7 +493,7 @@ export default function AdminReports() {
                       nameKey="status"
                       label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
                       outerRadius={80}
-                      fill="#8884d8"
+                      fill="#737373"
                       dataKey="count"
                     >
                       {reportData.appointmentStats.map((entry, index) => (
@@ -574,7 +505,7 @@ export default function AdminReports() {
                 </ResponsiveContainer>
                 <div className="flex flex-col justify-center space-y-4">
                   {reportData.appointmentStats.map((stat, index) => (
-                    <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                    <div key={index} className="flex items-center justify-between p-3 bg-muted rounded-lg">
                       <div className="flex items-center gap-3">
                         <div 
                           className="w-4 h-4 rounded-full" 
@@ -634,7 +565,7 @@ export default function AdminReports() {
                       </div>
                       <div className="text-right">
                         <p className="font-bold text-lg">${Number(donor.totalAmount || 0).toFixed(2)}</p>
-                        <p className="text-xs text-green-600">Top #{index + 1}</p>
+                        <p className="text-xs text-muted-foreground">Top #{index + 1}</p>
                       </div>
                     </div>
                   ))}
@@ -666,9 +597,9 @@ export default function AdminReports() {
           <CardContent>
             <div className="space-y-4">
               {reportData?.recentActivity?.map((activity, index) => (
-                <div key={activity.id} className="flex items-start space-x-4 p-4 border rounded-lg hover:bg-gray-50 transition-colors">
+                <div key={activity.id} className="flex items-start space-x-4 p-4 border rounded-lg hover:bg-muted/50 transition-colors">
                   <div className={`flex-shrink-0 w-3 h-3 rounded-full mt-2 ${
-                    activity.type === 'donation' ? 'bg-green-500' : 'bg-blue-500'
+                    activity.type === 'donation' ? 'bg-foreground' : 'bg-muted-foreground'
                   }`} />
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between">
@@ -683,7 +614,7 @@ export default function AdminReports() {
                           {activity.type}
                         </Badge>
                         {activity.amount && (
-                          <span className="font-bold text-green-600 text-xs">
+                          <span className="font-bold text-foreground text-xs">
                             ${Number(activity.amount || 0).toFixed(2)}
                           </span>
                         )}
@@ -697,7 +628,7 @@ export default function AdminReports() {
               ))}
               {(!reportData?.recentActivity || reportData.recentActivity.length === 0) && (
                 <div className="text-center py-12">
-                  <Activity className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+                  <Activity className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
                   <p className="text-muted-foreground">No recent activity found</p>
                 </div>
               )}

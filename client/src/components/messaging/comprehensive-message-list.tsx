@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
+import { SearchInput } from "@/components/ui/search-input";
 import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -16,7 +17,6 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import {
 	Plus,
 	MessageSquare,
-	Search,
 	Send,
 	Clock,
 	Calendar,
@@ -435,11 +435,11 @@ export function ComprehensiveMessageList() {
 	// Get message priority color
 	const getPriorityColor = (priority: string) => {
 		switch (priority) {
-			case 'urgent': return 'text-red-600 dark:text-red-400 bg-red-100 dark:bg-red-900/20';
-			case 'high': return 'text-orange-600 dark:text-orange-400 bg-orange-100 dark:bg-orange-900/20';
-			case 'normal': return 'text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/20';
-			case 'low': return 'text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800/50';
-			default: return 'text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/20';
+			case 'urgent': return 'text-foreground bg-muted border border-foreground';
+			case 'high': return 'text-foreground bg-muted';
+			case 'normal': return 'text-muted-foreground bg-muted';
+			case 'low': return 'text-muted-foreground bg-muted';
+			default: return 'text-muted-foreground bg-muted';
 		}
 	};
 
@@ -452,9 +452,9 @@ export function ComprehensiveMessageList() {
 			case 'appointment_reschedule':
 				return <Calendar className="w-4 h-4" />;
 			case 'emergency_notification':
-				return <AlertCircle className="w-4 h-4 text-red-500" />;
+				return <AlertCircle className="w-4 h-4 text-foreground" />;
 			case 'system_notification':
-				return <CheckCircle className="w-4 h-4 text-green-500" />;
+				return <CheckCircle className="w-4 h-4 text-muted-foreground" />;
 			default:
 				return <MessageSquare className="w-4 h-4" />;
 		}
@@ -482,13 +482,13 @@ export function ComprehensiveMessageList() {
 
 		switch (message.deliveryStatus) {
 			case 'sent':
-				return <CheckCircle className="w-3 h-3 text-gray-400" />;
+				return <CheckCircle className="w-3 h-3 text-muted-foreground" />;
 			case 'delivered':
-				return <CheckCircle className="w-3 h-3 text-blue-500" />;
+				return <CheckCircle className="w-3 h-3 text-muted-foreground" />;
 			case 'read':
-				return <CheckCircle className="w-3 h-3 text-[#ffdd00] ring-1 rounded-full ring-black p-0" fill="#000" />;
+				return <CheckCircle className="w-3 h-3 text-foreground" />;
 			default:
-				return <CheckCircle className="w-3 h-3 text-gray-400" />;
+				return <CheckCircle className="w-3 h-3 text-muted-foreground" />;
 		}
 	};
 
@@ -500,10 +500,10 @@ export function ComprehensiveMessageList() {
 						{Array.from({ length: 5 }).map((_, i) => (
 							<div key={i} className="animate-pulse">
 								<div className="flex items-center space-x-4 p-4 border rounded-lg">
-									<div className="w-12 h-12 bg-slate-300 rounded-full"></div>
+									<div className="w-12 h-12 bg-muted rounded-full"></div>
 									<div className="flex-1 space-y-2">
-										<div className="h-4 bg-slate-300 rounded w-1/3"></div>
-										<div className="h-3 bg-slate-300 rounded w-2/3"></div>
+										<div className="h-4 bg-muted rounded w-1/3"></div>
+										<div className="h-3 bg-muted rounded w-2/3"></div>
 									</div>
 								</div>
 							</div>
@@ -957,15 +957,11 @@ export function ComprehensiveMessageList() {
 						</div>
 					</div>
 
-					<div className="relative">
-						<Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-						<Input
-							placeholder="Search conversations..."
-							value={searchTerm}
-							onChange={(e) => setSearchTerm(e.target.value)}
-							className="pl-10"
-						/>
-					</div>
+					<SearchInput
+						placeholder="Search conversations..."
+						value={searchTerm}
+						onChange={(e) => setSearchTerm(e.target.value)}
+					/>
 				</div>
 
 				<Tabs value={activeTab} onValueChange={setActiveTab} className="w-full flex flex-col flex-1">
@@ -981,21 +977,21 @@ export function ComprehensiveMessageList() {
 									filteredConversations.map((conversation) => (
 										<div
 											className={`p-3 rounded-xl cursor-pointer transition-all duration-200 ${selectedConversation?.userId === conversation.userId
-												? "bg-primary/10 border border-primary/20 shadow-sm"
+												? "bg-accent border border-border shadow-sm"
 												: "hover:bg-muted/50 border border-transparent"
 												}`}
 											onClick={() => handleConversationSelect(conversation)}
 										>
 											<div className="flex items-center space-x-3">
 												<div className="relative">
-													<Avatar className="w-8 h-8 ring-2 ring-primary/10">
+													<Avatar className="w-8 h-8 ring-2 ring-border">
 														<AvatarImage src="" />
-														<AvatarFallback className="bg-primary/10 text-primary font-semibold">
+														<AvatarFallback className="bg-muted text-foreground font-semibold">
 															{conversation.userName[0]}
 														</AvatarFallback>
 													</Avatar>
 													{isUserOnline(conversation.userId) && (
-														<div className="absolute bottom-0 -right-1 w-2 h-2 bg-green-500 rounded-full"></div>
+														<div className="absolute bottom-0 -right-1 w-2 h-2 bg-foreground rounded-full"></div>
 													)}
 												</div>
 
@@ -1032,16 +1028,16 @@ export function ComprehensiveMessageList() {
 															{conversation.userRole}
 														</Badge>
 														{isUserOnline(conversation.userId) && (
-															<span className="text-xs text-green-600 dark:text-green-400 font-medium">• Online</span>
+															<span className="text-xs text-muted-foreground font-medium">• Online</span>
 														)}
 													</div>
 
 													{isTyping(conversation.userId) ? (
 														<div className="mt-2">
 															<div className="flex space-x-1">
-																<div className="size-2 bg-gray-500/40 dark:bg-[#ffdd00] bg-black rounded-full animate-bounce"></div>
-																<div className="size-2 bg-gray-500/40 dark:bg-[#ffdd00] bg-black rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-																<div className="size-2 bg-gray-500/40 dark:bg-[#ffdd00] bg-black rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+																<div className="size-2 bg-muted-foreground rounded-full animate-bounce"></div>
+																<div className="size-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+																<div className="size-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
 															</div>
 														</div>
 													) : conversation.lastMessage && (
@@ -1088,7 +1084,7 @@ export function ComprehensiveMessageList() {
 											<Tooltip key={`message-all-${message.id}-${index}`}>
 												<TooltipTrigger asChild>
 													<div className={`p-3 rounded-lg cursor-pointer transition-colors ${message.status === "unread"
-														? "bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-800"
+														? "bg-accent border border-foreground"
 														: "hover:bg-accent/50"
 														}`}
 														onClick={() => {
@@ -1153,7 +1149,7 @@ export function ComprehensiveMessageList() {
 																		{formatMessageTime(message.createdAt)}
 																	</span>
 																	{message.status === "unread" && (
-																		<Circle className="w-3 h-3 text-blue-500 dark:text-blue-400 fill-current" />
+																		<Circle className="w-3 h-3 text-foreground fill-current" />
 																	)}
 																</div>
 															</div>
@@ -1173,7 +1169,7 @@ export function ComprehensiveMessageList() {
 															</p>
 														)}
 														{message.status === 'unread' && (
-															<p className="text-xs text-blue-600 dark:text-blue-400 font-medium">
+															<p className="text-xs text-foreground font-medium">
 																Unread
 															</p>
 														)}
@@ -1220,14 +1216,14 @@ export function ComprehensiveMessageList() {
 										</Button>
 									)}
 									<div className="relative">
-										<Avatar className="w-6 h-6 ring-2 ring-[#ffdd00]">
+										<Avatar className="w-6 h-6 ring-2 ring-border">
 											<AvatarImage src="" />
-											<AvatarFallback className="bg-[#ffdd00]/30 text-black font-semibold text-sm">
+											<AvatarFallback className="bg-muted text-foreground font-semibold text-sm">
 												{selectedConversation.userName.split(' ').map(n => n[0]).join('')}
 											</AvatarFallback>
 										</Avatar>
 										{selectedConversation.isOnline && (
-											<div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-background"></div>
+											<div className="absolute -bottom-1 -right-1 w-4 h-4 bg-foreground rounded-full border-2 border-background"></div>
 										)}
 									</div>
 
@@ -1238,7 +1234,7 @@ export function ComprehensiveMessageList() {
 												{selectedConversation.userRole}
 											</Badge>
 											{isUserOnline(selectedConversation.userId) && (
-												<span className="text-xs text-green-600 dark:text-green-400 font-medium">• Online</span>
+												<span className="text-xs text-muted-foreground font-medium">• Online</span>
 											)}
 										</div>
 									</div>
@@ -1248,9 +1244,9 @@ export function ComprehensiveMessageList() {
 									{isTyping(selectedConversation.userId) && (
 										<div className="flex items-center space-x-1 px-3 py-1 bg-muted rounded-full">
 											<div className="flex space-x-1">
-												<div className="w-2 h-2 bg-gray-500/40 dark:bg-[#ffdd00] rounded-full animate-bounce"></div>
-												<div className="w-2 h-2 bg-gray-500/40 dark:bg-[#ffdd00] rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-												<div className="w-2 h-2 bg-gray-500/40 dark:bg-[#ffdd00] rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+												<div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce"></div>
+												<div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+												<div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
 											</div>
 										</div>
 									)}
@@ -1280,7 +1276,7 @@ export function ComprehensiveMessageList() {
 												{/* Sender info for other person's messages */}
 												{showSenderInfo && (
 													<div className="flex items-center space-x-2 px-2">
-														<Avatar className="w-6 h-6 border p-3 bg-[#ffdd00]/50 border-[#ffdd00]">
+														<Avatar className="w-6 h-6 border p-3 bg-muted border-border">
 															<AvatarImage src="" />
 															<AvatarFallback className="text-xs">
 																{message.sender?.firstName?.charAt(0)}{message.sender?.lastName?.charAt(0)}
@@ -1295,8 +1291,8 @@ export function ComprehensiveMessageList() {
 												{/* Message bubble */}
 												<div
 													className={`px-2 py-1 rounded-2xl shadow-sm ${isOwnMessage
-														? 'bg-[#ffdd00]/70 text-foreground rounded-br-md'
-														: 'ml-10 bg-[#ffdd00]/30 text-foreground rounded-bl-md'
+														? 'bg-foreground text-background rounded-br-md'
+														: 'ml-10 bg-muted text-foreground rounded-bl-md'
 														}`}
 												>
 													{/* Message type indicator */}

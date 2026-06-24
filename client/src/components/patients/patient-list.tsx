@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
+import { SearchInput } from "@/components/ui/search-input";
+import { StatusBadge } from "@/components/ui/status-badge";
 import { Search, Plus, Eye, Edit, Phone, Mail, MessageSquare } from "lucide-react";
 import { format } from "date-fns";
 import { useAuth } from "@/context/auth-context";
@@ -112,13 +112,11 @@ export function PatientList({ onNewPatient, onEditPatient, onViewPatient, onMess
             </Button>
           )}
         </div>
-        <div className="relative max-w-md">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-          <Input
+        <div className="max-w-md">
+          <SearchInput
             placeholder={isPatient ? "Search patients..." : "Search clients..."}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10"
           />
         </div>
       </CardHeader>
@@ -139,9 +137,7 @@ export function PatientList({ onNewPatient, onEditPatient, onViewPatient, onMess
                       {patient.user?.firstName} {patient.user?.lastName}
                     </h3>
                     {patient.user?.isActive && (
-                      <Badge variant="secondary" className="bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300">
-                        Active
-                      </Badge>
+                      <StatusBadge status="active" />
                     )}
                   </div>
                   

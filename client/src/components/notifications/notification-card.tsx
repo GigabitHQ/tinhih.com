@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { StatusBadge } from "@/components/ui/status-badge";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { 
@@ -27,38 +28,32 @@ export function NotificationCard({ notification, compact = false }: Notification
   const getNotificationIcon = (type: string) => {
     switch (type?.toLowerCase()) {
       case "appointment":
-        return <Calendar className="h-4 w-4 text-blue-600" />;
+        return <Calendar className="h-4 w-4 text-muted-foreground" />;
       case "message":
-        return <MessageSquare className="h-4 w-4 text-green-600" />;
+        return <MessageSquare className="h-4 w-4 text-muted-foreground" />;
       case "billing":
-        return <CreditCard className="h-4 w-4 text-orange-600" />;
+        return <CreditCard className="h-4 w-4 text-muted-foreground" />;
       case "medical":
-        return <User className="h-4 w-4 text-purple-600" />;
+        return <User className="h-4 w-4 text-muted-foreground" />;
       case "alert":
-        return <AlertCircle className="h-4 w-4 text-red-600" />;
+        return <AlertCircle className="h-4 w-4 text-muted-foreground" />;
       case "success":
-        return <CheckCircle2 className="h-4 w-4 text-green-600" />;
+        return <CheckCircle2 className="h-4 w-4 text-muted-foreground" />;
       default:
-        return <Bell className="h-4 w-4 text-slate-600" />;
+        return <Bell className="h-4 w-4 text-muted-foreground" />;
     }
   };
 
   const getPriorityBadge = (priority: string) => {
-    switch (priority?.toLowerCase()) {
-      case "high":
-        return <Badge className="bg-red-100 text-red-800 border-red-200 dark:bg-red-900/20 dark:text-red-400 dark:border-red-800">High</Badge>;
-      case "medium":
-        return <Badge className="bg-yellow-100 text-yellow-800 border-yellow-200 dark:bg-yellow-900/20 dark:text-yellow-400 dark:border-yellow-800">Medium</Badge>;
-      case "low":
-        return <Badge className="bg-green-100 text-green-800 border-green-200 dark:bg-green-900/20 dark:text-green-400 dark:border-green-800">Low</Badge>;
-      default:
-        return null;
+    if (!["high", "medium", "low"].includes(priority?.toLowerCase())) {
+      return null;
     }
+    return <StatusBadge status={priority} showIcon={false} />;
   };
 
   if (compact) {
     return (
-      <div className={`flex items-center gap-3 p-3 border border-border rounded-lg hover:bg-accent/50 transition-colors ${!notification.read ? 'bg-blue-50/50 dark:bg-blue-950/20' : ''}`}>
+      <div className={`flex items-center gap-3 p-3 border border-border rounded-lg hover:bg-accent/50 transition-colors ${!notification.read ? 'bg-muted/50' : ''}`}>
         <div className="flex-shrink-0">
           {getNotificationIcon(notification.type)}
         </div>
@@ -69,7 +64,7 @@ export function NotificationCard({ notification, compact = false }: Notification
               {notification.title}
             </h4>
             {!notification.read && (
-              <Badge className="bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-900/20 dark:text-blue-400 dark:border-blue-800 text-xs">
+              <Badge variant="secondary" className="text-xs">
                 New
               </Badge>
             )}
@@ -94,18 +89,18 @@ export function NotificationCard({ notification, compact = false }: Notification
   }
 
   return (
-    <Card className={`hover:shadow-md transition-shadow ${!notification.read ? 'border-blue-200 dark:border-blue-800' : ''}`}>
+    <Card className={`hover:shadow-md transition-shadow ${!notification.read ? 'border-foreground' : ''}`}>
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-slate-100 dark:bg-slate-800 rounded-lg">
+            <div className="p-2 bg-muted rounded-lg">
               {getNotificationIcon(notification.type)}
             </div>
             <div>
               <CardTitle className="text-lg flex items-center gap-2">
                 {notification.title}
                 {!notification.read && (
-                  <Badge className="bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-900/20 dark:text-blue-400 dark:border-blue-800">
+                  <Badge variant="secondary">
                     New
                   </Badge>
                 )}
@@ -136,7 +131,7 @@ export function NotificationCard({ notification, compact = false }: Notification
               View Details
             </Button>
             {!notification.read && (
-              <Button size="sm" className="bg-[#ffdd00] hover:bg-[#ffdd00]/90 text-black">
+              <Button size="sm">
                 <CheckCircle className="h-4 w-4 mr-2" />
                 Mark Read
               </Button>

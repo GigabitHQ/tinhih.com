@@ -9,6 +9,7 @@ import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
 import { format } from 'date-fns';
 import { Calendar, Clock, User, Mail, Phone, MessageSquare, Search, Filter, Eye } from 'lucide-react';
+import { StatusBadge } from '@/components/ui/status-badge';
 
 interface PublicBookingUser {
   id: string;
@@ -119,21 +120,6 @@ export function AllPublicBookings() {
     setPagination(prev => ({ ...prev, page: 1 })); // Reset to first page when filtering
   };
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'pending':
-        return 'bg-yellow-100 text-yellow-800';
-      case 'accepted':
-        return 'bg-green-100 text-green-800';
-      case 'rejected':
-        return 'bg-red-100 text-red-800';
-      case 'cancelled':
-        return 'bg-gray-100 text-gray-800';
-      default:
-        return 'bg-gray-100 text-gray-800';
-    }
-  };
-
   const filteredBookings = bookings.filter(booking => {
     if (filters.search) {
       const searchTerm = filters.search.toLowerCase();
@@ -152,10 +138,10 @@ export function AllPublicBookings() {
     return (
       <div className="space-y-4">
         <div className="animate-pulse">
-          <div className="h-8 bg-gray-200 rounded w-1/4 mb-4"></div>
+          <div className="h-8 bg-muted rounded w-1/4 mb-4"></div>
           <div className="space-y-3">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="h-32 bg-gray-200 rounded"></div>
+              <div key={i} className="h-32 bg-muted rounded"></div>
             ))}
           </div>
         </div>
@@ -183,7 +169,7 @@ export function AllPublicBookings() {
             <div className="space-y-2">
               <label className="text-sm font-medium">Search</label>
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <Input
                   placeholder="Search by name, email, or specialty..."
                   value={filters.search}
@@ -229,9 +215,9 @@ export function AllPublicBookings() {
       {filteredBookings.length === 0 ? (
         <Card>
           <CardContent className="text-center py-8">
-            <MessageSquare className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No bookings found</h3>
-            <p className="text-gray-500">Try adjusting your filters or check back later.</p>
+            <MessageSquare className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+            <h3 className="text-lg font-medium text-foreground mb-2">No bookings found</h3>
+            <p className="text-muted-foreground">Try adjusting your filters or check back later.</p>
           </CardContent>
         </Card>
       ) : (
@@ -246,10 +232,8 @@ export function AllPublicBookings() {
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-3">
-                        <Badge className={getStatusColor(booking.status)}>
-                          <span className="capitalize">{booking.status}</span>
-                        </Badge>
-                        <span className="text-sm text-gray-500">
+                        <StatusBadge status={booking.status} />
+                        <span className="text-sm text-muted-foreground">
                           {format(new Date(booking.createdAt), 'MMM d, yyyy h:mm a')}
                         </span>
                       </div>
@@ -257,18 +241,18 @@ export function AllPublicBookings() {
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                         <div className="space-y-2">
                           <div className="flex items-center gap-2">
-                            <User className="w-4 h-4 text-gray-500" />
+                            <User className="w-4 h-4 text-muted-foreground" />
                             <span className="font-medium">
                               {user.firstName} {user.lastName}
                             </span>
                           </div>
                           <div className="flex items-center gap-2">
-                            <Mail className="w-4 h-4 text-gray-500" />
+                            <Mail className="w-4 h-4 text-muted-foreground" />
                             <span className="text-sm">{user.email}</span>
                           </div>
                           {user.phone && (
                             <div className="flex items-center gap-2">
-                              <Phone className="w-4 h-4 text-gray-500" />
+                              <Phone className="w-4 h-4 text-muted-foreground" />
                               <span className="text-sm">{user.phone}</span>
                             </div>
                           )}
@@ -276,28 +260,28 @@ export function AllPublicBookings() {
 
                         <div className="space-y-2">
                           <div className="flex items-center gap-2">
-                            <Calendar className="w-4 h-4 text-gray-500" />
+                            <Calendar className="w-4 h-4 text-muted-foreground" />
                             <span className="font-medium">
                               {format(appointmentDate, 'EEEE, MMMM d, yyyy')}
                             </span>
                           </div>
                           <div className="flex items-center gap-2">
-                            <Clock className="w-4 h-4 text-gray-500" />
+                            <Clock className="w-4 h-4 text-muted-foreground" />
                             <span className="font-medium">{booking.appointmentTime}</span>
                           </div>
                           <div className="flex items-center gap-2">
-                            <span className="text-sm text-gray-500">Service:</span>
+                            <span className="text-sm text-muted-foreground">Service:</span>
                             <span className="text-sm font-medium capitalize">{booking.service}</span>
                           </div>
                         </div>
 
                         <div className="space-y-2">
-                          <div className="text-sm text-gray-500">Practitioner</div>
+                          <div className="text-sm text-muted-foreground">Practitioner</div>
                           <div className="font-medium">
                             {practitioner.specialty || 'General Practitioner'}
                           </div>
                           {practitioner.consultationFee && (
-                            <div className="text-sm text-gray-600">
+                            <div className="text-sm text-muted-foreground">
                               Fee: ${practitioner.consultationFee}
                             </div>
                           )}
@@ -305,22 +289,22 @@ export function AllPublicBookings() {
                       </div>
 
                       {user.message && (
-                        <div className="mb-4 p-3 bg-gray-50 rounded-lg">
+                        <div className="mb-4 p-3 bg-muted rounded-lg">
                           <div className="flex items-center gap-2 mb-2">
-                            <MessageSquare className="w-4 h-4 text-gray-500" />
+                            <MessageSquare className="w-4 h-4 text-muted-foreground" />
                             <span className="text-sm font-medium">Message:</span>
                           </div>
-                          <p className="text-sm text-gray-700">{user.message}</p>
+                          <p className="text-sm text-foreground">{user.message}</p>
                         </div>
                       )}
 
                       {booking.notes && (
-                        <div className="mb-4 p-3 bg-blue-50 rounded-lg">
+                        <div className="mb-4 p-3 bg-muted rounded-lg">
                           <div className="flex items-center gap-2 mb-2">
-                            <MessageSquare className="w-4 h-4 text-blue-500" />
-                            <span className="text-sm font-medium text-blue-700">Notes:</span>
+                            <MessageSquare className="w-4 h-4 text-muted-foreground" />
+                            <span className="text-sm font-medium text-foreground">Notes:</span>
                           </div>
-                          <p className="text-sm text-blue-700">{booking.notes}</p>
+                          <p className="text-sm text-muted-foreground">{booking.notes}</p>
                         </div>
                       )}
                     </div>
@@ -376,7 +360,7 @@ export function AllPublicBookings() {
               </PaginationContent>
             </Pagination>
             
-            <div className="text-center text-sm text-gray-500 mt-2">
+            <div className="text-center text-sm text-muted-foreground mt-2">
               Page {pagination.page} of {pagination.totalPages} • {pagination.total} total bookings
             </div>
           </CardContent>

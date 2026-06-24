@@ -9,9 +9,8 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { 
-  Users2, 
-  Search, 
-  Filter, 
+  Users2,
+  Filter,
   Eye, 
   Edit, 
   Trash2, 
@@ -32,6 +31,8 @@ import {
 import { api } from "@/lib/api";
 import { useToast } from "@/hooks/use-toast";
 import { usePageTitle } from "@/context/page-context";
+import { StatCard } from "@/components/ui/stat-card";
+import { SearchInput } from "@/components/ui/search-input";
 
 interface Member {
   id: string;
@@ -321,10 +322,7 @@ export default function AdminMembers() {
               <p className="text-muted-foreground mt-1">Manage TiNHiH community members and their engagement</p>
             </div>
             <div className="flex items-center space-x-2">
-              <Button 
-                onClick={() => setShowCreateDialog(true)}
-                className="bg-[#ffdd00] text-black hover:bg-[#ffdd00]/90"
-              >
+              <Button onClick={() => setShowCreateDialog(true)}>
                 <Users2 className="w-4 h-4 mr-2" />
                 Create Member
               </Button>
@@ -338,79 +336,22 @@ export default function AdminMembers() {
 
         {/* Stats Cards */}
         <div className="p-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-6">
-            <Card>
-              <CardContent className="p-4">
-                <div className="flex items-center space-x-2">
-                  <Users2 className="w-5 h-5 text-blue-600" />
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground">Total Members</p>
-                    <p className="text-2xl font-bold">{memberStats.total}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4">
-                <div className="flex items-center space-x-2">
-                  <CheckCircle className="w-5 h-5 text-green-600" />
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground">Active Members</p>
-                    <p className="text-2xl font-bold">{memberStats.active}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4">
-                <div className="flex items-center space-x-2">
-                  <Clock className="w-5 h-5 text-orange-600" />
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground">New This Week</p>
-                    <p className="text-2xl font-bold">{memberStats.recent}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4">
-                <div className="flex items-center space-x-2">
-                  <Heart className="w-5 h-5 text-pink-600" />
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground">Volunteers</p>
-                    <p className="text-2xl font-bold">{memberStats.volunteers}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4">
-                <div className="flex items-center space-x-2">
-                  <Award className="w-5 h-5 text-purple-600" />
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground">Mentors</p>
-                    <p className="text-2xl font-bold">{memberStats.mentors}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4">
-                <div className="flex items-center space-x-2">
-                  <Star className="w-5 h-5 text-yellow-600" />
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground">Avg Rating</p>
-                    <p className="text-2xl font-bold">
-                      {members.length > 0 
-                        ? (members.reduce((sum, m) => sum + (m.onboardingData?.feedback?.serviceRating || 0), 0) / 
-                           members.filter(m => m.onboardingData?.feedback?.serviceRating).length).toFixed(1)
-                        : "N/A"
-                      }
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-6">
+            <StatCard label="Total Members" value={memberStats.total} icon={Users2} />
+            <StatCard label="Active Members" value={memberStats.active} icon={CheckCircle} />
+            <StatCard label="New This Week" value={memberStats.recent} icon={Clock} />
+            <StatCard label="Volunteers" value={memberStats.volunteers} icon={Heart} />
+            <StatCard label="Mentors" value={memberStats.mentors} icon={Award} />
+            <StatCard
+              label="Avg Rating"
+              value={
+                members.length > 0
+                  ? (members.reduce((sum, m) => sum + (m.onboardingData?.feedback?.serviceRating || 0), 0) /
+                     members.filter(m => m.onboardingData?.feedback?.serviceRating).length).toFixed(1)
+                  : "N/A"
+              }
+              icon={Star}
+            />
           </div>
 
           {/* Filters */}
@@ -425,16 +366,12 @@ export default function AdminMembers() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="search">Search Members</Label>
-                  <div className="relative">
-                    <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                    <Input
-                      id="search"
-                      placeholder="Search by name, email, or phone..."
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      className="pl-10"
-                    />
-                  </div>
+                  <SearchInput
+                    id="search"
+                    placeholder="Search by name, email, or phone..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
                 </div>
                 <div>
                   <Label htmlFor="status">Status</Label>
@@ -478,18 +415,18 @@ export default function AdminMembers() {
                     >
                       <div className="flex items-center space-x-4">
                         <div className="flex items-center space-x-2">
-                          <Users2 className="w-5 h-5 text-purple-600" />
+                          <Users2 className="w-5 h-5 text-muted-foreground" />
                           <Badge variant={member.user.isActive ? "default" : "secondary"}>
                             {member.user.isActive ? "Active" : "Inactive"}
                           </Badge>
                           {member.onboardingData?.communityParticipation?.mentorshipProvided && (
-                            <Badge variant="outline" className="text-purple-600 border-purple-600">
+                            <Badge variant="outline">
                               <Award className="w-3 h-3 mr-1" />
                               Mentor
                             </Badge>
                           )}
                           {member.onboardingData?.communityParticipation?.volunteerHours && member.onboardingData.communityParticipation.volunteerHours > 0 && (
-                            <Badge variant="outline" className="text-pink-600 border-pink-600">
+                            <Badge variant="outline">
                               <Heart className="w-3 h-3 mr-1" />
                               Volunteer
                             </Badge>
@@ -566,7 +503,7 @@ export default function AdminMembers() {
               </DialogDescription>
             </DialogHeader>
             <div className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="createFirstName">First Name *</Label>
                   <Input
@@ -634,10 +571,9 @@ export default function AdminMembers() {
                 <Button variant="outline" onClick={() => setShowCreateDialog(false)}>
                   Cancel
                 </Button>
-                <Button 
-                  onClick={handleCreateMember} 
+                <Button
+                  onClick={handleCreateMember}
                   disabled={isCreating}
-                  className="bg-[#ffdd00] text-black hover:bg-[#ffdd00]/90"
                 >
                   {isCreating ? (
                     <>
@@ -664,7 +600,7 @@ export default function AdminMembers() {
             </DialogHeader>
             {selectedMember && (
               <div className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <Label className="text-sm font-medium">Name</Label>
                     <p className="text-sm mt-1">
@@ -677,7 +613,7 @@ export default function AdminMembers() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <Label className="text-sm font-medium">Phone</Label>
                     <p className="text-sm mt-1">{selectedMember.user.phone || "Not provided"}</p>
@@ -694,7 +630,7 @@ export default function AdminMembers() {
                 {selectedMember.onboardingData?.recoveryJourney && (
                   <div className="space-y-3">
                     <h4 className="font-medium text-sm">Recovery Journey</h4>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {selectedMember.onboardingData.recoveryJourney.startDate && (
                         <div>
                           <Label className="text-sm font-medium">Recovery Start Date</Label>
@@ -735,7 +671,7 @@ export default function AdminMembers() {
                 {selectedMember.onboardingData?.communityParticipation && (
                   <div className="space-y-3">
                     <h4 className="font-medium text-sm">Community Participation</h4>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {selectedMember.onboardingData.communityParticipation.eventsAttended !== undefined && (
                         <div>
                           <Label className="text-sm font-medium">Events Attended</Label>
@@ -751,7 +687,7 @@ export default function AdminMembers() {
                     </div>
                     {selectedMember.onboardingData.communityParticipation.mentorshipProvided && (
                       <div className="flex items-center space-x-2">
-                        <Award className="w-4 h-4 text-purple-600" />
+                        <Award className="w-4 h-4 text-muted-foreground" />
                         <span className="text-sm">Provides mentorship to others</span>
                       </div>
                     )}
@@ -785,7 +721,7 @@ export default function AdminMembers() {
                   </div>
                 )}
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <Label className="text-sm font-medium">Account Created</Label>
                     <p className="text-sm mt-1">
@@ -817,7 +753,7 @@ export default function AdminMembers() {
               </DialogDescription>
             </DialogHeader>
             <div className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="firstName">First Name</Label>
                   <Input

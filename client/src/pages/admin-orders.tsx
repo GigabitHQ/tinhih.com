@@ -5,11 +5,11 @@ import { api } from "@/lib/api";
 import { AdminLayout } from "@/components/layout/admin-layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { 
-  Search, 
+import { StatusBadge } from "@/components/ui/status-badge";
+import { SearchInput } from "@/components/ui/search-input";
+import {
+  Search,
   Filter, 
   Eye, 
   Package, 
@@ -20,10 +20,6 @@ import {
   Phone,
   Mail,
   ShoppingCart,
-  CheckCircle,
-  Clock,
-  AlertCircle,
-  Truck,
   Download,
   RefreshCw
 } from "lucide-react";
@@ -151,44 +147,9 @@ export default function AdminOrders() {
     }
   };
 
-  const getStatusBadge = (status: Order['status']) => {
-    const statusConfig = {
-      pending: { color: "bg-yellow-100 text-yellow-800", icon: Clock },
-      processing: { color: "bg-blue-100 text-blue-800", icon: Package },
-      shipped: { color: "bg-purple-100 text-purple-800", icon: Truck },
-      delivered: { color: "bg-green-100 text-green-800", icon: CheckCircle },
-      cancelled: { color: "bg-red-100 text-red-800", icon: AlertCircle },
-    };
+  const getStatusBadge = (status: Order['status']) => <StatusBadge status={status} />;
 
-    const config = statusConfig[status];
-    const Icon = config.icon;
-
-    return (
-      <Badge className={config.color}>
-        <Icon className="w-3 h-3 mr-1" />
-        {status.charAt(0).toUpperCase() + status.slice(1)}
-      </Badge>
-    );
-  };
-
-  const getPaymentStatusBadge = (status: Order['paymentStatus']) => {
-    const statusConfig = {
-      pending: { color: "bg-yellow-100 text-yellow-800", icon: Clock },
-      paid: { color: "bg-green-100 text-green-800", icon: CheckCircle },
-      failed: { color: "bg-red-100 text-red-800", icon: AlertCircle },
-      refunded: { color: "bg-gray-100 text-gray-800", icon: DollarSign },
-    };
-
-    const config = statusConfig[status];
-    const Icon = config.icon;
-
-    return (
-      <Badge className={config.color}>
-        <Icon className="w-3 h-3 mr-1" />
-        {status.charAt(0).toUpperCase() + status.slice(1)}
-      </Badge>
-    );
-  };
+  const getPaymentStatusBadge = (status: Order['paymentStatus']) => <StatusBadge status={status} />;
 
   const handleSearch = () => {
     setCurrentPage(1);
@@ -256,16 +217,12 @@ export default function AdminOrders() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="space-y-2">
               <label className="text-sm font-medium">Search</label>
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-                <Input
-                  placeholder="Order number, customer name..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-                  className="pl-10"
-                />
-              </div>
+              <SearchInput
+                placeholder="Order number, customer name..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+              />
             </div>
             <div className="space-y-2">
               <label className="text-sm font-medium">Order Status</label>

@@ -45,7 +45,7 @@ export default function AdminPanel() {
       description: "Manage staff accounts and permissions",
       icon: Users,
       path: "/admin/staff",
-      color: "bg-blue-500",
+      color: "bg-muted text-muted-foreground",
       stats: dashboardData?.staffCount || 0
     },
     {
@@ -53,7 +53,7 @@ export default function AdminPanel() {
       description: "Manage recovery specialists and their profiles",
       icon: Stethoscope,
       path: "/admin/practitioners",
-      color: "bg-green-500",
+      color: "bg-muted text-muted-foreground",
       stats: dashboardData?.practitionerCount || 0
     },
     {
@@ -61,7 +61,7 @@ export default function AdminPanel() {
       description: "Manage system administrators and their permissions",
       icon: Crown,
       path: "/admin/admins",
-      color: "bg-purple-500",
+      color: "bg-muted text-muted-foreground",
       stats: dashboardData?.adminCount || 0
     },
     {
@@ -69,7 +69,7 @@ export default function AdminPanel() {
       description: "Monitor payments and financial transactions",
       icon: DollarSign,
       path: "/admin/transactions",
-      color: "bg-yellow-500",
+      color: "bg-muted text-muted-foreground",
       stats: dashboardData?.transactionCount || 0
     },
     {
@@ -77,7 +77,7 @@ export default function AdminPanel() {
       description: "Manage inspirational quotes and content",
       icon: Quote,
       path: "/admin/quotes",
-      color: "bg-purple-500",
+      color: "bg-muted text-muted-foreground",
       stats: dashboardData?.quoteCount || 0
     },
     {
@@ -85,7 +85,7 @@ export default function AdminPanel() {
       description: "Manage community events and activities",
       icon: CalendarDays,
       path: "/admin/events",
-      color: "bg-red-500",
+      color: "bg-muted text-muted-foreground",
       stats: dashboardData?.eventCount || 0
     }
   ];
@@ -158,7 +158,7 @@ export default function AdminPanel() {
               <Card key={section.path} className="hover:shadow-lg transition-shadow duration-200">
                 <CardHeader>
                   <div className="flex items-center justify-between">
-                    <div className={`p-3 rounded-lg ${section.color} text-white`}>
+                    <div className={`p-3 rounded-lg ${section.color}`}>
                       <Icon className="h-6 w-6" />
                     </div>
                     <Badge variant="secondary" className="text-sm">
@@ -192,7 +192,7 @@ export default function AdminPanel() {
             <CardContent>
               {isLoading ? (
                 <div className="text-center py-8">
-                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-foreground mx-auto"></div>
                   <p className="text-muted-foreground mt-2">Loading recent activity...</p>
                 </div>
               ) : dashboardData?.recentActivity?.length > 0 ? (
@@ -200,10 +200,10 @@ export default function AdminPanel() {
                   {dashboardData.recentActivity.map((activity: any, index: number) => (
                     <div key={index} className="flex items-center space-x-4 p-3 rounded-lg border">
                       <div className="flex-shrink-0">
-                        {activity.type === 'payment' && <CheckCircle className="h-5 w-5 text-green-500" />}
-                        {activity.type === 'user' && <Users className="h-5 w-5 text-blue-500" />}
-                        {activity.type === 'event' && <CalendarDays className="h-5 w-5 text-red-500" />}
-                        {activity.type === 'default' && <Clock className="h-5 w-5 text-gray-500" />}
+                        {activity.type === 'payment' && <CheckCircle className="h-5 w-5 text-muted-foreground" />}
+                        {activity.type === 'user' && <Users className="h-5 w-5 text-muted-foreground" />}
+                        {activity.type === 'event' && <CalendarDays className="h-5 w-5 text-muted-foreground" />}
+                        {activity.type === 'default' && <Clock className="h-5 w-5 text-muted-foreground" />}
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium text-foreground">{activity.title}</p>

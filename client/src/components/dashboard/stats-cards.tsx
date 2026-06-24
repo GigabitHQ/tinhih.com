@@ -69,8 +69,8 @@ export function StatsCards({ className }: StatsCardsProps) {
       change: insights?.revenueGrowth ? `${insights.revenueGrowth >= 0 ? '+' : ''}${insights.revenueGrowth.toFixed(1)}% from last month` : "+8% from last month",
       changeType: (insights?.revenueGrowth || 0) >= 0 ? "increase" as const : "decrease" as const,
       icon: DollarSign,
-      iconBg: "bg-green-100",
-      iconColor: "text-green-600",
+      iconBg: "bg-muted",
+      iconColor: "text-muted-foreground",
       onClick: () => setLocation("/billing"),
     },
     {
@@ -78,8 +78,8 @@ export function StatsCards({ className }: StatsCardsProps) {
       value: `$${Number(stats?.outstandingRevenue || 0).toFixed(2)}`,
       subtitle: "pending payment",
       icon: AlertCircle,
-      iconBg: "bg-red-100",
-      iconColor: "text-red-600",
+      iconBg: "bg-muted",
+      iconColor: "text-muted-foreground",
       onClick: () => setLocation("/billing?status=unpaid"),
     },
   ];
@@ -116,9 +116,7 @@ export function StatsCards({ className }: StatsCardsProps) {
                   {stat.value}
                 </p>
                 {stat.change && (
-                  <p className={`text-sm mt-1 ${
-                    stat.changeType === "increase" ? "text-green-600" : "text-red-600"
-                  }`}>
+                  <p className="text-sm mt-1 text-muted-foreground">
                     {stat.changeType === "increase" ? (
                       <TrendingUp className="inline w-3 h-3 mr-1" />
                     ) : (

@@ -101,9 +101,9 @@ export default function Login() {
           <CardContent className="pt-0 space-y-6">
             {/* Login Success Alert */}
             {loginSuccess && (
-              <Alert className="border-green-200 bg-green-50">
-                <CheckCircle className="h-4 w-4 text-green-600" />
-                <AlertDescription className="text-green-800">
+              <Alert className="border-border bg-muted">
+                <CheckCircle className="h-4 w-4 text-foreground" />
+                <AlertDescription className="text-foreground">
                   Welcome back! Redirecting to your dashboard...
                 </AlertDescription>
               </Alert>
@@ -111,7 +111,7 @@ export default function Login() {
 
             {/* Login Error Alert */}
             {loginError && (
-              <Alert variant="destructive" className="bg-red-50/10 text-red-500 border border-red-300">
+              <Alert variant="destructive" className="border-foreground text-foreground">
                 <AlertCircle className="h-4 w-4" />
                 <AlertDescription>
                   {loginError}
@@ -138,7 +138,7 @@ export default function Login() {
                           className="h-11 bg-background border-input"
                         />
                       </FormControl>
-                      <FormMessage className="text-red-500" />
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -176,7 +176,7 @@ export default function Login() {
                           </Button>
                         </div>
                       </FormControl>
-                      <FormMessage className="text-red-500" />
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -192,12 +192,12 @@ export default function Login() {
 
                 <Button
                   type="submit"
-                  className="w-full h-11 bg-[#ffdd00] hover:bg-[#ffdd00]/90 text-black font-medium"
+                  className="w-full h-11 font-medium"
                   disabled={isLoading}
                 >
                   {isLoading ? (
                     <div className="flex items-center space-x-2">
-                      <div className="w-4 h-4 border-2 border-black/30 border-t-black rounded-full animate-spin"></div>
+                      <div className="w-4 h-4 border-2 border-current/30 border-t-current rounded-full animate-spin"></div>
                       <span>Signing in...</span>
                     </div>
                   ) : (

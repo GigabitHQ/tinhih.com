@@ -90,36 +90,20 @@ export function PatientTimeline({ patientId, className }: PatientTimelineProps) 
     }
   };
 
-  const getTimelineColor = (type: string, status?: string) => {
-    switch (type) {
-      case 'appointment':
-        if (status === 'completed') return 'text-green-600 bg-green-100';
-        if (status === 'cancelled') return 'text-red-600 bg-red-100';
-        return 'text-blue-600 bg-blue-100';
-      case 'clinical_note':
-        return 'text-purple-600 bg-purple-100';
-      case 'invoice':
-        if (status === 'paid') return 'text-green-600 bg-green-100';
-        if (status === 'overdue') return 'text-red-600 bg-red-100';
-        return 'text-orange-600 bg-orange-100';
-      case 'telehealth':
-        return 'text-indigo-600 bg-indigo-100';
-      case 'message':
-        return 'text-gray-600 bg-gray-100';
-      default:
-        return 'text-gray-600 bg-gray-100';
-    }
+  const getTimelineColor = (_type: string, _status?: string) => {
+    // Neutral, monochrome timeline icon chip — state is conveyed by icon, not hue.
+    return 'text-muted-foreground bg-muted';
   };
 
   const getStatusIcon = (type: string, status?: string) => {
     if (type === 'appointment') {
-      if (status === 'completed') return <CheckCircle className="w-3 h-3 text-green-600" />;
-      if (status === 'cancelled') return <XCircle className="w-3 h-3 text-red-600" />;
-      if (status === 'scheduled') return <AlertCircle className="w-3 h-3 text-blue-600" />;
+      if (status === 'completed') return <CheckCircle className="w-3 h-3 text-muted-foreground" />;
+      if (status === 'cancelled') return <XCircle className="w-3 h-3 text-muted-foreground" />;
+      if (status === 'scheduled') return <AlertCircle className="w-3 h-3 text-muted-foreground" />;
     }
     if (type === 'invoice') {
-      if (status === 'paid') return <CheckCircle className="w-3 h-3 text-green-600" />;
-      if (status === 'overdue') return <XCircle className="w-3 h-3 text-red-600" />;
+      if (status === 'paid') return <CheckCircle className="w-3 h-3 text-muted-foreground" />;
+      if (status === 'overdue') return <XCircle className="w-3 h-3 text-muted-foreground" />;
     }
     return null;
   };

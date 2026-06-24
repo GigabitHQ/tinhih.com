@@ -109,8 +109,8 @@ export function ContextualSidebar({ entityType, entityId, className }: Contextua
             {patient?.allergies && patient.allergies.length > 0 && (
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
-                  <AlertTriangle className="w-4 h-4 text-red-500" />
-                  <span className="text-sm font-medium text-red-600">Allergies</span>
+                  <AlertTriangle className="w-4 h-4 text-foreground" />
+                  <span className="text-sm font-medium text-foreground">Allergies</span>
                 </div>
                 <div className="flex flex-wrap gap-1">
                   {patient.allergies.map((allergy: string, index: number) => (
@@ -155,7 +155,7 @@ export function ContextualSidebar({ entityType, entityId, className }: Contextua
               <div className="space-y-3">
                 {recentAppointments.map((appointment: any, index: number) => (
                   <div key={index} className="flex items-start gap-3 p-2 rounded border">
-                    <Calendar className="w-4 h-4 mt-1 text-primary" />
+                    <Calendar className="w-4 h-4 mt-1 text-muted-foreground" />
                     <div className="flex-1 min-w-0">
                       <div className="text-sm font-medium truncate">
                         {appointment.title}
@@ -172,7 +172,7 @@ export function ContextualSidebar({ entityType, entityId, className }: Contextua
                 
                 {activeInvoices.map((invoice: any, index: number) => (
                   <div key={index} className="flex items-start gap-3 p-2 rounded border">
-                    <CreditCard className="w-4 h-4 mt-1 text-green-600" />
+                    <CreditCard className="w-4 h-4 mt-1 text-muted-foreground" />
                     <div className="flex-1 min-w-0">
                       <div className="text-sm font-medium">
                         Invoice #{invoice.invoiceNumber}

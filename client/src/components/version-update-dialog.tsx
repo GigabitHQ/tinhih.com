@@ -74,9 +74,9 @@ export function VersionUpdateDialog({ versionInfo, onClose }: VersionUpdateDialo
       case 'installing':
         return <RefreshCw className="h-4 w-4 animate-spin" />;
       case 'complete':
-        return <CheckCircle className="h-4 w-4 text-green-500" />;
+        return <CheckCircle className="h-4 w-4 text-foreground" />;
       case 'error':
-        return <AlertCircle className="h-4 w-4 text-red-500" />;
+        return <AlertCircle className="h-4 w-4 text-foreground" />;
       default:
         return <Clock className="h-4 w-4" />;
     }
@@ -87,13 +87,13 @@ export function VersionUpdateDialog({ versionInfo, onClose }: VersionUpdateDialo
       case 'checking':
       case 'downloading':
       case 'installing':
-        return 'text-yellow-600';
+        return 'text-muted-foreground';
       case 'complete':
-        return 'text-green-600';
+        return 'text-foreground';
       case 'error':
-        return 'text-red-600';
+        return 'text-foreground';
       default:
-        return 'text-gray-600';
+        return 'text-muted-foreground';
     }
   };
 
@@ -105,7 +105,7 @@ export function VersionUpdateDialog({ versionInfo, onClose }: VersionUpdateDialo
         <DialogHeader>
           <div className="flex items-center justify-between">
             <DialogTitle className="flex items-center gap-2">
-              <Download className="h-5 w-5 text-blue-500" />
+              <Download className="h-5 w-5 text-muted-foreground" />
               New Version Available
             </DialogTitle>
             {/* {!isUpdating && (
@@ -133,7 +133,7 @@ export function VersionUpdateDialog({ versionInfo, onClose }: VersionUpdateDialo
             </div>
             <div className="flex items-center justify-between">
               <span className="text-sm text-muted-foreground">New Version</span>
-              <Badge className="bg-green-100 text-green-800 border-green-200">
+              <Badge variant="secondary">
                 {versionInfo.latestVersion}
               </Badge>
             </div>
@@ -160,7 +160,7 @@ export function VersionUpdateDialog({ versionInfo, onClose }: VersionUpdateDialo
             <div className="space-y-3">
               <div className="flex items-center gap-2">
                 {progress ? getStatusIcon(progress.status) : <RefreshCw className="h-4 w-4 animate-spin" />}
-                <span className={`text-sm font-medium ${progress ? getStatusColor(progress.status) : 'text-blue-600'}`}>
+                <span className={`text-sm font-medium ${progress ? getStatusColor(progress.status) : 'text-muted-foreground'}`}>
                   {progress ? progress.message : 'Preparing update...'}
                 </span>
               </div>

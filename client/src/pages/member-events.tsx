@@ -8,6 +8,7 @@ import { api } from "@/lib/api";
 import { usePageTitle } from "@/context/page-context";
 import { format } from "date-fns";
 import { Calendar, Clock, MapPin, ExternalLink } from "lucide-react";
+import { StatusBadge } from "@/components/ui/status-badge";
 
 interface Event {
   id: string;
@@ -66,11 +67,11 @@ export default function MemberEvents() {
     const end = new Date(endDate);
 
     if (now < start) {
-      return { status: "upcoming", color: "bg-blue-100 text-blue-800", label: "Upcoming" };
+      return { status: "upcoming", color: "bg-muted text-muted-foreground", label: "Upcoming" };
     } else if (now >= start && now <= end) {
-      return { status: "ongoing", color: "bg-green-100 text-green-800", label: "Ongoing" };
+      return { status: "ongoing", color: "bg-muted text-muted-foreground", label: "Ongoing" };
     } else {
-      return { status: "past", color: "bg-gray-100 text-gray-800", label: "Past" };
+      return { status: "past", color: "bg-muted text-muted-foreground", label: "Past" };
     }
   };
 
@@ -95,7 +96,7 @@ export default function MemberEvents() {
     return (
       <MemberLayout>
         <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-foreground"></div>
           <span className="ml-2">Loading events...</span>
         </div>
       </MemberLayout>
@@ -115,22 +116,22 @@ export default function MemberEvents() {
 
         {/* Ongoing Events */}
         {ongoingEvents.length > 0 && (
-          <Card className="border-2 border-green-200 bg-green-50/50">
+          <Card className="border-2 border-border bg-muted">
             <CardHeader>
-              <CardTitle className="flex items-center space-x-2 text-green-800">
+              <CardTitle className="flex items-center space-x-2 text-foreground">
                 <Calendar className="h-5 w-5" />
                 <span>Currently Happening</span>
-                <Badge className="bg-green-200 text-green-800">Live</Badge>
+                <StatusBadge status="active" label="Live" showIcon={false} />
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 {ongoingEvents.map((event) => (
-                  <div key={event.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-white rounded-lg border border-green-200 space-y-3 sm:space-y-0">
+                  <div key={event.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-card rounded-lg border border-border space-y-3 sm:space-y-0">
                     <div className="flex-1">
-                      <h3 className="font-semibold text-base sm:text-lg text-green-800">{event.title}</h3>
-                      <p className="text-sm text-gray-600 mb-2">{event.description}</p>
-                      <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 text-sm text-gray-600">
+                      <h3 className="font-semibold text-base sm:text-lg text-foreground">{event.title}</h3>
+                      <p className="text-sm text-muted-foreground mb-2">{event.description}</p>
+                      <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 text-sm text-muted-foreground">
                         <div className="flex items-center space-x-1">
                           <Clock className="h-4 w-4" />
                           <span>Until {format(new Date(event.endDate), "MMM dd, yyyy 'at' h:mm a")}</span>
@@ -143,7 +144,7 @@ export default function MemberEvents() {
                         )}
                       </div>
                     </div>
-                    <Button variant="outline" size="sm" className="border-green-300 text-green-700 w-full sm:w-auto">
+                    <Button variant="outline" size="sm" className="w-full sm:w-auto">
                       <ExternalLink className="h-4 w-4 mr-2" />
                       Join Now
                     </Button>
@@ -160,7 +161,7 @@ export default function MemberEvents() {
             <CardTitle className="flex items-center space-x-2">
               <Calendar className="h-5 w-5" />
               <span>Upcoming Events</span>
-              <Badge className="bg-blue-100 text-blue-800">{upcomingEvents.length}</Badge>
+              <Badge variant="secondary">{upcomingEvents.length}</Badge>
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -194,7 +195,7 @@ export default function MemberEvents() {
             ) : (
               <div className="text-center py-6 sm:py-8">
                 <Calendar className="h-10 w-10 sm:h-12 sm:w-12 text-muted-foreground mx-auto mb-4" />
-                <h3 className="text-base sm:text-lg font-medium text-gray-900 mb-2">No upcoming events</h3>
+                <h3 className="text-base sm:text-lg font-medium text-foreground mb-2">No upcoming events</h3>
                 <p className="text-muted-foreground text-sm sm:text-base">
                   Check back soon for new community events
                 </p>
@@ -210,17 +211,17 @@ export default function MemberEvents() {
               <CardTitle className="flex items-center space-x-2">
                 <Calendar className="h-5 w-5" />
                 <span>Past Events</span>
-                <Badge className="bg-gray-100 text-gray-800">{pastEvents.length}</Badge>
+                <Badge variant="secondary">{pastEvents.length}</Badge>
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 {pastEvents.map((event) => (
-                  <div key={event.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 border rounded-lg bg-gray-50 space-y-3 sm:space-y-0">
+                  <div key={event.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 border rounded-lg bg-muted space-y-3 sm:space-y-0">
                     <div className="flex-1">
-                      <h3 className="font-semibold text-base sm:text-lg text-gray-600">{event.title}</h3>
-                      <p className="text-sm text-gray-500 mb-2">{event.description}</p>
-                      <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 text-sm text-gray-500">
+                      <h3 className="font-semibold text-base sm:text-lg text-muted-foreground">{event.title}</h3>
+                      <p className="text-sm text-muted-foreground mb-2">{event.description}</p>
+                      <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 text-sm text-muted-foreground">
                         <div className="flex items-center space-x-1">
                           <Clock className="h-4 w-4" />
                           <span>Ended {format(new Date(event.endDate), "MMM dd, yyyy")}</span>
@@ -233,7 +234,7 @@ export default function MemberEvents() {
                         )}
                       </div>
                     </div>
-                    <Badge variant="outline" className="text-gray-500 w-fit">
+                    <Badge variant="outline" className="text-muted-foreground w-fit">
                       Past Event
                     </Badge>
                   </div>
@@ -244,15 +245,15 @@ export default function MemberEvents() {
         )}
 
         {/* Event Calendar Info */}
-        <Card className="bg-blue-50 border-blue-200">
+        <Card className="bg-muted border-border">
           <CardContent className="p-4 sm:p-6">
             <div className="text-center">
-              <Calendar className="h-10 w-10 sm:h-12 sm:w-12 text-blue-600 mx-auto mb-4" />
-              <h3 className="text-base sm:text-lg font-medium text-blue-900 mb-2">Stay Connected</h3>
-              <p className="text-blue-700 mb-4 text-sm sm:text-base">
+              <Calendar className="h-10 w-10 sm:h-12 sm:w-12 text-muted-foreground mx-auto mb-4" />
+              <h3 className="text-base sm:text-lg font-medium text-foreground mb-2">Stay Connected</h3>
+              <p className="text-muted-foreground mb-4 text-sm sm:text-base">
                 Join our community events to connect with others, learn new things, and support each other in your healthcare journey.
               </p>
-              <p className="text-xs sm:text-sm text-blue-600">
+              <p className="text-xs sm:text-sm text-muted-foreground">
                 Events are regularly updated. Check back often for new opportunities to engage with the community.
               </p>
             </div>

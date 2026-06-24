@@ -26,7 +26,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-500 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-foreground mx-auto mb-4"></div>
           <p className="text-muted-foreground">Checking admin access...</p>
         </div>
       </div>
@@ -83,9 +83,9 @@ export function AdminLayout({ children }: AdminLayoutProps) {
           </div>
           
           <div className="flex items-center space-x-2">
-            <div className="flex items-center space-x-2 px-3 py-1 rounded-full bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
-              <div className="w-2 h-2 rounded-full bg-red-500"></div>
-              <span className="text-xs font-medium text-red-700 dark:text-red-300">Admin Mode</span>
+            <div className="flex items-center space-x-2 px-3 py-1 rounded-full bg-muted border border-border">
+              <div className="w-2 h-2 rounded-full bg-foreground"></div>
+              <span className="text-xs font-medium text-muted-foreground">Admin Mode</span>
             </div>
           </div>
         </div>

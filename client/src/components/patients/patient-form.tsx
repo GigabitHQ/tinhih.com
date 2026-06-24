@@ -153,7 +153,7 @@ export function PatientForm({ patient, onSuccess, onCancel }: PatientFormProps) 
                       <FormControl>
                         <Input {...field} />
                       </FormControl>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -167,7 +167,7 @@ export function PatientForm({ patient, onSuccess, onCancel }: PatientFormProps) 
                       <FormControl>
                         <Input {...field} />
                       </FormControl>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -183,7 +183,7 @@ export function PatientForm({ patient, onSuccess, onCancel }: PatientFormProps) 
                       <FormControl>
                         <Input type="email" {...field} disabled={isEditing} />
                       </FormControl>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -197,7 +197,7 @@ export function PatientForm({ patient, onSuccess, onCancel }: PatientFormProps) 
                       <FormControl>
                         <Input {...field} />
                       </FormControl>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -213,7 +213,7 @@ export function PatientForm({ patient, onSuccess, onCancel }: PatientFormProps) 
                       <FormControl>
                         <Input type="password" {...field} />
                       </FormControl>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -234,7 +234,7 @@ export function PatientForm({ patient, onSuccess, onCancel }: PatientFormProps) 
                       <FormControl>
                         <Input type="date" {...field} />
                       </FormControl>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -258,7 +258,7 @@ export function PatientForm({ patient, onSuccess, onCancel }: PatientFormProps) 
                           <SelectItem value="prefer_not_to_say">Prefer not to say</SelectItem>
                         </SelectContent>
                       </Select>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -273,7 +273,7 @@ export function PatientForm({ patient, onSuccess, onCancel }: PatientFormProps) 
                     <FormControl>
                       <Textarea {...field} />
                     </FormControl>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -288,7 +288,7 @@ export function PatientForm({ patient, onSuccess, onCancel }: PatientFormProps) 
                       <FormControl>
                         <Input {...field} />
                       </FormControl>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -302,7 +302,7 @@ export function PatientForm({ patient, onSuccess, onCancel }: PatientFormProps) 
                       <FormControl>
                         <Input {...field} />
                       </FormControl>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -318,7 +318,7 @@ export function PatientForm({ patient, onSuccess, onCancel }: PatientFormProps) 
                       <FormControl>
                         <Input {...field} />
                       </FormControl>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -332,7 +332,7 @@ export function PatientForm({ patient, onSuccess, onCancel }: PatientFormProps) 
                       <FormControl>
                         <Input {...field} />
                       </FormControl>
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />

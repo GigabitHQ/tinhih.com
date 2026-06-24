@@ -163,10 +163,10 @@ export default function ProductDetail() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 py-8">
+      <div className="min-h-screen bg-muted py-8">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-center h-64">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-foreground"></div>
             <span className="ml-2">Loading product...</span>
           </div>
         </div>
@@ -176,12 +176,12 @@ export default function ProductDetail() {
 
   if (!product) {
     return (
-      <div className="min-h-screen bg-gray-50 py-8">
+      <div className="min-h-screen bg-muted py-8">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center">
-            <Package className="h-16 w-16 text-gray-400 mx-auto mb-4" />
+            <Package className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
             <h1 className="text-2xl font-bold mb-4">Product Not Found</h1>
-            <p className="text-gray-600 mb-4">
+            <p className="text-muted-foreground mb-4">
               The requested product could not be found.
             </p>
             <Button onClick={() => setLocation("/store")}>
@@ -198,7 +198,7 @@ export default function ProductDetail() {
   const productImages = product.images || [product.image];
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-muted py-8">
       <div className="max-w-7xl mx-auto px-4">
         {/* Breadcrumb */}
         <div className="mb-6">
@@ -222,12 +222,12 @@ export default function ProductDetail() {
                 className="w-full h-96 object-cover rounded-lg"
               />
               {product.isOnSale && (
-                <Badge className="absolute top-4 right-4 bg-red-500 text-white">
+                <Badge className="absolute top-4 right-4 bg-foreground text-background">
                   {product.salePercentage}% OFF
                 </Badge>
               )}
               {product.isFeatured && (
-                <Badge className="absolute top-4 left-4 bg-yellow-500 text-white">
+                <Badge variant="secondary" className="absolute top-4 left-4">
                   Featured
                 </Badge>
               )}
@@ -241,7 +241,7 @@ export default function ProductDetail() {
                     key={index}
                     onClick={() => setSelectedImage(index)}
                     className={`w-20 h-20 rounded-lg overflow-hidden border-2 ${
-                      selectedImage === index ? 'border-blue-500' : 'border-gray-200'
+                      selectedImage === index ? 'border-foreground' : 'border-border'
                     }`}
                   >
                     <img
@@ -261,13 +261,13 @@ export default function ProductDetail() {
               <h1 className="text-3xl font-bold mb-2">{product.name}</h1>
               <div className="flex items-center space-x-4 mb-4">
                 <div className="flex items-center space-x-1">
-                  <Star className="h-5 w-5 text-yellow-500 fill-current" />
+                  <Star className="h-5 w-5 text-foreground fill-current" />
                   <span className="font-medium">{product.rating}</span>
-                  <span className="text-gray-500">({product.reviews} reviews)</span>
+                  <span className="text-muted-foreground">({product.reviews} reviews)</span>
                 </div>
                 <Badge variant="outline">{product.category}</Badge>
               </div>
-              <p className="text-lg text-gray-600">{product.description}</p>
+              <p className="text-lg text-muted-foreground">{product.description}</p>
             </div>
 
             {/* Price */}
@@ -275,13 +275,13 @@ export default function ProductDetail() {
               <div className="flex items-center space-x-2">
                 <span className="text-3xl font-bold">${productPrice?.toFixed(2)}</span>
                 {product.originalPrice && product.originalPrice !== productPrice && (
-                  <span className="text-xl text-gray-500 line-through">
+                  <span className="text-xl text-muted-foreground line-through">
                     ${product.originalPrice.toFixed(2)}
                   </span>
                 )}
               </div>
               {product.isOnSale && (
-                <p className="text-green-600 font-medium">
+                <p className="text-foreground font-medium">
                   Save ${((product.originalPrice || 0) - (productPrice || 0)).toFixed(2)}!
                 </p>
               )}
@@ -341,13 +341,13 @@ export default function ProductDetail() {
             )}
 
             {/* Features */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="flex items-center space-x-2">
-                <Truck className="h-5 w-5 text-gray-400" />
+                <Truck className="h-5 w-5 text-muted-foreground" />
                 <span className="text-sm">Free shipping</span>
               </div>
               <div className="flex items-center space-x-2">
-                <Shield className="h-5 w-5 text-gray-400" />
+                <Shield className="h-5 w-5 text-muted-foreground" />
                 <span className="text-sm">Secure checkout</span>
               </div>
             </div>
@@ -362,7 +362,7 @@ export default function ProductDetail() {
                 <CardTitle>Product Description</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed">
                   {product.longDescription}
                 </p>
               </CardContent>
@@ -382,7 +382,7 @@ export default function ProductDetail() {
                   {Object.entries(product.specifications).map(([key, value]) => (
                     <div key={key} className="flex justify-between">
                       <span className="font-medium">{key}:</span>
-                      <span className="text-gray-600">{value}</span>
+                      <span className="text-muted-foreground">{value}</span>
                     </div>
                   ))}
                 </div>

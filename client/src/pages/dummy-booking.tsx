@@ -192,8 +192,8 @@ export default function DummyBooking() {
                     <CardContent className="p-6">
                         <RadioGroupItem value="returning" id="returning" className="sr-only" />
                         <Label htmlFor="returning" className="flex items-center space-x-4 cursor-pointer">
-                            <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                                <User className="w-6 h-6 text-primary" />
+                            <div className="w-12 h-12 bg-muted rounded-full flex items-center justify-center">
+                                <User className="w-6 h-6 text-muted-foreground" />
                             </div>
                                                             <div className="flex-1">
                                     <h3 className="text-[13px] font-medium">Returning Client</h3>
@@ -208,8 +208,8 @@ export default function DummyBooking() {
                     <CardContent className="p-6">
                         <RadioGroupItem value="new" id="new" className="sr-only" />
                         <Label htmlFor="new" className="flex items-center space-x-4 cursor-pointer">
-                            <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                                <User className="w-6 h-6 text-primary" />
+                            <div className="w-12 h-12 bg-muted rounded-full flex items-center justify-center">
+                                <User className="w-6 h-6 text-muted-foreground" />
                             </div>
                                                             <div className="flex-1">
                                     <h3 className="text-[13px] font-medium">New Client</h3>
@@ -230,7 +230,7 @@ export default function DummyBooking() {
                 <p className="text-[13px] text-muted-foreground">Choose the service that best fits your needs</p>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {SERVICES.map((service) => (
                     <Card
                         key={service.id}
@@ -295,8 +295,8 @@ export default function DummyBooking() {
                     >
                         <CardContent className="p-6">
                             <div className="flex items-center space-x-4">
-                                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                                    <location.icon className="w-6 h-6 text-primary" />
+                                <div className="w-12 h-12 bg-muted rounded-full flex items-center justify-center">
+                                    <location.icon className="w-6 h-6 text-muted-foreground" />
                                 </div>
                                 <div className="flex-1">
                                     <h3 className="text-[13px] font-medium">{location.name}</h3>
@@ -450,11 +450,9 @@ export default function DummyBooking() {
                         {steps.map((step, index) => (
                             <div key={step.id} className="flex items-center">
                                 <div className="flex items-center gap-2">
-                                    <div className={`w-8 h-8 rounded-full flex border items-center justify-center text-sm font-semibold ${currentStep > step.id ? 'border-none' : 'bg-gray-300'}`}>
+                                    <div className={`w-8 h-8 rounded-full flex border items-center justify-center text-sm font-semibold ${currentStep > step.id ? 'border-none bg-foreground text-background' : 'bg-muted text-muted-foreground'}`}>
                                         {currentStep > step.id ? (
-                                            <span>
-                                                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlnsXlink="http://www.w3.org/1999/xlink" width="30" height="30" x="0" y="0" viewBox="0 0 2.54 2.54" xmlSpace="preserve" fillRule="evenodd" className=""><g><circle cx="1.27" cy="1.27" r="1.27" fill="#48b02c" opacity="1" data-original="#48b02c"></circle><g fill="#fff"><path d="m.962 1.626.895-.895a.068.068 0 0 1 .096 0l.087.087a.068.068 0 0 1 0 .096l-.896.895a.068.068 0 0 1-.095 0l-.087-.087a.068.068 0 0 1 0-.096z" fill="#ffffff" opacity="1" data-original="#ffffff"></path><path d="m.683 1.08.545.546a.068.068 0 0 1 0 .096l-.086.086a.068.068 0 0 1-.096 0L.5 1.263a.068.068 0 0 1 0-.096l.087-.086a.068.068 0 0 1 .096 0z" fill="#ffffff" opacity="1" data-original="#ffffff"></path></g></g></svg>
-                                            </span>
+                                            <Check className="w-4 h-4" />
                                         ) : (
                                             step.id
                                         )}
@@ -464,7 +462,7 @@ export default function DummyBooking() {
                                     </div>
                                 </div>
                                 {index < steps.length - 1 && (
-                                    <div className={`w-[100px] h-0.5 mx-4 ${currentStep > step.id ? 'bg-green-500' : 'bg-muted'
+                                    <div className={`w-[100px] h-0.5 mx-4 ${currentStep > step.id ? 'bg-foreground' : 'bg-muted'
                                         }`} />
                                 )}
                             </div>

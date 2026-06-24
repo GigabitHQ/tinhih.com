@@ -40,10 +40,10 @@ function PasswordStrengthIndicator({ password }: { password: string }) {
   if (password.length === 0) return null;
 
   const getStrengthColor = () => {
-    if (percentage >= 80) return "text-green-600 dark:text-green-400";
-    if (percentage >= 60) return "text-yellow-600 dark:text-yellow-400";
-    if (percentage >= 40) return "text-orange-600 dark:text-orange-400";
-    return "text-red-600 dark:text-red-400";
+    if (percentage >= 80) return "text-foreground";
+    if (percentage >= 60) return "text-foreground";
+    if (percentage >= 40) return "text-muted-foreground";
+    return "text-muted-foreground";
   };
 
   const getStrengthText = () => {
@@ -151,7 +151,7 @@ export default function ResetPassword() {
 
   if (!token) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-blue-900 dark:to-purple-900 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-background flex items-center justify-center p-4">
         <div className="w-full max-w-md mx-auto">
           {/* Header */}
           <div className="text-center mb-8">
@@ -171,10 +171,10 @@ export default function ResetPassword() {
             <p className="text-muted-foreground/70 text-sm mt-2">Invalid reset link detected</p>
           </div>
 
-          <Card className="border-0 shadow-2xl bg-card/80 backdrop-blur-sm">
+          <Card className="shadow-lg bg-card">
             <CardHeader className="text-center pb-4">
-              <div className="w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                <AlertCircle className="h-6 w-6 text-red-600 dark:text-red-400" />
+              <div className="w-12 h-12 bg-muted rounded-full flex items-center justify-center mx-auto mb-4">
+                <AlertCircle className="h-6 w-6 text-foreground" />
               </div>
               <CardTitle className="text-xl font-semibold text-foreground">
                 Invalid Reset Link
@@ -184,17 +184,17 @@ export default function ResetPassword() {
               </p>
             </CardHeader>
             <CardContent className="space-y-6">
-              <Alert variant="destructive" className="border-red-200 bg-red-50 dark:border-red-800 dark:bg-red-900/20">
+              <Alert variant="destructive" className="border-foreground text-foreground">
                 <AlertCircle className="h-4 w-4" />
                 <AlertDescription className="text-sm font-medium">
                   {error}
                 </AlertDescription>
               </Alert>
-              
+
               <div className="space-y-3">
-                <Button 
+                <Button
                   onClick={() => setLocation("/forgot-password")}
-                  className="w-full h-11 bg-[#ffdd00] hover:bg-[#ffdd00]/90 text-black font-medium"
+                  className="w-full h-11 font-medium"
                 >
                   Request New Reset Link
                 </Button>
@@ -227,7 +227,7 @@ export default function ResetPassword() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-blue-900 dark:to-purple-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <div className="w-full max-w-md mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
@@ -247,10 +247,10 @@ export default function ResetPassword() {
           <p className="text-muted-foreground/70 text-sm mt-2">Create a new secure password</p>
         </div>
 
-        <Card className="border-0 shadow-2xl bg-card/80 backdrop-blur-sm">
+        <Card className="shadow-lg bg-card">
           <CardHeader className="text-center pb-6">
-            <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-              <CheckCircle className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+            <div className="w-12 h-12 bg-muted rounded-full flex items-center justify-center mx-auto mb-4">
+              <CheckCircle className="h-6 w-6 text-foreground" />
             </div>
             <CardTitle className="text-xl font-semibold text-foreground">
               Reset Your Password
@@ -262,17 +262,17 @@ export default function ResetPassword() {
           <CardContent className="space-y-6">
             {/* Success Alert */}
             {success && (
-              <Alert className="border-green-200 bg-green-50 dark:border-green-800 dark:bg-green-900/20">
-                <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
-                <AlertDescription className="text-green-800 dark:text-green-200 font-medium">
+              <Alert className="border-border bg-muted">
+                <CheckCircle className="h-4 w-4 text-foreground" />
+                <AlertDescription className="text-foreground font-medium">
                   🎉 Password reset successfully! Redirecting to login page...
                 </AlertDescription>
               </Alert>
             )}
-            
+
             {/* Error Alert */}
             {error && (
-              <Alert variant="destructive" className="border-red-200 bg-red-50 dark:border-red-800 dark:bg-red-900/20">
+              <Alert variant="destructive" className="border-foreground text-foreground">
                 <AlertCircle className="h-4 w-4" />
                 <AlertDescription className="font-medium">
                   {error}
@@ -320,7 +320,7 @@ export default function ResetPassword() {
                         </div>
                       </FormControl>
                       <PasswordStrengthIndicator password={password} />
-                      <FormMessage className="text-red-600"/>
+                      <FormMessage/>
                     </FormItem>
                   )}
                 />
@@ -358,20 +358,20 @@ export default function ResetPassword() {
                           </Button>
                         </div>
                       </FormControl>
-                      <FormMessage className="text-red-600 font-medium" />
+                      <FormMessage className="font-medium" />
                     </FormItem>
                   )}
                 />
                 
                 <div className="pt-2">
-                  <Button 
-                    type="submit" 
-                    className="w-full h-11 bg-[#ffdd00] hover:bg-[#ffdd00]/90 text-black font-medium" 
+                  <Button
+                    type="submit"
+                    className="w-full h-11 font-medium"
                     disabled={isLoading}
                   >
                     {isLoading ? (
                       <div className="flex items-center space-x-2">
-                        <div className="w-4 h-4 border-2 border-black/30 border-t-black rounded-full animate-spin"></div>
+                        <div className="w-4 h-4 border-2 border-current/30 border-t-current rounded-full animate-spin"></div>
                         <span>Updating password...</span>
                       </div>
                     ) : (

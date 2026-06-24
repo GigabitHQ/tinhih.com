@@ -396,17 +396,17 @@ export default function TelehealthPage() {
       <div className="flex-1 overflow-auto">
         <div className="p-6">
           {/* HIPAA Compliance Header */}
-          <div className="mb-6 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg">
+          <div className="mb-6 p-4 bg-muted border border-border rounded-lg">
             <div className="flex items-center gap-3">
-              <Shield className="w-6 h-6 text-blue-600" />
+              <Shield className="w-6 h-6 text-muted-foreground" />
               <div>
-                <h3 className="font-semibold text-blue-900">HIPAA-Compliant Telehealth Meetings</h3>
-                <p className="text-sm text-blue-700">
+                <h3 className="font-semibold text-foreground">HIPAA-Compliant Telehealth Meetings</h3>
+                <p className="text-sm text-muted-foreground">
                   All collaborative meeting sessions are encrypted, audited, and protected under HIPAA regulations
                 </p>
               </div>
             </div>
-            <div className="mt-3 flex flex-wrap gap-4 text-xs text-blue-600">
+            <div className="mt-3 flex flex-wrap gap-4 text-xs text-muted-foreground">
               <div className="flex items-center gap-1">
                 <Lock className="w-3 h-3" />
                 <span>End-to-end encryption</span>

@@ -1,16 +1,15 @@
 import { useState, useEffect } from "react";
 import { ThemedCard, ThemedCardContent, ThemedCardHeader, ThemedCardTitle } from "@/components/ui/themed-card";
 import { ThemedButton } from "@/components/ui/themed-button";
-import { Badge } from "@/components/ui/badge";
+import { StatusBadge } from "@/components/ui/status-badge";
+import { StatCard } from "@/components/ui/stat-card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
-  Video, 
-  Calendar, 
-  Clock, 
-  Activity,
+  Video,
+  Calendar,
+  Clock,
   TrendingUp,
   CheckCircle,
-  AlertCircle,
   Play,
   Pause,
   Phone,
@@ -120,28 +119,6 @@ export function SessionDashboard({
     }))
   });
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'scheduled': return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200';
-      case 'waiting_room': return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200';
-      case 'in_session': return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200';
-      case 'completed': return 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200';
-      case 'cancelled': return 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200';
-      default: return 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200';
-    }
-  };
-
-  const getStatusIcon = (status: string) => {
-    switch (status) {
-      case 'scheduled': return <Play className="w-3 h-3" />;
-      case 'waiting_room': return <Video className="w-3 h-3" />;
-      case 'in_session': return <Video className="w-3 h-3" />;
-      case 'completed': return <CheckCircle className="w-3 h-3" />;
-      case 'cancelled': return <AlertCircle className="w-3 h-3" />;
-      default: return <Activity className="w-3 h-3" />;
-    }
-  };
-
   const getStatusText = (status: string) => {
     const statusMap: { [key: string]: string } = {
       'scheduled': 'Ready to Start',
@@ -201,15 +178,10 @@ export function SessionDashboard({
                   {session.patient?.user?.firstName} {session.patient?.user?.lastName}
                 </span>
               </div>
-              <Badge className={getStatusColor(session.status)}>
-                <div className="flex items-center gap-1">
-                  {getStatusIcon(session.status)}
-                  <span>{getStatusText(session.status)}</span>
-                </div>
-              </Badge>
+              <StatusBadge status={session.status} label={getStatusText(session.status)} />
             </div>
             <div className="flex items-center space-x-2 mb-2">
-              <span className="text-sm text-gray-600">
+              <span className="text-sm text-muted-foreground">
                 {getPlatformName(session.platform || 'webrtc')}
               </span>
             </div>
@@ -290,7 +262,7 @@ export function SessionDashboard({
                       navigator.clipboard.writeText(session.meetingUrl!);
                       const toast = document.createElement('div');
                       toast.textContent = 'Meeting link copied!';
-                      toast.className = 'fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded shadow-lg z-50';
+                      toast.className = 'fixed top-4 right-4 bg-foreground text-background px-4 py-2 rounded shadow-lg z-50';
                       document.body.appendChild(toast);
                       setTimeout(() => document.body.removeChild(toast), 3000);
                     }}
@@ -325,105 +297,42 @@ export function SessionDashboard({
   return (
     <div className="space-y-6">
       {/* Quick Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <ThemedCard 
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <StatCard
+          label="Today"
+          value={todaySessions.length}
+          hint="Sessions"
+          icon={Calendar}
           onClick={() => handleStatClick("today")}
-          className="cursor-pointer hover:shadow-md transition-all duration-300 hover:scale-105 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950 dark:to-emerald-950 border-green-200 dark:border-green-800"
-        >
-          <ThemedCardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-green-700 dark:text-green-300">
-                  Today
-                </p>
-                <p className="text-3xl font-bold text-green-600 dark:text-green-400">
-                  {todaySessions.length}
-                </p>
-                <p className="text-xs text-green-600 dark:text-green-400 mt-1">
-                  Sessions
-                </p>
-              </div>
-              <div className="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center">
-                <Calendar className="w-6 h-6 text-green-600 dark:text-green-400" />
-              </div>
-            </div>
-          </ThemedCardContent>
-        </ThemedCard>
+          className="cursor-pointer transition-shadow hover:shadow-md"
+        />
 
-        <ThemedCard 
+        <StatCard
+          label="Active Now"
+          value={sessions.filter(s => s.status === 'waiting_room' || s.status === 'in_session').length}
+          hint="Live Sessions"
+          icon={Video}
           onClick={() => handleStatClick("active")}
-          className="cursor-pointer hover:shadow-md transition-all duration-300 hover:scale-105 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950 dark:to-indigo-950 border-blue-200 dark:border-blue-800"
-        >
-          <ThemedCardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-blue-700 dark:text-blue-300">
-                  Active Now
-                </p>
-                <p className="text-3xl font-bold text-blue-600 dark:text-blue-400">
-                  {sessions.filter(s => s.status === 'waiting_room' || s.status === 'in_session').length}
-                </p>
-                <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">
-                  Live Sessions
-                </p>
-              </div>
-              <div className="relative">
-                <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center">
-                  <Video className="w-6 h-6 text-blue-600 dark:text-blue-400 animate-pulse" />
-                </div>
-                <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white dark:border-gray-900 animate-ping"></div>
-              </div>
-            </div>
-          </ThemedCardContent>
-        </ThemedCard>
+          className="cursor-pointer transition-shadow hover:shadow-md"
+        />
 
-        <ThemedCard 
+        <StatCard
+          label="Upcoming"
+          value={upcomingSessions.length}
+          hint="Scheduled"
+          icon={Clock}
           onClick={() => handleStatClick("upcoming")}
-          className="cursor-pointer hover:shadow-md transition-all duration-300 hover:scale-105 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950 dark:to-pink-950 border-purple-200 dark:border-purple-800"
-        >
-          <ThemedCardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-purple-700 dark:text-purple-300">
-                  Upcoming
-                </p>
-                <p className="text-3xl font-bold text-purple-600 dark:text-purple-400">
-                  {upcomingSessions.length}
-                </p>
-                <p className="text-xs text-purple-600 dark:text-purple-400 mt-1">
-                  Scheduled
-                </p>
-              </div>
-              <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center">
-                <Clock className="w-6 h-6 text-purple-600 dark:text-purple-400" />
-              </div>
-            </div>
-          </ThemedCardContent>
-        </ThemedCard>
+          className="cursor-pointer transition-shadow hover:shadow-md"
+        />
 
-        <ThemedCard 
+        <StatCard
+          label="Completed"
+          value={completedSessions.length}
+          hint="Sessions"
+          icon={CheckCircle}
           onClick={() => handleStatClick("completed")}
-          className="cursor-pointer hover:shadow-md transition-all duration-300 hover:scale-105 bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-950 dark:to-amber-950 border-orange-200 dark:border-orange-800"
-        >
-          <ThemedCardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-orange-700 dark:text-orange-300">
-                  Completed
-                </p>
-                <p className="text-3xl font-bold text-orange-600 dark:text-orange-400">
-                  {completedSessions.length}
-                </p>
-                <p className="text-xs text-orange-600 dark:text-orange-400 mt-1">
-                  Sessions
-                </p>
-              </div>
-              <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900 rounded-full flex items-center justify-center">
-                <CheckCircle className="w-6 h-6 text-orange-600 dark:text-orange-400" />
-              </div>
-            </div>
-          </ThemedCardContent>
-        </ThemedCard>
+          className="cursor-pointer transition-shadow hover:shadow-md"
+        />
       </div>
 
       {/* Session Tabs */}
@@ -433,34 +342,34 @@ export function SessionDashboard({
         </ThemedCardHeader>
         <ThemedCardContent>
           <Tabs value={selectedTab} onValueChange={setSelectedTab}>
-            <TabsList className="grid w-full mt-1 grid-cols-4 h-12 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-              <TabsTrigger 
-                value="all" 
-                className="flex items-center gap-2 px-4 py-2 rounded-md transition-all duration-200 data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:shadow-sm data-[state=active]:text-primary font-medium hover:bg-gray-50 dark:hover:bg-gray-700"
+            <TabsList className="grid w-full mt-1 grid-cols-4 h-12 bg-muted p-1 rounded-lg shadow-sm border border-border">
+              <TabsTrigger
+                value="all"
+                className="flex items-center gap-2 px-4 py-2 rounded-md transition-all duration-200 data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-foreground font-medium hover:bg-accent"
               >
                 <List className="w-4 h-4" />
                 All ({activeFilter ? activeSessions.length : sessions.length})
                 {activeFilter && (
-                  <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                  <div className="w-2 h-2 bg-foreground rounded-full animate-pulse"></div>
                 )}
               </TabsTrigger>
-              <TabsTrigger 
-                value="today" 
-                className="flex items-center gap-2 px-4 py-2 rounded-md transition-all duration-200 data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:shadow-sm data-[state=active]:text-primary font-medium hover:bg-gray-50 dark:hover:bg-gray-700"
+              <TabsTrigger
+                value="today"
+                className="flex items-center gap-2 px-4 py-2 rounded-md transition-all duration-200 data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-foreground font-medium hover:bg-accent"
               >
                 <Calendar className="w-4 h-4" />
                 Today ({todaySessions.length})
               </TabsTrigger>
-              <TabsTrigger 
-                value="upcoming" 
-                className="flex items-center gap-2 px-4 py-2 rounded-md transition-all duration-200 data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:shadow-sm data-[state=active]:text-primary font-medium hover:bg-gray-50 dark:hover:bg-gray-700"
+              <TabsTrigger
+                value="upcoming"
+                className="flex items-center gap-2 px-4 py-2 rounded-md transition-all duration-200 data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-foreground font-medium hover:bg-accent"
               >
                 <Clock className="w-4 h-4" />
                 Upcoming ({upcomingSessions.length})
               </TabsTrigger>
-              <TabsTrigger 
-                value="completed" 
-                className="flex items-center gap-2 px-4 py-2 rounded-md transition-all duration-200 data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:shadow-sm data-[state=active]:text-primary font-medium hover:bg-gray-50 dark:hover:bg-gray-700"
+              <TabsTrigger
+                value="completed"
+                className="flex items-center gap-2 px-4 py-2 rounded-md transition-all duration-200 data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-foreground font-medium hover:bg-accent"
               >
                 <CheckCircle className="w-4 h-4" />
                 Completed ({completedSessions.length})
@@ -469,15 +378,15 @@ export function SessionDashboard({
 
             <TabsContent value="all" className="mt-6">
               {activeFilter && (
-                <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 rounded-lg">
+                <div className="mb-4 p-3 bg-muted border border-border rounded-lg">
                   <div className="flex items-center gap-2">
-                    <Video className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-                    <span className="text-sm font-medium text-blue-700 dark:text-blue-300">
+                    <Video className="w-4 h-4 text-muted-foreground" />
+                    <span className="text-sm font-medium text-foreground">
                       Showing Active Sessions Only
                     </span>
                     <button
                       onClick={() => setActiveFilter(false)}
-                      className="ml-auto text-xs text-blue-600 dark:text-blue-400 hover:underline"
+                      className="ml-auto text-xs text-muted-foreground hover:underline"
                     >
                       Show All
                     </button>

@@ -452,10 +452,10 @@ export function PaymentForm({ invoice, onSuccess, onCancel }: PaymentFormProps) 
 
             {/* Retry Notice */}
             {retryCount > 0 && (
-              <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+              <div className="p-4 bg-muted border border-foreground rounded-lg">
                 <div className="flex items-center space-x-2">
-                  <Clock className="w-4 h-4 text-yellow-600" />
-                  <p className="text-sm text-yellow-800">
+                  <Clock className="w-4 h-4 text-foreground" />
+                  <p className="text-sm text-foreground">
                     Payment attempt {retryCount}/3. Please ensure your payment details are correct.
                   </p>
                 </div>
@@ -463,12 +463,12 @@ export function PaymentForm({ invoice, onSuccess, onCancel }: PaymentFormProps) 
             )}
 
             {/* Security Info */}
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+            <div className="bg-muted border border-border rounded-lg p-4">
               <div className="flex items-start gap-3">
-                <Shield className="w-5 h-5 text-blue-600 mt-0.5" />
+                <Shield className="w-5 h-5 text-muted-foreground mt-0.5" />
                 <div className="space-y-1">
-                  <p className="text-sm font-medium text-blue-900">Secure Payment Processing</p>
-                  <p className="text-xs text-blue-700">
+                  <p className="text-sm font-medium text-foreground">Secure Payment Processing</p>
+                  <p className="text-xs text-muted-foreground">
                     Your payment information is encrypted and processed securely through Stripe. 
                     We never store your card details on our servers.
                   </p>
@@ -602,7 +602,7 @@ export function StripePaymentWrapper({ invoice, onSuccess, onCancel }: StripePay
   if (!stripePromise) {
     return (
       <div className="text-center py-8">
-        <div className="text-amber-600 mb-4">
+        <div className="text-foreground mb-4">
           <AlertCircle className="w-8 h-8 mx-auto mb-2" />
           <p className="font-medium">Payment Processing Unavailable</p>
           <p className="text-sm text-muted-foreground mt-1">
@@ -625,7 +625,7 @@ export function StripePaymentWrapper({ invoice, onSuccess, onCancel }: StripePay
     return (
       <div className="flex items-center justify-center py-8">
         <div className="text-center">
-          <Clock className="w-8 h-8 animate-spin mx-auto mb-4 text-primary" />
+          <Clock className="w-8 h-8 animate-spin mx-auto mb-4 text-foreground" />
           <p className="text-sm text-muted-foreground">Initializing payment...</p>
         </div>
       </div>
@@ -635,7 +635,7 @@ export function StripePaymentWrapper({ invoice, onSuccess, onCancel }: StripePay
   if (error) {
     return (
       <div className="text-center py-8">
-        <div className="text-red-600 mb-4">
+        <div className="text-foreground mb-4">
           <AlertCircle className="w-8 h-8 mx-auto mb-2" />
           <p className="font-medium">Payment initialization failed</p>
           <p className="text-sm text-muted-foreground mt-1">{error}</p>

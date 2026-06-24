@@ -2,28 +2,23 @@ import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import { 
-  DollarSign, 
-  Search, 
-  Filter, 
-  Download, 
+  DollarSign,
+  Filter,
+  Download,
   Eye,
   CheckCircle,
   XCircle,
   Clock,
-  AlertCircle,
   TrendingUp,
   TrendingDown,
   Calendar,
   User,
   Stethoscope,
-  FileText,
   Mail,
   Phone,
   MapPin,
@@ -39,6 +34,9 @@ import { format } from "date-fns";
 import { AdminLayout } from "@/components/layout/admin-layout";
 import { useToast } from "@/hooks/use-toast";
 import { TransactionDetails } from "@/components/admin/transaction-details";
+import { StatCard } from "@/components/ui/stat-card";
+import { StatusBadge } from "@/components/ui/status-badge";
+import { SearchInput } from "@/components/ui/search-input";
 
 interface Transaction {
   id: string;
@@ -127,22 +125,7 @@ export default function AdminTransactions() {
     })
     .reduce((sum: number, t: Transaction) => sum + parseFloat(t.total || '0'), 0);
 
-  const getStatusBadge = (status: string) => {
-    switch (status) {
-      case 'paid':
-        return <Badge className="bg-green-100 text-green-800 border-green-200"><CheckCircle className="w-3 h-3 mr-1" />Paid</Badge>;
-      case 'sent':
-        return <Badge className="bg-blue-100 text-blue-800 border-blue-200"><Mail className="w-3 h-3 mr-1" />Sent</Badge>;
-      case 'overdue':
-        return <Badge className="bg-red-100 text-red-800 border-red-200"><XCircle className="w-3 h-3 mr-1" />Overdue</Badge>;
-      case 'draft':
-        return <Badge className="bg-gray-100 text-gray-800 border-gray-200"><FileText className="w-3 h-3 mr-1" />Draft</Badge>;
-      case 'cancelled':
-        return <Badge className="bg-orange-100 text-orange-800 border-orange-200"><AlertCircle className="w-3 h-3 mr-1" />Cancelled</Badge>;
-      default:
-        return <Badge className="bg-gray-100 text-gray-800 border-gray-200"><Clock className="w-3 h-3 mr-1" />Unknown</Badge>;
-    }
-  };
+  const getStatusBadge = (status: string) => <StatusBadge status={status} />;
 
   const handleExportTransactions = () => {
     const csvContent = "data:text/csv;charset=utf-8," + 
@@ -235,71 +218,37 @@ export default function AdminTransactions() {
         {/* Dashboard Content */}
         <div className="flex-1 overflow-auto p-6">
           {/* Summary Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mb-8">
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
-                <TrendingUp className="h-4 w-4 text-green-500" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">${totalRevenue.toFixed(2)}</div>
-                <p className="text-xs text-muted-foreground">
-                  All time earnings
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Monthly Revenue</CardTitle>
-                <BarChart3 className="h-4 w-4 text-blue-500" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">${monthlyRevenue.toFixed(2)}</div>
-                <p className="text-xs text-muted-foreground">
-                  This month
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Paid Invoices</CardTitle>
-                <CheckCircle className="h-4 w-4 text-green-500" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{successfulPayments}</div>
-                <p className="text-xs text-muted-foreground">
-                  Completed payments
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Pending</CardTitle>
-                <Clock className="h-4 w-4 text-yellow-500" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{pendingPayments}</div>
-                <p className="text-xs text-muted-foreground">
-                  Awaiting payment
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Overdue</CardTitle>
-                <XCircle className="h-4 w-4 text-red-500" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{failedPayments}</div>
-                <p className="text-xs text-muted-foreground">
-                  Past due
-                </p>
-              </CardContent>
-            </Card>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-8">
+            <StatCard
+              label="Total Revenue"
+              value={`$${totalRevenue.toFixed(2)}`}
+              icon={TrendingUp}
+              hint="All time earnings"
+            />
+            <StatCard
+              label="Monthly Revenue"
+              value={`$${monthlyRevenue.toFixed(2)}`}
+              icon={BarChart3}
+              hint="This month"
+            />
+            <StatCard
+              label="Paid Invoices"
+              value={successfulPayments}
+              icon={CheckCircle}
+              hint="Completed payments"
+            />
+            <StatCard
+              label="Pending"
+              value={pendingPayments}
+              icon={Clock}
+              hint="Awaiting payment"
+            />
+            <StatCard
+              label="Overdue"
+              value={failedPayments}
+              icon={XCircle}
+              hint="Past due"
+            />
           </div>
 
           {/* Filters */}
@@ -312,15 +261,11 @@ export default function AdminTransactions() {
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-                  <Input
-                    placeholder="Search by invoice number, client, or practitioner..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10"
-                  />
-                </div>
+                <SearchInput
+                  placeholder="Search by invoice number, client, or practitioner..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
                 
                 <Select value={statusFilter} onValueChange={setStatusFilter}>
                   <SelectTrigger>
@@ -360,7 +305,7 @@ export default function AdminTransactions() {
             <CardContent>
               {isLoading ? (
                 <div className="text-center py-8">
-                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-foreground mx-auto"></div>
                   <p className="text-muted-foreground mt-2">Loading transactions...</p>
                 </div>
               ) : transactions.length > 0 ? (
@@ -403,7 +348,7 @@ export default function AdminTransactions() {
                           </td>
                           <td className="py-3 px-4 font-medium">
                             <div className="flex items-center">
-                              <DollarSign className="w-4 h-4 mr-1 text-green-600" />
+                              <DollarSign className="w-4 h-4 mr-1 text-muted-foreground" />
                               ${parseFloat(transaction.total).toFixed(2)}
                             </div>
                           </td>
@@ -468,7 +413,7 @@ export default function AdminTransactions() {
               </TabsList>
 
               <TabsContent value="overview" className="space-y-6">
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <Card>
                     <CardHeader>
                       <CardTitle className="text-lg">Invoice Details</CardTitle>
@@ -543,7 +488,7 @@ export default function AdminTransactions() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label className="text-sm font-medium text-muted-foreground">Name</label>
                         <p className="text-lg">{selectedTransaction.patient.user.firstName} {selectedTransaction.patient.user.lastName}</p>
@@ -580,7 +525,7 @@ export default function AdminTransactions() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label className="text-sm font-medium text-muted-foreground">Name</label>
                         <p className="text-lg">{selectedTransaction.practitioner.user.firstName} {selectedTransaction.practitioner.user.lastName}</p>
@@ -618,7 +563,7 @@ export default function AdminTransactions() {
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
-                      <div className="grid grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                           <label className="text-sm font-medium text-muted-foreground">Title</label>
                           <p className="text-lg">{selectedTransaction.appointment.title}</p>

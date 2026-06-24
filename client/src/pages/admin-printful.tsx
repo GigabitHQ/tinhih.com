@@ -178,7 +178,7 @@ export default function AdminPrintful() {
     return (
       <AdminLayout>
         <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-foreground"></div>
           <span className="ml-2">Loading Printful data...</span>
         </div>
       </AdminLayout>
@@ -335,7 +335,7 @@ export default function AdminPrintful() {
                 >
                   {creatingProduct ? (
                     <>
-                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary-foreground mr-2"></div>
                       Creating Product...
                     </>
                   ) : (
@@ -359,8 +359,8 @@ export default function AdminPrintful() {
                     <div
                       key={template.id}
                       className={`p-3 border rounded-lg cursor-pointer transition-colors ${selectedTemplate?.id === template.id
-                        ? 'border-blue-500 bg-blue-50'
-                        : 'border-gray-200 hover:border-gray-300'
+                        ? 'border-foreground bg-muted'
+                        : 'border-border hover:border-foreground/40'
                         }`}
                       onClick={() => handleTemplateSelect(template)}
                     >
@@ -403,7 +403,7 @@ export default function AdminPrintful() {
               {products.length === 0 ? (
                 <div className="text-center py-8">
                   <Package className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                  <h3 className="text-lg font-medium text-gray-900 mb-2">No products yet</h3>
+                  <h3 className="text-lg font-medium text-foreground mb-2">No products yet</h3>
                   <p className="text-muted-foreground">
                     Create your first product using the form above
                   </p>
@@ -423,8 +423,8 @@ export default function AdminPrintful() {
                           }}
                         />
                       ) : (
-                        <div className="w-full h-32 bg-gray-100 flex items-center justify-center">
-                          <Package className="h-8 w-8 text-gray-400" />
+                        <div className="w-full h-32 bg-muted flex items-center justify-center">
+                          <Package className="h-8 w-8 text-muted-foreground" />
                         </div>
                       )}
                       <CardContent className="p-4">
@@ -464,7 +464,7 @@ export default function AdminPrintful() {
     console.error('AdminPrintful component error:', error);
     return (
       <div className="p-8">
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+        <div className="bg-card border border-foreground text-foreground px-4 py-3 rounded">
           <h2 className="font-bold">Error Loading Printful Management</h2>
           <p>{error.message || 'An unexpected error occurred'}</p>
         </div>

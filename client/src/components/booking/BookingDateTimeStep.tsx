@@ -211,7 +211,7 @@ export function BookingDateTimeStep({
               
               return (
                 <div key={day} className={`p-3 text-center text-sm font-medium border-l ${
-                  isSelected ? 'bg-primary/10' : ''
+                  isSelected ? 'bg-muted' : ''
                 }`}>
                   {day}
                 </div>
@@ -238,7 +238,7 @@ export function BookingDateTimeStep({
                   
                   return (
                     <div key={day} className={`p-2 border-l flex items-center justify-center ${
-                      selectedDate && isSameDay(dayDate, selectedDate) ? 'bg-primary/5' : ''
+                      selectedDate && isSameDay(dayDate, selectedDate) ? 'bg-muted/50' : ''
                     }`}>
                       {isAvailable ? (
                         <button
@@ -246,8 +246,8 @@ export function BookingDateTimeStep({
                             handleDateTimeSelect(dayDate, slot.time);
                           }}
                           className={`w-full py-2 px-3 text-sm rounded-md transition-colors ${
-                            isSelected 
-                              ? 'bg-primary text-primary-foreground' 
+                            isSelected
+                              ? 'bg-foreground text-background'
                               : 'bg-muted hover:bg-accent'
                           }`}
                         >
@@ -269,7 +269,7 @@ export function BookingDateTimeStep({
 
       {/* Selected Appointment Summary */}
       {selectedDate && selectedTime && (
-        <Card className="bg-primary/5 border-primary/20">
+        <Card className="bg-muted border-border">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
@@ -293,7 +293,7 @@ export function BookingDateTimeStep({
       {/* Legend */}
       <div className="flex items-center justify-center space-x-6 text-sm text-muted-foreground">
         <div className="flex items-center space-x-2">
-          <div className="w-3 h-3 bg-primary rounded-full"></div>
+          <div className="w-3 h-3 bg-foreground rounded-full"></div>
           <span>Selected</span>
         </div>
         <div className="flex items-center space-x-2">

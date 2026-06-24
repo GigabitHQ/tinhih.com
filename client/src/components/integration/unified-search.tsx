@@ -120,7 +120,7 @@ export function UnifiedSearch({ placeholder = "Search across all modules...", cl
             {isLoading ? (
               <div className="p-4">
                 <div className="flex items-center justify-center space-x-2">
-                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary"></div>
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-foreground"></div>
                   <span className="text-sm text-muted-foreground">Searching...</span>
                 </div>
               </div>
@@ -137,7 +137,7 @@ export function UnifiedSearch({ placeholder = "Search across all modules...", cl
                       {searchResults.patients.map((patient: any) => (
                         <Link key={patient.id} href={getResultLink('patients', patient)}>
                           <div className="flex items-center gap-3 p-2 hover:bg-muted rounded cursor-pointer">
-                            <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+                            <div className="w-8 h-8 bg-muted rounded-full flex items-center justify-center">
                               {getResultIcon('patients')}
                             </div>
                             <div className="flex-1 min-w-0">
@@ -164,7 +164,7 @@ export function UnifiedSearch({ placeholder = "Search across all modules...", cl
                       {searchResults.appointments.map((appointment: any) => (
                         <Link key={appointment.id} href={getResultLink('appointments', appointment)}>
                           <div className="flex items-center gap-3 p-2 hover:bg-muted rounded cursor-pointer">
-                            <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                            <div className="w-8 h-8 bg-muted rounded-full flex items-center justify-center">
                               {getResultIcon('appointments')}
                             </div>
                             <div className="flex-1 min-w-0">
@@ -194,7 +194,7 @@ export function UnifiedSearch({ placeholder = "Search across all modules...", cl
                       {searchResults.notes.map((note: any) => (
                         <Link key={note.id} href={getResultLink('notes', note)}>
                           <div className="flex items-center gap-3 p-2 hover:bg-muted rounded cursor-pointer">
-                            <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                            <div className="w-8 h-8 bg-muted rounded-full flex items-center justify-center">
                               {getResultIcon('notes')}
                             </div>
                             <div className="flex-1 min-w-0">
@@ -221,7 +221,7 @@ export function UnifiedSearch({ placeholder = "Search across all modules...", cl
                       {searchResults.invoices.map((invoice: any) => (
                         <Link key={invoice.id} href={getResultLink('invoices', invoice)}>
                           <div className="flex items-center gap-3 p-2 hover:bg-muted rounded cursor-pointer">
-                            <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                            <div className="w-8 h-8 bg-muted rounded-full flex items-center justify-center">
                               {getResultIcon('invoices')}
                             </div>
                             <div className="flex-1 min-w-0">

@@ -135,7 +135,7 @@ export function CalendarSidebar({
           id: user?.id || '',
           name: `My Appointments (${user?.firstName || 'Unknown'} ${user?.lastName || 'User'})`,
           avatar: `${user?.firstName?.[0] || ''}${user?.lastName?.[0] || ''}`,
-          color: "bg-primary",
+          color: "bg-muted",
           isCurrentUser: true,
         }
       ];
@@ -148,7 +148,7 @@ export function CalendarSidebar({
           id: "all",
           name: "All Practitioners",
           avatar: "AT",
-          color: "bg-blue-500",
+          color: "bg-muted",
         }
       ];
 
@@ -161,7 +161,7 @@ export function CalendarSidebar({
             id: user.id,
             name: `Current User (${user?.firstName || 'Unknown'} ${user?.lastName || 'User'})`,
             avatar: `${user?.firstName?.[0] || ''}${user?.lastName?.[0] || ''}`,
-            color: "bg-primary",
+            color: "bg-muted",
             isCurrentUser: true,
           });
         } else {
@@ -176,7 +176,7 @@ export function CalendarSidebar({
             id: p.user?.id || p.id,
             name: `${p.user?.firstName} ${p.user?.lastName}`,
             avatar: `${p.user?.firstName?.[0] || ''}${p.user?.lastName?.[0] || ''}`,
-            color: "bg-green-500",
+            color: "bg-muted",
           });
         });
       }
@@ -391,7 +391,7 @@ export function CalendarSidebar({
                   className={`
                     text-center p-1 rounded text-xs hover:bg-accent transition-colors cursor-pointer
                     ${!dayInfo.isCurrentMonth ? 'text-muted-foreground' : ''}
-                    ${isToday ? 'bg-[#ffdd00] text-black font-medium' : ''}
+                    ${isToday ? 'bg-foreground text-background font-medium' : ''}
                     ${isSelected && !isToday ? 'bg-accent' : ''}
                   `}
                 >
@@ -438,7 +438,7 @@ export function CalendarSidebar({
                     />
                     <div className="flex items-center space-x-2 flex-1">
                       {member.avatar && (
-                        <div className={`w-6 h-6 rounded-full ${member.color} flex items-center justify-center text-white text-xs font-medium`}>
+                        <div className={`w-6 h-6 rounded-full ${member.color} flex items-center justify-center text-muted-foreground text-xs font-medium`}>
                           {member.avatar}
                         </div>
                       )}
@@ -537,7 +537,7 @@ export function CalendarSidebar({
                             
                             {event.link && (
                               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                                <span className="text-xs text-blue-600 hover:text-blue-800 cursor-pointer">
+                                <span className="text-xs text-muted-foreground hover:text-foreground cursor-pointer">
                                   View Details
                                 </span>
                               </div>

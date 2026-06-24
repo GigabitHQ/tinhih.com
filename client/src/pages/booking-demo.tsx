@@ -66,7 +66,7 @@ export default function BookingDemo() {
               <div key={step.id} className="flex items-center">
                 <div className="flex flex-col items-center">
                   <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium ${
-                    currentStep > step.id ? 'bg-green-500 text-white' :
+                    currentStep > step.id ? 'bg-foreground text-background' :
                     currentStep === step.id ? 'bg-primary text-primary-foreground' :
                     'bg-muted text-muted-foreground'
                   }`}>
@@ -79,7 +79,7 @@ export default function BookingDemo() {
                 </div>
                 {index < 4 && (
                   <div className={`w-16 h-0.5 mx-4 ${
-                    currentStep > step.id ? 'bg-green-500' : 'bg-muted'
+                    currentStep > step.id ? 'bg-foreground' : 'bg-muted'
                   }`} />
                 )}
               </div>
@@ -106,7 +106,7 @@ export default function BookingDemo() {
                 <p className="text-muted-foreground">Please provide your details to complete the booking</p>
               </div>
 
-              <Card className="bg-primary/5 border-primary/20">
+              <Card className="bg-muted border-border">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     Selected Appointment

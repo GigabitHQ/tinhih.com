@@ -30,25 +30,25 @@ function PasswordStrengthIndicator({ password }: { password: string }) {
     const percentage = (score / requirements.length) * 100;
 
     let strength = "Very Weak";
-    let color = "text-red-600";
-    let bgColor = "bg-red-500";
+    let color = "text-muted-foreground";
+    let bgColor = "bg-muted-foreground/40";
 
     if (percentage >= 80) {
       strength = "Strong";
-      color = "text-emerald-600";
-      bgColor = "bg-emerald-500";
+      color = "text-foreground";
+      bgColor = "bg-foreground";
     } else if (percentage >= 60) {
       strength = "Good";
-      color = "text-yellow-600";
-      bgColor = "bg-yellow-500";
+      color = "text-foreground";
+      bgColor = "bg-foreground/80";
     } else if (percentage >= 40) {
       strength = "Fair";
-      color = "text-orange-600";
-      bgColor = "bg-orange-500";
+      color = "text-muted-foreground";
+      bgColor = "bg-muted-foreground/70";
     } else if (percentage >= 20) {
       strength = "Weak";
-      color = "text-red-600";
-      bgColor = "bg-red-500";
+      color = "text-muted-foreground";
+      bgColor = "bg-muted-foreground/50";
     }
 
     return { score, percentage, strength, color, bgColor, requirements };
@@ -78,8 +78,8 @@ function PasswordStrengthIndicator({ password }: { password: string }) {
         {requirements.map((req, index) => (
           <div key={index} className="flex items-center space-x-2 text-xs">
             <div className={`w-3 h-3 rounded-full flex items-center justify-center transition-all duration-200 ${
-              req.met 
-                ? 'bg-green-100 text-green-600' 
+              req.met
+                ? 'bg-foreground text-background'
                 : 'bg-muted text-muted-foreground'
             }`}>
               {req.met ? (
@@ -89,7 +89,7 @@ function PasswordStrengthIndicator({ password }: { password: string }) {
               )}
             </div>
             <span className={`font-medium transition-colors duration-200 ${
-              req.met ? 'text-green-700' : 'text-muted-foreground'
+              req.met ? 'text-foreground' : 'text-muted-foreground'
             }`}>
               {req.label}
             </span>
@@ -194,17 +194,17 @@ export default function Register() {
           <CardContent className="pt-0 space-y-6">
             {/* Register Success Alert */}
             {registerSuccess && (
-              <Alert className="border-green-200 bg-green-50">
-                <CheckCircle className="h-4 w-4 text-green-600" />
-                <AlertDescription className="text-green-800">
+              <Alert className="border-border bg-muted">
+                <CheckCircle className="h-4 w-4 text-foreground" />
+                <AlertDescription className="text-foreground">
                   Welcome to TiNHiH Portal! Redirecting to your dashboard...
                 </AlertDescription>
               </Alert>
             )}
-            
+
             {/* Register Error Alert */}
             {registerError && (
-              <Alert variant="destructive" className="bg-red-50/10 text-red-500 border border-red-300">
+              <Alert variant="destructive" className="border-foreground text-foreground">
                 <AlertCircle className="h-4 w-4" />
                 <AlertDescription>
                   {registerError.startsWith('<html>') ? 'Server Error' : registerError}
@@ -214,7 +214,7 @@ export default function Register() {
             
             <Form {...registerForm}>
               <form onSubmit={registerForm.handleSubmit(onRegister)} className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <FormField
                     control={registerForm.control}
                     name="firstName"
@@ -231,7 +231,7 @@ export default function Register() {
                             className="h-11 bg-background border-input"
                           />
                         </FormControl>
-                        <FormMessage className="text-red-500"/>
+                        <FormMessage/>
                       </FormItem>
                     )}
                   />
@@ -252,7 +252,7 @@ export default function Register() {
                             className="h-11 bg-background border-input"
                           />
                         </FormControl>
-                        <FormMessage className="text-red-500"/>
+                        <FormMessage/>
                       </FormItem>
                     )}
                   />
@@ -275,7 +275,7 @@ export default function Register() {
                           className="h-11 bg-background border-input"
                         />
                       </FormControl>
-                      <FormMessage className="text-red-500"/>
+                      <FormMessage/>
                     </FormItem>
                   )}
                 />
@@ -318,7 +318,7 @@ export default function Register() {
                         </div>
                       </FormControl>
                       <PasswordStrengthIndicator password={password} />
-                      <FormMessage className="text-red-500"/>
+                      <FormMessage/>
                     </FormItem>
                   )}
                 />
@@ -340,19 +340,19 @@ export default function Register() {
                         <SelectContent>
                           <SelectItem value="patient">
                             <div className="flex items-center space-x-2">
-                              <Heart className="h-4 w-4 text-pink-500" />
+                              <Heart className="h-4 w-4 text-muted-foreground" />
                               <span>Client - Seeking mental health support</span>
                             </div>
                           </SelectItem>
                           <SelectItem value="practitioner">
                             <div className="flex items-center space-x-2">
-                              <Stethoscope className="h-4 w-4 text-blue-500" />
+                              <Stethoscope className="h-4 w-4 text-muted-foreground" />
                               <span>Provider - Mental Health Professional</span>
                             </div>
                           </SelectItem>
                           <SelectItem value="member">
                             <div className="flex items-center space-x-2">
-                              <Users className="h-4 w-4 text-purple-500" />
+                              <Users className="h-4 w-4 text-muted-foreground" />
                               <span>Community Member - Support & Connect</span>
                             </div>
                           </SelectItem>
@@ -364,19 +364,19 @@ export default function Register() {
                           </SelectItem> */}
                         </SelectContent>
                       </Select>
-                      <FormMessage className="text-red-500"/>
+                      <FormMessage/>
                     </FormItem>
                   )}
                 />
                 
-                <Button 
-                  type="submit" 
-                  className="w-full h-11 bg-[#ffdd00] hover:bg-[#ffdd00]/90 text-black font-medium" 
+                <Button
+                  type="submit"
+                  className="w-full h-11 font-medium"
                   disabled={isLoading}
                 >
                   {isLoading ? (
                     <div className="flex items-center space-x-2">
-                      <div className="w-4 h-4 border-2 border-black/30 border-t-black rounded-full animate-spin"></div>
+                      <div className="w-4 h-4 border-2 border-current/30 border-t-current rounded-full animate-spin"></div>
                       <span>Creating account...</span>
                     </div>
                   ) : (

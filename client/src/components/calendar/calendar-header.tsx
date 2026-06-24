@@ -150,9 +150,9 @@ export function CalendarHeader({
           {/* Google Calendar Sync Indicator */}
           {googleIntegration?.calendarSync && (
             <div className="flex items-center space-x-2">
-              <div className="flex items-center space-x-2 px-3 py-1 bg-green-50 border border-green-200 rounded-lg">
-                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                <span className="text-xs text-green-700 font-medium">Google Calendar Synced</span>
+              <div className="flex items-center space-x-2 px-3 py-1 bg-muted border border-border rounded-lg">
+                <div className="w-2 h-2 bg-foreground rounded-full animate-pulse"></div>
+                <span className="text-xs text-foreground font-medium">Google Calendar Synced</span>
               </div>
               {/* Manual Sync Button - Always show when connected */}
               {onManualSync && (

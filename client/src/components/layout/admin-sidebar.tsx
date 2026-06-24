@@ -74,7 +74,7 @@ export function AdminSidebar({ isMobile = false }: AdminSidebarProps) {
 
   return (
     <aside 
-      className={`w-64 h-screen fixed left-0 top-0 z-40 shadow-sm flex flex-col transition-all duration-300 ease-in-out border-r border-gray-200 dark:border-gray-800/50 ${!isMobile ? 'hidden lg:flex' : 'flex'}`}
+      className={`w-64 h-screen fixed left-0 top-0 z-40 shadow-sm flex flex-col transition-all duration-300 ease-in-out border-r border-border ${!isMobile ? 'hidden lg:flex' : 'flex'}`}
       style={{
         backgroundColor: `hsl(var(--sidebar-background))`,
         color: `hsl(var(--sidebar-foreground))`,
@@ -119,7 +119,7 @@ export function AdminSidebar({ isMobile = false }: AdminSidebarProps) {
       </div>
 
       {/* Back to Main App Button */}
-      <div className="flex-shrink-0 p-4 border-b border-gray-200 dark:border-gray-800/50">
+      <div className="flex-shrink-0 p-4 border-b border-border">
         <Link href="/">
           <Button variant="outline" className="w-full justify-start">
             <ArrowLeft className="w-4 h-4 mr-2" />
@@ -199,14 +199,14 @@ export function AdminSidebar({ isMobile = false }: AdminSidebarProps) {
 
       {/* Admin Footer */}
       <div 
-        className="flex-shrink-0 p-5 transition-colors duration-300 border-t border-gray-200 dark:border-gray-800/80"
+        className="flex-shrink-0 p-5 transition-colors duration-300 border-t border-border"
         style={{
           backgroundColor: `hsl(var(--sidebar-background))`,
         }}
       >
         <div className="text-center">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center mx-auto mb-3">
-            <Shield className="w-5 h-5 text-white" />
+          <div className="w-10 h-10 rounded-full bg-foreground flex items-center justify-center mx-auto mb-3">
+            <Shield className="w-5 h-5 text-background" />
           </div>
           <p className="text-xs font-medium text-foreground">Administrator Access</p>
           <p className="text-xs text-muted-foreground mt-1">TiNHiH Portal</p>

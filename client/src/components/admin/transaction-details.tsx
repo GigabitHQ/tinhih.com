@@ -1,25 +1,20 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { 
+import {
   Calendar,
   User,
   Stethoscope,
   Mail,
   Phone,
-  CreditCard,
-  CheckCircle,
-  XCircle,
-  Clock,
-  AlertCircle,
-  FileText
+  CreditCard
 } from "lucide-react";
 import { format } from "date-fns";
 import { api } from "@/lib/api";
 import { useToast } from "@/hooks/use-toast";
+import { StatusBadge } from "@/components/ui/status-badge";
 
 interface Transaction {
   id: string;
@@ -69,23 +64,6 @@ interface TransactionDetailsProps {
 export function TransactionDetails({ transaction, open, onOpenChange }: TransactionDetailsProps) {
   const { toast } = useToast();
 
-  const getStatusBadge = (status: string) => {
-    switch (status) {
-      case 'paid':
-        return <Badge className="bg-green-100 text-green-800 border-green-200"><CheckCircle className="w-3 h-3 mr-1" />Paid</Badge>;
-      case 'sent':
-        return <Badge className="bg-blue-100 text-blue-800 border-blue-200"><Mail className="w-3 h-3 mr-1" />Sent</Badge>;
-      case 'overdue':
-        return <Badge className="bg-red-100 text-red-800 border-red-200"><XCircle className="w-3 h-3 mr-1" />Overdue</Badge>;
-      case 'draft':
-        return <Badge className="bg-gray-100 text-gray-800 border-gray-200"><FileText className="w-3 h-3 mr-1" />Draft</Badge>;
-      case 'cancelled':
-        return <Badge className="bg-orange-100 text-orange-800 border-orange-200"><AlertCircle className="w-3 h-3 mr-1" />Cancelled</Badge>;
-      default:
-        return <Badge className="bg-gray-100 text-gray-800 border-gray-200"><Clock className="w-3 h-3 mr-1" />Unknown</Badge>;
-    }
-  };
-
   const handleResendInvoice = async () => {
     if (!transaction) return;
     
@@ -122,7 +100,7 @@ export function TransactionDetails({ transaction, open, onOpenChange }: Transact
           </TabsList>
 
           <TabsContent value="overview" className="space-y-6">
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <Card>
                 <CardHeader>
                   <CardTitle className="text-lg">Invoice Details</CardTitle>
@@ -134,7 +112,7 @@ export function TransactionDetails({ transaction, open, onOpenChange }: Transact
                   </div>
                   <div className="flex justify-between">
                     <span className="font-medium">Status:</span>
-                    {getStatusBadge(transaction.status)}
+                    <StatusBadge status={transaction.status} />
                   </div>
                   <div className="flex justify-between">
                     <span className="font-medium">Created:</span>
@@ -214,7 +192,7 @@ export function TransactionDetails({ transaction, open, onOpenChange }: Transact
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="text-sm font-medium text-muted-foreground">Name</label>
                     <p className="text-lg">{transaction.patient.user.firstName} {transaction.patient.user.lastName}</p>
@@ -251,7 +229,7 @@ export function TransactionDetails({ transaction, open, onOpenChange }: Transact
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="text-sm font-medium text-muted-foreground">Name</label>
                     <p className="text-lg">{transaction.practitioner.user.firstName} {transaction.practitioner.user.lastName}</p>
@@ -289,7 +267,7 @@ export function TransactionDetails({ transaction, open, onOpenChange }: Transact
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="text-sm font-medium text-muted-foreground">Title</label>
                       <p className="text-lg">{transaction.appointment.title}</p>

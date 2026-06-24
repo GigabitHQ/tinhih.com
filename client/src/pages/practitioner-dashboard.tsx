@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { api } from "@/lib/api";
 import { ThemedCard, ThemedCardContent, ThemedCardHeader, ThemedCardTitle } from "@/components/ui/themed-card";
 import { ThemedButton } from "@/components/ui/themed-button";
-import { Badge } from "@/components/ui/badge";
+import { StatusBadge } from "@/components/ui/status-badge";
 import { Calendar, Users, DollarSign, Clock, Video, MessageSquare, FileText } from "lucide-react";
 import { format } from "date-fns";
 import { useLocation } from "wouter";
@@ -64,21 +64,6 @@ export default function RecoverySpecialistDashboard() {
     },
   });
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "confirmed":
-        return "bg-green-100 text-green-800";
-      case "in_progress":
-        return "bg-blue-100 text-blue-800";
-      case "scheduled":
-        return "bg-yellow-100 text-yellow-800";
-      case "completed":
-        return "bg-gray-100 text-gray-800";
-      default:
-        return "bg-gray-100 text-gray-800";
-    }
-  };
-
   const getClientInitials = (patient: any) => {
     const firstName = patient?.user?.firstName || "";
     const lastName = patient?.user?.lastName || "";
@@ -91,42 +76,36 @@ export default function RecoverySpecialistDashboard() {
       description: "Manage recovery sessions",
       icon: Calendar,
       onClick: () => setLocation("/calendar"),
-      color: "bg-blue-500",
     },
     {
       title: "My Clients",
       description: "View client records",
       icon: Users,
       onClick: () => setLocation("/clients"),
-      color: "bg-green-500",
     },
     {
       title: "Messages",
       description: "Communicate with clients",
       icon: MessageSquare,
       onClick: () => setLocation("/messages"),
-      color: "bg-purple-500",
     },
     {
       title: "Recovery Notes",
       description: "Document treatment sessions",
       icon: FileText,
       onClick: () => setLocation("/clinical-notes"),
-      color: "bg-orange-500",
     },
     {
       title: "Service Billing",
       description: "View invoices and payments",
       icon: DollarSign,
       onClick: () => setLocation("/billing"),
-      color: "bg-emerald-500",
     },
     {
       title: "Telehealth Sessions",
       description: "Start virtual recovery sessions",
       icon: Video,
       onClick: () => setLocation("/telehealth"),
-      color: "bg-indigo-500",
     },
   ];
 
@@ -155,8 +134,8 @@ export default function RecoverySpecialistDashboard() {
                   <p className="text-sm font-medium text-muted-foreground">Clients</p>
                   <p className="text-2xl font-bold">{statsLoading ? "..." : stats?.totalClients || 0}</p>
                 </div>
-                <div className="p-2 bg-blue-100 rounded-lg">
-                  <Users className="w-5 h-5 text-blue-600" />
+                <div className="p-2 bg-muted rounded-lg">
+                  <Users className="w-5 h-5 text-muted-foreground" />
                 </div>
               </div>
             </ThemedCardContent>
@@ -169,8 +148,8 @@ export default function RecoverySpecialistDashboard() {
                   <p className="text-sm font-medium text-muted-foreground">Today's Sessions</p>
                   <p className="text-2xl font-bold">{statsLoading ? "..." : stats?.todaySessions || 0}</p>
                 </div>
-                <div className="p-2 bg-green-100 rounded-lg">
-                  <Calendar className="w-5 h-5 text-green-600" />
+                <div className="p-2 bg-muted rounded-lg">
+                  <Calendar className="w-5 h-5 text-muted-foreground" />
                 </div>
               </div>
             </ThemedCardContent>
@@ -183,8 +162,8 @@ export default function RecoverySpecialistDashboard() {
                   <p className="text-sm font-medium text-muted-foreground">Service Revenue</p>
                   <p className="text-2xl font-bold">${statsLoading ? "..." : Number(stats?.totalRevenue || 0).toFixed(2)}</p>
                 </div>
-                <div className="p-2 bg-emerald-100 rounded-lg">
-                  <DollarSign className="w-5 h-5 text-emerald-600" />
+                <div className="p-2 bg-muted rounded-lg">
+                  <DollarSign className="w-5 h-5 text-muted-foreground" />
                 </div>
               </div>
             </ThemedCardContent>
@@ -197,8 +176,8 @@ export default function RecoverySpecialistDashboard() {
                   <p className="text-sm font-medium text-muted-foreground">Outstanding</p>
                   <p className="text-2xl font-bold">${statsLoading ? "..." : Number(stats?.outstandingRevenue || 0).toFixed(2)}</p>
                 </div>
-                <div className="p-2 bg-red-100 rounded-lg">
-                  <Clock className="w-5 h-5 text-red-600" />
+                <div className="p-2 bg-muted rounded-lg">
+                  <Clock className="w-5 h-5 text-muted-foreground" />
                 </div>
               </div>
             </ThemedCardContent>
@@ -251,9 +230,7 @@ export default function RecoverySpecialistDashboard() {
                         <div className="flex-1">
                           <div className="flex items-center justify-between">
                             <h4 className="font-medium">{session.title}</h4>
-                            <Badge className={getStatusColor(session.status)}>
-                              {session.status}
-                            </Badge>
+                            <StatusBadge status={session.status} />
                           </div>
                           <p className="text-sm text-muted-foreground">
                             {format(new Date(session.appointmentDate), 'h:mm a')} • {session.duration} min
@@ -303,7 +280,7 @@ export default function RecoverySpecialistDashboard() {
                       className="flex items-center space-x-3 p-3 rounded-lg hover:bg-muted/50 transition-colors cursor-pointer"
                       onClick={action.onClick}
                     >
-                      <div className={`p-2 rounded-lg ${action.color} text-white`}>
+                      <div className="p-2 rounded-lg bg-muted text-muted-foreground">
                         <action.icon className="w-4 h-4" />
                       </div>
                       <div>
@@ -324,11 +301,11 @@ export default function RecoverySpecialistDashboard() {
               <ThemedCardContent>
                 <div className="space-y-3">
                   <div className="flex items-center space-x-3 text-sm">
-                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <div className="w-2 h-2 bg-muted-foreground rounded-full"></div>
                     <span className="text-muted-foreground">Last login: {format(new Date(), 'MMM dd, h:mm a')}</span>
                   </div>
                   <div className="flex items-center space-x-3 text-sm">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                    <div className="w-2 h-2 bg-muted-foreground rounded-full"></div>
                     <span className="text-muted-foreground">Dashboard accessed</span>
                   </div>
                 </div>

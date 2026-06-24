@@ -443,7 +443,7 @@ export function BookingSettings({ onClose }: BookingSettingsProps) {
                             />
                           </FormControl>
                                <p className="text-sm text-muted-foreground">How many days in advance patients can book</p>
-                          <FormMessage className="text-red-600"/>
+                          <FormMessage />
                         </FormItem>
                       )}
                     />
@@ -471,7 +471,7 @@ export function BookingSettings({ onClose }: BookingSettingsProps) {
                             />
                           </FormControl>
                                <p className="text-sm text-muted-foreground">Maximum appointments per day</p>
-                          <FormMessage className="text-red-600"/>
+                          <FormMessage />
                         </FormItem>
                       )}
                     />
@@ -501,7 +501,7 @@ export function BookingSettings({ onClose }: BookingSettingsProps) {
                             />
                           </FormControl>
                                <p className="text-sm text-muted-foreground">Time between appointments</p>
-                          <FormMessage className="text-red-600"/>
+                          <FormMessage />
                         </FormItem>
                       )}
                     />
@@ -529,7 +529,7 @@ export function BookingSettings({ onClose }: BookingSettingsProps) {
                           />
                         </FormControl>
                                <p className="text-sm text-muted-foreground">Send notifications before appointments</p>
-                        <FormMessage className="text-red-600"/>
+                        <FormMessage />
                       </FormItem>
                     )}
                   />
@@ -700,7 +700,7 @@ export function BookingSettings({ onClose }: BookingSettingsProps) {
                                 />
                               </FormControl>
                               <p className="text-sm text-muted-foreground">This message will appear at the top of your booking page</p>
-                              <FormMessage className="text-red-600"/>
+                              <FormMessage />
                             </FormItem>
                           );
                         }}
@@ -729,7 +729,7 @@ export function BookingSettings({ onClose }: BookingSettingsProps) {
                           />
                         </FormControl>
                               <p className="text-sm text-muted-foreground">This will be displayed to patients during booking</p>
-                        <FormMessage className="text-red-600"/>
+                        <FormMessage />
                       </FormItem>
                           );
                         }}

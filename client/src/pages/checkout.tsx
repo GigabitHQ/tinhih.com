@@ -868,7 +868,7 @@ export default function Checkout() {
         <div className="max-w-2xl mx-auto px-4">
           <Card className="text-center">
             <CardContent className="p-8">
-              <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-4" />
+              <CheckCircle className="h-16 w-16 text-foreground mx-auto mb-4" />
               <h1 className="text-2xl font-bold mb-2 text-foreground">Order Confirmed!</h1>
               <p className="text-muted-foreground mb-4">
                 Thank you for your purchase. Your order has been successfully placed.
@@ -938,7 +938,7 @@ export default function Checkout() {
         <div className="mb-8">
           <div className="flex items-center justify-center space-x-4">
             <div className={`flex items-center space-x-2 ${currentStep === 'shipping' ? 'text-primary' : 'text-muted-foreground'}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center border-2 ${currentStep === 'shipping' ? 'bg-primary text-white border-primary' : 'border-muted-foreground'
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center border-2 ${currentStep === 'shipping' ? 'bg-primary text-primary-foreground border-primary' : 'border-muted-foreground'
                 }`}>
                 {currentStep === 'shipping' ? '1' : <CheckCircle2 className="w-4 h-4" />}
               </div>
@@ -946,7 +946,7 @@ export default function Checkout() {
             </div>
             <div className="w-16 h-px bg-muted-foreground"></div>
             <div className={`flex items-center space-x-2 ${currentStep === 'payment' ? 'text-primary' : 'text-muted-foreground'}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center border-2 ${currentStep === 'payment' ? 'bg-primary text-white border-primary' : 'border-muted-foreground'
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center border-2 ${currentStep === 'payment' ? 'bg-primary text-primary-foreground border-primary' : 'border-muted-foreground'
                 }`}>
                 {currentStep === 'payment' ? '2' : currentStep === 'success' ? <CheckCircle2 className="w-4 h-4" /> : '2'}
               </div>
@@ -954,7 +954,7 @@ export default function Checkout() {
             </div>
             <div className="w-16 h-px bg-muted-foreground"></div>
             <div className={`flex items-center space-x-2 ${currentStep === 'success' ? 'text-primary' : 'text-muted-foreground'}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center border-2 ${currentStep === 'success' ? 'bg-primary text-white border-primary' : 'border-muted-foreground'
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center border-2 ${currentStep === 'success' ? 'bg-primary text-primary-foreground border-primary' : 'border-muted-foreground'
                 }`}>
                 {currentStep === 'success' ? '3' : '3'}
               </div>
@@ -969,8 +969,8 @@ export default function Checkout() {
             <Card className="bg-card border-border shadow-lg">
               <CardHeader className="border-b">
                 <CardTitle className="flex items-center space-x-2 text-foreground">
-                  <div className="p-2 rounded-lg bg-gradient-to-r from-[#ffdd00] to-yellow-400">
-                    <ShoppingCart className="h-5 w-5 text-black" />
+                  <div className="p-2 rounded-lg bg-muted">
+                    <ShoppingCart className="h-5 w-5 text-muted-foreground" />
                   </div>
                   <span className="text-lg font-semibold">Order Summary</span>
                 </CardTitle>
@@ -1008,7 +1008,7 @@ export default function Checkout() {
                                 variant="outline"
                                 onClick={() => handleQuantityChange(item.product.id, item.quantity - 1, item.selectedVariant)}
                                 disabled={item.quantity <= 1 || currentStep === 'payment'}
-                                className="w-6 h-6 p-0 border-border hover:border-[#ffdd00] hover:bg-[#ffdd00]/10"
+                                className="w-6 h-6 p-0 border-border hover:bg-accent"
                               >
                                 <span className="text-sm lg:text-lg font-semibold"><Minus className="h-4 w-4 lg:h-5 lg:w-5" /></span>
                               </Button>
@@ -1020,7 +1020,7 @@ export default function Checkout() {
                                 variant="outline"
                                 onClick={() => handleQuantityChange(item.product.id, item.quantity + 1, item.selectedVariant)}
                                 disabled={currentStep === 'payment'}
-                                className="w-6 h-6 p-0 border-border hover:border-[#ffdd00] hover:bg-[#ffdd00]/10"
+                                className="w-6 h-6 p-0 border-border hover:bg-accent"
                               >
                                 <span className="text-sm lg:text-lg font-semibold"><Plus className="h-4 w-4 lg:h-5 lg:w-5" /></span>
                               </Button>
@@ -1035,7 +1035,7 @@ export default function Checkout() {
                                 variant="outline"
                                 onClick={() => handleRemoveItem(item.product.id, item.selectedVariant)}
                                 disabled={currentStep === 'payment'}
-                                className="w-6 h-6 p-0 border-red-200 hover:border-red-400 hover:bg-red-50 text-red-600"
+                                className="w-6 h-6 p-0 text-destructive hover:bg-accent"
                               >
                                 <Trash2 className="h-4 w-4 lg:h-5 lg:w-5" />
                               </Button>
@@ -1052,14 +1052,14 @@ export default function Checkout() {
                                 </div>
                               )}
                               {paymentError && (
-                                <div className="flex items-center space-x-2 text-sm text-red-600">
-                                  <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                                <div className="flex items-center space-x-2 text-sm text-destructive">
+                                  <div className="w-2 h-2 bg-destructive rounded-full"></div>
                                   <span>{paymentError}</span>
                                 </div>
                               )}
                               {isPaymentComplete && isCardValid && !paymentError && (
-                                <div className="flex items-center space-x-2 text-sm text-green-600">
-                                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                                <div className="flex items-center space-x-2 text-sm text-foreground">
+                                  <div className="w-2 h-2 bg-foreground rounded-full"></div>
                                   <span>Card information valid ✓</span>
                                 </div>
                               )}
@@ -1090,28 +1090,28 @@ export default function Checkout() {
                           <Button
                             onClick={handleApplyCoupon}
                             disabled={couponLoading || !couponCode.trim() || currentStep === 'payment'}
-                            className="bg-[#ffdd00] hover:bg-yellow-400 text-black font-semibold px-4"
+                            className="font-semibold px-4"
                           >
                             {couponLoading ? (
-                              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-black"></div>
+                              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary-foreground"></div>
                             ) : (
                               "Apply"
                             )}
                           </Button>
                         </div>
                         {couponError && (
-                          <p className="text-red-600 text-sm flex items-center">
+                          <p className="text-destructive text-sm flex items-center">
                             <AlertCircle className="h-4 w-4 mr-1" />
                             {couponError}
                           </p>
                         )}
                       </div>
                     ) : (
-                      <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800/30 rounded-lg p-3">
+                      <div className="bg-muted border border-border rounded-lg p-3">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center space-x-2">
-                            <CheckCircle className="h-4 w-4 text-green-600" />
-                            <span className="text-green-800 dark:text-green-200 font-medium">
+                            <CheckCircle className="h-4 w-4 text-foreground" />
+                            <span className="text-foreground font-medium">
                               {appliedCoupon.name || appliedCoupon.id}
                               {appliedCoupon.amount_off && ` - $${(appliedCoupon.amount_off / 100).toFixed(2)} OFF`}
                               {appliedCoupon.percent_off && ` - ${appliedCoupon.percent_off}% OFF`}
@@ -1122,7 +1122,7 @@ export default function Checkout() {
                             variant="ghost"
                             size="sm"
                             disabled={currentStep === 'payment'}
-                            className="text-green-600 dark:text-green-400 hover:text-green-800 dark:hover:text-green-200 hover:bg-green-100 dark:hover:bg-green-900/30"
+                            className="text-muted-foreground hover:text-foreground hover:bg-accent"
                           >
                             Remove
                           </Button>
@@ -1141,7 +1141,7 @@ export default function Checkout() {
 
                   <div className="flex justify-between items-center py-2">
                     <span className="text-foreground font-medium">Shipping:</span>
-                    <span className={`font-semibold ${calculateShipping() === 0 ? 'text-green-600' : 'text-foreground'}`}>
+                    <span className="font-semibold text-foreground">
                       {calculateShipping() === 0 ? "Free" : `$${calculateShipping().toFixed(2)}`}
                     </span>
                   </div>
@@ -1154,7 +1154,7 @@ export default function Checkout() {
                   {appliedCoupon && (
                     <div className="flex justify-between items-center py-2">
                       <span className="text-foreground font-medium">Discount ({appliedCoupon.name || appliedCoupon.id}):</span>
-                      <span className="text-green-600 font-semibold">-${calculateDiscount().toFixed(2)}</span>
+                      <span className="text-foreground font-semibold">-${calculateDiscount().toFixed(2)}</span>
                     </div>
                   )}
 
@@ -1163,9 +1163,9 @@ export default function Checkout() {
                       <span className="text-foreground font-bold text-lg">Total:</span>
                       <div className="flex items-center space-x-2">
                         {updatingPayment && (
-                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-[#ffdd00]"></div>
+                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-foreground"></div>
                         )}
-                        <span className="font-bold text-xl text-black bg-[#ffdd00] dark:bg-[#ffdd00] px-3 py-1 rounded-lg">
+                        <span className="font-bold text-xl text-background bg-foreground px-3 py-1 rounded-lg">
                           ${currentStep === 'payment' && paymentIntentAmount > 0 ? paymentIntentAmount.toFixed(2) : calculateTotal().toFixed(2)}
                         </span>
                       </div>
@@ -1174,10 +1174,10 @@ export default function Checkout() {
 
                   {/* Savings Info */}
                   {calculateShipping() === 0 && (
-                    <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800/30 rounded-lg p-3">
+                    <div className="bg-muted border border-border rounded-lg p-3">
                       <div className="flex items-center space-x-2">
-                        <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                        <span className="text-green-800 dark:text-green-200 text-sm font-medium">
+                        <div className="w-2 h-2 bg-foreground rounded-full"></div>
+                        <span className="text-foreground text-sm font-medium">
                           Free shipping on orders over $50!
                         </span>
                       </div>
@@ -1192,11 +1192,11 @@ export default function Checkout() {
           <div className="lg:col-span-2">
             {/* Step 1: Shipping Information */}
             {currentStep === 'shipping' && (
-              <Card className="bg-foreground shadow-lg border-0 rounded">
-                <CardHeader className="bg-gradient-to-r from-[#ffdd00]/30 to-[#ffdd00]/80 border-b">
+              <Card className="bg-card shadow-lg rounded">
+                <CardHeader className="bg-muted border-b">
                   <CardTitle className="flex items-center space-x-3 text-foreground">
-                    <div className="p-2 rounded-lg bg-[#ffdd00]/80">
-                      <MapPin className="h-5 w-5 text-[#334155]" />
+                    <div className="p-2 rounded-lg bg-card">
+                      <MapPin className="h-5 w-5 text-muted-foreground" />
                     </div>
                     <div>
                       <span className="text-lg font-semibold">Shipping Information</span>
@@ -1213,7 +1213,7 @@ export default function Checkout() {
                         value={formData.firstName}
                         onChange={(e) => handleInputChange("firstName", e.target.value)}
                         required
-                        className="mt-1 bg-foreground border border-gray-300 dark:border-gray-600 focus:border-[#ffdd00] focus:ring-[#ffdd00]"
+                        className="mt-1 bg-background border border-input focus:border-ring focus:ring-ring"
                         placeholder="Enter your first name"
                       />
                     </div>
@@ -1224,7 +1224,7 @@ export default function Checkout() {
                         value={formData.lastName}
                         onChange={(e) => handleInputChange("lastName", e.target.value)}
                         required
-                        className="mt-1 bg-foreground border border-gray-300 dark:border-gray-600 focus:border-[#ffdd00] focus:ring-[#ffdd00]"
+                        className="mt-1 bg-background border border-input focus:border-ring focus:ring-ring"
                         placeholder="Enter your last name"
                       />
                     </div>
@@ -1239,7 +1239,7 @@ export default function Checkout() {
                         value={formData.email}
                         onChange={(e) => handleInputChange("email", e.target.value)}
                         required
-                        className="mt-1 bg-foreground border border-gray-300 dark:border-gray-600 focus:border-[#ffdd00] focus:ring-[#ffdd00]"
+                        className="mt-1 bg-background border border-input focus:border-ring focus:ring-ring"
                         placeholder="your.email@example.com"
                       />
                     </div>
@@ -1249,7 +1249,7 @@ export default function Checkout() {
                         id="phone"
                         value={formData.phone}
                         onChange={(e) => handleInputChange("phone", e.target.value)}
-                        className="mt-1 bg-foreground border border-gray-300 dark:border-gray-600 focus:border-[#ffdd00] focus:ring-[#ffdd00]"
+                        className="mt-1 bg-background border border-input focus:border-ring focus:ring-ring"
                         placeholder="(555) 123-4567"
                       />
                     </div>
@@ -1262,7 +1262,7 @@ export default function Checkout() {
                       value={formData.address1}
                       onChange={(e) => handleInputChange("address1", e.target.value)}
                       required
-                      className="mt-1 bg-foreground border border-gray-300 dark:border-gray-600 focus:border-[#ffdd00] focus:ring-[#ffdd00]"
+                      className="mt-1 bg-background border border-input focus:border-ring focus:ring-ring"
                       placeholder="123 Main Street"
                     />
                   </div>
@@ -1273,7 +1273,7 @@ export default function Checkout() {
                       id="address2"
                       value={formData.address2}
                       onChange={(e) => handleInputChange("address2", e.target.value)}
-                      className="mt-1 bg-foreground border border-gray-300 dark:border-gray-600 focus:border-[#ffdd00] focus:ring-[#ffdd00]"
+                      className="mt-1 bg-background border border-input focus:border-ring focus:ring-ring"
                       placeholder="Apt 4B"
                     />
                   </div>
@@ -1286,7 +1286,7 @@ export default function Checkout() {
                         value={formData.city}
                         onChange={(e) => handleInputChange("city", e.target.value)}
                         required
-                        className="mt-1 bg-foreground border border-gray-300 dark:border-gray-600 focus:border-[#ffdd00] focus:ring-[#ffdd00]"
+                        className="mt-1 bg-background border border-input focus:border-ring focus:ring-ring"
                         placeholder="New York"
                       />
                     </div>
@@ -1296,7 +1296,7 @@ export default function Checkout() {
                         id="state"
                         value={formData.state}
                         onChange={(e) => handleInputChange("state", e.target.value)}
-                        className="mt-1 w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none  focus:ring-[#ffdd00] focus:border-[#ffdd00] bg-foreground placeholder:opacity-50"
+                        className="mt-1 w-full p-3 border border-input rounded-md focus:outline-none focus:ring-ring focus:border-ring bg-background placeholder:opacity-50"
                         required
                       >
                         <option value="">Select State</option>
@@ -1314,7 +1314,7 @@ export default function Checkout() {
                         value={formData.zipCode}
                         onChange={(e) => handleInputChange("zipCode", e.target.value)}
                         required
-                        className="mt-1 bg-foreground border border-gray-300 dark:border-gray-600 focus:border-[#ffdd00] focus:ring-[#ffdd00]"
+                        className="mt-1 bg-background border border-input focus:border-ring focus:ring-ring"
                         placeholder="12345"
                       />
                     </div>
@@ -1327,7 +1327,7 @@ export default function Checkout() {
                       value={formData.notes}
                       onChange={(e) => handleInputChange("notes", e.target.value)}
                       placeholder="Any special instructions or notes for your order..."
-                      className="mt-1 bg-foreground border border-gray-300 dark:border-gray-600 focus:border-[#ffdd00] focus:ring-[#ffdd00]"
+                      className="mt-1 bg-background border border-input focus:border-ring focus:ring-ring"
                       rows={3}
                     />
                   </div>
@@ -1336,12 +1336,12 @@ export default function Checkout() {
                     <Button
                       onClick={handleNextStep}
                       size="lg"
-                      className="bg-[#ffdd00]/80 hover:bg-[#ffdd00] text-black px-8"
+                      className="px-8"
                       disabled={loading}
                     >
                       {loading ? (
                         <div className="flex items-center space-x-2">
-                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-[#ffdd00"></div>
+                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary-foreground"></div>
                           <span>Loading...</span>
                         </div>
                       ) : (
@@ -1358,11 +1358,11 @@ export default function Checkout() {
 
             {/* Step 2: Payment Information */}
             {currentStep === 'payment' && (
-              <Card className="bg-foreground shadow-lg border-0 dark:bg-foreground">
-                <CardHeader className="bg-gradient-to-r from-green-50 to-emerald-50 border-b">
+              <Card className="bg-card shadow-lg">
+                <CardHeader className="bg-muted border-b">
                   <CardTitle className="flex items-center space-x-3 text-foreground">
-                    <div className="p-2 rounded-lg bg-green-100">
-                      <CreditCard className="h-5 w-5 text-green-600" />
+                    <div className="p-2 rounded-lg bg-card">
+                      <CreditCard className="h-5 w-5 text-muted-foreground" />
                     </div>
                     <div>
                       <span className="text-lg font-semibold">Payment Information</span>
@@ -1372,12 +1372,12 @@ export default function Checkout() {
                 </CardHeader>
                 <CardContent className="p-6 space-y-6">
                   {/* Security Notice */}
-                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  <div className="bg-muted border border-border rounded-lg p-4">
                     <div className="flex items-center space-x-2">
-                      <Shield className="h-5 w-5 text-blue-600" />
-                      <span className="text-blue-800 font-medium">Secure Payment</span>
+                      <Shield className="h-5 w-5 text-muted-foreground" />
+                      <span className="text-foreground font-medium">Secure Payment</span>
                     </div>
-                    <p className="text-blue-700 text-sm mt-1">
+                    <p className="text-muted-foreground text-sm mt-1">
                       Your payment information is encrypted and secure. We never store your card details.
                     </p>
                   </div>
@@ -1385,7 +1385,7 @@ export default function Checkout() {
                   {/* Payment Form */}
                   {loading || !paymentIntent ? (
                     <div className="flex items-center justify-center py-8">
-                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-foreground"></div>
                       <span className="ml-3 text-muted-foreground">
                         {loading ? "Loading payment form..." : "Updating payment form..."}
                       </span>
@@ -1400,7 +1400,7 @@ export default function Checkout() {
                           className="mt-1"
                         />
                         {paymentError && (
-                          <p className="text-red-600 text-sm mt-2 flex items-center">
+                          <p className="text-destructive text-sm mt-2 flex items-center">
                             <AlertCircle className="h-4 w-4 mr-1" />
                             {paymentError}
                           </p>
@@ -1436,9 +1436,9 @@ export default function Checkout() {
                         // For card payments, check if payment is complete and card is valid
                         paymentMethod && paymentMethod.type === 'card'
                           ? (isPaymentComplete && isCardValid
-                            ? 'bg-[#ffdd00] hover:bg-yellow-400 text-black'
-                            : 'bg-gray-400 text-gray-600 cursor-not-allowed')
-                          : 'bg-[#ffdd00]/80 hover:bg-[#ffdd00] text-[#1f2937]'
+                            ? 'bg-primary text-primary-foreground hover:bg-primary/90'
+                            : 'bg-muted text-muted-foreground cursor-not-allowed')
+                          : 'bg-primary text-primary-foreground hover:bg-primary/90'
                         }`}
                       disabled={
                         loading ||
@@ -1449,12 +1449,12 @@ export default function Checkout() {
                     >
                       {loading ? (
                         <div className="flex items-center space-x-2">
-                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-black"></div>
+                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary-foreground"></div>
                           <span>Loading...</span>
                         </div>
                       ) : updatingPayment ? (
                         <div className="flex items-center space-x-2">
-                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-black"></div>
+                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary-foreground"></div>
                           <span>Updating Payment...</span>
                         </div>
                       ) : paymentMethod && paymentMethod.type === 'card' && !isPaymentComplete ? (
@@ -1472,11 +1472,11 @@ export default function Checkout() {
 
             {/* Step 3: Success */}
             {currentStep === 'success' && (
-              <Card className="bg-card shadow-lg border-0">
-                <CardHeader className="bg-gradient-to-r from-green-50 dark:from-green-900/20 to-emerald-50 dark:to-emerald-900/20 border-b">
+              <Card className="bg-card shadow-lg">
+                <CardHeader className="bg-muted border-b">
                   <CardTitle className="flex items-center space-x-3 text-foreground">
-                    <div className="p-2 rounded-lg bg-green-100 dark:bg-green-900/30">
-                      <CheckCircle className="h-5 w-5 text-green-600" />
+                    <div className="p-2 rounded-lg bg-card">
+                      <CheckCircle className="h-5 w-5 text-foreground" />
                     </div>
                     <div>
                       <span className="text-lg font-semibold">Order Successful!</span>
@@ -1486,8 +1486,8 @@ export default function Checkout() {
                 </CardHeader>
                 <CardContent className="p-6 space-y-6">
                   <div className="text-center space-y-4">
-                    <div className="p-4 rounded-full bg-green-100 dark:bg-green-900/30 w-16 h-16 mx-auto flex items-center justify-center">
-                      <CheckCircle className="h-8 w-8 text-green-600" />
+                    <div className="p-4 rounded-full bg-muted w-16 h-16 mx-auto flex items-center justify-center">
+                      <CheckCircle className="h-8 w-8 text-foreground" />
                     </div>
                     <div>
                       <h3 className="text-xl font-semibold text-foreground mb-2">Payment Successful!</h3>
@@ -1512,7 +1512,6 @@ export default function Checkout() {
                       <Button
                         onClick={() => setLocation("/member/orders")}
                         size="lg"
-                        className="bg-[#ffdd00] hover:bg-yellow-400 text-black"
                       >
                         View Orders
                       </Button>
@@ -1528,8 +1527,8 @@ export default function Checkout() {
         <div className="mt-12 pt-8 border-t border-border">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
             <div className="flex flex-col items-center space-y-2">
-              <div className="p-3 rounded-full bg-green-100 dark:bg-green-900/30">
-                <Shield className="h-6 w-6 text-green-600" />
+              <div className="p-3 rounded-full bg-muted">
+                <Shield className="h-6 w-6 text-muted-foreground" />
               </div>
               <h3 className="font-semibold text-foreground">Secure Payment</h3>
               <p className="text-sm text-muted-foreground">
@@ -1537,8 +1536,8 @@ export default function Checkout() {
               </p>
             </div>
             <div className="flex flex-col items-center space-y-2">
-              <div className="p-3 rounded-full bg-blue-100 dark:bg-blue-900/30">
-                <Truck className="h-6 w-6 text-blue-600" />
+              <div className="p-3 rounded-full bg-muted">
+                <Truck className="h-6 w-6 text-muted-foreground" />
               </div>
               <h3 className="font-semibold text-foreground">Fast Shipping</h3>
               <p className="text-sm text-muted-foreground">
@@ -1546,8 +1545,8 @@ export default function Checkout() {
               </p>
             </div>
             <div className="flex flex-col items-center space-y-2">
-              <div className="p-3 rounded-full bg-purple-100 dark:bg-purple-900/30">
-                <CheckCircle className="h-6 w-6 text-purple-600" />
+              <div className="p-3 rounded-full bg-muted">
+                <CheckCircle className="h-6 w-6 text-muted-foreground" />
               </div>
               <h3 className="font-semibold text-foreground">Quality Guarantee</h3>
               <p className="text-sm text-muted-foreground">

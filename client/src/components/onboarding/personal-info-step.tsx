@@ -90,7 +90,7 @@ export function PersonalInfoStep({ data, existingData, onComplete, isEditing }: 
                 name="firstName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>First Name <span className="text-red-600">*</span></FormLabel>
+                    <FormLabel>First Name <span className="text-muted-foreground">*</span></FormLabel>
                     <FormControl>
                       <Input 
                         placeholder="Enter your first name" 
@@ -98,7 +98,7 @@ export function PersonalInfoStep({ data, existingData, onComplete, isEditing }: 
                         className={form.formState.errors.firstName ? "error" : ""}
                       />
                     </FormControl>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -108,7 +108,7 @@ export function PersonalInfoStep({ data, existingData, onComplete, isEditing }: 
                 name="lastName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Last Name <span className="text-red-600">*</span></FormLabel>
+                    <FormLabel>Last Name <span className="text-muted-foreground">*</span></FormLabel>
                     <FormControl>
                       <Input 
                         placeholder="Enter your last name" 
@@ -116,7 +116,7 @@ export function PersonalInfoStep({ data, existingData, onComplete, isEditing }: 
                         className={form.formState.errors.lastName ? "error" : ""}
                       />
                     </FormControl>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -135,7 +135,7 @@ export function PersonalInfoStep({ data, existingData, onComplete, isEditing }: 
                       className={form.formState.errors.preferredName ? "error" : ""}
                     />
                   </FormControl>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -146,7 +146,7 @@ export function PersonalInfoStep({ data, existingData, onComplete, isEditing }: 
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email Address <span className="text-red-600">*</span></FormLabel>
+                    <FormLabel>Email Address <span className="text-muted-foreground">*</span></FormLabel>
                     <FormControl>
                       <Input 
                         type="email" 
@@ -155,7 +155,7 @@ export function PersonalInfoStep({ data, existingData, onComplete, isEditing }: 
                         className={form.formState.errors.email ? "error" : ""}
                       />
                     </FormControl>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -165,7 +165,7 @@ export function PersonalInfoStep({ data, existingData, onComplete, isEditing }: 
                 name="phone"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Phone Number <span className="text-red-600">*</span></FormLabel>
+                    <FormLabel>Phone Number <span className="text-muted-foreground">*</span></FormLabel>
                     <FormControl>
                       <Input 
                         placeholder="Enter your phone number" 
@@ -173,7 +173,7 @@ export function PersonalInfoStep({ data, existingData, onComplete, isEditing }: 
                         className={form.formState.errors.phone ? "error" : ""}
                       />
                     </FormControl>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -202,7 +202,7 @@ export function PersonalInfoStep({ data, existingData, onComplete, isEditing }: 
                 name="gender"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Gender <span className="text-red-600">*</span></FormLabel>
+                    <FormLabel>Gender <span className="text-muted-foreground">*</span></FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
                         <SelectTrigger>
@@ -217,7 +217,7 @@ export function PersonalInfoStep({ data, existingData, onComplete, isEditing }: 
                         <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
                       </SelectContent>
                     </Select>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -233,11 +233,11 @@ export function PersonalInfoStep({ data, existingData, onComplete, isEditing }: 
               name="address"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Street Address <span className="text-red-600">*</span></FormLabel>
+                  <FormLabel>Street Address <span className="text-muted-foreground">*</span></FormLabel>
                   <FormControl>
                     <Input placeholder="Enter your street address" {...field} />
                   </FormControl>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -248,11 +248,11 @@ export function PersonalInfoStep({ data, existingData, onComplete, isEditing }: 
                 name="city"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>City <span className="text-red-600">*</span></FormLabel>
+                    <FormLabel>City <span className="text-muted-foreground">*</span></FormLabel>
                     <FormControl>
                       <Input placeholder="Enter your city" {...field} />
                     </FormControl>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -262,7 +262,7 @@ export function PersonalInfoStep({ data, existingData, onComplete, isEditing }: 
                 name="state"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>State <span className="text-red-600">*</span></FormLabel>
+                    <FormLabel>State <span className="text-muted-foreground">*</span></FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
                         <SelectTrigger>
@@ -285,7 +285,7 @@ export function PersonalInfoStep({ data, existingData, onComplete, isEditing }: 
                         <SelectItem value="other">Other</SelectItem>
                       </SelectContent>
                     </Select>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -295,11 +295,11 @@ export function PersonalInfoStep({ data, existingData, onComplete, isEditing }: 
                 name="zipCode"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>ZIP Code <span className="text-red-600">*</span></FormLabel>
+                    <FormLabel>ZIP Code <span className="text-muted-foreground">*</span></FormLabel>
                     <FormControl>
                       <Input placeholder="Enter your ZIP code" {...field} />
                     </FormControl>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -333,7 +333,7 @@ export function PersonalInfoStep({ data, existingData, onComplete, isEditing }: 
                         <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
                       </SelectContent>
                     </Select>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -347,7 +347,7 @@ export function PersonalInfoStep({ data, existingData, onComplete, isEditing }: 
                     <FormControl>
                       <Input placeholder="What do you do for work?" {...field} />
                     </FormControl>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -364,11 +364,11 @@ export function PersonalInfoStep({ data, existingData, onComplete, isEditing }: 
                 name="emergencyContactName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Emergency Contact Name <span className="text-red-600">*</span></FormLabel>
+                    <FormLabel>Emergency Contact Name <span className="text-muted-foreground">*</span></FormLabel>
                     <FormControl>
                       <Input placeholder="Enter emergency contact name" {...field} />
                     </FormControl>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -378,11 +378,11 @@ export function PersonalInfoStep({ data, existingData, onComplete, isEditing }: 
                 name="emergencyContactPhone"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Emergency Contact Phone <span className="text-red-600">*</span></FormLabel>
+                    <FormLabel>Emergency Contact Phone <span className="text-muted-foreground">*</span></FormLabel>
                     <FormControl>
                       <Input placeholder="Enter emergency contact phone" {...field} />
                     </FormControl>
-                    <FormMessage className="text-red-600"/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -393,7 +393,7 @@ export function PersonalInfoStep({ data, existingData, onComplete, isEditing }: 
               name="emergencyContactRelationship"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Relationship to Emergency Contact <span className="text-red-600">*</span></FormLabel>
+                  <FormLabel>Relationship to Emergency Contact <span className="text-muted-foreground">*</span></FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
                       <SelectTrigger>
@@ -409,7 +409,7 @@ export function PersonalInfoStep({ data, existingData, onComplete, isEditing }: 
                       <SelectItem value="other">Other</SelectItem>
                     </SelectContent>
                   </Select>
-                  <FormMessage className="text-red-600"/>
+                  <FormMessage />
                 </FormItem>
               )}
             />

@@ -7,14 +7,13 @@ import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { 
-  Users, 
-  Plus, 
-  Search, 
-  Edit, 
-  Trash2, 
-  UserCheck, 
-  UserX, 
+import {
+  Users,
+  Plus,
+  Edit,
+  Trash2,
+  UserCheck,
+  UserX,
   Mail,
   Shield,
   Crown
@@ -23,6 +22,7 @@ import { api } from "@/lib/api";
 import { useToast } from "@/hooks/use-toast";
 import { usePageTitle } from "@/context/page-context";
 import { AdminLayout } from "@/components/layout/admin-layout";
+import { SearchInput } from "@/components/ui/search-input";
 
 interface Admin {
   id: string;
@@ -288,7 +288,7 @@ export default function AdminAdmins() {
       <AdminLayout>
         <div className="flex items-center justify-center h-64">
           <div className="text-center">
-            <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+            <div className="w-8 h-8 border-4 border-foreground border-t-transparent rounded-full animate-spin mx-auto mb-4" />
             <p className="text-muted-foreground">Loading admin users...</p>
           </div>
         </div>
@@ -303,7 +303,7 @@ export default function AdminAdmins() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold text-foreground flex items-center gap-2">
-              <Crown className="w-8 h-8 text-primary" />
+              <Crown className="w-8 h-8 text-muted-foreground" />
               Admin Management
             </h1>
             <p className="text-muted-foreground mt-1">
@@ -322,7 +322,7 @@ export default function AdminAdmins() {
                 <DialogTitle>Add New Administrator</DialogTitle>
               </DialogHeader>
               <div className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <Label>First Name</Label>
                     <Input
@@ -341,7 +341,7 @@ export default function AdminAdmins() {
                   </div>
                 </div>
                 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <Label>Email</Label>
                     <Input
@@ -361,7 +361,7 @@ export default function AdminAdmins() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <Label>Department</Label>
                     <Select value={formData.department} onValueChange={(value) => setFormData(prev => ({ ...prev, department: value }))}>
@@ -431,12 +431,10 @@ export default function AdminAdmins() {
           <CardContent className="p-4">
             <div className="flex items-center gap-4">
               <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-                <Input
+                <SearchInput
                   placeholder="Search admins..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10"
                 />
               </div>
             </div>
@@ -500,8 +498,8 @@ export default function AdminAdmins() {
                 {filteredAdmins.map((admin) => (
                   <div key={admin.id} className="flex items-center justify-between p-4 border rounded-lg">
                     <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
-                        <Crown className="w-5 h-5 text-primary" />
+                      <div className="w-10 h-10 bg-muted rounded-full flex items-center justify-center">
+                        <Crown className="w-5 h-5 text-muted-foreground" />
                       </div>
                                              <div>
                          <h3 className="font-medium text-foreground">
@@ -548,7 +546,7 @@ export default function AdminAdmins() {
                         size="sm"
                         onClick={() => openDeleteDialog(admin)}
                         title="Deactivate Admin"
-                        className="text-red-600 hover:text-red-700"
+                        className="text-muted-foreground hover:text-foreground"
                       >
                         <Trash2 className="w-4 h-4" />
                       </Button>
@@ -567,7 +565,7 @@ export default function AdminAdmins() {
               <DialogTitle>Edit Administrator</DialogTitle>
             </DialogHeader>
             <div className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <Label>First Name</Label>
                   <Input
@@ -586,7 +584,7 @@ export default function AdminAdmins() {
                 </div>
               </div>
               
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <Label>Email</Label>
                   <Input
@@ -606,7 +604,7 @@ export default function AdminAdmins() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <Label>Department</Label>
                   <Select value={formData.department} onValueChange={(value) => setFormData(prev => ({ ...prev, department: value }))}>
