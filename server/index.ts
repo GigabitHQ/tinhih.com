@@ -71,7 +71,15 @@ app.get("/health", (req, res) => {
     } else {
       // Import "path" dynamically in prod
       const { join } = await import("path");
-      app.use(express.static(join(process.cwd(), "dist/public")));
+      const publicDir = join(process.cwd(), "dist/public");
+
+      app.use(express.static(publicDir));
+      app.use("/api", (_req, res) => {
+        res.status(404).json({ message: "API route not found" });
+      });
+      app.get("*", (_req, res) => {
+        res.sendFile(join(publicDir, "index.html"));
+      });
     }
 
     server.listen(parseInt(PORT.toString()), "0.0.0.0", () => {
