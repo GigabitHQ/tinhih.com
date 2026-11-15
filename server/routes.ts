@@ -10,6 +10,7 @@ import { cacheService } from "./cache-service";
 import { wsServer } from "./websocket-server";
 import notificationRoutes from "./notification-routes";
 import publicBookingRoutes from "./public-booking-routes";
+import { cleantalkCheck, spamMetaFromRequest, SPAM_REFUSAL } from "./cleantalk";
 import versionRoutes from "./routes/version-routes";
 import { ActivityService } from "./activity-service";
 import { eq, and, gte, lte, ilike, or, lt, desc, asc, count, sum, sql, isNull } from "drizzle-orm";
@@ -414,6 +415,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/auth/register", async (req, res) => {
     try {
       const userData = insertUserSchema.parse(req.body);
+
+      // Spam check (CleanTalk; off without CLEANTALK_ACCESS_KEY, fails open). Before anything is stored or emailed.
+      const spam = await cleantalkCheck(spamMetaFromRequest(req, userData));
+      if (!spam.allowed) {
+        console.warn("Registration blocked by CleanTalk:", spam.reason);
+        return res.status(400).json({ message: SPAM_REFUSAL });
+      }
       
       // Check if user already exists
       const existingUser = await storage.getUserByEmail(userData.email);
@@ -8272,6 +8280,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
       if (!practitioner) {
         console.error('Practitioner not found for ID:', practitionerId, 'and booking link:', bookingLink);
         return res.status(404).json({ message: "Invalid booking link" });
+      }
+
+      // Spam check (CleanTalk; off without CLEANTALK_ACCESS_KEY, fails open). No reason/notes text is sent.
+      const spam = await cleantalkCheck(spamMetaFromRequest(req, { email, firstName, lastName }));
+      if (!spam.allowed) {
+        console.warn("Public booking blocked by CleanTalk:", spam.reason);
+        return res.status(400).json({ message: SPAM_REFUSAL });
       }
 
       // Check if user exists, create if not

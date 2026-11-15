@@ -103,6 +103,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (error.status === 400) {
         if (error.message?.includes("already exists")) {
           throw new Error("An account with this email already exists. Please use a different email or try logging in.");
+        } else if (error.message?.includes("support@tinhih.com")) {
+          // Blocked by the server-side spam check: show the friendly contact message
+          throw new Error(error.message);
         } else {
           throw new Error("Invalid registration data. Please check your information.");
         }

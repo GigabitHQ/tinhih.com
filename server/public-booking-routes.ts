@@ -8,6 +8,7 @@ import {
 } from "@shared/schema";
 import { eq, and, desc, sql } from "drizzle-orm";
 import { NotificationService } from "./notification-service";
+import { cleantalkCheck, spamMetaFromRequest, SPAM_REFUSAL } from "./cleantalk";
 
 const router = Router();
 const notificationService = new NotificationService();
@@ -41,6 +42,13 @@ router.post("/", async (req, res) => {
         success: false,
         message: "Practitioner not found"
       });
+    }
+
+    // Spam check (CleanTalk; off without CLEANTALK_ACCESS_KEY, fails open). The message/notes text is NOT sent.
+    const spam = await cleantalkCheck(spamMetaFromRequest(req, { email, firstName, lastName }));
+    if (!spam.allowed) {
+      console.warn("Public booking blocked by CleanTalk:", spam.reason);
+      return res.status(400).json({ success: false, message: SPAM_REFUSAL });
     }
 
     // Create or find the public booking user (guest)
