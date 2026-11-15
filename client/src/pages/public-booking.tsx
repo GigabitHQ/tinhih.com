@@ -368,9 +368,10 @@ export default function PublicBooking({ bookingLink }: PublicBookingProps) {
         } else {
           alert("Failed to submit booking. Please try again.");
         }
-      } catch (error) {
+      } catch (error: any) {
         console.error("Error submitting booking:", error);
-        alert("Failed to submit booking. Please try again.");
+        // The server's spam check refuses with a message that tells the person how to reach us
+        alert(error?.message?.includes("support@tinhih.com") ? error.message : "Failed to submit booking. Please try again.");
       }
     } else {
       handleNext();
